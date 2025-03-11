@@ -1,0 +1,987 @@
+﻿<?xml version="1.0" ?>
+<PsychoPy2experiment encoding="utf-8" version="2023.2.3">
+  <Settings>
+    <Param val="3" valType="str" updates="None" name="Audio latency priority"/>
+    <Param val="ptb" valType="str" updates="None" name="Audio lib"/>
+    <Param val="" valType="str" updates="None" name="Completed URL"/>
+    <Param val="auto" valType="str" updates="None" name="Data file delimiter"/>
+    <Param val="u'data/%s_%s_%s' % (expInfo['participant'], expName, expInfo['date'])" valType="code" updates="None" name="Data filename"/>
+    <Param val="True" valType="bool" updates="None" name="Enable Escape"/>
+    <Param val="" valType="str" updates="None" name="End Message"/>
+    <Param val="{'participant': 'f&quot;{randint(0, 999999):06.0f}&quot;', 'session': '001'}" valType="code" updates="None" name="Experiment info"/>
+    <Param val="True" valType="bool" updates="None" name="Force stereo"/>
+    <Param val="True" valType="bool" updates="None" name="Full-screen window"/>
+    <Param val="" valType="str" updates="None" name="HTML path"/>
+    <Param val="" valType="str" updates="None" name="Incomplete URL"/>
+    <Param val="testMonitor" valType="str" updates="None" name="Monitor"/>
+    <Param val="[]" valType="list" updates="None" name="Resources"/>
+    <Param val="False" valType="bool" updates="None" name="Save csv file"/>
+    <Param val="False" valType="bool" updates="None" name="Save excel file"/>
+    <Param val="False" valType="bool" updates="None" name="Save hdf5 file"/>
+    <Param val="True" valType="bool" updates="None" name="Save log file"/>
+    <Param val="True" valType="bool" updates="None" name="Save psydat file"/>
+    <Param val="True" valType="bool" updates="None" name="Save wide csv file"/>
+    <Param val="1" valType="num" updates="None" name="Screen"/>
+    <Param val="True" valType="bool" updates="None" name="Show info dlg"/>
+    <Param val="False" valType="bool" updates="None" name="Show mouse"/>
+    <Param val="height" valType="str" updates="None" name="Units"/>
+    <Param val="" valType="str" updates="None" name="Use version"/>
+    <Param val="[1366, 768]" valType="list" updates="None" name="Window size (pixels)"/>
+    <Param val="none" valType="str" updates="None" name="backgroundFit"/>
+    <Param val="" valType="str" updates="None" name="backgroundImg"/>
+    <Param val="avg" valType="str" updates="None" name="blendMode"/>
+    <Param val="{'thisRow.t': 'priority.CRITICAL', 'expName': 'priority.LOW'}" valType="dict" updates="None" name="colPriority"/>
+    <Param val="1.0000, 1.0000, 1.0000" valType="color" updates="None" name="color"/>
+    <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
+    <Param val="100.1.1.1" valType="str" updates="None" name="elAddress"/>
+    <Param val="FILTER_LEVEL_2" valType="str" updates="None" name="elDataFiltering"/>
+    <Param val="FILTER_LEVEL_OFF" valType="str" updates="None" name="elLiveFiltering"/>
+    <Param val="EYELINK 1000 DESKTOP" valType="str" updates="None" name="elModel"/>
+    <Param val="ELLIPSE_FIT" valType="str" updates="None" name="elPupilAlgorithm"/>
+    <Param val="PUPIL_AREA" valType="str" updates="None" name="elPupilMeasure"/>
+    <Param val="1000" valType="num" updates="None" name="elSampleRate"/>
+    <Param val="False" valType="bool" updates="None" name="elSimMode"/>
+    <Param val="RIGHT_EYE" valType="str" updates="None" name="elTrackEyes"/>
+    <Param val="PUPIL_CR_TRACKING" valType="str" updates="None" name="elTrackingMode"/>
+    <Param val="смиролор" valType="str" updates="None" name="expName"/>
+    <Param val="on Sync" valType="str" updates="None" name="exportHTML"/>
+    <Param val="None" valType="str" updates="None" name="eyetracker"/>
+    <Param val="127.0.0.1" valType="str" updates="None" name="gpAddress"/>
+    <Param val="4242" valType="num" updates="None" name="gpPort"/>
+    <Param val="PsychToolbox" valType="str" updates="None" name="keyboardBackend"/>
+    <Param val="exp" valType="code" updates="None" name="logging level"/>
+    <Param val="('MIDDLE_BUTTON',)" valType="list" updates="None" name="mgBlink"/>
+    <Param val="CONTINUOUS" valType="str" updates="None" name="mgMove"/>
+    <Param val="0.5" valType="num" updates="None" name="mgSaccade"/>
+    <Param val="neon.local" valType="str" updates="None" name="plCompanionAddress"/>
+    <Param val="scene_camera.json" valType="file" updates="None" name="plCompanionCameraCalibration"/>
+    <Param val="8080" valType="num" updates="None" name="plCompanionPort"/>
+    <Param val="True" valType="bool" updates="None" name="plCompanionRecordingEnabled"/>
+    <Param val="0.6" valType="num" updates="None" name="plConfidenceThreshold"/>
+    <Param val="True" valType="bool" updates="None" name="plPupilCaptureRecordingEnabled"/>
+    <Param val="" valType="str" updates="None" name="plPupilCaptureRecordingLocation"/>
+    <Param val="127.0.0.1" valType="str" updates="None" name="plPupilRemoteAddress"/>
+    <Param val="50020" valType="num" updates="None" name="plPupilRemotePort"/>
+    <Param val="1000" valType="num" updates="None" name="plPupilRemoteTimeoutMs"/>
+    <Param val="False" valType="bool" updates="None" name="plPupillometryOnly"/>
+    <Param val="psychopy_iohub_surface" valType="str" updates="None" name="plSurfaceName"/>
+    <Param val="time" valType="str" updates="None" name="sortColumns"/>
+    <Param val="" valType="str" updates="None" name="tbLicenseFile"/>
+    <Param val="" valType="str" updates="None" name="tbModel"/>
+    <Param val="60" valType="num" updates="None" name="tbSampleRate"/>
+    <Param val="" valType="str" updates="None" name="tbSerialNo"/>
+    <Param val="pyglet" valType="str" updates="None" name="winBackend"/>
+  </Settings>
+  <Routines>
+    <Routine name="trial">
+      <RoutineSettingsComponent name="trial" plugin="None">
+        <Param val="none" valType="str" updates="None" name="backgroundFit"/>
+        <Param val="" valType="str" updates="None" name="backgroundImg"/>
+        <Param val="$[0,0,0]" valType="color" updates="None" name="color"/>
+        <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
+        <Param val="" valType="str" updates="constant" name="desc"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="trial" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="constant" name="skipIf"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
+      </RoutineSettingsComponent>
+      <KeyboardComponent name="key_resp" plugin="None">
+        <Param val="'s','l'" valType="list" updates="constant" name="allowedKeys"/>
+        <Param val="" valType="str" updates="constant" name="correctAns"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="True" valType="bool" updates="constant" name="discard previous"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
+        <Param val="key_resp" valType="code" updates="None" name="name"/>
+        <Param val="press" valType="str" updates="constant" name="registerOn"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.65" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="all keys" valType="str" updates="constant" name="store"/>
+        <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
+        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
+      </KeyboardComponent>
+      <ImageComponent name="image" plugin="None">
+        <Param val="center" valType="str" updates="constant" name="anchor"/>
+        <Param val="$[1,1,1]" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="False" valType="bool" updates="constant" name="flipHoriz"/>
+        <Param val="False" valType="bool" updates="constant" name="flipVert"/>
+        <Param val="$Stimul" valType="file" updates="set every repeat" name="image"/>
+        <Param val="linear" valType="str" updates="constant" name="interpolate"/>
+        <Param val="" valType="str" updates="constant" name="mask"/>
+        <Param val="image" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="(0.5, 0.5)" valType="list" updates="constant" name="size"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="0.5" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="128" valType="num" updates="constant" name="texture resolution"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+      </ImageComponent>
+      <TextComponent name="text_2" plugin="None">
+        <Param val="black" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.07" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="text_2" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.65" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="?" valType="str" updates="constant" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+    </Routine>
+    <Routine name="instruction">
+      <RoutineSettingsComponent name="instruction" plugin="None">
+        <Param val="none" valType="str" updates="None" name="backgroundFit"/>
+        <Param val="" valType="str" updates="None" name="backgroundImg"/>
+        <Param val="$[0,0,0]" valType="color" updates="None" name="color"/>
+        <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
+        <Param val="" valType="str" updates="constant" name="desc"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="instruction" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="constant" name="skipIf"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
+      </RoutineSettingsComponent>
+      <TextComponent name="instruction_text" plugin="None">
+        <Param val="0, 0, 0" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="instruction_text" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="У цьому експерименті Вам буде протягом короткого часу представлене коло певного кольору. Після демонстрації фігури на екрані з'явиться знак питяння. &amp;#10;Натисніть'S', якщо вважаєте,що коло було ближче до СИНЬОГО кольору.&amp;#10;Натисніть 'L', якщо вважаєте,що коло було ближче до ФІОЛЕТОВОГО кольору.&amp;#10;Будь ласка намагайтесь відповідати швидко і чітко.&amp;#10;Натисніть будь яку клавішу,щоб розпочати" valType="str" updates="constant" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+      <KeyboardComponent name="stop_instruction" plugin="None">
+        <Param val="" valType="list" updates="constant" name="allowedKeys"/>
+        <Param val="" valType="str" updates="constant" name="correctAns"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="True" valType="bool" updates="constant" name="discard previous"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
+        <Param val="stop_instruction" valType="code" updates="None" name="name"/>
+        <Param val="press" valType="str" updates="constant" name="registerOn"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="1" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="nothing" valType="str" updates="constant" name="store"/>
+        <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
+        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
+      </KeyboardComponent>
+    </Routine>
+    <Routine name="Pause">
+      <RoutineSettingsComponent name="Pause" plugin="None">
+        <Param val="none" valType="str" updates="None" name="backgroundFit"/>
+        <Param val="" valType="str" updates="None" name="backgroundImg"/>
+        <Param val="$[0,0,0]" valType="color" updates="None" name="color"/>
+        <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
+        <Param val="" valType="str" updates="constant" name="desc"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="Pause" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="constant" name="skipIf"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
+      </RoutineSettingsComponent>
+      <TextComponent name="text" plugin="None">
+        <Param val="black" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.07" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="text" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="20.0" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="Вітаємо! Ви пройшли перший блок. Залишилось всього сім. У Вас є час перепочити 20 секунд." valType="str" updates="constant" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+      <TextComponent name="Text_continius" plugin="None">
+        <Param val="black" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.07" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="Text_continius" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="20.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="Натисніть пробіл, щоб продовжити" valType="str" updates="constant" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+      <KeyboardComponent name="key_continue" plugin="None">
+        <Param val="'space'" valType="list" updates="constant" name="allowedKeys"/>
+        <Param val="" valType="str" updates="constant" name="correctAns"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="True" valType="bool" updates="constant" name="discard previous"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
+        <Param val="key_continue" valType="code" updates="None" name="name"/>
+        <Param val="press" valType="str" updates="constant" name="registerOn"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="20.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="last key" valType="str" updates="constant" name="store"/>
+        <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
+        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
+      </KeyboardComponent>
+    </Routine>
+    <Routine name="Exit">
+      <RoutineSettingsComponent name="Exit" plugin="None">
+        <Param val="none" valType="str" updates="None" name="backgroundFit"/>
+        <Param val="" valType="str" updates="None" name="backgroundImg"/>
+        <Param val="$[0,0,0]" valType="color" updates="None" name="color"/>
+        <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
+        <Param val="" valType="str" updates="constant" name="desc"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="Exit" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="constant" name="skipIf"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
+      </RoutineSettingsComponent>
+      <ImageComponent name="image_2" plugin="None">
+        <Param val="center" valType="str" updates="constant" name="anchor"/>
+        <Param val="-1.0000, -1.0000, -1.0000" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="False" valType="bool" updates="constant" name="flipHoriz"/>
+        <Param val="False" valType="bool" updates="constant" name="flipVert"/>
+        <Param val="кар8.jpg" valType="file" updates="constant" name="image"/>
+        <Param val="linear" valType="str" updates="constant" name="interpolate"/>
+        <Param val="" valType="str" updates="constant" name="mask"/>
+        <Param val="image_2" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="(1, 1)" valType="list" updates="constant" name="size"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="10.0" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="128" valType="num" updates="constant" name="texture resolution"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+      </ImageComponent>
+    </Routine>
+    <Routine name="Pause2">
+      <RoutineSettingsComponent name="Pause2" plugin="None">
+        <Param val="none" valType="str" updates="None" name="backgroundFit"/>
+        <Param val="" valType="str" updates="None" name="backgroundImg"/>
+        <Param val="$[0,0,0]" valType="color" updates="None" name="color"/>
+        <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
+        <Param val="" valType="str" updates="constant" name="desc"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="Pause2" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="constant" name="skipIf"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
+      </RoutineSettingsComponent>
+      <TextComponent name="Text_pause2" plugin="None">
+        <Param val="black" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.07" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="Text_pause2" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="20.0" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="Вітаємо! Ви пройшли другий блок. Залишилось всього шість. У Вас є час перепочити 20 секунд." valType="str" updates="constant" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+      <TextComponent name="Text_cont_pause2" plugin="None">
+        <Param val="black" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.07" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="Text_cont_pause2" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="20.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="Натисніть пробіл, щоб продовжити" valType="str" updates="constant" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+      <KeyboardComponent name="key_cont_pause2" plugin="None">
+        <Param val="'space'" valType="list" updates="constant" name="allowedKeys"/>
+        <Param val="" valType="str" updates="constant" name="correctAns"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="True" valType="bool" updates="constant" name="discard previous"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
+        <Param val="key_cont_pause2" valType="code" updates="None" name="name"/>
+        <Param val="press" valType="str" updates="constant" name="registerOn"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="20.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="last key" valType="str" updates="constant" name="store"/>
+        <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
+        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
+      </KeyboardComponent>
+    </Routine>
+    <Routine name="Pause3">
+      <RoutineSettingsComponent name="Pause3" plugin="None">
+        <Param val="none" valType="str" updates="None" name="backgroundFit"/>
+        <Param val="" valType="str" updates="None" name="backgroundImg"/>
+        <Param val="$[0,0,0]" valType="color" updates="None" name="color"/>
+        <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
+        <Param val="" valType="str" updates="constant" name="desc"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="Pause3" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="constant" name="skipIf"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
+      </RoutineSettingsComponent>
+      <TextComponent name="Text_pause3" plugin="None">
+        <Param val="black" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.07" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="Text_pause3" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="20.0" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="Вітаємо! Ви пройшли третій блок. Залишилось всього п'ять. У Вас є час перепочити 20 секунд." valType="str" updates="constant" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+      <TextComponent name="Text_cont_pause3" plugin="None">
+        <Param val="black" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.07" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="Text_cont_pause3" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="20.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="Натисніть пробіл, щоб продовжити" valType="str" updates="constant" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+      <KeyboardComponent name="key_cont_pause3" plugin="None">
+        <Param val="'space'" valType="list" updates="constant" name="allowedKeys"/>
+        <Param val="" valType="str" updates="constant" name="correctAns"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="True" valType="bool" updates="constant" name="discard previous"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
+        <Param val="key_cont_pause3" valType="code" updates="None" name="name"/>
+        <Param val="press" valType="str" updates="constant" name="registerOn"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="20.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="last key" valType="str" updates="constant" name="store"/>
+        <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
+        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
+      </KeyboardComponent>
+    </Routine>
+    <Routine name="Pause4">
+      <RoutineSettingsComponent name="Pause4" plugin="None">
+        <Param val="none" valType="str" updates="None" name="backgroundFit"/>
+        <Param val="" valType="str" updates="None" name="backgroundImg"/>
+        <Param val="$[0,0,0]" valType="color" updates="None" name="color"/>
+        <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
+        <Param val="" valType="str" updates="constant" name="desc"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="Pause4" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="constant" name="skipIf"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
+      </RoutineSettingsComponent>
+      <TextComponent name="Text_pause4" plugin="None">
+        <Param val="black" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.07" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="Text_pause4" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="20.0" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="Вітаємо! Ви пройшли четвертий блок. Залишилось всього чотири. У Вас є час перепочити 20 секунд." valType="str" updates="constant" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+      <TextComponent name="Text_cont_pause4" plugin="None">
+        <Param val="black" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.07" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="Text_cont_pause4" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="20.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="Натисніть пробіл, щоб продовжити" valType="str" updates="constant" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+      <KeyboardComponent name="key_cont_pause4" plugin="None">
+        <Param val="'space'" valType="list" updates="constant" name="allowedKeys"/>
+        <Param val="" valType="str" updates="constant" name="correctAns"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="True" valType="bool" updates="constant" name="discard previous"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
+        <Param val="key_cont_pause4" valType="code" updates="None" name="name"/>
+        <Param val="press" valType="str" updates="constant" name="registerOn"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="20.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="last key" valType="str" updates="constant" name="store"/>
+        <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
+        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
+      </KeyboardComponent>
+    </Routine>
+    <Routine name="Pause5">
+      <RoutineSettingsComponent name="Pause5" plugin="None">
+        <Param val="none" valType="str" updates="None" name="backgroundFit"/>
+        <Param val="" valType="str" updates="None" name="backgroundImg"/>
+        <Param val="$[0,0,0]" valType="color" updates="None" name="color"/>
+        <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
+        <Param val="" valType="str" updates="constant" name="desc"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="Pause5" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="constant" name="skipIf"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
+      </RoutineSettingsComponent>
+      <TextComponent name="Text_pause5" plugin="None">
+        <Param val="black" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.07" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="Text_pause5" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="20.0" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="Вітаємо! Ви пройшли п'ятий блок. Залишилось всього три. У Вас є час перепочити 20 секунд." valType="str" updates="constant" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+      <TextComponent name="Text_cont_pause5" plugin="None">
+        <Param val="black" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.07" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="Text_cont_pause5" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="20.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="Натисніть пробіл, щоб продовжити" valType="str" updates="constant" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+      <KeyboardComponent name="key_cont_pause5" plugin="None">
+        <Param val="'space'" valType="list" updates="constant" name="allowedKeys"/>
+        <Param val="" valType="str" updates="constant" name="correctAns"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="True" valType="bool" updates="constant" name="discard previous"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
+        <Param val="key_cont_pause5" valType="code" updates="None" name="name"/>
+        <Param val="press" valType="str" updates="constant" name="registerOn"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="20.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="last key" valType="str" updates="constant" name="store"/>
+        <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
+        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
+      </KeyboardComponent>
+    </Routine>
+    <Routine name="Pause6">
+      <RoutineSettingsComponent name="Pause6" plugin="None">
+        <Param val="none" valType="str" updates="None" name="backgroundFit"/>
+        <Param val="" valType="str" updates="None" name="backgroundImg"/>
+        <Param val="$[0,0,0]" valType="color" updates="None" name="color"/>
+        <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
+        <Param val="" valType="str" updates="constant" name="desc"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="Pause6" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="constant" name="skipIf"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
+      </RoutineSettingsComponent>
+      <TextComponent name="Text_pause6" plugin="None">
+        <Param val="black" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.07" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="Text_pause6" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="20.0" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="Вітаємо! Ви пройшли шостий блок. Залишилось всього два. У Вас є час перепочити 20 секунд." valType="str" updates="constant" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+      <TextComponent name="Text_cont_pause6" plugin="None">
+        <Param val="black" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.07" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="Text_cont_pause6" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="20.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="Натисніть пробіл, щоб продовжити" valType="str" updates="constant" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+      <KeyboardComponent name="key_cont_pause6" plugin="None">
+        <Param val="'space'" valType="list" updates="constant" name="allowedKeys"/>
+        <Param val="" valType="str" updates="constant" name="correctAns"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="True" valType="bool" updates="constant" name="discard previous"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
+        <Param val="key_cont_pause6" valType="code" updates="None" name="name"/>
+        <Param val="press" valType="str" updates="constant" name="registerOn"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="20.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="last key" valType="str" updates="constant" name="store"/>
+        <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
+        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
+      </KeyboardComponent>
+    </Routine>
+    <Routine name="Pause7">
+      <RoutineSettingsComponent name="Pause7" plugin="None">
+        <Param val="none" valType="str" updates="None" name="backgroundFit"/>
+        <Param val="" valType="str" updates="None" name="backgroundImg"/>
+        <Param val="$[0,0,0]" valType="color" updates="None" name="color"/>
+        <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
+        <Param val="" valType="str" updates="constant" name="desc"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="Pause7" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="constant" name="skipIf"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
+      </RoutineSettingsComponent>
+      <TextComponent name="Text_cont_pause7" plugin="None">
+        <Param val="white" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="Text_cont_pause7" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="20.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="Натисніть пробіл, щоб продовжити" valType="str" updates="constant" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+      <KeyboardComponent name="key_cont_pause7" plugin="None">
+        <Param val="'space'" valType="list" updates="constant" name="allowedKeys"/>
+        <Param val="" valType="str" updates="constant" name="correctAns"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="True" valType="bool" updates="constant" name="discard previous"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
+        <Param val="key_cont_pause7" valType="code" updates="None" name="name"/>
+        <Param val="press" valType="str" updates="constant" name="registerOn"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="20.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="last key" valType="str" updates="constant" name="store"/>
+        <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
+        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
+      </KeyboardComponent>
+      <TextComponent name="text_pause_7" plugin="None">
+        <Param val="black" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="text_pause_7" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="20.0" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="Вітаємо! Ви пройшли сьомий блок. Залишився всього один. У Вас є час перепочити 20 секунд." valType="str" updates="constant" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+    </Routine>
+  </Routines>
+  <Flow>
+    <Routine name="instruction"/>
+    <LoopInitiator loopType="TrialHandler" name="trials_1">
+      <Param name="Selected rows" updates="None" val="" valType="str"/>
+      <Param name="conditions" updates="None" val="[{'Name': 'Purple 1', 'Stimul': 'К1', 'Color': 'Purple'}, {'Name': 'Purple 2', 'Stimul': 'К2', 'Color': 'Purple'}, {'Name': 'Purple 3', 'Stimul': 'К3', 'Color': 'Purple'}, {'Name': 'Purple 4', 'Stimul': 'К4', 'Color': 'Purple'}, {'Name': 'Purple 5', 'Stimul': 'К5', 'Color': 'Purple'}, {'Name': 'Purple 6', 'Stimul': 'К6', 'Color': 'Purple'}, {'Name': 'Purple 7', 'Stimul': 'К7', 'Color': 'Purple'}, {'Name': 'Purple 8', 'Stimul': 'К8', 'Color': 'Purple'}, {'Name': 'Purple 9', 'Stimul': 'К9', 'Color': 'Purple'}, {'Name': 'Purple 10', 'Stimul': 'К10', 'Color': 'Purple'}, {'Name': 'Purple 11', 'Stimul': 'К11', 'Color': 'Purple'}, {'Name': 'Purple 12', 'Stimul': 'К12', 'Color': 'Purple'}, {'Name': 'Purple 13', 'Stimul': 'К13', 'Color': 'Purple'}, {'Name': 'Purple 14', 'Stimul': 'К14', 'Color': 'Purple'}, {'Name': 'Purple 15', 'Stimul': 'К15', 'Color': 'Purple'}, {'Name': 'Purple 16', 'Stimul': 'К16', 'Color': 'Purple'}, {'Name': 'Purple 17', 'Stimul': 'К17', 'Color': 'Purple'}, {'Name': 'Purple 18', 'Stimul': 'К18', 'Color': 'Purple'}, {'Name': 'Purple 19', 'Stimul': 'К19', 'Color': 'Purple'}, {'Name': 'Purple 20', 'Stimul': 'К20', 'Color': 'Purple'}, {'Name': 'Purple 21', 'Stimul': 'К21', 'Color': 'Purple'}, {'Name': 'Purple 22', 'Stimul': 'К22', 'Color': 'Purple'}, {'Name': 'Purple 23', 'Stimul': 'К23', 'Color': 'Purple'}, {'Name': 'Purple 24', 'Stimul': 'К24', 'Color': 'Purple'}, {'Name': 'Purple 25', 'Stimul': 'К25', 'Color': 'Purple'}, {'Name': 'Purple 26', 'Stimul': 'К26', 'Color': 'Purple'}, {'Name': 'Purple 27', 'Stimul': 'К27', 'Color': 'Purple'}, {'Name': 'Purple 28', 'Stimul': 'К28', 'Color': 'Purple'}, {'Name': 'Purple 29', 'Stimul': 'К29', 'Color': 'Purple'}, {'Name': 'Purple 30', 'Stimul': 'К30', 'Color': 'Purple'}, {'Name': 'Purple 31', 'Stimul': 'К31', 'Color': 'Purple'}, {'Name': 'Purple 32', 'Stimul': 'К32', 'Color': 'Purple'}, {'Name': 'Purple 33', 'Stimul': 'К33', 'Color': 'Purple'}, {'Name': 'Purple 34', 'Stimul': 'К34', 'Color': 'Purple'}, {'Name': 'Purple 35', 'Stimul': 'К35', 'Color': 'Purple'}, {'Name': 'Purple 36', 'Stimul': 'К36', 'Color': 'Purple'}, {'Name': 'Purple 37', 'Stimul': 'К37', 'Color': 'Purple'}, {'Name': 'Purple 38', 'Stimul': 'К38', 'Color': 'Purple'}, {'Name': 'Purple 39', 'Stimul': 'К39', 'Color': 'Purple'}, {'Name': 'Purple 40', 'Stimul': 'К40', 'Color': 'Purple'}, {'Name': 'Purple 41', 'Stimul': 'К41', 'Color': 'Purple'}, {'Name': 'Purple 42', 'Stimul': 'К42', 'Color': 'Purple'}, {'Name': 'Purple 43', 'Stimul': 'К43', 'Color': 'Purple'}, {'Name': 'Purple 44', 'Stimul': 'К44', 'Color': 'Purple'}, {'Name': 'Purple 45', 'Stimul': 'К45', 'Color': 'Purple'}, {'Name': 'Purple 46', 'Stimul': 'К46', 'Color': 'Purple'}, {'Name': 'Purple 47', 'Stimul': 'К47', 'Color': 'Purple'}, {'Name': 'Purple 48', 'Stimul': 'К48', 'Color': 'Purple'}, {'Name': 'Purple 49', 'Stimul': 'К49', 'Color': 'Purple'}, {'Name': 'Purple 50', 'Stimul': 'К50', 'Color': 'Purple'}, {'Name': 'Blue 1', 'Stimul': 'К52', 'Color': 'Blue'}, {'Name': 'Blue 2', 'Stimul': 'К53', 'Color': 'Blue'}, {'Name': 'Blue 3', 'Stimul': 'К54', 'Color': 'Blue'}, {'Name': 'Blue 4', 'Stimul': 'К55', 'Color': 'Blue'}, {'Name': 'Blue 5', 'Stimul': 'К56', 'Color': 'Blue'}, {'Name': 'Blue 6', 'Stimul': 'К57', 'Color': 'Blue'}, {'Name': 'Blue 7', 'Stimul': 'К58', 'Color': 'Blue'}, {'Name': 'Blue 8', 'Stimul': 'К59', 'Color': 'Blue'}, {'Name': 'Blue 9', 'Stimul': 'К60', 'Color': 'Blue'}, {'Name': 'Blue 10', 'Stimul': 'К61', 'Color': 'Blue'}, {'Name': 'Blue 11', 'Stimul': 'К62', 'Color': 'Blue'}, {'Name': 'Blue 12', 'Stimul': 'К63', 'Color': 'Blue'}, {'Name': 'Blue 13', 'Stimul': 'К64', 'Color': 'Blue'}, {'Name': 'Blue 14', 'Stimul': 'К65', 'Color': 'Blue'}, {'Name': 'Blue 15', 'Stimul': 'К66', 'Color': 'Blue'}, {'Name': 'Blue 16', 'Stimul': 'К67', 'Color': 'Blue'}, {'Name': 'Blue 17', 'Stimul': 'К68', 'Color': 'Blue'}, {'Name': 'Blue 18', 'Stimul': 'К69', 'Color': 'Blue'}, {'Name': 'Blue 19', 'Stimul': 'К70', 'Color': 'Blue'}, {'Name': 'Blue 20', 'Stimul': 'К71', 'Color': 'Blue'}, {'Name': 'Blue 21', 'Stimul': 'К72', 'Color': 'Blue'}, {'Name': 'Blue 22', 'Stimul': 'К73', 'Color': 'Blue'}, {'Name': 'Blue 23', 'Stimul': 'К74', 'Color': 'Blue'}, {'Name': 'Blue 24', 'Stimul': 'К75', 'Color': 'Blue'}, {'Name': 'Blue 25', 'Stimul': 'К76', 'Color': 'Blue'}, {'Name': 'Blue 26', 'Stimul': 'К77', 'Color': 'Blue'}, {'Name': 'Blue 27', 'Stimul': 'К78', 'Color': 'Blue'}, {'Name': 'Blue 28', 'Stimul': 'К79', 'Color': 'Blue'}, {'Name': 'Blue 29', 'Stimul': 'К80', 'Color': 'Blue'}, {'Name': 'Blue 30', 'Stimul': 'К81', 'Color': 'Blue'}, {'Name': 'Blue 31', 'Stimul': 'К82', 'Color': 'Blue'}, {'Name': 'Blue 32', 'Stimul': 'К83', 'Color': 'Blue'}, {'Name': 'Blue 33', 'Stimul': 'К84', 'Color': 'Blue'}, {'Name': 'Blue 34', 'Stimul': 'К85', 'Color': 'Blue'}, {'Name': 'Blue 35', 'Stimul': 'К86', 'Color': 'Blue'}, {'Name': 'Blue 36', 'Stimul': 'К87', 'Color': 'Blue'}, {'Name': 'Blue 37', 'Stimul': 'К88', 'Color': 'Blue'}, {'Name': 'Blue 38', 'Stimul': 'К89', 'Color': 'Blue'}, {'Name': 'Blue 39', 'Stimul': 'К90', 'Color': 'Blue'}, {'Name': 'Blue 40', 'Stimul': 'К91', 'Color': 'Blue'}, {'Name': 'Blue 41', 'Stimul': 'К92', 'Color': 'Blue'}, {'Name': 'Blue 42', 'Stimul': 'К93', 'Color': 'Blue'}, {'Name': 'Blue 43', 'Stimul': 'К94', 'Color': 'Blue'}, {'Name': 'Blue 44', 'Stimul': 'К95', 'Color': 'Blue'}, {'Name': 'Blue 45', 'Stimul': 'К96', 'Color': 'Blue'}, {'Name': 'Blue 46', 'Stimul': 'К97', 'Color': 'Blue'}, {'Name': 'Blue 47', 'Stimul': 'К98', 'Color': 'Blue'}, {'Name': 'Blue 48', 'Stimul': 'К99', 'Color': 'Blue'}, {'Name': 'Blue 49', 'Stimul': 'К100', 'Color': 'Blue'}, {'Name': 'Blue 50', 'Stimul': 'К101', 'Color': 'Blue'}]" valType="str"/>
+      <Param name="conditionsFile" updates="None" val="Stimul_1.xlsx" valType="file"/>
+      <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
+      <Param name="isTrials" updates="None" val="True" valType="bool"/>
+      <Param name="loopType" updates="None" val="random" valType="str"/>
+      <Param name="nReps" updates="None" val="1" valType="num"/>
+      <Param name="name" updates="None" val="trials_1" valType="code"/>
+      <Param name="random seed" updates="None" val="" valType="code"/>
+    </LoopInitiator>
+    <Routine name="trial"/>
+    <LoopTerminator name="trials_1"/>
+    <Routine name="Pause"/>
+    <LoopInitiator loopType="TrialHandler" name="trials_2">
+      <Param name="Selected rows" updates="None" val="" valType="str"/>
+      <Param name="conditions" updates="None" val="[{'Name': 'Purple 1', 'Stimul': 'К1', 'Color': 'Purple'}, {'Name': 'Purple 2', 'Stimul': 'К2', 'Color': 'Purple'}, {'Name': 'Purple 3', 'Stimul': 'К3', 'Color': 'Purple'}, {'Name': 'Purple 4', 'Stimul': 'К4', 'Color': 'Purple'}, {'Name': 'Purple 5', 'Stimul': 'К5', 'Color': 'Purple'}, {'Name': 'Purple 6', 'Stimul': 'К6', 'Color': 'Purple'}, {'Name': 'Purple 7', 'Stimul': 'К7', 'Color': 'Purple'}, {'Name': 'Purple 8', 'Stimul': 'К8', 'Color': 'Purple'}, {'Name': 'Purple 9', 'Stimul': 'К9', 'Color': 'Purple'}, {'Name': 'Purple 10', 'Stimul': 'К10', 'Color': 'Purple'}, {'Name': 'Purple 11', 'Stimul': 'К11', 'Color': 'Purple'}, {'Name': 'Purple 12', 'Stimul': 'К12', 'Color': 'Purple'}, {'Name': 'Purple 13', 'Stimul': 'К13', 'Color': 'Purple'}, {'Name': 'Purple 14', 'Stimul': 'К14', 'Color': 'Purple'}, {'Name': 'Purple 15', 'Stimul': 'К15', 'Color': 'Purple'}, {'Name': 'Purple 16', 'Stimul': 'К16', 'Color': 'Purple'}, {'Name': 'Purple 17', 'Stimul': 'К17', 'Color': 'Purple'}, {'Name': 'Purple 18', 'Stimul': 'К18', 'Color': 'Purple'}, {'Name': 'Purple 19', 'Stimul': 'К19', 'Color': 'Purple'}, {'Name': 'Purple 20', 'Stimul': 'К20', 'Color': 'Purple'}, {'Name': 'Purple 21', 'Stimul': 'К21', 'Color': 'Purple'}, {'Name': 'Purple 22', 'Stimul': 'К22', 'Color': 'Purple'}, {'Name': 'Purple 23', 'Stimul': 'К23', 'Color': 'Purple'}, {'Name': 'Purple 24', 'Stimul': 'К24', 'Color': 'Purple'}, {'Name': 'Purple 25', 'Stimul': 'К25', 'Color': 'Purple'}, {'Name': 'Purple 26', 'Stimul': 'К26', 'Color': 'Purple'}, {'Name': 'Purple 27', 'Stimul': 'К27', 'Color': 'Purple'}, {'Name': 'Purple 28', 'Stimul': 'К28', 'Color': 'Purple'}, {'Name': 'Purple 29', 'Stimul': 'К29', 'Color': 'Purple'}, {'Name': 'Purple 30', 'Stimul': 'К30', 'Color': 'Purple'}, {'Name': 'Purple 31', 'Stimul': 'К31', 'Color': 'Purple'}, {'Name': 'Purple 32', 'Stimul': 'К32', 'Color': 'Purple'}, {'Name': 'Purple 33', 'Stimul': 'К33', 'Color': 'Purple'}, {'Name': 'Purple 34', 'Stimul': 'К34', 'Color': 'Purple'}, {'Name': 'Purple 35', 'Stimul': 'К35', 'Color': 'Purple'}, {'Name': 'Purple 36', 'Stimul': 'К36', 'Color': 'Purple'}, {'Name': 'Purple 37', 'Stimul': 'К37', 'Color': 'Purple'}, {'Name': 'Purple 38', 'Stimul': 'К38', 'Color': 'Purple'}, {'Name': 'Purple 39', 'Stimul': 'К39', 'Color': 'Purple'}, {'Name': 'Purple 40', 'Stimul': 'К40', 'Color': 'Purple'}, {'Name': 'Purple 41', 'Stimul': 'К41', 'Color': 'Purple'}, {'Name': 'Purple 42', 'Stimul': 'К42', 'Color': 'Purple'}, {'Name': 'Purple 43', 'Stimul': 'К43', 'Color': 'Purple'}, {'Name': 'Purple 44', 'Stimul': 'К44', 'Color': 'Purple'}, {'Name': 'Purple 45', 'Stimul': 'К45', 'Color': 'Purple'}, {'Name': 'Purple 46', 'Stimul': 'К46', 'Color': 'Purple'}, {'Name': 'Purple 47', 'Stimul': 'К47', 'Color': 'Purple'}, {'Name': 'Purple 48', 'Stimul': 'К48', 'Color': 'Purple'}, {'Name': 'Purple 49', 'Stimul': 'К49', 'Color': 'Purple'}, {'Name': 'Purple 50', 'Stimul': 'К50', 'Color': 'Purple'}, {'Name': 'Blue 1', 'Stimul': 'К52', 'Color': 'Blue'}, {'Name': 'Blue 2', 'Stimul': 'К53', 'Color': 'Blue'}, {'Name': 'Blue 3', 'Stimul': 'К54', 'Color': 'Blue'}, {'Name': 'Blue 4', 'Stimul': 'К55', 'Color': 'Blue'}, {'Name': 'Blue 5', 'Stimul': 'К56', 'Color': 'Blue'}, {'Name': 'Blue 6', 'Stimul': 'К57', 'Color': 'Blue'}, {'Name': 'Blue 7', 'Stimul': 'К58', 'Color': 'Blue'}, {'Name': 'Blue 8', 'Stimul': 'К59', 'Color': 'Blue'}, {'Name': 'Blue 9', 'Stimul': 'К60', 'Color': 'Blue'}, {'Name': 'Blue 10', 'Stimul': 'К61', 'Color': 'Blue'}, {'Name': 'Blue 11', 'Stimul': 'К62', 'Color': 'Blue'}, {'Name': 'Blue 12', 'Stimul': 'К63', 'Color': 'Blue'}, {'Name': 'Blue 13', 'Stimul': 'К64', 'Color': 'Blue'}, {'Name': 'Blue 14', 'Stimul': 'К65', 'Color': 'Blue'}, {'Name': 'Blue 15', 'Stimul': 'К66', 'Color': 'Blue'}, {'Name': 'Blue 16', 'Stimul': 'К67', 'Color': 'Blue'}, {'Name': 'Blue 17', 'Stimul': 'К68', 'Color': 'Blue'}, {'Name': 'Blue 18', 'Stimul': 'К69', 'Color': 'Blue'}, {'Name': 'Blue 19', 'Stimul': 'К70', 'Color': 'Blue'}, {'Name': 'Blue 20', 'Stimul': 'К71', 'Color': 'Blue'}, {'Name': 'Blue 21', 'Stimul': 'К72', 'Color': 'Blue'}, {'Name': 'Blue 22', 'Stimul': 'К73', 'Color': 'Blue'}, {'Name': 'Blue 23', 'Stimul': 'К74', 'Color': 'Blue'}, {'Name': 'Blue 24', 'Stimul': 'К75', 'Color': 'Blue'}, {'Name': 'Blue 25', 'Stimul': 'К76', 'Color': 'Blue'}, {'Name': 'Blue 26', 'Stimul': 'К77', 'Color': 'Blue'}, {'Name': 'Blue 27', 'Stimul': 'К78', 'Color': 'Blue'}, {'Name': 'Blue 28', 'Stimul': 'К79', 'Color': 'Blue'}, {'Name': 'Blue 29', 'Stimul': 'К80', 'Color': 'Blue'}, {'Name': 'Blue 30', 'Stimul': 'К81', 'Color': 'Blue'}, {'Name': 'Blue 31', 'Stimul': 'К82', 'Color': 'Blue'}, {'Name': 'Blue 32', 'Stimul': 'К83', 'Color': 'Blue'}, {'Name': 'Blue 33', 'Stimul': 'К84', 'Color': 'Blue'}, {'Name': 'Blue 34', 'Stimul': 'К85', 'Color': 'Blue'}, {'Name': 'Blue 35', 'Stimul': 'К86', 'Color': 'Blue'}, {'Name': 'Blue 36', 'Stimul': 'К87', 'Color': 'Blue'}, {'Name': 'Blue 37', 'Stimul': 'К88', 'Color': 'Blue'}, {'Name': 'Blue 38', 'Stimul': 'К89', 'Color': 'Blue'}, {'Name': 'Blue 39', 'Stimul': 'К90', 'Color': 'Blue'}, {'Name': 'Blue 40', 'Stimul': 'К91', 'Color': 'Blue'}, {'Name': 'Blue 41', 'Stimul': 'К92', 'Color': 'Blue'}, {'Name': 'Blue 42', 'Stimul': 'К93', 'Color': 'Blue'}, {'Name': 'Blue 43', 'Stimul': 'К94', 'Color': 'Blue'}, {'Name': 'Blue 44', 'Stimul': 'К95', 'Color': 'Blue'}, {'Name': 'Blue 45', 'Stimul': 'К96', 'Color': 'Blue'}, {'Name': 'Blue 46', 'Stimul': 'К97', 'Color': 'Blue'}, {'Name': 'Blue 47', 'Stimul': 'К98', 'Color': 'Blue'}, {'Name': 'Blue 48', 'Stimul': 'К99', 'Color': 'Blue'}, {'Name': 'Blue 49', 'Stimul': 'К100', 'Color': 'Blue'}, {'Name': 'Blue 50', 'Stimul': 'К101', 'Color': 'Blue'}]" valType="str"/>
+      <Param name="conditionsFile" updates="None" val="Stimul_2.xlsx" valType="file"/>
+      <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
+      <Param name="isTrials" updates="None" val="True" valType="bool"/>
+      <Param name="loopType" updates="None" val="random" valType="str"/>
+      <Param name="nReps" updates="None" val="1" valType="num"/>
+      <Param name="name" updates="None" val="trials_2" valType="code"/>
+      <Param name="random seed" updates="None" val="" valType="code"/>
+    </LoopInitiator>
+    <Routine name="trial"/>
+    <LoopTerminator name="trials_2"/>
+    <Routine name="Pause2"/>
+    <LoopInitiator loopType="TrialHandler" name="trials_3">
+      <Param name="Selected rows" updates="None" val="" valType="str"/>
+      <Param name="conditions" updates="None" val="[{'Name': 'Purple 1', 'Stimul': 'К1', 'Color': 'Purple'}, {'Name': 'Purple 2', 'Stimul': 'К2', 'Color': 'Purple'}, {'Name': 'Purple 3', 'Stimul': 'К3', 'Color': 'Purple'}, {'Name': 'Purple 7', 'Stimul': 'К7', 'Color': 'Purple'}, {'Name': 'Purple 8', 'Stimul': 'К8', 'Color': 'Purple'}, {'Name': 'Purple 9', 'Stimul': 'К9', 'Color': 'Purple'}, {'Name': 'Purple 10', 'Stimul': 'К10', 'Color': 'Purple'}, {'Name': 'Purple 11', 'Stimul': 'К11', 'Color': 'Purple'}, {'Name': 'Purple 12', 'Stimul': 'К12', 'Color': 'Purple'}, {'Name': 'Purple 16', 'Stimul': 'К16', 'Color': 'Purple'}, {'Name': 'Purple 17', 'Stimul': 'К17', 'Color': 'Purple'}, {'Name': 'Purple 18', 'Stimul': 'К18', 'Color': 'Purple'}, {'Name': 'Purple 19', 'Stimul': 'К19', 'Color': 'Purple'}, {'Name': 'Purple 20', 'Stimul': 'К20', 'Color': 'Purple'}, {'Name': 'Purple 21', 'Stimul': 'К21', 'Color': 'Purple'}, {'Name': 'Purple 22', 'Stimul': 'К22', 'Color': 'Purple'}, {'Name': 'Purple 23', 'Stimul': 'К23', 'Color': 'Purple'}, {'Name': 'Purple 24', 'Stimul': 'К24', 'Color': 'Purple'}, {'Name': 'Purple 25', 'Stimul': 'К25', 'Color': 'Purple'}, {'Name': 'Purple 26', 'Stimul': 'К26', 'Color': 'Purple'}, {'Name': 'Purple 27', 'Stimul': 'К27', 'Color': 'Purple'}, {'Name': 'Purple 28', 'Stimul': 'К28', 'Color': 'Purple'}, {'Name': 'Purple 29', 'Stimul': 'К29', 'Color': 'Purple'}, {'Name': 'Purple 33', 'Stimul': 'К33', 'Color': 'Purple'}, {'Name': 'Purple 34', 'Stimul': 'К34', 'Color': 'Purple'}, {'Name': 'Purple 35', 'Stimul': 'К35', 'Color': 'Purple'}, {'Name': 'Purple 36', 'Stimul': 'К36', 'Color': 'Purple'}, {'Name': 'Purple 37', 'Stimul': 'К37', 'Color': 'Purple'}, {'Name': 'Purple 38', 'Stimul': 'К38', 'Color': 'Purple'}, {'Name': 'Purple 40', 'Stimul': 'К40', 'Color': 'Purple'}, {'Name': 'Purple 41', 'Stimul': 'К41', 'Color': 'Purple'}, {'Name': 'Purple 42', 'Stimul': 'К42', 'Color': 'Purple'}, {'Name': 'Purple 43', 'Stimul': 'К43', 'Color': 'Purple'}, {'Name': 'Purple 44', 'Stimul': 'К44', 'Color': 'Purple'}, {'Name': 'Purple 45', 'Stimul': 'К45', 'Color': 'Purple'}, {'Name': 'Purple 46', 'Stimul': 'К46', 'Color': 'Purple'}, {'Name': 'Purple 47', 'Stimul': 'К47', 'Color': 'Purple'}, {'Name': 'Purple 48', 'Stimul': 'К48', 'Color': 'Purple'}, {'Name': 'Purple 49', 'Stimul': 'К49', 'Color': 'Purple'}, {'Name': 'Purple 50', 'Stimul': 'К50', 'Color': 'Purple'}, {'Name': 'Blue 1', 'Stimul': 'К52', 'Color': 'Blue'}, {'Name': 'Blue 2', 'Stimul': 'К53', 'Color': 'Blue'}, {'Name': 'Blue 3', 'Stimul': 'К54', 'Color': 'Blue'}, {'Name': 'Blue 4', 'Stimul': 'К55', 'Color': 'Blue'}, {'Name': 'Blue 5', 'Stimul': 'К56', 'Color': 'Blue'}, {'Name': 'Blue 6', 'Stimul': 'К57', 'Color': 'Blue'}, {'Name': 'Blue 7', 'Stimul': 'К58', 'Color': 'Blue'}, {'Name': 'Blue 8', 'Stimul': 'К59', 'Color': 'Blue'}, {'Name': 'Blue 9', 'Stimul': 'К60', 'Color': 'Blue'}, {'Name': 'Blue 10', 'Stimul': 'К61', 'Color': 'Blue'}, {'Name': 'Blue 11', 'Stimul': 'К62', 'Color': 'Blue'}, {'Name': 'Blue 12', 'Stimul': 'К63', 'Color': 'Blue'}, {'Name': 'Blue 13', 'Stimul': 'К64', 'Color': 'Blue'}, {'Name': 'Blue 14', 'Stimul': 'К65', 'Color': 'Blue'}, {'Name': 'Blue 15', 'Stimul': 'К66', 'Color': 'Blue'}, {'Name': 'Blue 16', 'Stimul': 'К67', 'Color': 'Blue'}, {'Name': 'Blue 17', 'Stimul': 'К68', 'Color': 'Blue'}, {'Name': 'Blue 18', 'Stimul': 'К69', 'Color': 'Blue'}, {'Name': 'Blue 19', 'Stimul': 'К70', 'Color': 'Blue'}, {'Name': 'Blue 20', 'Stimul': 'К71', 'Color': 'Blue'}, {'Name': 'Blue 21', 'Stimul': 'К72', 'Color': 'Blue'}, {'Name': 'Blue 22', 'Stimul': 'К73', 'Color': 'Blue'}, {'Name': 'Blue 23', 'Stimul': 'К74', 'Color': 'Blue'}, {'Name': 'Blue 24', 'Stimul': 'К75', 'Color': 'Blue'}, {'Name': 'Blue 25', 'Stimul': 'К76', 'Color': 'Blue'}, {'Name': 'Blue 26', 'Stimul': 'К77', 'Color': 'Blue'}, {'Name': 'Blue 27', 'Stimul': 'К78', 'Color': 'Blue'}, {'Name': 'Blue 28', 'Stimul': 'К79', 'Color': 'Blue'}, {'Name': 'Blue 29', 'Stimul': 'К80', 'Color': 'Blue'}, {'Name': 'Blue 30', 'Stimul': 'К81', 'Color': 'Blue'}, {'Name': 'Blue 31', 'Stimul': 'К82', 'Color': 'Blue'}, {'Name': 'Blue 32', 'Stimul': 'К83', 'Color': 'Blue'}, {'Name': 'Blue 33', 'Stimul': 'К84', 'Color': 'Blue'}, {'Name': 'Blue 34', 'Stimul': 'К85', 'Color': 'Blue'}, {'Name': 'Blue 35', 'Stimul': 'К86', 'Color': 'Blue'}, {'Name': 'Blue 36', 'Stimul': 'К87', 'Color': 'Blue'}, {'Name': 'Blue 37', 'Stimul': 'К88', 'Color': 'Blue'}, {'Name': 'Blue 38', 'Stimul': 'К89', 'Color': 'Blue'}, {'Name': 'Blue 39', 'Stimul': 'К90', 'Color': 'Blue'}, {'Name': 'Blue 40', 'Stimul': 'К91', 'Color': 'Blue'}, {'Name': 'Blue 41', 'Stimul': 'К92', 'Color': 'Blue'}, {'Name': 'Blue 42', 'Stimul': 'К93', 'Color': 'Blue'}, {'Name': 'Blue 43', 'Stimul': 'К94', 'Color': 'Blue'}, {'Name': 'Blue 44', 'Stimul': 'К95', 'Color': 'Blue'}, {'Name': 'Blue 45', 'Stimul': 'К96', 'Color': 'Blue'}, {'Name': 'Blue 46', 'Stimul': 'К97', 'Color': 'Blue'}, {'Name': 'Blue 47', 'Stimul': 'К98', 'Color': 'Blue'}, {'Name': 'Blue 48', 'Stimul': 'К99', 'Color': 'Blue'}, {'Name': 'Blue 49', 'Stimul': 'К100', 'Color': 'Blue'}, {'Name': 'Blue 50', 'Stimul': 'К101', 'Color': 'Blue'}, {'Name': 'Blue 51', 'Stimul': 'К52', 'Color': 'Blue'}, {'Name': 'Blue 52', 'Stimul': 'К53', 'Color': 'Blue'}, {'Name': 'Blue 53', 'Stimul': 'К54', 'Color': 'Blue'}, {'Name': 'Blue 54', 'Stimul': 'К55', 'Color': 'Blue'}, {'Name': 'Blue 55', 'Stimul': 'К56', 'Color': 'Blue'}, {'Name': 'Blue 56', 'Stimul': 'К57', 'Color': 'Blue'}, {'Name': 'Blue 57', 'Stimul': 'К58', 'Color': 'Blue'}, {'Name': 'Blue 58', 'Stimul': 'К59', 'Color': 'Blue'}, {'Name': 'Blue 59', 'Stimul': 'К60', 'Color': 'Blue'}, {'Name': 'Blue 60', 'Stimul': 'К61', 'Color': 'Blue'}]" valType="str"/>
+      <Param name="conditionsFile" updates="None" val="Stimul_3.xlsx" valType="file"/>
+      <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
+      <Param name="isTrials" updates="None" val="True" valType="bool"/>
+      <Param name="loopType" updates="None" val="random" valType="str"/>
+      <Param name="nReps" updates="None" val="1" valType="num"/>
+      <Param name="name" updates="None" val="trials_3" valType="code"/>
+      <Param name="random seed" updates="None" val="" valType="code"/>
+    </LoopInitiator>
+    <Routine name="trial"/>
+    <LoopTerminator name="trials_3"/>
+    <Routine name="Pause3"/>
+    <LoopInitiator loopType="TrialHandler" name="trials_4">
+      <Param name="Selected rows" updates="None" val="" valType="str"/>
+      <Param name="conditions" updates="None" val="[{'Name': 'Purple 1', 'Stimul': 'К1', 'Color': 'Purple'}, {'Name': 'Purple 2', 'Stimul': 'К2', 'Color': 'Purple'}, {'Name': 'Purple 9', 'Stimul': 'К9', 'Color': 'Purple'}, {'Name': 'Purple 10', 'Stimul': 'К10', 'Color': 'Purple'}, {'Name': 'Purple 11', 'Stimul': 'К11', 'Color': 'Purple'}, {'Name': 'Purple 12', 'Stimul': 'К12', 'Color': 'Purple'}, {'Name': 'Purple 16', 'Stimul': 'К16', 'Color': 'Purple'}, {'Name': 'Purple 17', 'Stimul': 'К17', 'Color': 'Purple'}, {'Name': 'Purple 18', 'Stimul': 'К18', 'Color': 'Purple'}, {'Name': 'Purple 19', 'Stimul': 'К19', 'Color': 'Purple'}, {'Name': 'Purple 26', 'Stimul': 'К26', 'Color': 'Purple'}, {'Name': 'Purple 27', 'Stimul': 'К27', 'Color': 'Purple'}, {'Name': 'Purple 28', 'Stimul': 'К28', 'Color': 'Purple'}, {'Name': 'Purple 29', 'Stimul': 'К29', 'Color': 'Purple'}, {'Name': 'Purple 33', 'Stimul': 'К33', 'Color': 'Purple'}, {'Name': 'Purple 34', 'Stimul': 'К34', 'Color': 'Purple'}, {'Name': 'Purple 35', 'Stimul': 'К35', 'Color': 'Purple'}, {'Name': 'Purple 36', 'Stimul': 'К36', 'Color': 'Purple'}, {'Name': 'Purple 37', 'Stimul': 'К37', 'Color': 'Purple'}, {'Name': 'Purple 38', 'Stimul': 'К38', 'Color': 'Purple'}, {'Name': 'Purple 43', 'Stimul': 'К43', 'Color': 'Purple'}, {'Name': 'Purple 44', 'Stimul': 'К44', 'Color': 'Purple'}, {'Name': 'Purple 45', 'Stimul': 'К45', 'Color': 'Purple'}, {'Name': 'Purple 46', 'Stimul': 'К46', 'Color': 'Purple'}, {'Name': 'Purple 47', 'Stimul': 'К47', 'Color': 'Purple'}, {'Name': 'Purple 48', 'Stimul': 'К48', 'Color': 'Purple'}, {'Name': 'Purple 49', 'Stimul': 'К49', 'Color': 'Purple'}, {'Name': 'Purple 50', 'Stimul': 'К50', 'Color': 'Purple'}, {'Name': 'Blue 1', 'Stimul': 'К52', 'Color': 'Blue'}, {'Name': 'Blue 2', 'Stimul': 'К53', 'Color': 'Blue'}, {'Name': 'Blue 3', 'Stimul': 'К54', 'Color': 'Blue'}, {'Name': 'Blue 4', 'Stimul': 'К55', 'Color': 'Blue'}, {'Name': 'Blue 5', 'Stimul': 'К56', 'Color': 'Blue'}, {'Name': 'Blue 6', 'Stimul': 'К57', 'Color': 'Blue'}, {'Name': 'Blue 7', 'Stimul': 'К58', 'Color': 'Blue'}, {'Name': 'Blue 8', 'Stimul': 'К59', 'Color': 'Blue'}, {'Name': 'Blue 9', 'Stimul': 'К60', 'Color': 'Blue'}, {'Name': 'Blue 10', 'Stimul': 'К61', 'Color': 'Blue'}, {'Name': 'Blue 11', 'Stimul': 'К62', 'Color': 'Blue'}, {'Name': 'Blue 12', 'Stimul': 'К63', 'Color': 'Blue'}, {'Name': 'Blue 13', 'Stimul': 'К64', 'Color': 'Blue'}, {'Name': 'Blue 14', 'Stimul': 'К65', 'Color': 'Blue'}, {'Name': 'Blue 15', 'Stimul': 'К66', 'Color': 'Blue'}, {'Name': 'Blue 16', 'Stimul': 'К67', 'Color': 'Blue'}, {'Name': 'Blue 17', 'Stimul': 'К68', 'Color': 'Blue'}, {'Name': 'Blue 18', 'Stimul': 'К69', 'Color': 'Blue'}, {'Name': 'Blue 19', 'Stimul': 'К70', 'Color': 'Blue'}, {'Name': 'Blue 20', 'Stimul': 'К71', 'Color': 'Blue'}, {'Name': 'Blue 21', 'Stimul': 'К72', 'Color': 'Blue'}, {'Name': 'Blue 22', 'Stimul': 'К73', 'Color': 'Blue'}, {'Name': 'Blue 23', 'Stimul': 'К74', 'Color': 'Blue'}, {'Name': 'Blue 24', 'Stimul': 'К75', 'Color': 'Blue'}, {'Name': 'Blue 25', 'Stimul': 'К76', 'Color': 'Blue'}, {'Name': 'Blue 26', 'Stimul': 'К77', 'Color': 'Blue'}, {'Name': 'Blue 27', 'Stimul': 'К78', 'Color': 'Blue'}, {'Name': 'Blue 28', 'Stimul': 'К79', 'Color': 'Blue'}, {'Name': 'Blue 29', 'Stimul': 'К80', 'Color': 'Blue'}, {'Name': 'Blue 30', 'Stimul': 'К81', 'Color': 'Blue'}, {'Name': 'Blue 31', 'Stimul': 'К82', 'Color': 'Blue'}, {'Name': 'Blue 32', 'Stimul': 'К83', 'Color': 'Blue'}, {'Name': 'Blue 33', 'Stimul': 'К84', 'Color': 'Blue'}, {'Name': 'Blue 34', 'Stimul': 'К85', 'Color': 'Blue'}, {'Name': 'Blue 35', 'Stimul': 'К86', 'Color': 'Blue'}, {'Name': 'Blue 36', 'Stimul': 'К87', 'Color': 'Blue'}, {'Name': 'Blue 37', 'Stimul': 'К88', 'Color': 'Blue'}, {'Name': 'Blue 38', 'Stimul': 'К89', 'Color': 'Blue'}, {'Name': 'Blue 39', 'Stimul': 'К90', 'Color': 'Blue'}, {'Name': 'Blue 40', 'Stimul': 'К91', 'Color': 'Blue'}, {'Name': 'Blue 41', 'Stimul': 'К92', 'Color': 'Blue'}, {'Name': 'Blue 42', 'Stimul': 'К93', 'Color': 'Blue'}, {'Name': 'Blue 43', 'Stimul': 'К94', 'Color': 'Blue'}, {'Name': 'Blue 44', 'Stimul': 'К95', 'Color': 'Blue'}, {'Name': 'Blue 45', 'Stimul': 'К96', 'Color': 'Blue'}, {'Name': 'Blue 46', 'Stimul': 'К97', 'Color': 'Blue'}, {'Name': 'Blue 47', 'Stimul': 'К98', 'Color': 'Blue'}, {'Name': 'Blue 48', 'Stimul': 'К99', 'Color': 'Blue'}, {'Name': 'Blue 49', 'Stimul': 'К100', 'Color': 'Blue'}, {'Name': 'Blue 50', 'Stimul': 'К101', 'Color': 'Blue'}, {'Name': 'Blue 51', 'Stimul': 'К52', 'Color': 'Blue'}, {'Name': 'Blue 52', 'Stimul': 'К53', 'Color': 'Blue'}, {'Name': 'Blue 53', 'Stimul': 'К54', 'Color': 'Blue'}, {'Name': 'Blue 54', 'Stimul': 'К55', 'Color': 'Blue'}, {'Name': 'Blue 55', 'Stimul': 'К56', 'Color': 'Blue'}, {'Name': 'Blue 56', 'Stimul': 'К57', 'Color': 'Blue'}, {'Name': 'Blue 57', 'Stimul': 'К58', 'Color': 'Blue'}, {'Name': 'Blue 58', 'Stimul': 'К59', 'Color': 'Blue'}, {'Name': 'Blue 59', 'Stimul': 'К60', 'Color': 'Blue'}, {'Name': 'Blue 60', 'Stimul': 'К61', 'Color': 'Blue'}, {'Name': 'Blue 61', 'Stimul': 'К62', 'Color': 'Blue'}, {'Name': 'Blue 62', 'Stimul': 'К63', 'Color': 'Blue'}, {'Name': 'Blue 63', 'Stimul': 'К64', 'Color': 'Blue'}, {'Name': 'Blue 64', 'Stimul': 'К65', 'Color': 'Blue'}, {'Name': 'Blue 65', 'Stimul': 'К66', 'Color': 'Blue'}, {'Name': 'Blue 66', 'Stimul': 'К67', 'Color': 'Blue'}, {'Name': 'Blue 67', 'Stimul': 'К68', 'Color': 'Blue'}, {'Name': 'Blue 68', 'Stimul': 'К69', 'Color': 'Blue'}, {'Name': 'Blue 69', 'Stimul': 'К70', 'Color': 'Blue'}, {'Name': 'Blue 70', 'Stimul': 'К71', 'Color': 'Blue'}, {'Name': 'Blue 71', 'Stimul': 'К72', 'Color': 'Blue'}, {'Name': 'Blue 72', 'Stimul': 'К73', 'Color': 'Blue'}]" valType="str"/>
+      <Param name="conditionsFile" updates="None" val="Stimul_4.xlsx" valType="file"/>
+      <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
+      <Param name="isTrials" updates="None" val="True" valType="bool"/>
+      <Param name="loopType" updates="None" val="random" valType="str"/>
+      <Param name="nReps" updates="None" val="1" valType="num"/>
+      <Param name="name" updates="None" val="trials_4" valType="code"/>
+      <Param name="random seed" updates="None" val="" valType="code"/>
+    </LoopInitiator>
+    <Routine name="trial"/>
+    <LoopTerminator name="trials_4"/>
+    <Routine name="Pause4"/>
+    <LoopInitiator loopType="TrialHandler" name="trials_5">
+      <Param name="Selected rows" updates="None" val="" valType="str"/>
+      <Param name="conditions" updates="None" val="[{'Name': 'Purple 1', 'Stimul': 'К1', 'Color': 'Purple'}, {'Name': 'Purple 10', 'Stimul': 'К10', 'Color': 'Purple'}, {'Name': 'Purple 11', 'Stimul': 'К11', 'Color': 'Purple'}, {'Name': 'Purple 12', 'Stimul': 'К12', 'Color': 'Purple'}, {'Name': 'Purple 18', 'Stimul': 'К18', 'Color': 'Purple'}, {'Name': 'Purple 19', 'Stimul': 'К19', 'Color': 'Purple'}, {'Name': 'Purple 26', 'Stimul': 'К26', 'Color': 'Purple'}, {'Name': 'Purple 27', 'Stimul': 'К27', 'Color': 'Purple'}, {'Name': 'Purple 28', 'Stimul': 'К28', 'Color': 'Purple'}, {'Name': 'Purple 29', 'Stimul': 'К29', 'Color': 'Purple'}, {'Name': 'Purple 37', 'Stimul': 'К37', 'Color': 'Purple'}, {'Name': 'Purple 38', 'Stimul': 'К38', 'Color': 'Purple'}, {'Name': 'Purple 43', 'Stimul': 'К43', 'Color': 'Purple'}, {'Name': 'Purple 44', 'Stimul': 'К44', 'Color': 'Purple'}, {'Name': 'Purple 45', 'Stimul': 'К45', 'Color': 'Purple'}, {'Name': 'Purple 50', 'Stimul': 'К50', 'Color': 'Purple'}, {'Name': 'Blue 1', 'Stimul': 'К52', 'Color': 'Blue'}, {'Name': 'Blue 2', 'Stimul': 'К53', 'Color': 'Blue'}, {'Name': 'Blue 3', 'Stimul': 'К54', 'Color': 'Blue'}, {'Name': 'Blue 4', 'Stimul': 'К55', 'Color': 'Blue'}, {'Name': 'Blue 5', 'Stimul': 'К56', 'Color': 'Blue'}, {'Name': 'Blue 6', 'Stimul': 'К57', 'Color': 'Blue'}, {'Name': 'Blue 7', 'Stimul': 'К58', 'Color': 'Blue'}, {'Name': 'Blue 8', 'Stimul': 'К59', 'Color': 'Blue'}, {'Name': 'Blue 9', 'Stimul': 'К60', 'Color': 'Blue'}, {'Name': 'Blue 10', 'Stimul': 'К61', 'Color': 'Blue'}, {'Name': 'Blue 11', 'Stimul': 'К62', 'Color': 'Blue'}, {'Name': 'Blue 12', 'Stimul': 'К63', 'Color': 'Blue'}, {'Name': 'Blue 13', 'Stimul': 'К64', 'Color': 'Blue'}, {'Name': 'Blue 14', 'Stimul': 'К65', 'Color': 'Blue'}, {'Name': 'Blue 15', 'Stimul': 'К66', 'Color': 'Blue'}, {'Name': 'Blue 16', 'Stimul': 'К67', 'Color': 'Blue'}, {'Name': 'Blue 17', 'Stimul': 'К68', 'Color': 'Blue'}, {'Name': 'Blue 18', 'Stimul': 'К69', 'Color': 'Blue'}, {'Name': 'Blue 19', 'Stimul': 'К70', 'Color': 'Blue'}, {'Name': 'Blue 20', 'Stimul': 'К71', 'Color': 'Blue'}, {'Name': 'Blue 21', 'Stimul': 'К72', 'Color': 'Blue'}, {'Name': 'Blue 22', 'Stimul': 'К73', 'Color': 'Blue'}, {'Name': 'Blue 23', 'Stimul': 'К74', 'Color': 'Blue'}, {'Name': 'Blue 24', 'Stimul': 'К75', 'Color': 'Blue'}, {'Name': 'Blue 25', 'Stimul': 'К76', 'Color': 'Blue'}, {'Name': 'Blue 26', 'Stimul': 'К77', 'Color': 'Blue'}, {'Name': 'Blue 27', 'Stimul': 'К78', 'Color': 'Blue'}, {'Name': 'Blue 28', 'Stimul': 'К79', 'Color': 'Blue'}, {'Name': 'Blue 29', 'Stimul': 'К80', 'Color': 'Blue'}, {'Name': 'Blue 30', 'Stimul': 'К81', 'Color': 'Blue'}, {'Name': 'Blue 31', 'Stimul': 'К82', 'Color': 'Blue'}, {'Name': 'Blue 32', 'Stimul': 'К83', 'Color': 'Blue'}, {'Name': 'Blue 33', 'Stimul': 'К84', 'Color': 'Blue'}, {'Name': 'Blue 34', 'Stimul': 'К85', 'Color': 'Blue'}, {'Name': 'Blue 35', 'Stimul': 'К86', 'Color': 'Blue'}, {'Name': 'Blue 36', 'Stimul': 'К87', 'Color': 'Blue'}, {'Name': 'Blue 37', 'Stimul': 'К88', 'Color': 'Blue'}, {'Name': 'Blue 38', 'Stimul': 'К89', 'Color': 'Blue'}, {'Name': 'Blue 39', 'Stimul': 'К90', 'Color': 'Blue'}, {'Name': 'Blue 40', 'Stimul': 'К91', 'Color': 'Blue'}, {'Name': 'Blue 41', 'Stimul': 'К92', 'Color': 'Blue'}, {'Name': 'Blue 42', 'Stimul': 'К93', 'Color': 'Blue'}, {'Name': 'Blue 43', 'Stimul': 'К94', 'Color': 'Blue'}, {'Name': 'Blue 44', 'Stimul': 'К95', 'Color': 'Blue'}, {'Name': 'Blue 45', 'Stimul': 'К96', 'Color': 'Blue'}, {'Name': 'Blue 46', 'Stimul': 'К97', 'Color': 'Blue'}, {'Name': 'Blue 47', 'Stimul': 'К98', 'Color': 'Blue'}, {'Name': 'Blue 48', 'Stimul': 'К99', 'Color': 'Blue'}, {'Name': 'Blue 49', 'Stimul': 'К100', 'Color': 'Blue'}, {'Name': 'Blue 50', 'Stimul': 'К101', 'Color': 'Blue'}, {'Name': 'Blue 51', 'Stimul': 'К52', 'Color': 'Blue'}, {'Name': 'Blue 52', 'Stimul': 'К53', 'Color': 'Blue'}, {'Name': 'Blue 53', 'Stimul': 'К54', 'Color': 'Blue'}, {'Name': 'Blue 54', 'Stimul': 'К55', 'Color': 'Blue'}, {'Name': 'Blue 55', 'Stimul': 'К56', 'Color': 'Blue'}, {'Name': 'Blue 56', 'Stimul': 'К57', 'Color': 'Blue'}, {'Name': 'Blue 57', 'Stimul': 'К58', 'Color': 'Blue'}, {'Name': 'Blue 58', 'Stimul': 'К59', 'Color': 'Blue'}, {'Name': 'Blue 59', 'Stimul': 'К60', 'Color': 'Blue'}, {'Name': 'Blue 60', 'Stimul': 'К61', 'Color': 'Blue'}, {'Name': 'Blue 61', 'Stimul': 'К62', 'Color': 'Blue'}, {'Name': 'Blue 62', 'Stimul': 'К63', 'Color': 'Blue'}, {'Name': 'Blue 63', 'Stimul': 'К64', 'Color': 'Blue'}, {'Name': 'Blue 64', 'Stimul': 'К65', 'Color': 'Blue'}, {'Name': 'Blue 65', 'Stimul': 'К66', 'Color': 'Blue'}, {'Name': 'Blue 66', 'Stimul': 'К67', 'Color': 'Blue'}, {'Name': 'Blue 67', 'Stimul': 'К68', 'Color': 'Blue'}, {'Name': 'Blue 68', 'Stimul': 'К69', 'Color': 'Blue'}, {'Name': 'Blue 69', 'Stimul': 'К70', 'Color': 'Blue'}, {'Name': 'Blue 70', 'Stimul': 'К71', 'Color': 'Blue'}, {'Name': 'Blue 71', 'Stimul': 'К72', 'Color': 'Blue'}, {'Name': 'Blue 72', 'Stimul': 'К73', 'Color': 'Blue'}, {'Name': 'Blue 73', 'Stimul': 'К74', 'Color': 'Blue'}, {'Name': 'Blue 74', 'Stimul': 'К75', 'Color': 'Blue'}, {'Name': 'Blue 75', 'Stimul': 'К76', 'Color': 'Blue'}, {'Name': 'Blue 76', 'Stimul': 'К77', 'Color': 'Blue'}, {'Name': 'Blue 77', 'Stimul': 'К78', 'Color': 'Blue'}, {'Name': 'Blue 78', 'Stimul': 'К79', 'Color': 'Blue'}, {'Name': 'Blue 79', 'Stimul': 'К80', 'Color': 'Blue'}, {'Name': 'Blue 80', 'Stimul': 'К81', 'Color': 'Blue'}, {'Name': 'Blue 81', 'Stimul': 'К82', 'Color': 'Blue'}, {'Name': 'Blue 82', 'Stimul': 'К83', 'Color': 'Blue'}, {'Name': 'Blue 83', 'Stimul': 'К84', 'Color': 'Blue'}, {'Name': 'Blue 84', 'Stimul': 'К85', 'Color': 'Blue'}]" valType="str"/>
+      <Param name="conditionsFile" updates="None" val="Stimul_5.xlsx" valType="file"/>
+      <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
+      <Param name="isTrials" updates="None" val="True" valType="bool"/>
+      <Param name="loopType" updates="None" val="random" valType="str"/>
+      <Param name="nReps" updates="None" val="1" valType="num"/>
+      <Param name="name" updates="None" val="trials_5" valType="code"/>
+      <Param name="random seed" updates="None" val="" valType="code"/>
+    </LoopInitiator>
+    <Routine name="trial"/>
+    <LoopTerminator name="trials_5"/>
+    <Routine name="Pause5"/>
+    <LoopInitiator loopType="TrialHandler" name="trials_6">
+      <Param name="Selected rows" updates="None" val="" valType="str"/>
+      <Param name="conditions" updates="None" val="[{'Name': 'Purple 1', 'Stimul': 'К1', 'Color': 'Purple'}, {'Name': 'Purple 10', 'Stimul': 'К10', 'Color': 'Purple'}, {'Name': 'Purple 11', 'Stimul': 'К11', 'Color': 'Purple'}, {'Name': 'Purple 12', 'Stimul': 'К12', 'Color': 'Purple'}, {'Name': 'Purple 18', 'Stimul': 'К18', 'Color': 'Purple'}, {'Name': 'Purple 19', 'Stimul': 'К19', 'Color': 'Purple'}, {'Name': 'Purple 26', 'Stimul': 'К26', 'Color': 'Purple'}, {'Name': 'Purple 27', 'Stimul': 'К27', 'Color': 'Purple'}, {'Name': 'Purple 28', 'Stimul': 'К28', 'Color': 'Purple'}, {'Name': 'Purple 29', 'Stimul': 'К29', 'Color': 'Purple'}, {'Name': 'Purple 37', 'Stimul': 'К37', 'Color': 'Purple'}, {'Name': 'Purple 38', 'Stimul': 'К38', 'Color': 'Purple'}, {'Name': 'Purple 43', 'Stimul': 'К43', 'Color': 'Purple'}, {'Name': 'Purple 44', 'Stimul': 'К44', 'Color': 'Purple'}, {'Name': 'Purple 45', 'Stimul': 'К45', 'Color': 'Purple'}, {'Name': 'Purple 50', 'Stimul': 'К50', 'Color': 'Purple'}, {'Name': 'Blue 1', 'Stimul': 'К52', 'Color': 'Blue'}, {'Name': 'Blue 2', 'Stimul': 'К53', 'Color': 'Blue'}, {'Name': 'Blue 3', 'Stimul': 'К54', 'Color': 'Blue'}, {'Name': 'Blue 4', 'Stimul': 'К55', 'Color': 'Blue'}, {'Name': 'Blue 5', 'Stimul': 'К56', 'Color': 'Blue'}, {'Name': 'Blue 6', 'Stimul': 'К57', 'Color': 'Blue'}, {'Name': 'Blue 7', 'Stimul': 'К58', 'Color': 'Blue'}, {'Name': 'Blue 8', 'Stimul': 'К59', 'Color': 'Blue'}, {'Name': 'Blue 9', 'Stimul': 'К60', 'Color': 'Blue'}, {'Name': 'Blue 10', 'Stimul': 'К61', 'Color': 'Blue'}, {'Name': 'Blue 11', 'Stimul': 'К62', 'Color': 'Blue'}, {'Name': 'Blue 12', 'Stimul': 'К63', 'Color': 'Blue'}, {'Name': 'Blue 13', 'Stimul': 'К64', 'Color': 'Blue'}, {'Name': 'Blue 14', 'Stimul': 'К65', 'Color': 'Blue'}, {'Name': 'Blue 15', 'Stimul': 'К66', 'Color': 'Blue'}, {'Name': 'Blue 16', 'Stimul': 'К67', 'Color': 'Blue'}, {'Name': 'Blue 17', 'Stimul': 'К68', 'Color': 'Blue'}, {'Name': 'Blue 18', 'Stimul': 'К69', 'Color': 'Blue'}, {'Name': 'Blue 19', 'Stimul': 'К70', 'Color': 'Blue'}, {'Name': 'Blue 20', 'Stimul': 'К71', 'Color': 'Blue'}, {'Name': 'Blue 21', 'Stimul': 'К72', 'Color': 'Blue'}, {'Name': 'Blue 22', 'Stimul': 'К73', 'Color': 'Blue'}, {'Name': 'Blue 23', 'Stimul': 'К74', 'Color': 'Blue'}, {'Name': 'Blue 24', 'Stimul': 'К75', 'Color': 'Blue'}, {'Name': 'Blue 25', 'Stimul': 'К76', 'Color': 'Blue'}, {'Name': 'Blue 26', 'Stimul': 'К77', 'Color': 'Blue'}, {'Name': 'Blue 27', 'Stimul': 'К78', 'Color': 'Blue'}, {'Name': 'Blue 28', 'Stimul': 'К79', 'Color': 'Blue'}, {'Name': 'Blue 29', 'Stimul': 'К80', 'Color': 'Blue'}, {'Name': 'Blue 30', 'Stimul': 'К81', 'Color': 'Blue'}, {'Name': 'Blue 31', 'Stimul': 'К82', 'Color': 'Blue'}, {'Name': 'Blue 32', 'Stimul': 'К83', 'Color': 'Blue'}, {'Name': 'Blue 33', 'Stimul': 'К84', 'Color': 'Blue'}, {'Name': 'Blue 34', 'Stimul': 'К85', 'Color': 'Blue'}, {'Name': 'Blue 35', 'Stimul': 'К86', 'Color': 'Blue'}, {'Name': 'Blue 36', 'Stimul': 'К87', 'Color': 'Blue'}, {'Name': 'Blue 37', 'Stimul': 'К88', 'Color': 'Blue'}, {'Name': 'Blue 38', 'Stimul': 'К89', 'Color': 'Blue'}, {'Name': 'Blue 39', 'Stimul': 'К90', 'Color': 'Blue'}, {'Name': 'Blue 40', 'Stimul': 'К91', 'Color': 'Blue'}, {'Name': 'Blue 41', 'Stimul': 'К92', 'Color': 'Blue'}, {'Name': 'Blue 42', 'Stimul': 'К93', 'Color': 'Blue'}, {'Name': 'Blue 43', 'Stimul': 'К94', 'Color': 'Blue'}, {'Name': 'Blue 44', 'Stimul': 'К95', 'Color': 'Blue'}, {'Name': 'Blue 45', 'Stimul': 'К96', 'Color': 'Blue'}, {'Name': 'Blue 46', 'Stimul': 'К97', 'Color': 'Blue'}, {'Name': 'Blue 47', 'Stimul': 'К98', 'Color': 'Blue'}, {'Name': 'Blue 48', 'Stimul': 'К99', 'Color': 'Blue'}, {'Name': 'Blue 49', 'Stimul': 'К100', 'Color': 'Blue'}, {'Name': 'Blue 50', 'Stimul': 'К101', 'Color': 'Blue'}, {'Name': 'Blue 51', 'Stimul': 'К52', 'Color': 'Blue'}, {'Name': 'Blue 52', 'Stimul': 'К53', 'Color': 'Blue'}, {'Name': 'Blue 53', 'Stimul': 'К54', 'Color': 'Blue'}, {'Name': 'Blue 54', 'Stimul': 'К55', 'Color': 'Blue'}, {'Name': 'Blue 55', 'Stimul': 'К56', 'Color': 'Blue'}, {'Name': 'Blue 56', 'Stimul': 'К57', 'Color': 'Blue'}, {'Name': 'Blue 57', 'Stimul': 'К58', 'Color': 'Blue'}, {'Name': 'Blue 58', 'Stimul': 'К59', 'Color': 'Blue'}, {'Name': 'Blue 59', 'Stimul': 'К60', 'Color': 'Blue'}, {'Name': 'Blue 60', 'Stimul': 'К61', 'Color': 'Blue'}, {'Name': 'Blue 61', 'Stimul': 'К62', 'Color': 'Blue'}, {'Name': 'Blue 62', 'Stimul': 'К63', 'Color': 'Blue'}, {'Name': 'Blue 63', 'Stimul': 'К64', 'Color': 'Blue'}, {'Name': 'Blue 64', 'Stimul': 'К65', 'Color': 'Blue'}, {'Name': 'Blue 65', 'Stimul': 'К66', 'Color': 'Blue'}, {'Name': 'Blue 66', 'Stimul': 'К67', 'Color': 'Blue'}, {'Name': 'Blue 67', 'Stimul': 'К68', 'Color': 'Blue'}, {'Name': 'Blue 68', 'Stimul': 'К69', 'Color': 'Blue'}, {'Name': 'Blue 69', 'Stimul': 'К70', 'Color': 'Blue'}, {'Name': 'Blue 70', 'Stimul': 'К71', 'Color': 'Blue'}, {'Name': 'Blue 71', 'Stimul': 'К72', 'Color': 'Blue'}, {'Name': 'Blue 72', 'Stimul': 'К73', 'Color': 'Blue'}, {'Name': 'Blue 73', 'Stimul': 'К74', 'Color': 'Blue'}, {'Name': 'Blue 74', 'Stimul': 'К75', 'Color': 'Blue'}, {'Name': 'Blue 75', 'Stimul': 'К76', 'Color': 'Blue'}, {'Name': 'Blue 76', 'Stimul': 'К77', 'Color': 'Blue'}, {'Name': 'Blue 77', 'Stimul': 'К78', 'Color': 'Blue'}, {'Name': 'Blue 78', 'Stimul': 'К79', 'Color': 'Blue'}, {'Name': 'Blue 79', 'Stimul': 'К80', 'Color': 'Blue'}, {'Name': 'Blue 80', 'Stimul': 'К81', 'Color': 'Blue'}, {'Name': 'Blue 81', 'Stimul': 'К82', 'Color': 'Blue'}, {'Name': 'Blue 82', 'Stimul': 'К83', 'Color': 'Blue'}, {'Name': 'Blue 83', 'Stimul': 'К84', 'Color': 'Blue'}, {'Name': 'Blue 84', 'Stimul': 'К85', 'Color': 'Blue'}]" valType="str"/>
+      <Param name="conditionsFile" updates="None" val="Stimul_6.xlsx" valType="file"/>
+      <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
+      <Param name="isTrials" updates="None" val="True" valType="bool"/>
+      <Param name="loopType" updates="None" val="random" valType="str"/>
+      <Param name="nReps" updates="None" val="1" valType="num"/>
+      <Param name="name" updates="None" val="trials_6" valType="code"/>
+      <Param name="random seed" updates="None" val="" valType="code"/>
+    </LoopInitiator>
+    <Routine name="trial"/>
+    <LoopTerminator name="trials_6"/>
+    <Routine name="Pause6"/>
+    <LoopInitiator loopType="TrialHandler" name="trials_7">
+      <Param name="Selected rows" updates="None" val="" valType="str"/>
+      <Param name="conditions" updates="None" val="[{'Name': 'Purple 1', 'Stimul': 'К1', 'Color': 'Purple'}, {'Name': 'Purple 12', 'Stimul': 'К12', 'Color': 'Purple'}, {'Name': 'Purple 18', 'Stimul': 'К18', 'Color': 'Purple'}, {'Name': 'Purple 37', 'Stimul': 'К37', 'Color': 'Purple'}, {'Name': 'Purple 38', 'Stimul': 'К38', 'Color': 'Purple'}, {'Name': 'Purple 45', 'Stimul': 'К45', 'Color': 'Purple'}, {'Name': 'Blue 1', 'Stimul': 'К52', 'Color': 'Blue'}, {'Name': 'Blue 2', 'Stimul': 'К53', 'Color': 'Blue'}, {'Name': 'Blue 3', 'Stimul': 'К54', 'Color': 'Blue'}, {'Name': 'Blue 4', 'Stimul': 'К55', 'Color': 'Blue'}, {'Name': 'Blue 5', 'Stimul': 'К56', 'Color': 'Blue'}, {'Name': 'Blue 6', 'Stimul': 'К57', 'Color': 'Blue'}, {'Name': 'Blue 7', 'Stimul': 'К58', 'Color': 'Blue'}, {'Name': 'Blue 8', 'Stimul': 'К59', 'Color': 'Blue'}, {'Name': 'Blue 9', 'Stimul': 'К60', 'Color': 'Blue'}, {'Name': 'Blue 10', 'Stimul': 'К61', 'Color': 'Blue'}, {'Name': 'Blue 11', 'Stimul': 'К62', 'Color': 'Blue'}, {'Name': 'Blue 12', 'Stimul': 'К63', 'Color': 'Blue'}, {'Name': 'Blue 13', 'Stimul': 'К64', 'Color': 'Blue'}, {'Name': 'Blue 14', 'Stimul': 'К65', 'Color': 'Blue'}, {'Name': 'Blue 15', 'Stimul': 'К66', 'Color': 'Blue'}, {'Name': 'Blue 16', 'Stimul': 'К67', 'Color': 'Blue'}, {'Name': 'Blue 17', 'Stimul': 'К68', 'Color': 'Blue'}, {'Name': 'Blue 18', 'Stimul': 'К69', 'Color': 'Blue'}, {'Name': 'Blue 19', 'Stimul': 'К70', 'Color': 'Blue'}, {'Name': 'Blue 20', 'Stimul': 'К71', 'Color': 'Blue'}, {'Name': 'Blue 21', 'Stimul': 'К72', 'Color': 'Blue'}, {'Name': 'Blue 22', 'Stimul': 'К73', 'Color': 'Blue'}, {'Name': 'Blue 23', 'Stimul': 'К74', 'Color': 'Blue'}, {'Name': 'Blue 24', 'Stimul': 'К75', 'Color': 'Blue'}, {'Name': 'Blue 25', 'Stimul': 'К76', 'Color': 'Blue'}, {'Name': 'Blue 26', 'Stimul': 'К77', 'Color': 'Blue'}, {'Name': 'Blue 27', 'Stimul': 'К78', 'Color': 'Blue'}, {'Name': 'Blue 28', 'Stimul': 'К79', 'Color': 'Blue'}, {'Name': 'Blue 29', 'Stimul': 'К80', 'Color': 'Blue'}, {'Name': 'Blue 30', 'Stimul': 'К81', 'Color': 'Blue'}, {'Name': 'Blue 31', 'Stimul': 'К82', 'Color': 'Blue'}, {'Name': 'Blue 32', 'Stimul': 'К83', 'Color': 'Blue'}, {'Name': 'Blue 33', 'Stimul': 'К84', 'Color': 'Blue'}, {'Name': 'Blue 34', 'Stimul': 'К85', 'Color': 'Blue'}, {'Name': 'Blue 35', 'Stimul': 'К86', 'Color': 'Blue'}, {'Name': 'Blue 36', 'Stimul': 'К87', 'Color': 'Blue'}, {'Name': 'Blue 37', 'Stimul': 'К88', 'Color': 'Blue'}, {'Name': 'Blue 38', 'Stimul': 'К89', 'Color': 'Blue'}, {'Name': 'Blue 39', 'Stimul': 'К90', 'Color': 'Blue'}, {'Name': 'Blue 40', 'Stimul': 'К91', 'Color': 'Blue'}, {'Name': 'Blue 41', 'Stimul': 'К92', 'Color': 'Blue'}, {'Name': 'Blue 42', 'Stimul': 'К93', 'Color': 'Blue'}, {'Name': 'Blue 43', 'Stimul': 'К94', 'Color': 'Blue'}, {'Name': 'Blue 44', 'Stimul': 'К95', 'Color': 'Blue'}, {'Name': 'Blue 45', 'Stimul': 'К96', 'Color': 'Blue'}, {'Name': 'Blue 46', 'Stimul': 'К97', 'Color': 'Blue'}, {'Name': 'Blue 47', 'Stimul': 'К98', 'Color': 'Blue'}, {'Name': 'Blue 48', 'Stimul': 'К99', 'Color': 'Blue'}, {'Name': 'Blue 49', 'Stimul': 'К100', 'Color': 'Blue'}, {'Name': 'Blue 50', 'Stimul': 'К101', 'Color': 'Blue'}, {'Name': 'Blue 51', 'Stimul': 'К52', 'Color': 'Blue'}, {'Name': 'Blue 52', 'Stimul': 'К53', 'Color': 'Blue'}, {'Name': 'Blue 53', 'Stimul': 'К54', 'Color': 'Blue'}, {'Name': 'Blue 54', 'Stimul': 'К55', 'Color': 'Blue'}, {'Name': 'Blue 55', 'Stimul': 'К56', 'Color': 'Blue'}, {'Name': 'Blue 56', 'Stimul': 'К57', 'Color': 'Blue'}, {'Name': 'Blue 57', 'Stimul': 'К58', 'Color': 'Blue'}, {'Name': 'Blue 58', 'Stimul': 'К59', 'Color': 'Blue'}, {'Name': 'Blue 59', 'Stimul': 'К60', 'Color': 'Blue'}, {'Name': 'Blue 60', 'Stimul': 'К61', 'Color': 'Blue'}, {'Name': 'Blue 61', 'Stimul': 'К62', 'Color': 'Blue'}, {'Name': 'Blue 62', 'Stimul': 'К63', 'Color': 'Blue'}, {'Name': 'Blue 63', 'Stimul': 'К64', 'Color': 'Blue'}, {'Name': 'Blue 64', 'Stimul': 'К65', 'Color': 'Blue'}, {'Name': 'Blue 65', 'Stimul': 'К66', 'Color': 'Blue'}, {'Name': 'Blue 66', 'Stimul': 'К67', 'Color': 'Blue'}, {'Name': 'Blue 67', 'Stimul': 'К68', 'Color': 'Blue'}, {'Name': 'Blue 68', 'Stimul': 'К69', 'Color': 'Blue'}, {'Name': 'Blue 69', 'Stimul': 'К70', 'Color': 'Blue'}, {'Name': 'Blue 70', 'Stimul': 'К71', 'Color': 'Blue'}, {'Name': 'Blue 71', 'Stimul': 'К72', 'Color': 'Blue'}, {'Name': 'Blue 72', 'Stimul': 'К73', 'Color': 'Blue'}, {'Name': 'Blue 73', 'Stimul': 'К74', 'Color': 'Blue'}, {'Name': 'Blue 74', 'Stimul': 'К75', 'Color': 'Blue'}, {'Name': 'Blue 75', 'Stimul': 'К76', 'Color': 'Blue'}, {'Name': 'Blue 76', 'Stimul': 'К77', 'Color': 'Blue'}, {'Name': 'Blue 77', 'Stimul': 'К78', 'Color': 'Blue'}, {'Name': 'Blue 78', 'Stimul': 'К79', 'Color': 'Blue'}, {'Name': 'Blue 79', 'Stimul': 'К80', 'Color': 'Blue'}, {'Name': 'Blue 80', 'Stimul': 'К81', 'Color': 'Blue'}, {'Name': 'Blue 81', 'Stimul': 'К82', 'Color': 'Blue'}, {'Name': 'Blue 82', 'Stimul': 'К83', 'Color': 'Blue'}, {'Name': 'Blue 83', 'Stimul': 'К84', 'Color': 'Blue'}, {'Name': 'Blue 84', 'Stimul': 'К85', 'Color': 'Blue'}, {'Name': 'Blue 85', 'Stimul': 'К86', 'Color': 'Blue'}, {'Name': 'Blue 86', 'Stimul': 'К87', 'Color': 'Blue'}, {'Name': 'Blue 87', 'Stimul': 'К88', 'Color': 'Blue'}, {'Name': 'Blue 88', 'Stimul': 'К89', 'Color': 'Blue'}, {'Name': 'Blue 89', 'Stimul': 'К90', 'Color': 'Blue'}, {'Name': 'Blue 90', 'Stimul': 'К91', 'Color': 'Blue'}, {'Name': 'Blue 91', 'Stimul': 'К92', 'Color': 'Blue'}, {'Name': 'Blue 92', 'Stimul': 'К93', 'Color': 'Blue'}, {'Name': 'Blue 93', 'Stimul': 'К94', 'Color': 'Blue'}, {'Name': 'Blue 94', 'Stimul': 'К95', 'Color': 'Blue'}]" valType="str"/>
+      <Param name="conditionsFile" updates="None" val="Stimul_7.xlsx" valType="file"/>
+      <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
+      <Param name="isTrials" updates="None" val="True" valType="bool"/>
+      <Param name="loopType" updates="None" val="random" valType="str"/>
+      <Param name="nReps" updates="None" val="1" valType="num"/>
+      <Param name="name" updates="None" val="trials_7" valType="code"/>
+      <Param name="random seed" updates="None" val="" valType="code"/>
+    </LoopInitiator>
+    <Routine name="trial"/>
+    <LoopTerminator name="trials_7"/>
+    <Routine name="Pause7"/>
+    <LoopInitiator loopType="TrialHandler" name="trials_8">
+      <Param name="Selected rows" updates="None" val="" valType="str"/>
+      <Param name="conditions" updates="None" val="[{'Name': 'Purple 1', 'Stimul': 'К1', 'Color': 'Purple'}, {'Name': 'Purple 12', 'Stimul': 'К12', 'Color': 'Purple'}, {'Name': 'Purple 18', 'Stimul': 'К18', 'Color': 'Purple'}, {'Name': 'Purple 37', 'Stimul': 'К37', 'Color': 'Purple'}, {'Name': 'Purple 38', 'Stimul': 'К38', 'Color': 'Purple'}, {'Name': 'Purple 45', 'Stimul': 'К45', 'Color': 'Purple'}, {'Name': 'Blue 1', 'Stimul': 'К52', 'Color': 'Blue'}, {'Name': 'Blue 2', 'Stimul': 'К53', 'Color': 'Blue'}, {'Name': 'Blue 3', 'Stimul': 'К54', 'Color': 'Blue'}, {'Name': 'Blue 4', 'Stimul': 'К55', 'Color': 'Blue'}, {'Name': 'Blue 5', 'Stimul': 'К56', 'Color': 'Blue'}, {'Name': 'Blue 6', 'Stimul': 'К57', 'Color': 'Blue'}, {'Name': 'Blue 7', 'Stimul': 'К58', 'Color': 'Blue'}, {'Name': 'Blue 8', 'Stimul': 'К59', 'Color': 'Blue'}, {'Name': 'Blue 9', 'Stimul': 'К60', 'Color': 'Blue'}, {'Name': 'Blue 10', 'Stimul': 'К61', 'Color': 'Blue'}, {'Name': 'Blue 11', 'Stimul': 'К62', 'Color': 'Blue'}, {'Name': 'Blue 12', 'Stimul': 'К63', 'Color': 'Blue'}, {'Name': 'Blue 13', 'Stimul': 'К64', 'Color': 'Blue'}, {'Name': 'Blue 14', 'Stimul': 'К65', 'Color': 'Blue'}, {'Name': 'Blue 15', 'Stimul': 'К66', 'Color': 'Blue'}, {'Name': 'Blue 16', 'Stimul': 'К67', 'Color': 'Blue'}, {'Name': 'Blue 17', 'Stimul': 'К68', 'Color': 'Blue'}, {'Name': 'Blue 18', 'Stimul': 'К69', 'Color': 'Blue'}, {'Name': 'Blue 19', 'Stimul': 'К70', 'Color': 'Blue'}, {'Name': 'Blue 20', 'Stimul': 'К71', 'Color': 'Blue'}, {'Name': 'Blue 21', 'Stimul': 'К72', 'Color': 'Blue'}, {'Name': 'Blue 22', 'Stimul': 'К73', 'Color': 'Blue'}, {'Name': 'Blue 23', 'Stimul': 'К74', 'Color': 'Blue'}, {'Name': 'Blue 24', 'Stimul': 'К75', 'Color': 'Blue'}, {'Name': 'Blue 25', 'Stimul': 'К76', 'Color': 'Blue'}, {'Name': 'Blue 26', 'Stimul': 'К77', 'Color': 'Blue'}, {'Name': 'Blue 27', 'Stimul': 'К78', 'Color': 'Blue'}, {'Name': 'Blue 28', 'Stimul': 'К79', 'Color': 'Blue'}, {'Name': 'Blue 29', 'Stimul': 'К80', 'Color': 'Blue'}, {'Name': 'Blue 30', 'Stimul': 'К81', 'Color': 'Blue'}, {'Name': 'Blue 31', 'Stimul': 'К82', 'Color': 'Blue'}, {'Name': 'Blue 32', 'Stimul': 'К83', 'Color': 'Blue'}, {'Name': 'Blue 33', 'Stimul': 'К84', 'Color': 'Blue'}, {'Name': 'Blue 34', 'Stimul': 'К85', 'Color': 'Blue'}, {'Name': 'Blue 35', 'Stimul': 'К86', 'Color': 'Blue'}, {'Name': 'Blue 36', 'Stimul': 'К87', 'Color': 'Blue'}, {'Name': 'Blue 37', 'Stimul': 'К88', 'Color': 'Blue'}, {'Name': 'Blue 38', 'Stimul': 'К89', 'Color': 'Blue'}, {'Name': 'Blue 39', 'Stimul': 'К90', 'Color': 'Blue'}, {'Name': 'Blue 40', 'Stimul': 'К91', 'Color': 'Blue'}, {'Name': 'Blue 41', 'Stimul': 'К92', 'Color': 'Blue'}, {'Name': 'Blue 42', 'Stimul': 'К93', 'Color': 'Blue'}, {'Name': 'Blue 43', 'Stimul': 'К94', 'Color': 'Blue'}, {'Name': 'Blue 44', 'Stimul': 'К95', 'Color': 'Blue'}, {'Name': 'Blue 45', 'Stimul': 'К96', 'Color': 'Blue'}, {'Name': 'Blue 46', 'Stimul': 'К97', 'Color': 'Blue'}, {'Name': 'Blue 47', 'Stimul': 'К98', 'Color': 'Blue'}, {'Name': 'Blue 48', 'Stimul': 'К99', 'Color': 'Blue'}, {'Name': 'Blue 49', 'Stimul': 'К100', 'Color': 'Blue'}, {'Name': 'Blue 50', 'Stimul': 'К101', 'Color': 'Blue'}, {'Name': 'Blue 51', 'Stimul': 'К52', 'Color': 'Blue'}, {'Name': 'Blue 52', 'Stimul': 'К53', 'Color': 'Blue'}, {'Name': 'Blue 53', 'Stimul': 'К54', 'Color': 'Blue'}, {'Name': 'Blue 54', 'Stimul': 'К55', 'Color': 'Blue'}, {'Name': 'Blue 55', 'Stimul': 'К56', 'Color': 'Blue'}, {'Name': 'Blue 56', 'Stimul': 'К57', 'Color': 'Blue'}, {'Name': 'Blue 57', 'Stimul': 'К58', 'Color': 'Blue'}, {'Name': 'Blue 58', 'Stimul': 'К59', 'Color': 'Blue'}, {'Name': 'Blue 59', 'Stimul': 'К60', 'Color': 'Blue'}, {'Name': 'Blue 60', 'Stimul': 'К61', 'Color': 'Blue'}, {'Name': 'Blue 61', 'Stimul': 'К62', 'Color': 'Blue'}, {'Name': 'Blue 62', 'Stimul': 'К63', 'Color': 'Blue'}, {'Name': 'Blue 63', 'Stimul': 'К64', 'Color': 'Blue'}, {'Name': 'Blue 64', 'Stimul': 'К65', 'Color': 'Blue'}, {'Name': 'Blue 65', 'Stimul': 'К66', 'Color': 'Blue'}, {'Name': 'Blue 66', 'Stimul': 'К67', 'Color': 'Blue'}, {'Name': 'Blue 67', 'Stimul': 'К68', 'Color': 'Blue'}, {'Name': 'Blue 68', 'Stimul': 'К69', 'Color': 'Blue'}, {'Name': 'Blue 69', 'Stimul': 'К70', 'Color': 'Blue'}, {'Name': 'Blue 70', 'Stimul': 'К71', 'Color': 'Blue'}, {'Name': 'Blue 71', 'Stimul': 'К72', 'Color': 'Blue'}, {'Name': 'Blue 72', 'Stimul': 'К73', 'Color': 'Blue'}, {'Name': 'Blue 73', 'Stimul': 'К74', 'Color': 'Blue'}, {'Name': 'Blue 74', 'Stimul': 'К75', 'Color': 'Blue'}, {'Name': 'Blue 75', 'Stimul': 'К76', 'Color': 'Blue'}, {'Name': 'Blue 76', 'Stimul': 'К77', 'Color': 'Blue'}, {'Name': 'Blue 77', 'Stimul': 'К78', 'Color': 'Blue'}, {'Name': 'Blue 78', 'Stimul': 'К79', 'Color': 'Blue'}, {'Name': 'Blue 79', 'Stimul': 'К80', 'Color': 'Blue'}, {'Name': 'Blue 80', 'Stimul': 'К81', 'Color': 'Blue'}, {'Name': 'Blue 81', 'Stimul': 'К82', 'Color': 'Blue'}, {'Name': 'Blue 82', 'Stimul': 'К83', 'Color': 'Blue'}, {'Name': 'Blue 83', 'Stimul': 'К84', 'Color': 'Blue'}, {'Name': 'Blue 84', 'Stimul': 'К85', 'Color': 'Blue'}, {'Name': 'Blue 85', 'Stimul': 'К86', 'Color': 'Blue'}, {'Name': 'Blue 86', 'Stimul': 'К87', 'Color': 'Blue'}, {'Name': 'Blue 87', 'Stimul': 'К88', 'Color': 'Blue'}, {'Name': 'Blue 88', 'Stimul': 'К89', 'Color': 'Blue'}, {'Name': 'Blue 89', 'Stimul': 'К90', 'Color': 'Blue'}, {'Name': 'Blue 90', 'Stimul': 'К91', 'Color': 'Blue'}, {'Name': 'Blue 91', 'Stimul': 'К92', 'Color': 'Blue'}, {'Name': 'Blue 92', 'Stimul': 'К93', 'Color': 'Blue'}, {'Name': 'Blue 93', 'Stimul': 'К94', 'Color': 'Blue'}, {'Name': 'Blue 94', 'Stimul': 'К95', 'Color': 'Blue'}]" valType="str"/>
+      <Param name="conditionsFile" updates="None" val="Stimul_8.xlsx" valType="file"/>
+      <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
+      <Param name="isTrials" updates="None" val="True" valType="bool"/>
+      <Param name="loopType" updates="None" val="random" valType="str"/>
+      <Param name="nReps" updates="None" val="1" valType="num"/>
+      <Param name="name" updates="None" val="trials_8" valType="code"/>
+      <Param name="random seed" updates="None" val="" valType="code"/>
+    </LoopInitiator>
+    <Routine name="trial"/>
+    <LoopTerminator name="trials_8"/>
+    <Routine name="Exit"/>
+  </Flow>
+</PsychoPy2experiment>
