@@ -1,4 +1,4 @@
-<!doctype html>
+<<!doctype html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -7,7 +7,7 @@
     <!-- styles -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-ui-dist@1.12.1/jquery-ui.min.css">
     <!-- PsychoJS CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='lib/psychojs-2023.2.3.css') }}">
+    <link rel="stylesheet" href="/static/lib/psychojs-2023.2.3.css">
   </head>
   <body>
     <div id="root"></div>
@@ -17,10 +17,11 @@
     <script src="https://cdn.jsdelivr.net/npm/preloadjs@1.0.1/lib/preloadjs.min.js"></script>
     
     <!-- experiment JS -->
-    <script src="{{ url_for('static', filename='main.js') }}" type="module"></script>
+    <script src="/static/main.js" type="module"></script>
 
     <!-- legacy browsers -->
-    <script src="{{ url_for('static', filename='lib/psychojs-2023.2.3.iife.js') }}" nomodule></script>
-    <script src="{{ url_for('static', filename='main-legacy-browsers.js') }}" nomodule></script>
+    <script src="/static/lib/psychojs-2023.2.3.iife.js" nomodule></script>
+    <script src="/static/main-legacy-browsers.js" nomodule></script>
   </body>
 </html>
+
