@@ -2,7 +2,7 @@ from flask import Flask, request, send_from_directory, jsonify
 import os
 import csv
 
-app = Flask(__name__, static_url_path='/static', static_folder='static')
+app = Flask(__name__, static_url_path='/static', static_folder='ТОЧКИ/static')
 
 # Показ експерименту
 @app.route('/')
