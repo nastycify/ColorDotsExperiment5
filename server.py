@@ -2,13 +2,13 @@ from flask import Flask, request, send_from_directory, jsonify
 import os
 import csv
 
-app = Flask(__name__, static_url_path='/static', static_folder='static')
+app = Flask(__name__, static_url_path='/static', static_folder='static', template_folder='templates')
 
 # Показ експерименту
 @app.route('/')
 def serve_experiment():
     # Відкриває файл index.html як головну сторінку
-    return send_from_directory('.', 'index.html')
+    return send_from_directory('templates', 'index.html')
 
 # Показ таблиць, зображень та інших ресурсів
 @app.route('/static/<path:filename>')
@@ -42,7 +42,10 @@ def download_results():
     return send_from_directory('.', 'results.csv', as_attachment=True)
 
 # Запуск сервера на порту 8000 (потрібно для Railway)
+import os
+
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 8000))  # Використовуємо порт, наданий Railway
     app.run(host='0.0.0.0', port=port, debug=True)
+
 
