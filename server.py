@@ -2,18 +2,18 @@ from flask import Flask, request, send_from_directory, jsonify
 import os
 import csv
 
-app = Flask(__name__, static_url_path='/static', static_folder='ТОЧКИ/static')
+app = Flask(__name__, static_url_path='/static', static_folder='static', template_folder='templates')
 
 # Показ експерименту
 @app.route('/')
 def serve_experiment():
     # Відкриває файл index.html як головну сторінку
-    return send_from_directory('ТОЧКИ', 'index.html')
+    return send_from_directory('templates', 'index.html')
 
 # Показ таблиць, зображень та інших ресурсів
-@app.route('/ТОЧКИ/<path:filename>')
+@app.route('/static/<path:filename>')
 def serve_resources(filename):
-    return send_from_directory('ТОЧКИ', filename)
+    return send_from_directory('static', filename)
 
 # Прийом даних від респондентів
 @app.route('/save_data', methods=['POST'])
