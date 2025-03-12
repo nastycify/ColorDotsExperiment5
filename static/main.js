@@ -129,19 +129,18 @@ dialogCancelScheduler.add(quitPsychoJS, '', false);
 psychoJS.start({
   expName: expName,
   expInfo: expInfo,
-  resources: [
-    // resources:
-    {'name': '..\Stimul_1.xlsx', 'path': '../Stimul_1.xlsx'},
-    {'name': '..\Stimul_2.xlsx', 'path': '../Stimul_2.xlsx'},
-    {'name': '..\Stimul_3.xlsx', 'path': '../Stimul_3.xlsx'},
-    {'name': '..\Stimul_4.xlsx', 'path': '../Stimul_4.xlsx'},
-    {'name': '..\Stimul_5.xlsx', 'path': '../Stimul_5.xlsx'},
-    {'name': '..\Stimul_6.xlsx', 'path': '../Stimul_6.xlsx'},
-    {'name': '..\Stimul_7.xlsx', 'path': '../Stimul_7.xlsx'},
-    {'name': '..\Stimul_8.xlsx', 'path': '../Stimul_8.xlsx'},
-    {'name': 'default.png', 'path': 'https://pavlovia.org/assets/default/default.png'},
-  ]
-});
+resources: [
+    {'name': 'Stimul_1.xlsx', 'path': 'https://color-dots-production.up.railway.app/static/Stimul_1.xlsx'},
+    {'name': 'Stimul_2.xlsx', 'path': 'https://color-dots-production.up.railway.app/static/Stimul_2.xlsx'},
+    {'name': 'Stimul_3.xlsx', 'path': 'https://color-dots-production.up.railway.app/static/Stimul_3.xlsx'},
+    {'name': 'Stimul_4.xlsx', 'path': 'https://color-dots-production.up.railway.app/static/Stimul_4.xlsx'},
+    {'name': 'Stimul_5.xlsx', 'path': 'https://color-dots-production.up.railway.app/static/Stimul_5.xlsx'},
+    {'name': 'Stimul_6.xlsx', 'path': 'https://color-dots-production.up.railway.app/static/Stimul_6.xlsx'},
+    {'name': 'Stimul_7.xlsx', 'path': 'https://color-dots-production.up.railway.app/static/Stimul_7.xlsx'},
+    {'name': 'Stimul_8.xlsx', 'path': 'https://color-dots-production.up.railway.app/static/Stimul_8.xlsx'},
+    {'name': 'default.png', 'path': 'https://pavlovia.org/assets/default/default.png'}
+]
+
 
 psychoJS.experimentLogger.setLevel(core.Logger.ServerLevel.EXP);
 
