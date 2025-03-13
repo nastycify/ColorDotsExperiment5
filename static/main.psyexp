@@ -333,7 +333,7 @@
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="False" valType="bool" updates="constant" name="flipHoriz"/>
         <Param val="False" valType="bool" updates="constant" name="flipVert"/>
-        <Param val="https://github.com/nastycify/ColorDotsExperiment5/blob/master/static/%D0%BA%D0%B0%D1%808.jpg?raw=true" valType="file" updates="constant" name="image"/>
+        <Param val="кар8.jpg" valType="file" updates="constant" name="image"/>
         <Param val="linear" valType="str" updates="constant" name="interpolate"/>
         <Param val="" valType="str" updates="constant" name="mask"/>
         <Param val="image_2" valType="code" updates="None" name="name"/>
