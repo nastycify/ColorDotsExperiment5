@@ -130,20 +130,18 @@ psychoJS.start({
   expName: expName,
   expInfo: expInfo,
   resources: [
-    // resources:
-    {'name': 'Stimul_1.xlsx', 'path': 'Stimul_1.xlsx'},
-    {'name': 'Stimul_2.xlsx', 'path': 'Stimul_2.xlsx'},
-    {'name': 'Stimul_3.xlsx', 'path': 'Stimul_3.xlsx'},
-    {'name': 'Stimul_4.xlsx', 'path': 'Stimul_4.xlsx'},
-    {'name': 'Stimul_5.xlsx', 'path': 'Stimul_5.xlsx'},
-    {'name': 'Stimul_6.xlsx', 'path': 'Stimul_6.xlsx'},
-    {'name': 'Stimul_7.xlsx', 'path': 'Stimul_7.xlsx'},
-    {'name': 'Stimul_8.xlsx', 'path': 'Stimul_8.xlsx'},
-    {'name': 'default.png', 'path': 'https://pavlovia.org/assets/default/default.png'},
-    {'name': 'Cat8.png', 'path': 'Cat8.png'},
+    {'name': 'Cat8.jpg', 'path': 'static/Cat8.png'},
+    {'name': 'Stimul_1.xlsx', 'path': 'static/Stimul_1.xlsx'},
+    {'name': 'Stimul_2.xlsx', 'path': 'static/Stimul_2.xlsx'},
+    {'name': 'Stimul_3.xlsx', 'path': 'static/Stimul_3.xlsx'},
+    {'name': 'Stimul_4.xlsx', 'path': 'static/Stimul_4.xlsx'},
+    {'name': 'Stimul_5.xlsx', 'path': 'static/Stimul_5.xlsx'},
+    {'name': 'Stimul_6.xlsx', 'path': 'static/Stimul_6.xlsx'},
+    {'name': 'Stimul_7.xlsx', 'path': 'static/Stimul_7.xlsx'},
+    {'name': 'Stimul_8.xlsx', 'path': 'static/Stimul_8.xlsx'},
+    {'name': 'default.png', 'path': 'https://pavlovia.org/assets/default/default.png'}, 
   ]
 });
-
 psychoJS.experimentLogger.setLevel(core.Logger.ServerLevel.EXP);
 
 
@@ -460,7 +458,7 @@ async function experimentInit() {
   image_2 = new visual.ImageStim({
     win : psychoJS.window,
     name : 'image_2', units : undefined, 
-    image : 'Cat8.png', mask : undefined,
+    image : 'static/Cat8.png', mask : undefined,
     anchor : 'center',
     ori : 0.0, pos : [0, 0], size : [1, 1],
     color : new util.Color([(- 1.0), (- 1.0), (- 1.0)]), opacity : undefined,
