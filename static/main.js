@@ -459,7 +459,8 @@ async function experimentInit() {
   image_2 = new visual.ImageStim({
     win : psychoJS.window,
     name : 'image_2', units : undefined, 
-    image : 'https://github.com/nastycify/ColorDotsExperiment5/blob/master/%D0%BA%D0%B0%D1%808.jpg?raw=true', mask : undefined,
+    image : image : 'static/кад8.jpg', 
+    mask : undefined,
     anchor : 'center',
     ori : 0.0, pos : [0, 0], size : [1, 1],
     color : new util.Color([(- 1.0), (- 1.0), (- 1.0)]), opacity : undefined,
