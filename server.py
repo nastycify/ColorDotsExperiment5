@@ -2,13 +2,10 @@ from flask import Flask, request, send_from_directory, jsonify
 import os
 import csv
 import logging
-from flask_cors import CORS  # Імпортуємо CORS
 
 # Створення екземпляра Flask
 app = Flask(__name__, static_url_path='/static', static_folder='static', template_folder='templates')
 
-# Налаштування CORS
-CORS(app)  # Додаємо CORS для всіх маршрутів
 
 # Налаштування логування
 logging.basicConfig(level=logging.INFO)
