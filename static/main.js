@@ -130,7 +130,7 @@ psychoJS.start({
   expName: expName,
   expInfo: expInfo,
   resources: [
-    {'name': 'Cat8.jpg', 'path': 'static/Cat8.jpg'},
+    {'name': 'Cat8.jpg', 'path': '/static/Cat8.jpg'},
     {'name': 'Stimul_1.xlsx', 'path': 'static/Stimul_1.xlsx'},
     {'name': 'Stimul_2.xlsx', 'path': 'static/Stimul_2.xlsx'},
     {'name': 'Stimul_3.xlsx', 'path': 'static/Stimul_3.xlsx'},
