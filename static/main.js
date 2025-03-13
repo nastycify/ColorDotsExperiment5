@@ -130,6 +130,7 @@ psychoJS.start({
   expName: expName,
   expInfo: expInfo,
   resources: [
+    {'name': 'Cat8.jpg', 'path': 'static/Cat8.jpg'},
     {'name': 'Stimul_1.xlsx', 'path': 'static/Stimul_1.xlsx'},
     {'name': 'Stimul_2.xlsx', 'path': 'static/Stimul_2.xlsx'},
     {'name': 'Stimul_3.xlsx', 'path': 'static/Stimul_3.xlsx'},
@@ -138,8 +139,7 @@ psychoJS.start({
     {'name': 'Stimul_6.xlsx', 'path': 'static/Stimul_6.xlsx'},
     {'name': 'Stimul_7.xlsx', 'path': 'static/Stimul_7.xlsx'},
     {'name': 'Stimul_8.xlsx', 'path': 'static/Stimul_8.xlsx'},
-    {'name': 'default.png', 'path': 'https://pavlovia.org/assets/default/default.png'},
-    {'name': 'Cat8.jpg', 'path': 'static/Cat8.jpg'}  
+    {'name': 'default.png', 'path': 'https://pavlovia.org/assets/default/default.png'}, 
   ]
 });
 
