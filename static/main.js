@@ -224,16 +224,7 @@ async function experimentInit() {
   trialClock = new util.Clock();
   key_resp = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
   
-  image = new visual.ImageStim({
-    win : psychoJS.window,
-    name : 'image', units : undefined, 
-    image : 'default.png', mask : undefined,
-    anchor : 'center',
-    ori : 0.0, pos : [0, 0], size : [0.5, 0.5],
-    color : new util.Color([1,1,1]), opacity : undefined,
-    flipHoriz : false, flipVert : false,
-    texRes : 128.0, interpolate : true, depth : -1.0 
-  });
+
   text_2 = new visual.TextStim({
     win: psychoJS.window,
     name: 'text_2',
