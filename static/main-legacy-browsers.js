@@ -132,7 +132,7 @@ psychoJS.start({
     {'name': 'Stimul_7.xlsx', 'path': 'Stimul_7.xlsx'},
     {'name': 'Stimul_8.xlsx', 'path': 'Stimul_8.xlsx'},
     {'name': 'default.png', 'path': 'https://pavlovia.org/assets/default/default.png'},
-    {'name': 'кар8.jpg', 'path': 'кар8.jpg'},
+    {'name': 'Cat8.jpg', 'path': 'Cat8.jpg'},
   ]
 });
 
@@ -452,7 +452,7 @@ async function experimentInit() {
   image_2 = new visual.ImageStim({
     win : psychoJS.window,
     name : 'image_2', units : undefined, 
-    image : 'кар8.jpg', mask : undefined,
+    image : 'Cat8.jpg', mask : undefined,
     anchor : 'center',
     ori : 0.0, pos : [0, 0], size : [1, 1],
     color : new util.Color([(- 1.0), (- 1.0), (- 1.0)]), opacity : undefined,
