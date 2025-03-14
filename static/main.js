@@ -1230,7 +1230,7 @@ async function sendDataToServer(data) {
       console.log('Дані успішно надіслані');
     }
   } catch (error) {
-    console.error('Помилка під час з'єднання з сервером:', error);
+    console.error('Помилка під час з\'єднання з сервером:', error);
   }
 }
 
