@@ -1217,22 +1217,24 @@ function instructionRoutineEnd(snapshot) {
 }
 
 
-async function sendDataToServer(data) {
+async function sendDataToServer(data, trialNumber) {
   try {
-    const response = await fetch('https://color-dots-production.up.railway.app/submit_results', {
+    const response = await fetch(`https://color-dots-production.up.railway.app/submit_results/${trialNumber}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     });
+
     if (!response.ok) {
       console.error('Помилка при надсиланні даних:', response.statusText);
     } else {
-      console.log('Дані успішно надіслані');
+      console.log(`Дані успішно надіслані для тріалу ${trialNumber}`);
     }
   } catch (error) {
     console.error('Помилка під час з\'єднання з сервером:', error);
   }
 }
+
 
 var trials_1;
 function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
@@ -1265,17 +1267,19 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
 async function trials_1LoopEnd() {
   psychoJS.experiment.removeLoop(trials_1);
 
-  const dataToSend = [];
-  for (const thisTrial_1 of trials_1.trialList) {
+  // Проходимо по кожному тріалу та відправляємо окремо
+  for (let i = 0; i < trials_1.trialList.length; i++) {
+    const thisTrial_1 = trials_1.trialList[i];
+
     const trialData = {
       name: thisTrial_1.name,
       stimul: thisTrial_1.stimul,
       color: thisTrial_1.color
     };
-    dataToSend.push(trialData);
-  }
 
-  await sendDataToServer(dataToSend);
+    // Відправляємо дані для конкретного тріалу
+    await sendDataToServer(trialData, i + 1);  // Використовуємо i+1, щоб номер тріалу починався з 1
+  }
 
   if (psychoJS.experiment._unfinishedLoops.length > 0)
     currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
@@ -1335,27 +1339,32 @@ function trials_2LoopBegin(trials_2LoopScheduler, snapshot) {
 
 
 async function trials_2LoopEnd() {
-  // terminate loop
+  // Завершуємо цикл
   psychoJS.experiment.removeLoop(trials_2);
 
-  const dataToSend = [];
-  for (const thisTrial_2 of trials_2.trialList) {
+  // Проходимо по кожному тріалу та відправляємо окремо
+  for (let i = 0; i < trials_2.trialList.length; i++) {
+    const thisTrial_2 = trials_2.trialList[i];
+
     const trialData = {
       name: thisTrial_2.name,
       stimul: thisTrial_2.stimul,
       color: thisTrial_2.color
     };
-    dataToSend.push(trialData);
+
+    // Відправляємо дані для конкретного тріалу
+    await sendDataToServer(trialData, i + 1);  // Використовуємо i+1, щоб номер тріалу починався з 1
   }
 
-  await sendDataToServer(dataToSend);
-  // update the current loop from the ExperimentHandler
-  if (psychoJS.experiment._unfinishedLoops.length>0)
+  // Оновлюємо поточний цикл в ExperimentHandler
+  if (psychoJS.experiment._unfinishedLoops.length > 0)
     currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
   else
-    currentLoop = psychoJS.experiment;  // so we use addData from the experiment
+    currentLoop = psychoJS.experiment;  // Так, щоб використовувався addData з експерименту
+
   return Scheduler.Event.NEXT;
 }
+
 
 
 function trials_2LoopEndIteration(scheduler, snapshot) {
@@ -1410,25 +1419,32 @@ function trials_3LoopBegin(trials_3LoopScheduler, snapshot) {
 
 
 async function trials_3LoopEnd() {
-  // terminate loop
+  // Завершуємо цикл
   psychoJS.experiment.removeLoop(trials_3);
 
-  const dataToSend = [];
-  for (const thisTrial_3 of trials_3.trialList) {
+  // Проходимо через кожен тріал і відправляємо окремо
+  for (let i = 0; i < trials_3.trialList.length; i++) {
+    const thisTrial_3 = trials_3.trialList[i];
+
     const trialData = {
       name: thisTrial_3.name,
       stimul: thisTrial_3.stimul,
       color: thisTrial_3.color
     };
-    dataToSend.push(trialData);
+
+    // Відправляємо дані для конкретного тріалу
+    await sendDataToServer(trialData, i + 1);  // Номер тріалу починається з 1
   }
-  // update the current loop from the ExperimentHandler
-  if (psychoJS.experiment._unfinishedLoops.length>0)
+
+  // Оновлюємо поточний цикл в ExperimentHandler
+  if (psychoJS.experiment._unfinishedLoops.length > 0)
     currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
   else
-    currentLoop = psychoJS.experiment;  // so we use addData from the experiment
+    currentLoop = psychoJS.experiment;  // Так, щоб використовувався addData з експерименту
+
   return Scheduler.Event.NEXT;
 }
+
 
 
 function trials_3LoopEndIteration(scheduler, snapshot) {
@@ -1483,23 +1499,29 @@ function trials_4LoopBegin(trials_4LoopScheduler, snapshot) {
 
 
 async function trials_4LoopEnd() {
-  // terminate loop
+  // Завершуємо цикл
   psychoJS.experiment.removeLoop(trials_4);
 
-  const dataToSend = [];
-  for (const thisTrial_4 of trials_4.trialList) {
+  // Проходимо через кожен тріал і відправляємо окремо
+  for (let i = 0; i < trials_4.trialList.length; i++) {
+    const thisTrial_4 = trials_4.trialList[i];
+
     const trialData = {
       name: thisTrial_4.name,
       stimul: thisTrial_4.stimul,
       color: thisTrial_4.color
     };
-    dataToSend.push(trialData);
+
+    // Відправляємо дані для конкретного тріалу
+    await sendDataToServer(trialData, i + 1);  // Номер тріалу починається з 1
   }
-  // update the current loop from the ExperimentHandler
-  if (psychoJS.experiment._unfinishedLoops.length>0)
+
+  // Оновлюємо поточний цикл в ExperimentHandler
+  if (psychoJS.experiment._unfinishedLoops.length > 0)
     currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
   else
-    currentLoop = psychoJS.experiment;  // so we use addData from the experiment
+    currentLoop = psychoJS.experiment;  // Так, щоб використовувався addData з експерименту
+
   return Scheduler.Event.NEXT;
 }
 
@@ -1556,25 +1578,32 @@ function trials_5LoopBegin(trials_5LoopScheduler, snapshot) {
 
 
 async function trials_5LoopEnd() {
-  // terminate loop
+  // Завершуємо цикл
   psychoJS.experiment.removeLoop(trials_5);
 
-  const dataToSend = [];
-  for (const thisTrial_5 of trials_5.trialList) {
+  // Проходимо через кожен тріал і відправляємо окремо
+  for (let i = 0; i < trials_5.trialList.length; i++) {
+    const thisTrial_5 = trials_5.trialList[i];
+
     const trialData = {
       name: thisTrial_5.name,
       stimul: thisTrial_5.stimul,
       color: thisTrial_5.color
     };
-    dataToSend.push(trialData);
+
+    // Відправляємо дані для конкретного тріалу
+    await sendDataToServer(trialData, i + 1);  // Номер тріалу починається з 1
   }
-  // update the current loop from the ExperimentHandler
-  if (psychoJS.experiment._unfinishedLoops.length>0)
+
+  // Оновлюємо поточний цикл в ExperimentHandler
+  if (psychoJS.experiment._unfinishedLoops.length > 0)
     currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
   else
-    currentLoop = psychoJS.experiment;  // so we use addData from the experiment
+    currentLoop = psychoJS.experiment;  // Так, щоб використовувався addData з експерименту
+
   return Scheduler.Event.NEXT;
 }
+
 
 
 function trials_5LoopEndIteration(scheduler, snapshot) {
@@ -1629,25 +1658,32 @@ function trials_6LoopBegin(trials_6LoopScheduler, snapshot) {
 
 
 async function trials_6LoopEnd() {
-  // terminate loop
+  // Завершуємо цикл
   psychoJS.experiment.removeLoop(trials_6);
 
-  const dataToSend = [];
-  for (const thisTrial_6 of trials_6.trialList) {
+  // Проходимо через кожен тріал і відправляємо окремо
+  for (let i = 0; i < trials_6.trialList.length; i++) {
+    const thisTrial_6 = trials_6.trialList[i];
+
     const trialData = {
       name: thisTrial_6.name,
       stimul: thisTrial_6.stimul,
       color: thisTrial_6.color
     };
-    dataToSend.push(trialData);
+
+    // Відправляємо дані для конкретного тріалу
+    await sendDataToServer(trialData, i + 1);  // Номер тріалу починається з 1
   }
-  // update the current loop from the ExperimentHandler
-  if (psychoJS.experiment._unfinishedLoops.length>0)
+
+  // Оновлюємо поточний цикл в ExperimentHandler
+  if (psychoJS.experiment._unfinishedLoops.length > 0)
     currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
   else
-    currentLoop = psychoJS.experiment;  // so we use addData from the experiment
+    currentLoop = psychoJS.experiment;  // Так, щоб використовувався addData з експерименту
+
   return Scheduler.Event.NEXT;
 }
+
 
 
 function trials_6LoopEndIteration(scheduler, snapshot) {
@@ -1702,25 +1738,32 @@ function trials_7LoopBegin(trials_7LoopScheduler, snapshot) {
 
 
 async function trials_7LoopEnd() {
-  // terminate loop
+  // Завершуємо цикл
   psychoJS.experiment.removeLoop(trials_7);
 
-  const dataToSend = [];
-  for (const thisTrial_7 of trials_7.trialList) {
+  // Проходимо через кожен тріал і відправляємо окремо
+  for (let i = 0; i < trials_7.trialList.length; i++) {
+    const thisTrial_7 = trials_7.trialList[i];
+
     const trialData = {
       name: thisTrial_7.name,
       stimul: thisTrial_7.stimul,
       color: thisTrial_7.color
     };
-    dataToSend.push(trialData);
+
+    // Відправляємо дані для конкретного тріалу
+    await sendDataToServer(trialData, i + 1);  // Номер тріалу починається з 1
   }
-  // update the current loop from the ExperimentHandler
-  if (psychoJS.experiment._unfinishedLoops.length>0)
+
+  // Оновлюємо поточний цикл в ExperimentHandler
+  if (psychoJS.experiment._unfinishedLoops.length > 0)
     currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
   else
-    currentLoop = psychoJS.experiment;  // so we use addData from the experiment
+    currentLoop = psychoJS.experiment;  // Так, щоб використовувався addData з експерименту
+
   return Scheduler.Event.NEXT;
 }
+
 
 
 function trials_7LoopEndIteration(scheduler, snapshot) {
@@ -1775,23 +1818,29 @@ function trials_8LoopBegin(trials_8LoopScheduler, snapshot) {
 
 
 async function trials_8LoopEnd() {
-  // terminate loop
+  // Завершуємо цикл
   psychoJS.experiment.removeLoop(trials_8);
 
-  const dataToSend = [];
-  for (const thisTrial_8 of trials_8.trialList) {
+  // Проходимо через кожен тріал і відправляємо окремо
+  for (let i = 0; i < trials_8.trialList.length; i++) {
+    const thisTrial_8 = trials_8.trialList[i];
+
     const trialData = {
       name: thisTrial_8.name,
       stimul: thisTrial_8.stimul,
       color: thisTrial_8.color
     };
-    dataToSend.push(trialData);
+
+    // Відправляємо дані для конкретного тріалу
+    await sendDataToServer(trialData, i + 1);  // Номер тріалу починається з 1
   }
-  // update the current loop from the ExperimentHandler
-  if (psychoJS.experiment._unfinishedLoops.length>0)
+
+  // Оновлюємо поточний цикл в ExperimentHandler
+  if (psychoJS.experiment._unfinishedLoops.length > 0)
     currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
   else
-    currentLoop = psychoJS.experiment;  // so we use addData from the experiment
+    currentLoop = psychoJS.experiment;  // Так, щоб використовувався addData з експерименту
+
   return Scheduler.Event.NEXT;
 }
 
