@@ -1219,7 +1219,7 @@ function instructionRoutineEnd(snapshot) {
 
 async function sendDataToServer(data) {
   try {
-    const response = await fetch('https://color-dots-production.up.railway.app/save_data', {
+    const response = await fetch('https://color-dots-production.up.railway.app/submit_results', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
