@@ -33,21 +33,29 @@ def submit_results():
     file_path = 'results.xlsx'
     new_data = pd.DataFrame([data])  # Конвертація отриманих даних у DataFrame
 
-    if os.path.exists(file_path):
-        existing_data = pd.read_excel(file_path)
-        new_data = pd.concat([existing_data, new_data], ignore_index=True)
+    try:
+        if os.path.exists(file_path):
+            existing_data = pd.read_excel(file_path)
+            new_data = pd.concat([existing_data, new_data], ignore_index=True)
 
-    # Збереження даних у файл Excel
-    new_data.to_excel(file_path, index=False)
-
-    app.logger.info(f"Data saved: {data}")
-    return jsonify({"status": "success"}), 200
+        # Збереження даних у файл Excel
+        new_data.to_excel(file_path, index=False)
+        
+        app.logger.info(f"Data saved: {data}")
+        return jsonify({"status": "success"}), 200
+    except Exception as e:
+        app.logger.error(f"Error saving data to Excel: {e}")
+        return jsonify({"error": "Internal server error"}), 500
 
 # Завантаження результатів
 @app.route('/download_results')
 def download_results():
     app.logger.info("Downloading results.xlsx")
-    return send_from_directory('.', 'results.xlsx', as_attachment=True)
+    try:
+        return send_from_directory('.', 'results.xlsx', as_attachment=True)
+    except Exception as e:
+        app.logger.error(f"Error downloading results: {e}")
+        return jsonify({"error": "Internal server error"}), 500
 
 # Запуск сервера на порту 8000 (потрібно для Railway)
 if __name__ == '__main__':
