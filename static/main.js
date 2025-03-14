@@ -1217,12 +1217,28 @@ function instructionRoutineEnd(snapshot) {
 }
 
 
+async function sendDataToServer(data) {
+  try {
+    const response = await fetch('https://color-dots-production.up.railway.app/save_data', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    if (!response.ok) {
+      console.error('Помилка при надсиланні даних:', response.statusText);
+    } else {
+      console.log('Дані успішно надіслані');
+    }
+  } catch (error) {
+    console.error('Помилка під час з'єднання з сервером:', error);
+  }
+}
+
 var trials_1;
 function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
   return async function() {
-    TrialHandler.fromSnapshot(snapshot); // update internal variables (.thisN etc) of the loop
+    TrialHandler.fromSnapshot(snapshot); 
     
-    // set up handler to look after randomisation of conditions etc
     trials_1 = new TrialHandler({
       psychoJS: psychoJS,
       nReps: 1, method: TrialHandler.Method.RANDOM,
@@ -1230,10 +1246,9 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
       trialList: 'Stimul_1.xlsx',
       seed: undefined, name: 'trials_1'
     });
-    psychoJS.experiment.addLoop(trials_1); // add the loop to the experiment
-    currentLoop = trials_1;  // we're now the current loop
-    
-    // Schedule all the trials in the trialList:
+    psychoJS.experiment.addLoop(trials_1);
+    currentLoop = trials_1;
+
     for (const thisTrial_1 of trials_1) {
       snapshot = trials_1.getSnapshot();
       trials_1LoopScheduler.add(importConditions(snapshot));
@@ -1247,26 +1262,33 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
   }
 }
 
-
 async function trials_1LoopEnd() {
-  // terminate loop
   psychoJS.experiment.removeLoop(trials_1);
-  // update the current loop from the ExperimentHandler
-  if (psychoJS.experiment._unfinishedLoops.length>0)
+
+  const dataToSend = [];
+  for (const thisTrial_1 of trials_1.trialList) {
+    const trialData = {
+      name: thisTrial_1.name,
+      stimul: thisTrial_1.stimul,
+      color: thisTrial_1.color
+    };
+    dataToSend.push(trialData);
+  }
+
+  await sendDataToServer(dataToSend);
+
+  if (psychoJS.experiment._unfinishedLoops.length > 0)
     currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
   else
-    currentLoop = psychoJS.experiment;  // so we use addData from the experiment
+    currentLoop = psychoJS.experiment; 
+
   return Scheduler.Event.NEXT;
 }
 
-
 function trials_1LoopEndIteration(scheduler, snapshot) {
-  // ------Prepare for next entry------
   return async function () {
     if (typeof snapshot !== 'undefined') {
-      // ------Check if user ended loop early------
       if (snapshot.finished) {
-        // Check for and save orphaned data
         if (psychoJS.experiment.isEntryEmpty()) {
           psychoJS.experiment.nextEntry(snapshot);
         }
@@ -1274,10 +1296,11 @@ function trials_1LoopEndIteration(scheduler, snapshot) {
       } else {
         psychoJS.experiment.nextEntry(snapshot);
       }
-    return Scheduler.Event.NEXT;
+      return Scheduler.Event.NEXT;
     }
   };
 }
+
 
 
 var trials_2;
@@ -1314,6 +1337,18 @@ function trials_2LoopBegin(trials_2LoopScheduler, snapshot) {
 async function trials_2LoopEnd() {
   // terminate loop
   psychoJS.experiment.removeLoop(trials_2);
+
+  const dataToSend = [];
+  for (const thisTrial_2 of trials_2.trialList) {
+    const trialData = {
+      name: thisTrial_2.name,
+      stimul: thisTrial_2.stimul,
+      color: thisTrial_2.color
+    };
+    dataToSend.push(trialData);
+  }
+
+  await sendDataToServer(dataToSend);
   // update the current loop from the ExperimentHandler
   if (psychoJS.experiment._unfinishedLoops.length>0)
     currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
@@ -1377,6 +1412,16 @@ function trials_3LoopBegin(trials_3LoopScheduler, snapshot) {
 async function trials_3LoopEnd() {
   // terminate loop
   psychoJS.experiment.removeLoop(trials_3);
+
+  const dataToSend = [];
+  for (const thisTrial_3 of trials_3.trialList) {
+    const trialData = {
+      name: thisTrial_3.name,
+      stimul: thisTrial_3.stimul,
+      color: thisTrial_3.color
+    };
+    dataToSend.push(trialData);
+  }
   // update the current loop from the ExperimentHandler
   if (psychoJS.experiment._unfinishedLoops.length>0)
     currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
@@ -1440,6 +1485,16 @@ function trials_4LoopBegin(trials_4LoopScheduler, snapshot) {
 async function trials_4LoopEnd() {
   // terminate loop
   psychoJS.experiment.removeLoop(trials_4);
+
+  const dataToSend = [];
+  for (const thisTrial_4 of trials_4.trialList) {
+    const trialData = {
+      name: thisTrial_4.name,
+      stimul: thisTrial_4.stimul,
+      color: thisTrial_4.color
+    };
+    dataToSend.push(trialData);
+  }
   // update the current loop from the ExperimentHandler
   if (psychoJS.experiment._unfinishedLoops.length>0)
     currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
@@ -1503,6 +1558,16 @@ function trials_5LoopBegin(trials_5LoopScheduler, snapshot) {
 async function trials_5LoopEnd() {
   // terminate loop
   psychoJS.experiment.removeLoop(trials_5);
+
+  const dataToSend = [];
+  for (const thisTrial_5 of trials_5.trialList) {
+    const trialData = {
+      name: thisTrial_5.name,
+      stimul: thisTrial_5.stimul,
+      color: thisTrial_5.color
+    };
+    dataToSend.push(trialData);
+  }
   // update the current loop from the ExperimentHandler
   if (psychoJS.experiment._unfinishedLoops.length>0)
     currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
@@ -1566,6 +1631,16 @@ function trials_6LoopBegin(trials_6LoopScheduler, snapshot) {
 async function trials_6LoopEnd() {
   // terminate loop
   psychoJS.experiment.removeLoop(trials_6);
+
+  const dataToSend = [];
+  for (const thisTrial_6 of trials_6.trialList) {
+    const trialData = {
+      name: thisTrial_6.name,
+      stimul: thisTrial_6.stimul,
+      color: thisTrial_6.color
+    };
+    dataToSend.push(trialData);
+  }
   // update the current loop from the ExperimentHandler
   if (psychoJS.experiment._unfinishedLoops.length>0)
     currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
@@ -1629,6 +1704,16 @@ function trials_7LoopBegin(trials_7LoopScheduler, snapshot) {
 async function trials_7LoopEnd() {
   // terminate loop
   psychoJS.experiment.removeLoop(trials_7);
+
+  const dataToSend = [];
+  for (const thisTrial_7 of trials_7.trialList) {
+    const trialData = {
+      name: thisTrial_7.name,
+      stimul: thisTrial_7.stimul,
+      color: thisTrial_7.color
+    };
+    dataToSend.push(trialData);
+  }
   // update the current loop from the ExperimentHandler
   if (psychoJS.experiment._unfinishedLoops.length>0)
     currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
@@ -1692,6 +1777,16 @@ function trials_8LoopBegin(trials_8LoopScheduler, snapshot) {
 async function trials_8LoopEnd() {
   // terminate loop
   psychoJS.experiment.removeLoop(trials_8);
+
+  const dataToSend = [];
+  for (const thisTrial_8 of trials_8.trialList) {
+    const trialData = {
+      name: thisTrial_8.name,
+      stimul: thisTrial_8.stimul,
+      color: thisTrial_8.color
+    };
+    dataToSend.push(trialData);
+  }
   // update the current loop from the ExperimentHandler
   if (psychoJS.experiment._unfinishedLoops.length>0)
     currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
