@@ -1,6 +1,7 @@
 from flask import Flask, request, send_from_directory, jsonify
 import os
-import pandas as pd  # Бібліотека для роботи з Excel
+import openpyxl
+from openpyxl import Workbook
 import logging
 
 # Створення екземпляра Flask
@@ -31,18 +32,26 @@ def submit_results():
 
     # Створення або оновлення файлу з результатами
     file_path = 'results.xlsx'
-    new_data = pd.DataFrame([data])  # Конвертація отриманих даних у DataFrame
 
+    # Створення нового робочого листа або завантаження існуючого
     try:
         if os.path.exists(file_path):
-            existing_data = pd.read_excel(file_path)
-            new_data = pd.concat([existing_data, new_data], ignore_index=True)
+            wb = openpyxl.load_workbook(file_path)
+            sheet = wb.active  # Використовуємо перший лист
+        else:
+            wb = Workbook()  # Створення нового файлу, якщо він не існує
+            sheet = wb.active
+            sheet.append(["Column1", "Column2", "Column3"])  # Ініціалізуємо заголовки
 
-        # Збереження даних у файл Excel
-        new_data.to_excel(file_path, index=False)
-        
+        # Додавання нових даних
+        sheet.append([data.get("field1"), data.get("field2"), data.get("field3")])  # Вставляйте свої поля
+
+        # Збереження Excel-файлу
+        wb.save(file_path)
+
         app.logger.info(f"Data saved: {data}")
         return jsonify({"status": "success"}), 200
+
     except Exception as e:
         app.logger.error(f"Error saving data to Excel: {e}")
         return jsonify({"error": "Internal server error"}), 500
