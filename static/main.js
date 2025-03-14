@@ -1217,9 +1217,9 @@ function instructionRoutineEnd(snapshot) {
 }
 
 
-async function sendDataToServer(data, trialNumber) {
+async function sendDataToServer(data) {
   try {
-    const response = await fetch(`https://color-dots-production.up.railway.app/submit_results/${trialNumber}`, {
+    const response = await fetch('https://color-dots-production.up.railway.app/submit_results', {  // без trialNumber
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
@@ -1228,7 +1228,7 @@ async function sendDataToServer(data, trialNumber) {
     if (!response.ok) {
       console.error('Помилка при надсиланні даних:', response.statusText);
     } else {
-      console.log(`Дані успішно надіслані для тріалу ${trialNumber}`);
+      console.log('Дані успішно надіслані');
     }
   } catch (error) {
     console.error('Помилка під час з\'єднання з сервером:', error);
