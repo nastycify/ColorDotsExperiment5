@@ -1054,7 +1054,7 @@ async function experimentInit() {
     units: undefined, 
     pos: [0, 0], height: 0.05,  wrapWidth: undefined, ori: 0.0,
     languageStyle: 'LTR',
-    color: new util.Color('white'),  opacity: undefined,
+    color: new util.Color('black'),  opacity: undefined,
     depth: 0.0 
   });
   
@@ -1077,7 +1077,7 @@ async function experimentInit() {
   text_3 = new visual.TextStim({
     win: psychoJS.window,
     name: 'text_3',
-    text: 'Дуже дякуємо за те, що прийняли участь у нашому експерименті! Ващ приділений час має велике значення для результатів дослідження!',
+    text: 'Дуже дякуємо за те, що прийняли участь у нашому експерименті! Ваш приділений час має велике значення для результатів дослідження!',
     font: 'Open Sans',
     units: undefined, 
     pos: [0, 0], height: 0.07,  wrapWidth: undefined, ori: 0.0,
