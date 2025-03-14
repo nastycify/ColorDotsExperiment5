@@ -519,7 +519,7 @@ psychoJS.start({
     {'name': 'К37.jpg', 'path': 'static/К37.jpg'},
     {'name': 'К38.jpg', 'path': 'static/К38.jpg'},
     {'name': 'К43.jpg', 'path': 'static/К43.jpg'},
-    {'name': 'К44.jpg', 'path': 'static/'К44.jpg'},
+    {'name': 'К44.jpg', 'path': 'static/К44.jpg'},
     {'name': 'К45.jpg', 'path': 'static/К45.jpg'},
     {'name': 'К50.jpg', 'path': 'static/К50.jpg'},
     {'name': 'К52.jpg', 'path': 'static/К52.jpg'},
