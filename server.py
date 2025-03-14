@@ -41,10 +41,15 @@ def submit_results():
         else:
             wb = Workbook()  # Створення нового файлу, якщо він не існує
             sheet = wb.active
-            sheet.append(["Column1", "Column2", "Column3"])  # Ініціалізуємо заголовки
+            sheet.append(["Name", "Stimul", "Color"])  # Ініціалізуємо заголовки
 
         # Додавання нових даних
-        sheet.append([data.get("field1"), data.get("field2"), data.get("field3")])  # Вставляйте свої поля
+        # Приймаємо дані як список об'єктів
+        if isinstance(data, list):
+            for item in data:
+                sheet.append([item.get("name"), item.get("stimul"), item.get("color")])  # Вставка даних
+        else:
+            sheet.append([data.get("name"), data.get("stimul"), data.get("color")])  # Вставка одного запису
 
         # Збереження Excel-файлу
         wb.save(file_path)
