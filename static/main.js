@@ -129,8 +129,20 @@ dialogCancelScheduler.add(quitPsychoJS, '', false);
 psychoJS.start({
   expName: expName,
   expInfo: expInfo,
-  });
-  
+  resources: [
+    // resources:
+    {'name': 'Stimul_1.xlsx', 'path': 'Stimul_1.xlsx'},
+    {'name': 'Stimul_2.xlsx', 'path': 'Stimul_2.xlsx'},
+    {'name': 'Stimul_3.xlsx', 'path': 'Stimul_3.xlsx'},
+    {'name': 'Stimul_4.xlsx', 'path': 'Stimul_4.xlsx'},
+    {'name': 'Stimul_5.xlsx', 'path': 'Stimul_5.xlsx'},
+    {'name': 'Stimul_6.xlsx', 'path': 'Stimul_6.xlsx'},
+    {'name': 'Stimul_7.xlsx', 'path': 'Stimul_7.xlsx'},
+    {'name': 'Stimul_8.xlsx', 'path': 'Stimul_8.xlsx'},
+    {'name': 'default.png', 'path': 'https://pavlovia.org/assets/default/default.png'},
+  ]
+});
+
 psychoJS.experimentLogger.setLevel(core.Logger.ServerLevel.EXP);
 
 
@@ -200,7 +212,7 @@ var Text_cont_pause7;
 var key_cont_pause7;
 var text_pause_7;
 var ExitClock;
-var image_2;
+var text_3;
 var globalClock;
 var routineTimer;
 async function experimentInit() {
@@ -224,7 +236,16 @@ async function experimentInit() {
   trialClock = new util.Clock();
   key_resp = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
   
-
+  image = new visual.ImageStim({
+    win : psychoJS.window,
+    name : 'image', units : undefined, 
+    image : 'default.png', mask : undefined,
+    anchor : 'center',
+    ori : 0.0, pos : [0, 0], size : [0.5, 0.5],
+    color : new util.Color([1,1,1]), opacity : undefined,
+    flipHoriz : false, flipVert : false,
+    texRes : 128.0, interpolate : true, depth : -1.0 
+  });
   text_2 = new visual.TextStim({
     win: psychoJS.window,
     name: 'text_2',
@@ -435,16 +456,18 @@ async function experimentInit() {
   
   // Initialize components for Routine "Exit"
   ExitClock = new util.Clock();
-  image_2 = new visual.ImageStim({
-    win : psychoJS.window,
-    name : 'image_2', units : undefined, 
-    image :'static/resources/Cat8.png', mask : undefined,
-    anchor : 'center',
-    ori : 0.0, pos : [0, 0], size : [1, 1],
-    color : new util.Color([(- 1.0), (- 1.0), (- 1.0)]), opacity : undefined,
-    flipHoriz : false, flipVert : false,
-    texRes : 128.0, interpolate : true, depth : 0.0 
+  text_3 = new visual.TextStim({
+    win: psychoJS.window,
+    name: 'text_3',
+    text: 'Дуже дякуємо за те, що прийняли участь у нашому експерименті! Ващ приділений час має велике значення для результатів дослідження!',
+    font: 'Open Sans',
+    units: undefined, 
+    pos: [0, 0], height: 0.07,  wrapWidth: undefined, ori: 0.0,
+    languageStyle: 'LTR',
+    color: new util.Color('black'),  opacity: undefined,
+    depth: 0.0 
   });
+  
   // Create some handy timers
   globalClock = new util.Clock();  // to track the time since experiment started
   routineTimer = new util.CountdownTimer();  // to track time remaining of each (non-slip) routine
@@ -2265,7 +2288,7 @@ function ExitRoutineBegin(snapshot) {
     psychoJS.experiment.addData('Exit.started', globalClock.getTime());
     // keep track of which components have finished
     ExitComponents = [];
-    ExitComponents.push(image_2);
+    ExitComponents.push(text_3);
     
     for (const thisComponent of ExitComponents)
       if ('status' in thisComponent)
@@ -2283,18 +2306,18 @@ function ExitRoutineEachFrame() {
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
     // update/draw components on each frame
     
-    // *image_2* updates
-    if (t >= 0.0 && image_2.status === PsychoJS.Status.NOT_STARTED) {
+    // *text_3* updates
+    if (t >= 0.0 && text_3.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
-      image_2.tStart = t;  // (not accounting for frame time here)
-      image_2.frameNStart = frameN;  // exact frame index
+      text_3.tStart = t;  // (not accounting for frame time here)
+      text_3.frameNStart = frameN;  // exact frame index
       
-      image_2.setAutoDraw(true);
+      text_3.setAutoDraw(true);
     }
     
     frameRemains = 0.0 + 10.0 - psychoJS.window.monitorFramePeriod * 0.75;  // most of one frame period left
-    if (image_2.status === PsychoJS.Status.STARTED && t >= frameRemains) {
-      image_2.setAutoDraw(false);
+    if (text_3.status === PsychoJS.Status.STARTED && t >= frameRemains) {
+      text_3.setAutoDraw(false);
     }
     // check for quit (typically the Esc key)
     if (psychoJS.experiment.experimentEnded || psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
