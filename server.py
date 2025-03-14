@@ -1,11 +1,10 @@
 from flask import Flask, request, send_from_directory, jsonify
 import os
-import csv
+import pandas as pd  # Бібліотека для роботи з Excel
 import logging
 
 # Створення екземпляра Flask
 app = Flask(__name__, static_url_path='/static', static_folder='static', template_folder='templates')
-
 
 # Налаштування логування
 logging.basicConfig(level=logging.INFO)
@@ -13,7 +12,6 @@ logging.basicConfig(level=logging.INFO)
 # Показ експерименту
 @app.route('/')
 def serve_experiment():
-    # Відкриває файл index.html як головну сторінку
     app.logger.info("Serving experiment page")
     return send_from_directory('templates', 'index.html')
 
@@ -23,33 +21,33 @@ def serve_resources(filename):
     app.logger.info(f"Serving resource: {filename}")
     return send_from_directory('static', filename)
 
-# Прийом даних від респондентів
-@app.route('/save_data', methods=['POST'])
-def save_data():
+# Прийом даних від респондентів та збереження у .xlsx
+@app.route('/submit_results', methods=['POST'])
+def submit_results():
     data = request.get_json()  # Отримання JSON-даних з експерименту
 
-    # Створення (або доповнення) файлу для збереження результатів
-    file_path = 'results.csv'
-    with open(file_path, 'a', newline='') as f:
-        # Визначення заголовків для CSV-файлу
-        writer = csv.DictWriter(f, fieldnames=['participant', 'stimulus_name', 'stimulus_color', 'response'])
+    if not data:
+        return jsonify({"error": "No data received"}), 400
 
-        # Якщо файл порожній, додати заголовки
-        if f.tell() == 0:
-            writer.writeheader()
+    # Створення або оновлення файлу з результатами
+    file_path = 'results.xlsx'
+    new_data = pd.DataFrame([data])  # Конвертація отриманих даних у DataFrame
 
-        # Запис даних у файл
-        writer.writerow(data)
+    if os.path.exists(file_path):
+        existing_data = pd.read_excel(file_path)
+        new_data = pd.concat([existing_data, new_data], ignore_index=True)
+
+    # Збереження даних у файл Excel
+    new_data.to_excel(file_path, index=False)
 
     app.logger.info(f"Data saved: {data}")
-    # Повертає відповідь "success", щоб показати, що все працює
     return jsonify({"status": "success"}), 200
 
 # Завантаження результатів
 @app.route('/download_results')
 def download_results():
-    app.logger.info("Downloading results.csv")
-    return send_from_directory('.', 'results.csv', as_attachment=True)
+    app.logger.info("Downloading results.xlsx")
+    return send_from_directory('.', 'results.xlsx', as_attachment=True)
 
 # Запуск сервера на порту 8000 (потрібно для Railway)
 if __name__ == '__main__':
