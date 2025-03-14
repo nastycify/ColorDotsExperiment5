@@ -138,6 +138,7 @@ psychoJS.start({
     {'name': 'Stimul_6.xlsx', 'path': 'static/Stimul_6.xlsx'},
     {'name': 'Stimul_7.xlsx', 'path': 'static/Stimul_7.xlsx'},
     {'name': 'Stimul_8.xlsx', 'path': 'static/Stimul_8.xlsx'},
+    {'name': 'default.png', 'path': 'static/default.png'},
   ]
 });
 
@@ -234,7 +235,18 @@ async function experimentInit() {
   // Initialize components for Routine "trial"
   trialClock = new util.Clock();
   key_resp = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
-  
+
+ image = new visual.ImageStim({
+    win : psychoJS.window,
+    name : 'image', units : undefined, 
+    image : 'static/default.png', mask : undefined,
+    anchor : 'center',
+    ori : 0.0, pos : [0, 0], size : [0.5, 0.5],
+    color : new util.Color([1,1,1]), opacity : undefined,
+    flipHoriz : false, flipVert : false,
+    texRes : 128.0, interpolate : true, depth : -1.0 
+  });
+    
   text_2 = new visual.TextStim({
     win: psychoJS.window,
     name: 'text_2',
