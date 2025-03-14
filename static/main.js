@@ -130,18 +130,18 @@ psychoJS.start({
   expName: expName,
   expInfo: expInfo,
   resources: [
-    {'name': 'Stimul_1.xlsx', 'path': 'static/Stimul_1.xlsx'},
-    {'name': 'Stimul_2.xlsx', 'path': 'static/Stimul_2.xlsx'},
-    {'name': 'Stimul_3.xlsx', 'path': 'static/Stimul_3.xlsx'},
-    {'name': 'Stimul_4.xlsx', 'path': 'static/Stimul_4.xlsx'},
-    {'name': 'Stimul_5.xlsx', 'path': 'static/Stimul_5.xlsx'},
-    {'name': 'Stimul_6.xlsx', 'path': 'static/Stimul_6.xlsx'},
-    {'name': 'Stimul_7.xlsx', 'path': 'static/Stimul_7.xlsx'},
-    {'name': 'Stimul_8.xlsx', 'path': 'static/Stimul_8.xlsx'},
-    {'name': 'default.png', 'path': 'static/default.png'},
+    // resources:
+    {'name': 'Stimul_1_1.xlsx', 'path': 'Stimul_1_1.xlsx'},
+    {'name': 'Stimul_2_1.xlsx', 'path': 'Stimul_2_1.xlsx'},
+    {'name': 'Stimul_3_1.xlsx', 'path': 'Stimul_3_1.xlsx'},
+    {'name': 'Stimul_4_1.xlsx', 'path': 'Stimul_4_1.xlsx'},
+    {'name': 'Stimul_5_1.xlsx', 'path': 'Stimul_5_1.xlsx'},
+    {'name': 'Stimul_6_1.xlsx', 'path': 'Stimul_6_1.xlsx'},
+    {'name': 'Stimul_7_1.xlsx', 'path': 'Stimul_7_1.xlsx'},
+    {'name': 'Stimul_8_1.xlsx', 'path': 'Stimul_8_1.xlsx'},
+    {'name': 'default.png', 'path': 'https://pavlovia.org/assets/default/default.png'},
   ]
 });
-
 
 psychoJS.experimentLogger.setLevel(core.Logger.ServerLevel.EXP);
 
@@ -235,18 +235,17 @@ async function experimentInit() {
   // Initialize components for Routine "trial"
   trialClock = new util.Clock();
   key_resp = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
-
- image = new visual.ImageStim({
+  
+  image = new visual.ImageStim({
     win : psychoJS.window,
     name : 'image', units : undefined, 
-    image : 'static/default.png', mask : undefined,
+    image : 'default.png', mask : undefined,
     anchor : 'center',
     ori : 0.0, pos : [0, 0], size : [0.5, 0.5],
     color : new util.Color([1,1,1]), opacity : undefined,
     flipHoriz : false, flipVert : false,
     texRes : 128.0, interpolate : true, depth : -1.0 
   });
-    
   text_2 = new visual.TextStim({
     win: psychoJS.window,
     name: 'text_2',
@@ -610,7 +609,7 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
       psychoJS: psychoJS,
       nReps: 1, method: TrialHandler.Method.RANDOM,
       extraInfo: expInfo, originPath: undefined,
-      trialList: 'Stimul_1.xlsx',
+      trialList: 'Stimul_1_1.xlsx',
       seed: undefined, name: 'trials_1'
     });
     psychoJS.experiment.addLoop(trials_1); // add the loop to the experiment
@@ -673,7 +672,7 @@ function trials_2LoopBegin(trials_2LoopScheduler, snapshot) {
       psychoJS: psychoJS,
       nReps: 1, method: TrialHandler.Method.RANDOM,
       extraInfo: expInfo, originPath: undefined,
-      trialList: 'Stimul_2.xlsx',
+      trialList: 'Stimul_2_1.xlsx',
       seed: undefined, name: 'trials_2'
     });
     psychoJS.experiment.addLoop(trials_2); // add the loop to the experiment
@@ -736,7 +735,7 @@ function trials_3LoopBegin(trials_3LoopScheduler, snapshot) {
       psychoJS: psychoJS,
       nReps: 1, method: TrialHandler.Method.RANDOM,
       extraInfo: expInfo, originPath: undefined,
-      trialList: 'Stimul_3.xlsx',
+      trialList: 'Stimul_3_1.xlsx',
       seed: undefined, name: 'trials_3'
     });
     psychoJS.experiment.addLoop(trials_3); // add the loop to the experiment
@@ -799,7 +798,7 @@ function trials_4LoopBegin(trials_4LoopScheduler, snapshot) {
       psychoJS: psychoJS,
       nReps: 1, method: TrialHandler.Method.RANDOM,
       extraInfo: expInfo, originPath: undefined,
-      trialList: 'Stimul_4.xlsx',
+      trialList: 'Stimul_4_1.xlsx',
       seed: undefined, name: 'trials_4'
     });
     psychoJS.experiment.addLoop(trials_4); // add the loop to the experiment
@@ -862,7 +861,7 @@ function trials_5LoopBegin(trials_5LoopScheduler, snapshot) {
       psychoJS: psychoJS,
       nReps: 1, method: TrialHandler.Method.RANDOM,
       extraInfo: expInfo, originPath: undefined,
-      trialList: 'Stimul_5.xlsx',
+      trialList: 'Stimul_5_1.xlsx',
       seed: undefined, name: 'trials_5'
     });
     psychoJS.experiment.addLoop(trials_5); // add the loop to the experiment
@@ -925,7 +924,7 @@ function trials_6LoopBegin(trials_6LoopScheduler, snapshot) {
       psychoJS: psychoJS,
       nReps: 1, method: TrialHandler.Method.RANDOM,
       extraInfo: expInfo, originPath: undefined,
-      trialList: 'Stimul_6.xlsx',
+      trialList: 'Stimul_6_1.xlsx',
       seed: undefined, name: 'trials_6'
     });
     psychoJS.experiment.addLoop(trials_6); // add the loop to the experiment
@@ -988,7 +987,7 @@ function trials_7LoopBegin(trials_7LoopScheduler, snapshot) {
       psychoJS: psychoJS,
       nReps: 1, method: TrialHandler.Method.RANDOM,
       extraInfo: expInfo, originPath: undefined,
-      trialList: 'Stimul_7.xlsx',
+      trialList: 'Stimul_7_1.xlsx',
       seed: undefined, name: 'trials_7'
     });
     psychoJS.experiment.addLoop(trials_7); // add the loop to the experiment
@@ -1051,7 +1050,7 @@ function trials_8LoopBegin(trials_8LoopScheduler, snapshot) {
       psychoJS: psychoJS,
       nReps: 1, method: TrialHandler.Method.RANDOM,
       extraInfo: expInfo, originPath: undefined,
-      trialList: 'Stimul_8.xlsx',
+      trialList: 'Stimul_8_1.xlsx',
       seed: undefined, name: 'trials_8'
     });
     psychoJS.experiment.addLoop(trials_8); // add the loop to the experiment
