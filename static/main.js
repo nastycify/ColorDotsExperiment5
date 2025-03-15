@@ -1266,6 +1266,20 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
     return Scheduler.Event.NEXT;
   }
 }
+let trialResponses = []; // Масив для зберігання відповідей користувача
+
+function recordResponse(trialIndex) {
+  return new Promise(resolve => {
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'S' || event.key === 'L') {
+        const response = event.key === 'S' ? 'blue' : 'purple';  // Визначаємо колір
+        trialResponses[trialIndex] = response;  // Зберігаємо відповідь
+        console.log(`Trial ${trialIndex + 1} response: ${response}`);
+        resolve(response);  // Повідомляємо, що відповідь записана
+      }
+    });
+  });
+}
 
 async function trials_1LoopEnd() {
     psychoJS.experiment.removeLoop(trials_1);
@@ -1340,6 +1354,20 @@ function trials_2LoopBegin(trials_2LoopScheduler, snapshot) {
     
     return Scheduler.Event.NEXT;
   }
+}
+let trialResponses = []; // Масив для зберігання відповідей користувача
+
+function recordResponse(trialIndex) {
+  return new Promise(resolve => {
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'S' || event.key === 'L') {
+        const response = event.key === 'S' ? 'blue' : 'purple';  // Визначаємо колір
+        trialResponses[trialIndex] = response;  // Зберігаємо відповідь
+        console.log(`Trial ${trialIndex + 1} response: ${response}`);
+        resolve(response);  // Повідомляємо, що відповідь записана
+      }
+    });
+  });
 }
 
 
@@ -1420,6 +1448,20 @@ function trials_3LoopBegin(trials_3LoopScheduler, snapshot) {
   }
 }
 
+let trialResponses = []; // Масив для зберігання відповідей користувача
+
+function recordResponse(trialIndex) {
+  return new Promise(resolve => {
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'S' || event.key === 'L') {
+        const response = event.key === 'S' ? 'blue' : 'purple';  // Визначаємо колір
+        trialResponses[trialIndex] = response;  // Зберігаємо відповідь
+        console.log(`Trial ${trialIndex + 1} response: ${response}`);
+        resolve(response);  // Повідомляємо, що відповідь записана
+      }
+    });
+  });
+}
 
 async function trials_3LoopEnd() {
     psychoJS.experiment.removeLoop(trials_3);
@@ -1496,7 +1538,20 @@ function trials_4LoopBegin(trials_4LoopScheduler, snapshot) {
   }
 }
 
+let trialResponses = []; // Масив для зберігання відповідей користувача
 
+function recordResponse(trialIndex) {
+  return new Promise(resolve => {
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'S' || event.key === 'L') {
+        const response = event.key === 'S' ? 'blue' : 'purple';  // Визначаємо колір
+        trialResponses[trialIndex] = response;  // Зберігаємо відповідь
+        console.log(`Trial ${trialIndex + 1} response: ${response}`);
+        resolve(response);  // Повідомляємо, що відповідь записана
+      }
+    });
+  });
+}
 async function trials_4LoopEnd() {
     psychoJS.experiment.removeLoop(trials_4);
 
@@ -1573,7 +1628,20 @@ function trials_5LoopBegin(trials_5LoopScheduler, snapshot) {
   }
 }
 
+let trialResponses = []; // Масив для зберігання відповідей користувача
 
+function recordResponse(trialIndex) {
+  return new Promise(resolve => {
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'S' || event.key === 'L') {
+        const response = event.key === 'S' ? 'blue' : 'purple';  // Визначаємо колір
+        trialResponses[trialIndex] = response;  // Зберігаємо відповідь
+        console.log(`Trial ${trialIndex + 1} response: ${response}`);
+        resolve(response);  // Повідомляємо, що відповідь записана
+      }
+    });
+  });
+}
 async function trials_5LoopEnd() {
     psychoJS.experiment.removeLoop(trials_5);
 
@@ -1652,7 +1720,20 @@ function trials_6LoopBegin(trials_6LoopScheduler, snapshot) {
   }
 }
 
+let trialResponses = []; // Масив для зберігання відповідей користувача
 
+function recordResponse(trialIndex) {
+  return new Promise(resolve => {
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'S' || event.key === 'L') {
+        const response = event.key === 'S' ? 'blue' : 'purple';  // Визначаємо колір
+        trialResponses[trialIndex] = response;  // Зберігаємо відповідь
+        console.log(`Trial ${trialIndex + 1} response: ${response}`);
+        resolve(response);  // Повідомляємо, що відповідь записана
+      }
+    });
+  });
+}
 async function trials_6LoopEnd() {
     psychoJS.experiment.removeLoop(trials_6);
 
@@ -1729,7 +1810,20 @@ function trials_7LoopBegin(trials_7LoopScheduler, snapshot) {
   }
 }
 
+let trialResponses = []; // Масив для зберігання відповідей користувача
 
+function recordResponse(trialIndex) {
+  return new Promise(resolve => {
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'S' || event.key === 'L') {
+        const response = event.key === 'S' ? 'blue' : 'purple';  // Визначаємо колір
+        trialResponses[trialIndex] = response;  // Зберігаємо відповідь
+        console.log(`Trial ${trialIndex + 1} response: ${response}`);
+        resolve(response);  // Повідомляємо, що відповідь записана
+      }
+    });
+  });
+}
 async function trials_7LoopEnd() {
     psychoJS.experiment.removeLoop(trials_7);
 
@@ -1808,7 +1902,20 @@ function trials_8LoopBegin(trials_8LoopScheduler, snapshot) {
   }
 }
 
+let trialResponses = []; // Масив для зберігання відповідей користувача
 
+function recordResponse(trialIndex) {
+  return new Promise(resolve => {
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'S' || event.key === 'L') {
+        const response = event.key === 'S' ? 'blue' : 'purple';  // Визначаємо колір
+        trialResponses[trialIndex] = response;  // Зберігаємо відповідь
+        console.log(`Trial ${trialIndex + 1} response: ${response}`);
+        resolve(response);  // Повідомляємо, що відповідь записана
+      }
+    });
+  });
+}
 async function trials_8LoopEnd() {
     psychoJS.experiment.removeLoop(trials_8);
 
