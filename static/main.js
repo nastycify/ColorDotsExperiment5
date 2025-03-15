@@ -1218,23 +1218,34 @@ function instructionRoutineEnd(snapshot) {
 
 
 async function sendDataToServer(data, trialNumber) {
-    try {
-        const response = await fetch(`https://color-dots-production.up.railway.app/submit_results/${trialNumber}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        });
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 5000); // Тайм-аут на 5 секунд
 
-        if (!response.ok) {
-            const errorText = await response.text();  // Отримання тексту помилки
-            console.error(`Помилка при надсиланні даних: ${errorText}`);
-        } else {
-            console.log(`Дані успішно надіслані для тріалу ${trialNumber}`);
-        }
-    } catch (error) {
-        console.error('Помилка під час з\'єднання з сервером:', error);
-    }
+  try {
+      const response = await fetch(`https://color-dots-production.up.railway.app/submit_results/${trialNumber}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+          signal: controller.signal
+      });
+
+      clearTimeout(timeoutId);
+
+      if (!response.ok) {
+          const errorText = await response.text();
+          console.error(`Помилка при надсиланні даних: ${errorText}`);
+      } else {
+          console.log(`Дані успішно надіслані для тріалу ${trialNumber}`);
+      }
+  } catch (error) {
+      if (error.name === 'AbortError') {
+          console.error(`Тайм-аут при надсиланні даних для тріалу ${trialNumber}`);
+      } else {
+          console.error('Помилка під час з\'єднання з сервером:', error);
+      }
+  }
 }
+
 
 
 var trials_1;
@@ -1266,29 +1277,40 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
 }
 
 async function trials_1LoopEnd() {
-  psychoJS.experiment.removeLoop(trials_1);
+    psychoJS.experiment.removeLoop(trials_1);
 
-  // Проходимо по кожному тріалу та відправляємо окремо
-  for (let i = 0; i < trials_1.trialList.length; i++) {
-    const thisTrial_1 = trials_1.trialList[i];
+    // Перевірка наявності списку тріалів
+    if (!trials_1.trialList || trials_1.trialList.length === 0) {
+        console.warn('Список тріалів порожній або не завантажено.');
+        return Scheduler.Event.NEXT;
+    }
 
-    const trialData = {
-      name: thisTrial_1.name,
-      stimul: thisTrial_1.stimul,
-      color: thisTrial_1.color
-    };
+    // Проходимо по кожному тріалу та відправляємо окремо
+    for (let i = 0; i < trials_1.trialList.length; i++) {
+        const thisTrial_1 = trials_1.trialList[i];
 
-    // Відправляємо дані для конкретного тріалу
-    await sendDataToServer(trialData, i + 1);  // Використовуємо i+1, щоб номер тріалу починався з 1
-  }
+        // Перевірка наявності потрібних даних у кожному тріалі
+        const trialData = {
+            name: thisTrial_1?.name || 'невідомо',
+            stimul: thisTrial_1?.stimul || 'невідомо',
+            color: thisTrial_1?.color || 'невідомо'
+        };
 
-  if (psychoJS.experiment._unfinishedLoops.length > 0)
-    currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
-  else
-    currentLoop = psychoJS.experiment; 
+        console.log(`Відправляємо дані для тріалу ${i + 1}:`, trialData);
 
-  return Scheduler.Event.NEXT;
+        // Відправлення даних із тайм-аутом для уникнення зависань
+        await sendDataToServer(trialData, i + 1);  // Використовуємо i+1, щоб номер тріалу починався з 1
+    }
+
+    // Повернення до попереднього циклу або завершення
+    if (psychoJS.experiment._unfinishedLoops.length > 0)
+        currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
+    else
+        currentLoop = psychoJS.experiment; 
+
+    return Scheduler.Event.NEXT;
 }
+
 
 function trials_1LoopEndIteration(scheduler, snapshot) {
   return async function () {
@@ -1340,30 +1362,38 @@ function trials_2LoopBegin(trials_2LoopScheduler, snapshot) {
 
 
 async function trials_2LoopEnd() {
-  // Завершуємо цикл
-  psychoJS.experiment.removeLoop(trials_2);
+    psychoJS.experiment.removeLoop(trials_2);
 
-  // Проходимо по кожному тріалу та відправляємо окремо
-  for (let i = 0; i < trials_2.trialList.length; i++) {
-    const thisTrial_2 = trials_2.trialList[i];
+    // Перевірка наявності списку тріалів
+    if (!trials_2.trialList || trials_2.trialList.length === 0) {
+        console.warn('Список тріалів порожній або не завантажено.');
+        return Scheduler.Event.NEXT;
+    }
 
-    const trialData = {
-      name: thisTrial_2.name,
-      stimul: thisTrial_2.stimul,
-      color: thisTrial_2.color
-    };
+    // Проходимо по кожному тріалу та відправляємо окремо
+    for (let i = 0; i < trials_2.trialList.length; i++) {
+        const thisTrial_2 = trials_2.trialList[i];
 
-    // Відправляємо дані для конкретного тріалу
-    await sendDataToServer(trialData, i + 1);  // Використовуємо i+1, щоб номер тріалу починався з 1
-  }
+        // Перевірка наявності потрібних даних у кожному тріалі
+        const trialData = {
+            name: thisTrial_2?.name || 'невідомо',
+            stimul: thisTrial_2?.stimul || 'невідомо',
+            color: thisTrial_2?.color || 'невідомо'
+        };
 
-  // Оновлюємо поточний цикл в ExperimentHandler
-  if (psychoJS.experiment._unfinishedLoops.length > 0)
-    currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
-  else
-    currentLoop = psychoJS.experiment;  // Так, щоб використовувався addData з експерименту
+        console.log(`Відправляємо дані для тріалу ${i + 1}:`, trialData);
 
-  return Scheduler.Event.NEXT;
+        // Відправлення даних із тайм-аутом для уникнення зависань
+        await sendDataToServer(trialData, i + 1);  // Використовуємо i+1, щоб номер тріалу починався з 1
+    }
+
+    // Повернення до попереднього циклу або завершення
+    if (psychoJS.experiment._unfinishedLoops.length > 0)
+        currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
+    else
+        currentLoop = psychoJS.experiment; 
+
+    return Scheduler.Event.NEXT;
 }
 
 
@@ -1420,32 +1450,39 @@ function trials_3LoopBegin(trials_3LoopScheduler, snapshot) {
 
 
 async function trials_3LoopEnd() {
-  // Завершуємо цикл
-  psychoJS.experiment.removeLoop(trials_3);
+    psychoJS.experiment.removeLoop(trials_3);
 
-  // Проходимо через кожен тріал і відправляємо окремо
-  for (let i = 0; i < trials_3.trialList.length; i++) {
-    const thisTrial_3 = trials_3.trialList[i];
+    // Перевірка наявності списку тріалів
+    if (!trials_3.trialList || trials_3.trialList.length === 0) {
+        console.warn('Список тріалів порожній або не завантажено.');
+        return Scheduler.Event.NEXT;
+    }
 
-    const trialData = {
-      name: thisTrial_3.name,
-      stimul: thisTrial_3.stimul,
-      color: thisTrial_3.color
-    };
+    // Проходимо по кожному тріалу та відправляємо окремо
+    for (let i = 0; i < trials_3.trialList.length; i++) {
+        const thisTrial_3 = trials_3.trialList[i];
 
-    // Відправляємо дані для конкретного тріалу
-    await sendDataToServer(trialData, i + 1);  // Номер тріалу починається з 1
-  }
+        // Перевірка наявності потрібних даних у кожному тріалі
+        const trialData = {
+            name: thisTrial_3?.name || 'невідомо',
+            stimul: thisTrial_3?.stimul || 'невідомо',
+            color: thisTrial_3?.color || 'невідомо'
+        };
 
-  // Оновлюємо поточний цикл в ExperimentHandler
-  if (psychoJS.experiment._unfinishedLoops.length > 0)
-    currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
-  else
-    currentLoop = psychoJS.experiment;  // Так, щоб використовувався addData з експерименту
+        console.log(`Відправляємо дані для тріалу ${i + 1}:`, trialData);
 
-  return Scheduler.Event.NEXT;
+        // Відправлення даних із тайм-аутом для уникнення зависань
+        await sendDataToServer(trialData, i + 1);  // Використовуємо i+1, щоб номер тріалу починався з 1
+    }
+
+    // Повернення до попереднього циклу або завершення
+    if (psychoJS.experiment._unfinishedLoops.length > 0)
+        currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
+    else
+        currentLoop = psychoJS.experiment; 
+
+    return Scheduler.Event.NEXT;
 }
-
 
 
 function trials_3LoopEndIteration(scheduler, snapshot) {
@@ -1500,31 +1537,40 @@ function trials_4LoopBegin(trials_4LoopScheduler, snapshot) {
 
 
 async function trials_4LoopEnd() {
-  // Завершуємо цикл
-  psychoJS.experiment.removeLoop(trials_4);
+    psychoJS.experiment.removeLoop(trials_4);
 
-  // Проходимо через кожен тріал і відправляємо окремо
-  for (let i = 0; i < trials_4.trialList.length; i++) {
-    const thisTrial_4 = trials_4.trialList[i];
+    // Перевірка наявності списку тріалів
+    if (!trials_4.trialList || trials_4.trialList.length === 0) {
+        console.warn('Список тріалів порожній або не завантажено.');
+        return Scheduler.Event.NEXT;
+    }
 
-    const trialData = {
-      name: thisTrial_4.name,
-      stimul: thisTrial_4.stimul,
-      color: thisTrial_4.color
-    };
+    // Проходимо по кожному тріалу та відправляємо окремо
+    for (let i = 0; i < trials_4.trialList.length; i++) {
+        const thisTrial_4 = trials_4.trialList[i];
 
-    // Відправляємо дані для конкретного тріалу
-    await sendDataToServer(trialData, i + 1);  // Номер тріалу починається з 1
-  }
+        // Перевірка наявності потрібних даних у кожному тріалі
+        const trialData = {
+            name: thisTrial_4?.name || 'невідомо',
+            stimul: thisTrial_4?.stimul || 'невідомо',
+            color: thisTrial_4?.color || 'невідомо'
+        };
 
-  // Оновлюємо поточний цикл в ExperimentHandler
-  if (psychoJS.experiment._unfinishedLoops.length > 0)
-    currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
-  else
-    currentLoop = psychoJS.experiment;  // Так, щоб використовувався addData з експерименту
+        console.log(`Відправляємо дані для тріалу ${i + 1}:`, trialData);
 
-  return Scheduler.Event.NEXT;
+        // Відправлення даних із тайм-аутом для уникнення зависань
+        await sendDataToServer(trialData, i + 1);  // Використовуємо i+1, щоб номер тріалу починався з 1
+    }
+
+    // Повернення до попереднього циклу або завершення
+    if (psychoJS.experiment._unfinishedLoops.length > 0)
+        currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
+    else
+        currentLoop = psychoJS.experiment; 
+
+    return Scheduler.Event.NEXT;
 }
+
 
 
 function trials_4LoopEndIteration(scheduler, snapshot) {
@@ -1579,31 +1625,40 @@ function trials_5LoopBegin(trials_5LoopScheduler, snapshot) {
 
 
 async function trials_5LoopEnd() {
-  // Завершуємо цикл
-  psychoJS.experiment.removeLoop(trials_5);
+    psychoJS.experiment.removeLoop(trials_5);
 
-  // Проходимо через кожен тріал і відправляємо окремо
-  for (let i = 0; i < trials_5.trialList.length; i++) {
-    const thisTrial_5 = trials_5.trialList[i];
+    // Перевірка наявності списку тріалів
+    if (!trials_5.trialList || trials_5.trialList.length === 0) {
+        console.warn('Список тріалів порожній або не завантажено.');
+        return Scheduler.Event.NEXT;
+    }
 
-    const trialData = {
-      name: thisTrial_5.name,
-      stimul: thisTrial_5.stimul,
-      color: thisTrial_5.color
-    };
+    // Проходимо по кожному тріалу та відправляємо окремо
+    for (let i = 0; i < trials_5.trialList.length; i++) {
+        const thisTrial_5 = trials_5.trialList[i];
 
-    // Відправляємо дані для конкретного тріалу
-    await sendDataToServer(trialData, i + 1);  // Номер тріалу починається з 1
-  }
+        // Перевірка наявності потрібних даних у кожному тріалі
+        const trialData = {
+            name: thisTrial_5?.name || 'невідомо',
+            stimul: thisTrial_5?.stimul || 'невідомо',
+            color: thisTrial_5?.color || 'невідомо'
+        };
 
-  // Оновлюємо поточний цикл в ExperimentHandler
-  if (psychoJS.experiment._unfinishedLoops.length > 0)
-    currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
-  else
-    currentLoop = psychoJS.experiment;  // Так, щоб використовувався addData з експерименту
+        console.log(`Відправляємо дані для тріалу ${i + 1}:`, trialData);
 
-  return Scheduler.Event.NEXT;
+        // Відправлення даних із тайм-аутом для уникнення зависань
+        await sendDataToServer(trialData, i + 1);  // Використовуємо i+1, щоб номер тріалу починався з 1
+    }
+
+    // Повернення до попереднього циклу або завершення
+    if (psychoJS.experiment._unfinishedLoops.length > 0)
+        currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
+    else
+        currentLoop = psychoJS.experiment; 
+
+    return Scheduler.Event.NEXT;
 }
+
 
 
 
@@ -1659,30 +1714,38 @@ function trials_6LoopBegin(trials_6LoopScheduler, snapshot) {
 
 
 async function trials_6LoopEnd() {
-  // Завершуємо цикл
-  psychoJS.experiment.removeLoop(trials_6);
+    psychoJS.experiment.removeLoop(trials_6);
 
-  // Проходимо через кожен тріал і відправляємо окремо
-  for (let i = 0; i < trials_6.trialList.length; i++) {
-    const thisTrial_6 = trials_6.trialList[i];
+    // Перевірка наявності списку тріалів
+    if (!trials_6.trialList || trials_6.trialList.length === 0) {
+        console.warn('Список тріалів порожній або не завантажено.');
+        return Scheduler.Event.NEXT;
+    }
 
-    const trialData = {
-      name: thisTrial_6.name,
-      stimul: thisTrial_6.stimul,
-      color: thisTrial_6.color
-    };
+    // Проходимо по кожному тріалу та відправляємо окремо
+    for (let i = 0; i < trials_6.trialList.length; i++) {
+        const thisTrial_6 = trials_6.trialList[i];
 
-    // Відправляємо дані для конкретного тріалу
-    await sendDataToServer(trialData, i + 1);  // Номер тріалу починається з 1
-  }
+        // Перевірка наявності потрібних даних у кожному тріалі
+        const trialData = {
+            name: thisTrial_6?.name || 'невідомо',
+            stimul: thisTrial_6?.stimul || 'невідомо',
+            color: thisTrial_6?.color || 'невідомо'
+        };
 
-  // Оновлюємо поточний цикл в ExperimentHandler
-  if (psychoJS.experiment._unfinishedLoops.length > 0)
-    currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
-  else
-    currentLoop = psychoJS.experiment;  // Так, щоб використовувався addData з експерименту
+        console.log(`Відправляємо дані для тріалу ${i + 1}:`, trialData);
 
-  return Scheduler.Event.NEXT;
+        // Відправлення даних із тайм-аутом для уникнення зависань
+        await sendDataToServer(trialData, i + 1);  // Використовуємо i+1, щоб номер тріалу починався з 1
+    }
+
+    // Повернення до попереднього циклу або завершення
+    if (psychoJS.experiment._unfinishedLoops.length > 0)
+        currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
+    else
+        currentLoop = psychoJS.experiment; 
+
+    return Scheduler.Event.NEXT;
 }
 
 
@@ -1739,30 +1802,38 @@ function trials_7LoopBegin(trials_7LoopScheduler, snapshot) {
 
 
 async function trials_7LoopEnd() {
-  // Завершуємо цикл
-  psychoJS.experiment.removeLoop(trials_7);
+    psychoJS.experiment.removeLoop(trials_7);
 
-  // Проходимо через кожен тріал і відправляємо окремо
-  for (let i = 0; i < trials_7.trialList.length; i++) {
-    const thisTrial_7 = trials_7.trialList[i];
+    // Перевірка наявності списку тріалів
+    if (!trials_7.trialList || trials_7.trialList.length === 0) {
+        console.warn('Список тріалів порожній або не завантажено.');
+        return Scheduler.Event.NEXT;
+    }
 
-    const trialData = {
-      name: thisTrial_7.name,
-      stimul: thisTrial_7.stimul,
-      color: thisTrial_7.color
-    };
+    // Проходимо по кожному тріалу та відправляємо окремо
+    for (let i = 0; i < trials_7.trialList.length; i++) {
+        const thisTrial_7 = trials_7.trialList[i];
 
-    // Відправляємо дані для конкретного тріалу
-    await sendDataToServer(trialData, i + 1);  // Номер тріалу починається з 1
-  }
+        // Перевірка наявності потрібних даних у кожному тріалі
+        const trialData = {
+            name: thisTrial_7?.name || 'невідомо',
+            stimul: thisTrial_7?.stimul || 'невідомо',
+            color: thisTrial_7?.color || 'невідомо'
+        };
 
-  // Оновлюємо поточний цикл в ExperimentHandler
-  if (psychoJS.experiment._unfinishedLoops.length > 0)
-    currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
-  else
-    currentLoop = psychoJS.experiment;  // Так, щоб використовувався addData з експерименту
+        console.log(`Відправляємо дані для тріалу ${i + 1}:`, trialData);
 
-  return Scheduler.Event.NEXT;
+        // Відправлення даних із тайм-аутом для уникнення зависань
+        await sendDataToServer(trialData, i + 1);  // Використовуємо i+1, щоб номер тріалу починався з 1
+    }
+
+    // Повернення до попереднього циклу або завершення
+    if (psychoJS.experiment._unfinishedLoops.length > 0)
+        currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
+    else
+        currentLoop = psychoJS.experiment; 
+
+    return Scheduler.Event.NEXT;
 }
 
 
@@ -1819,30 +1890,38 @@ function trials_8LoopBegin(trials_8LoopScheduler, snapshot) {
 
 
 async function trials_8LoopEnd() {
-  // Завершуємо цикл
-  psychoJS.experiment.removeLoop(trials_8);
+    psychoJS.experiment.removeLoop(trials_8);
 
-  // Проходимо через кожен тріал і відправляємо окремо
-  for (let i = 0; i < trials_8.trialList.length; i++) {
-    const thisTrial_8 = trials_8.trialList[i];
+    // Перевірка наявності списку тріалів
+    if (!trials_8.trialList || trials_8.trialList.length === 0) {
+        console.warn('Список тріалів порожній або не завантажено.');
+        return Scheduler.Event.NEXT;
+    }
 
-    const trialData = {
-      name: thisTrial_8.name,
-      stimul: thisTrial_8.stimul,
-      color: thisTrial_8.color
-    };
+    // Проходимо по кожному тріалу та відправляємо окремо
+    for (let i = 0; i < trials_8.trialList.length; i++) {
+        const thisTrial_8 = trials_8.trialList[i];
 
-    // Відправляємо дані для конкретного тріалу
-    await sendDataToServer(trialData, i + 1);  // Номер тріалу починається з 1
-  }
+        // Перевірка наявності потрібних даних у кожному тріалі
+        const trialData = {
+            name: thisTrial_8?.name || 'невідомо',
+            stimul: thisTrial_8?.stimul || 'невідомо',
+            color: thisTrial_8?.color || 'невідомо'
+        };
 
-  // Оновлюємо поточний цикл в ExperimentHandler
-  if (psychoJS.experiment._unfinishedLoops.length > 0)
-    currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
-  else
-    currentLoop = psychoJS.experiment;  // Так, щоб використовувався addData з експерименту
+        console.log(`Відправляємо дані для тріалу ${i + 1}:`, trialData);
 
-  return Scheduler.Event.NEXT;
+        // Відправлення даних із тайм-аутом для уникнення зависань
+        await sendDataToServer(trialData, i + 1);  // Використовуємо i+1, щоб номер тріалу починався з 1
+    }
+
+    // Повернення до попереднього циклу або завершення
+    if (psychoJS.experiment._unfinishedLoops.length > 0)
+        currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
+    else
+        currentLoop = psychoJS.experiment; 
+
+    return Scheduler.Event.NEXT;
 }
 
 
