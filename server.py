@@ -4,6 +4,11 @@ import openpyxl
 from openpyxl import Workbook
 import logging
 
+# Створення папки для тимчасових файлів, якщо її ще немає
+tmp_folder = 'tmp'  # Назва папки для тимчасових файлів
+if not os.path.exists(tmp_folder):
+    os.makedirs(tmp_folder)  # Створення папки, якщо її немає
+
 # Створення екземпляра Flask
 app = Flask(__name__, static_url_path='/static', static_folder='static', template_folder='templates')
 
@@ -40,8 +45,8 @@ def submit_results(loop_name):
             if not all(field in item for field in required_fields):
                 return jsonify({"error": f"Missing required fields in entry: {item}"}), 400
 
-        # Створення або оновлення файлу з результатами в тимчасовій директорії
-        file_path = '/tmp/results.xlsx'  # Оновлений шлях
+        # Створення або оновлення файлу з результатами
+        file_path = os.path.join(tmp_folder, 'results.xlsx')  # Шлях до файлу в tmp
 
         if os.path.exists(file_path):
             wb = openpyxl.load_workbook(file_path)
@@ -77,8 +82,8 @@ def submit_results(loop_name):
 def download_results():
     app.logger.info("Downloading results.xlsx")
     try:
-        # Оновлений шлях для завантаження файлу з тимчасової директорії
-        return send_from_directory('/tmp', 'results.xlsx', as_attachment=True)
+        # Вказуємо шлях до файлу в tmp
+        return send_from_directory(tmp_folder, 'results.xlsx', as_attachment=True)
     except Exception as e:
         app.logger.error(f"Error downloading results: {e}")
         return jsonify({"error": "Internal server error"}), 500
@@ -87,4 +92,5 @@ def download_results():
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 8000))
     app.run(host='0.0.0.0', port=port, debug=True)
+
 
