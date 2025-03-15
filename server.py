@@ -40,8 +40,8 @@ def submit_results(loop_name):
             if not all(field in item for field in required_fields):
                 return jsonify({"error": f"Missing required fields in entry: {item}"}), 400
 
-        # Створення або оновлення файлу з результатами
-        file_path = 'results.xlsx'
+        # Створення або оновлення файлу з результатами в тимчасовій директорії
+        file_path = '/tmp/results.xlsx'  # Оновлений шлях
 
         if os.path.exists(file_path):
             wb = openpyxl.load_workbook(file_path)
@@ -77,7 +77,8 @@ def submit_results(loop_name):
 def download_results():
     app.logger.info("Downloading results.xlsx")
     try:
-        return send_from_directory('.', 'results.xlsx', as_attachment=True)
+        # Оновлений шлях для завантаження файлу з тимчасової директорії
+        return send_from_directory('/tmp', 'results.xlsx', as_attachment=True)
     except Exception as e:
         app.logger.error(f"Error downloading results: {e}")
         return jsonify({"error": "Internal server error"}), 500
@@ -86,3 +87,4 @@ def download_results():
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 8000))
     app.run(host='0.0.0.0', port=port, debug=True)
+
