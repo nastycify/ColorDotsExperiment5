@@ -3130,13 +3130,36 @@ function importConditions(currentLoop) {
 
 
 async function quitPsychoJS(message, isCompleted) {
-  // Check for and save orphaned data
+  // Перевіряємо та зберігаємо дані, якщо вони залишились
   if (psychoJS.experiment.isEntryEmpty()) {
     psychoJS.experiment.nextEntry();
   }
   psychoJS.window.close();
   psychoJS.quit({message: message, isCompleted: isCompleted});
-  // Припустимо, що дані експерименту зберігаються в змінній `experimentData`
-sendResultsToServer(trialData, i + 1);
+
+  // Збираємо всі дані для всіх лупів
+  const allExperimentData = [];
+  
+  // Збираємо дані для кожного лупа
+  const loopNames = ['trials_1', 'trials_2', 'trials_3', 'trials_4', 'trials_5', 'trials_6', 'trials_7', 'trials_8'];
+  
+  for (const loopName of loopNames) {
+    const trialData = psychoJS.experiment.getLoop(loopName).trialList.map((thisTrial, index) => ({
+      name: thisTrial.name ?? 'невідомо',
+      stimul: thisTrial.stimul ?? 'невідомо',
+      color: thisTrial.color ?? 'невідомо',
+      response: thisTrial.response ?? 'невідомо',
+      trialNumber: index + 1
+    }));
+    
+    allExperimentData.push(...trialData);  // Додаємо дані цього лупа в загальний масив
+  }
+
+  // Викликаємо sendResultsToServer і передаємо всі дані
+  sendResultsToServer(allExperimentData, 'all_loops')
+    .then(() => console.log("Результати успішно надіслані"))
+    .catch((error) => console.error("Помилка при відправці результатів:", error));
+
   return Scheduler.Event.QUIT;
 }
+
