@@ -1219,7 +1219,6 @@ function instructionRoutineEnd(snapshot) {
 
 async function sendResultsToServer(data, loopName) {
     try {
-         // Виведення даних перед відправкою
         console.log('Sending data for loop:', loopName, data);
         const response = await fetch(`https://color-dots-production.up.railway.app/submit_results/${loopName}`, {
             method: 'POST',
@@ -1271,22 +1270,19 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
 async function trials_1LoopEnd() {
     psychoJS.experiment.removeLoop(trials_1);
 
-    // Збираємо всі дані в масив для пакетного надсилання
+    // Збираємо дані правильно з `thisTrial_1` об'єкта
     const allTrialData = trials_1.trialList.map((thisTrial_1, index) => ({
-        name: thisTrial_1.name ?? 'невідомо',
-        stimul: thisTrial_1.stimul ?? 'невідомо',
-        color: thisTrial_1.color ?? 'невідомо',
-        response: thisTrial_1.response ?? 'невідомо', // Додаємо відповідь респондента
+        name: thisTrial_1?.name ?? 'невідомо',
+        stimul: thisTrial_1?.stimul ?? 'невідомо',
+        color: thisTrial_1?.color ?? 'невідомо',
+        response: thisTrial_1?.response ?? 'невідомо',
         trialNumber: index + 1
     }));
 
-    // Асинхронне надсилання даних без очікування
-sendResultsToServer(allTrialData, 'trials_1')
-    .then(() => console.log('Дані успішно надіслані.'))
-    .catch((error) => console.error('Помилка під час надсилання даних:', error));
+    await sendResultsToServer(allTrialData, 'trials_1')
+        .then(() => console.log('Дані успішно надіслані.'))
+        .catch((error) => console.error('Помилка під час надсилання даних:', error));
 
-
-    // Переходимо до наступного екрану (паузи) без очікування завершення надсилання
     if (psychoJS.experiment._unfinishedLoops.length > 0)
         currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
     else
@@ -1348,21 +1344,19 @@ function trials_2LoopBegin(trials_2LoopScheduler, snapshot) {
 async function trials_2LoopEnd() {
     psychoJS.experiment.removeLoop(trials_2);
 
-    // Збираємо всі дані в масив для пакетного надсилання
+    // Збираємо дані правильно з `thisTrial_2` об'єкта
     const allTrialData = trials_2.trialList.map((thisTrial_2, index) => ({
-        name: thisTrial_2.name ?? 'невідомо',
-        stimul: thisTrial_2.stimul ?? 'невідомо',
-        color: thisTrial_2.color ?? 'невідомо',
-        response: thisTrial_2.response ?? 'невідомо', // Додаємо відповідь респондента
+        name: thisTrial_2?.name ?? 'невідомо',
+        stimul: thisTrial_2?.stimul ?? 'невідомо',
+        color: thisTrial_2?.color ?? 'невідомо',
+        response: thisTrial_2?.response ?? 'невідомо',
         trialNumber: index + 1
     }));
 
-    // Асинхронне надсилання даних без очікування
-    sendResultsToServer(allTrialData, 'trials_2')
+    await sendResultsToServer(allTrialData, 'trials_2')
         .then(() => console.log('Дані успішно надіслані.'))
         .catch((error) => console.error('Помилка під час надсилання даних:', error));
 
-    // Переходимо до наступного екрану (паузи) без очікування завершення надсилання
     if (psychoJS.experiment._unfinishedLoops.length > 0)
         currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
     else
@@ -1427,21 +1421,19 @@ function trials_3LoopBegin(trials_3LoopScheduler, snapshot) {
 async function trials_3LoopEnd() {
     psychoJS.experiment.removeLoop(trials_3);
 
-    // Збираємо всі дані в масив для пакетного надсилання
+    // Збираємо дані правильно з `thisTrial_3` об'єкта
     const allTrialData = trials_3.trialList.map((thisTrial_3, index) => ({
-        name: thisTrial_3.name ?? 'невідомо',
-        stimul: thisTrial_3.stimul ?? 'невідомо',
-        color: thisTrial_3.color ?? 'невідомо',
-        response: thisTrial_3.response ?? 'невідомо', // Додаємо відповідь респондента
+        name: thisTrial_3?.name ?? 'невідомо',
+        stimul: thisTrial_3?.stimul ?? 'невідомо',
+        color: thisTrial_3?.color ?? 'невідомо',
+        response: thisTrial_3?.response ?? 'невідомо',
         trialNumber: index + 1
     }));
 
-    // Асинхронне надсилання даних без очікування
-    sendResultsToServer(allTrialData, 'trials_3')
+    await sendResultsToServer(allTrialData, 'trials_3')
         .then(() => console.log('Дані успішно надіслані.'))
         .catch((error) => console.error('Помилка під час надсилання даних:', error));
 
-    // Переходимо до наступного екрану (паузи) без очікування завершення надсилання
     if (psychoJS.experiment._unfinishedLoops.length > 0)
         currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
     else
@@ -1449,7 +1441,6 @@ async function trials_3LoopEnd() {
 
     return Scheduler.Event.NEXT;
 }
-
 
 function trials_3LoopEndIteration(scheduler, snapshot) {
   // ------Prepare for next entry------
@@ -1505,21 +1496,19 @@ function trials_4LoopBegin(trials_4LoopScheduler, snapshot) {
 async function trials_4LoopEnd() {
     psychoJS.experiment.removeLoop(trials_4);
 
-    // Збираємо всі дані в масив для пакетного надсилання
-    const allTrialData = trials_1.trialList.map((thisTrial_4, index) => ({
-        name: thisTrial_4.name ?? 'невідомо',
-        stimul: thisTrial_4.stimul ?? 'невідомо',
-        color: thisTrial_4.color ?? 'невідомо',
-        response: thisTrial_4.response ?? 'невідомо', // Додаємо відповідь респондента
+    // Збираємо дані правильно з `thisTrial_4` об'єкта
+    const allTrialData = trials_4.trialList.map((thisTrial_4, index) => ({
+        name: thisTrial_4?.name ?? 'невідомо',
+        stimul: thisTrial_4?.stimul ?? 'невідомо',
+        color: thisTrial_4?.color ?? 'невідомо',
+        response: thisTrial_4?.response ?? 'невідомо',
         trialNumber: index + 1
     }));
 
-    // Асинхронне надсилання даних без очікування
-    sendResultsToServer(allTrialData, 'trials_4')
+    await sendResultsToServer(allTrialData, 'trials_4')
         .then(() => console.log('Дані успішно надіслані.'))
         .catch((error) => console.error('Помилка під час надсилання даних:', error));
 
-    // Переходимо до наступного екрану (паузи) без очікування завершення надсилання
     if (psychoJS.experiment._unfinishedLoops.length > 0)
         currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
     else
@@ -1527,7 +1516,6 @@ async function trials_4LoopEnd() {
 
     return Scheduler.Event.NEXT;
 }
-
 
 
 function trials_4LoopEndIteration(scheduler, snapshot) {
@@ -1584,21 +1572,19 @@ function trials_5LoopBegin(trials_5LoopScheduler, snapshot) {
 async function trials_5LoopEnd() {
     psychoJS.experiment.removeLoop(trials_5);
 
-    // Збираємо всі дані в масив для пакетного надсилання
+    // Збираємо дані правильно з `thisTrial_5` об'єкта
     const allTrialData = trials_5.trialList.map((thisTrial_5, index) => ({
-        name: thisTrial_5.name ?? 'невідомо',
-        stimul: thisTrial_5.stimul ?? 'невідомо',
-        color: thisTrial_5.color ?? 'невідомо',
-        response: thisTrial_5.response ?? 'невідомо', // Додаємо відповідь респондента
+        name: thisTrial_5?.name ?? 'невідомо',
+        stimul: thisTrial_5?.stimul ?? 'невідомо',
+        color: thisTrial_5?.color ?? 'невідомо',
+        response: thisTrial_5?.response ?? 'невідомо',
         trialNumber: index + 1
     }));
 
-    // Асинхронне надсилання даних без очікування
-    sendResultsToServer(allTrialData, 'trials_5')
+    await sendResultsToServer(allTrialData, 'trials_5')
         .then(() => console.log('Дані успішно надіслані.'))
         .catch((error) => console.error('Помилка під час надсилання даних:', error));
 
-    // Переходимо до наступного екрану (паузи) без очікування завершення надсилання
     if (psychoJS.experiment._unfinishedLoops.length > 0)
         currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
     else
@@ -1663,21 +1649,19 @@ function trials_6LoopBegin(trials_6LoopScheduler, snapshot) {
 async function trials_6LoopEnd() {
     psychoJS.experiment.removeLoop(trials_6);
 
-    // Збираємо всі дані в масив для пакетного надсилання
+    // Збираємо дані правильно з `thisTrial_6` об'єкта
     const allTrialData = trials_6.trialList.map((thisTrial_6, index) => ({
-        name: thisTrial_6.name ?? 'невідомо',
-        stimul: thisTrial_6.stimul ?? 'невідомо',
-        color: thisTrial_6.color ?? 'невідомо',
-        response: thisTrial_6.response ?? 'невідомо', // Додаємо відповідь респондента
+        name: thisTrial_6?.name ?? 'невідомо',
+        stimul: thisTrial_6?.stimul ?? 'невідомо',
+        color: thisTrial_6?.color ?? 'невідомо',
+        response: thisTrial_6?.response ?? 'невідомо',
         trialNumber: index + 1
     }));
 
-    // Асинхронне надсилання даних без очікування
-    sendResultsToServer(allTrialData, 'trials_6')
+    await sendResultsToServer(allTrialData, 'trials_6')
         .then(() => console.log('Дані успішно надіслані.'))
         .catch((error) => console.error('Помилка під час надсилання даних:', error));
 
-    // Переходимо до наступного екрану (паузи) без очікування завершення надсилання
     if (psychoJS.experiment._unfinishedLoops.length > 0)
         currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
     else
@@ -1741,21 +1725,19 @@ function trials_7LoopBegin(trials_7LoopScheduler, snapshot) {
 async function trials_7LoopEnd() {
     psychoJS.experiment.removeLoop(trials_7);
 
-    // Збираємо всі дані в масив для пакетного надсилання
-    const allTrialData = trials_7.trialList.map((thisTrial_7, index) => ({
-        name: thisTrial_7.name ?? 'невідомо',
-        stimul: thisTrial_7.stimul ?? 'невідомо',
-        color: thisTrial_7.color ?? 'невідомо',
-        response: thisTrial_7.response ?? 'невідомо', // Додаємо відповідь респондента
+    // Збираємо дані правильно з `thisTrial_7` об'єкта
+    const allTrialData = trials_7.trialList.map((thisTrial7, index) => ({
+        name: thisTrial_7?.name ?? 'невідомо',
+        stimul: thisTrial_7?.stimul ?? 'невідомо',
+        color: thisTrial_7?.color ?? 'невідомо',
+        response: thisTrial_7?.response ?? 'невідомо',
         trialNumber: index + 1
     }));
 
-    // Асинхронне надсилання даних без очікування
-    sendResultsToServer(allTrialData, 'trials_7')
+    await sendResultsToServer(allTrialData, 'trials_7')
         .then(() => console.log('Дані успішно надіслані.'))
         .catch((error) => console.error('Помилка під час надсилання даних:', error));
 
-    // Переходимо до наступного екрану (паузи) без очікування завершення надсилання
     if (psychoJS.experiment._unfinishedLoops.length > 0)
         currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
     else
@@ -1820,21 +1802,19 @@ function trials_8LoopBegin(trials_8LoopScheduler, snapshot) {
 async function trials_8LoopEnd() {
     psychoJS.experiment.removeLoop(trials_8);
 
-    // Збираємо всі дані в масив для пакетного надсилання
+    // Збираємо дані правильно з `thisTrial_8` об'єкта
     const allTrialData = trials_8.trialList.map((thisTrial_8, index) => ({
-        name: thisTrial_8.name ?? 'невідомо',
-        stimul: thisTrial_8.stimul ?? 'невідомо',
-        color: thisTrial_8.color ?? 'невідомо',
-        response: thisTrial_8.response ?? 'невідомо', // Додаємо відповідь респондента
+        name: thisTrial_8?.name ?? 'невідомо',
+        stimul: thisTrial_8?.stimul ?? 'невідомо',
+        color: thisTrial_8?.color ?? 'невідомо',
+        response: thisTrial_8?.response ?? 'невідомо',
         trialNumber: index + 1
     }));
 
-    // Асинхронне надсилання даних без очікування
-    sendResultsToServer(allTrialData, 'trials_8')
+    await sendResultsToServer(allTrialData, 'trials_8')
         .then(() => console.log('Дані успішно надіслані.'))
         .catch((error) => console.error('Помилка під час надсилання даних:', error));
 
-    // Переходимо до наступного екрану (паузи) без очікування завершення надсилання
     if (psychoJS.experiment._unfinishedLoops.length > 0)
         currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
     else
@@ -3133,53 +3113,45 @@ function importConditions(currentLoop) {
 
 
 async function quitPsychoJS(message, isCompleted) {
-    // Перевіряємо та зберігаємо дані, якщо вони залишились
     if (psychoJS.experiment.isEntryEmpty()) {
         psychoJS.experiment.nextEntry();
     }
     psychoJS.window.close();
     psychoJS.quit({ message: message, isCompleted: isCompleted });
 
-    // Збираємо всі дані для всіх лупів
     const allExperimentData = [];
-
-    // Перевіряємо лупи через доступ до psychoJS.experiment._loops
     const loopNames = ['trials_1', 'trials_2', 'trials_3', 'trials_4', 'trials_5', 'trials_6', 'trials_7', 'trials_8'];
 
     for (const loopName of loopNames) {
         const loop = psychoJS.experiment._loops[loopName];
         if (loop) {
             const trialData = loop.trialList.map((thisTrial, index) => ({
-                name: thisTrial.name ?? 'невідомо',
-                stimul: thisTrial.stimul ?? 'невідомо',
-                color: thisTrial.color ?? 'невідомо',
-                response: thisTrial.response ?? 'невідомо',
+                name: thisTrial?.name ?? 'невідомо',
+                stimul: thisTrial?.stimul ?? 'невідомо',
+                color: thisTrial?.color ?? 'невідомо',
+                response: thisTrial?.response ?? 'невідомо',
                 trialNumber: index + 1
             }));
-
-            allExperimentData.push(...trialData); // Додаємо дані цього лупа в загальний масив
+            allExperimentData.push(...trialData);
         }
     }
 
-    // Функція для асинхронного надсилання даних для кожного лупа
     async function sendTrialData() {
-        for (let i = 0; i < loopNames.length; i++) {
-            const loopName = loopNames[i];
-            const trialData = allExperimentData.filter(data => data.trialNumber === i + 1); // Фільтруємо дані для поточного лупа
-
+        for (const loopName of loopNames) {
+            const trialData = allExperimentData.filter(data => data.trialNumber === parseInt(loopName.split('_')[1]));
             try {
-                console.log(`allExperimentData for ${loopName}:`, trialData); // Лог для діагностики
-                await sendResultsToServer(trialData, loopName); // Надсилаємо дані для конкретного лупа
+                console.log(`allExperimentData for ${loopName}:`, trialData);
+                await sendResultsToServer(trialData, loopName);
                 console.log(`Результати успішно надіслані для ${loopName}.`);
             } catch (error) {
                 console.error(`Помилка при відправці результатів для ${loopName}:`, error);
             }
         }
 
-        return Scheduler.Event.QUIT; // Завершуємо експеримент після надсилання всіх даних
+        return Scheduler.Event.QUIT;
     }
 
-    // Викликаємо функцію для асинхронного надсилання даних
     await sendTrialData();
 }
+
 
