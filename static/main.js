@@ -1279,9 +1279,10 @@ async function trials_1LoopEnd() {
     }));
 
     // Асинхронне надсилання даних без очікування
-    sendDataToServer(allTrialData, 'trials_1')
-        .then(() => console.log('Дані успішно надіслані.'))
-        .catch((error) => console.error('Помилка під час надсилання даних:', error));
+sendDataToServer(allTrialData, 'trials_1')
+    .then(() => console.log('Дані успішно надіслані.'))
+    .catch((error) => console.error('Помилка під час надсилання даних:', error));
+
 
     // Переходимо до наступного екрану (паузи) без очікування завершення надсилання
     if (psychoJS.experiment._unfinishedLoops.length > 0)
