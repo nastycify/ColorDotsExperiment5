@@ -1377,7 +1377,7 @@ function trials_2LoopBegin(trials_2LoopScheduler, snapshot) {
 
       recordResponse(snapshot.index, stimName, stimColor)
         .then(response => {
-          console.log(Response for trial ${snapshot.index + 1}: ${response});
+        console.log(`Response for trial ${snapshot.index + 1}: ${response}`);
           // Після отримання відповіді можна зберегти її в масив або обробити додатково
           psychoJS.experiment._trialsData[snapshot.index].response = response;
         })
@@ -1465,7 +1465,7 @@ function trials_3LoopBegin(trials_3LoopScheduler, snapshot) {
 
       recordResponse(snapshot.index, stimName, stimColor)
         .then(response => {
-          console.log(Response for trial ${snapshot.index + 1}: ${response});
+        console.log(`Response for trial ${snapshot.index + 1}: ${response}`);
           // Після отримання відповіді можна зберегти її в масив або обробити додатково
           psychoJS.experiment._trialsData[snapshot.index].response = response;
         })
@@ -1552,7 +1552,7 @@ function trials_4LoopBegin(trials_4LoopScheduler, snapshot) {
 
       recordResponse(snapshot.index, stimName, stimColor)
         .then(response => {
-          console.log(Response for trial ${snapshot.index + 1}: ${response});
+         console.log(`Response for trial ${snapshot.index + 1}: ${response}`);
           // Після отримання відповіді можна зберегти її в масив або обробити додатково
           psychoJS.experiment._trialsData[snapshot.index].response = response;
         })
@@ -1639,7 +1639,7 @@ function trials_5LoopBegin(trials_5LoopScheduler, snapshot) {
 
       recordResponse(snapshot.index, stimName, stimColor)
         .then(response => {
-          console.log(Response for trial ${snapshot.index + 1}: ${response});
+       console.log(`Response for trial ${snapshot.index + 1}: ${response}`);
           // Після отримання відповіді можна зберегти її в масив або обробити додатково
           psychoJS.experiment._trialsData[snapshot.index].response = response;
         })
@@ -1726,7 +1726,7 @@ function trials_6LoopBegin(trials_6LoopScheduler, snapshot) {
 
       recordResponse(snapshot.index, stimName, stimColor)
         .then(response => {
-          console.log(Response for trial ${snapshot.index + 1}: ${response});
+        console.log(`Response for trial ${snapshot.index + 1}: ${response}`);
           // Після отримання відповіді можна зберегти її в масив або обробити додатково
           psychoJS.experiment._trialsData[snapshot.index].response = response;
         })
@@ -1813,7 +1813,7 @@ function trials_7LoopBegin(trials_7LoopScheduler, snapshot) {
 
       recordResponse(snapshot.index, stimName, stimColor)
         .then(response => {
-          console.log(Response for trial ${snapshot.index + 1}: ${response});
+        console.log(`Response for trial ${snapshot.index + 1}: ${response}`);
           // Після отримання відповіді можна зберегти її в масив або обробити додатково
           psychoJS.experiment._trialsData[snapshot.index].response = response;
         })
@@ -1900,7 +1900,7 @@ function trials_8LoopBegin(trials_8LoopScheduler, snapshot) {
 
       recordResponse(snapshot.index, stimName, stimColor)
         .then(response => {
-          console.log(Response for trial ${snapshot.index + 1}: ${response});
+        console.log(`Response for trial ${snapshot.index + 1}: ${response}`);
           // Після отримання відповіді можна зберегти її в масив або обробити додатково
           psychoJS.experiment._trialsData[snapshot.index].response = response;
         })
