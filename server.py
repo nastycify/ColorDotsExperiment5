@@ -23,26 +23,22 @@ def serve_resources(filename):
     return send_from_directory('static', filename)
 
 # Прийом даних від респондентів та збереження у .xlsx
-@app.route('/submit_results/<int:trial_number>', methods=['POST'])
-def submit_results(trial_number):
+@app.route('/submit_results/<string:loop_name>', methods=['POST'])
+def submit_results(loop_name):
     try:
         data = request.get_json()
 
         # Логування отриманих даних
-        app.logger.info(f"Received data for trial {trial_number}: {data}")
+        app.logger.info(f"Received data for loop {loop_name}: {data}")
 
         if not data:
             return jsonify({"error": "No data received"}), 400
 
         # Перевірка структури вхідних даних
-        required_fields = ["name", "stimul", "color"]
-        if isinstance(data, list):
-            for item in data:
-                if not all(field in item for field in required_fields):
-                    return jsonify({"error": f"Missing required fields in entry: {item}"}), 400
-        else:
-            if not all(field in data for field in required_fields):
-                return jsonify({"error": "Missing required fields"}), 400
+        required_fields = ["name", "stimul", "color", "response", "trialNumber"]
+        for item in data:
+            if not all(field in item for field in required_fields):
+                return jsonify({"error": f"Missing required fields in entry: {item}"}), 400
 
         # Створення або оновлення файлу з результатами
         file_path = 'results.xlsx'
@@ -53,19 +49,23 @@ def submit_results(trial_number):
         else:
             wb = Workbook()
             sheet = wb.active
-            sheet.append(["Name", "Stimul", "Color", "Trial Number"])  # Додано trial_number
+            sheet.append(["Name", "Stimul", "Color", "Response", "Trial Number", "Loop Name"])
 
         # Додавання нових даних
-        if isinstance(data, list):
-            for item in data:
-                sheet.append([item.get("name"), item.get("stimul"), item.get("color"), trial_number])
-        else:
-            sheet.append([data.get("name"), data.get("stimul"), data.get("color"), trial_number])
+        for item in data:
+            sheet.append([
+                item.get("name"), 
+                item.get("stimul"), 
+                item.get("color"), 
+                item.get("response"), 
+                item.get("trialNumber"), 
+                loop_name
+            ])
 
         # Збереження Excel-файлу
         wb.save(file_path)
 
-        app.logger.info(f"Data successfully saved for trial {trial_number}")
+        app.logger.info(f"Data successfully saved for loop {loop_name}")
         return jsonify({"status": "success"}), 200
 
     except Exception as e:
@@ -86,6 +86,3 @@ def download_results():
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 8000))
     app.run(host='0.0.0.0', port=port, debug=True)
-
-
-
