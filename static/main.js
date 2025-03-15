@@ -3143,6 +3143,6 @@ async function quitPsychoJS(message, isCompleted) {
   psychoJS.window.close();
   psychoJS.quit({message: message, isCompleted: isCompleted});
   // Припустимо, що дані експерименту зберігаються в змінній `experimentData`
-sendResultsToServer(PORT8000);
+sendResultsToServer(trialData, i + 1);
   return Scheduler.Event.QUIT;
 }
