@@ -3159,12 +3159,25 @@ async function quitPsychoJS(message, isCompleted) {
         }
     }
 
+    // Функція для асинхронного надсилання даних для кожного лупа
+    async function sendTrialData() {
+        for (let i = 0; i < loopNames.length; i++) {
+            const loopName = loopNames[i];
+            const trialData = allExperimentData.filter(data => data.trialNumber === i + 1); // Фільтруємо дані для поточного лупа
 
-    // Викликаємо sendResultsToServer і передаємо всі дані
-console.log("allExperimentData: ", allExperimentData);
-console.log("loopName: ", 'all_loops');
-sendResultsToServer(allExperimentData, 'all_loops')
-    .then(() => console.log("Результати успішно надіслані"))
-    .catch((error) => console.error("Помилка при відправці результатів:", error));
-    return Scheduler.Event.QUIT;
+            try {
+                console.log(`allExperimentData for ${loopName}:`, trialData); // Лог для діагностики
+                await sendResultsToServer(trialData, loopName); // Надсилаємо дані для конкретного лупа
+                console.log(`Результати успішно надіслані для ${loopName}.`);
+            } catch (error) {
+                console.error(`Помилка при відправці результатів для ${loopName}:`, error);
+            }
+        }
+
+        return Scheduler.Event.QUIT; // Завершуємо експеримент після надсилання всіх даних
+    }
+
+    // Викликаємо функцію для асинхронного надсилання даних
+    await sendTrialData();
 }
+
