@@ -1217,16 +1217,16 @@ function instructionRoutineEnd(snapshot) {
 }
 
 
-async function sendDataToServer(data, loopName) {
+async function sendResultsToServer(data, loopName) {
     try {
         const response = await fetch(`https://color-dots-production.up.railway.app/submit_results/${loopName}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
+            body: JSON.stringify(data),
         });
 
         if (!response.ok) {
-            const errorText = await response.text();  // Текст помилки для діагностики
+            const errorText = await response.text();
             console.error(`Помилка при надсиланні даних (${loopName}): ${errorText}`);
         } else {
             console.log(`Дані успішно надіслані для лупу ${loopName}`);
@@ -3130,39 +3130,40 @@ function importConditions(currentLoop) {
 
 
 async function quitPsychoJS(message, isCompleted) {
-  // Перевіряємо та зберігаємо дані, якщо вони залишились
-  if (psychoJS.experiment.isEntryEmpty()) {
-    psychoJS.experiment.nextEntry();
-  }
-  psychoJS.window.close();
-  psychoJS.quit({message: message, isCompleted: isCompleted});
-
-  // Збираємо всі дані для всіх лупів
-  const allExperimentData = [];
-
-  // Перевіряємо лупи через доступ до psychoJS.experiment._loops
-  const loopNames = ['trials_1', 'trials_2', 'trials_3', 'trials_4', 'trials_5', 'trials_6', 'trials_7', 'trials_8'];
-  
-  for (const loopName of loopNames) {
-    const loop = psychoJS.experiment._loops[loopName];
-    if (loop) {
-      const trialData = loop.trialList.map((thisTrial, index) => ({
-        name: thisTrial.name ?? 'невідомо',
-        stimul: thisTrial.stimul ?? 'невідомо',
-        color: thisTrial.color ?? 'невідомо',
-        response: thisTrial.response ?? 'невідомо',
-        trialNumber: index + 1
-      }));
-      
-      allExperimentData.push(...trialData);  // Додаємо дані цього лупа в загальний масив
+    // Перевіряємо та зберігаємо дані, якщо вони залишились
+    if (psychoJS.experiment.isEntryEmpty()) {
+        psychoJS.experiment.nextEntry();
     }
-  }
+    psychoJS.window.close();
+    psychoJS.quit({ message: message, isCompleted: isCompleted });
 
-  // Викликаємо sendResultsToServer і передаємо всі дані
-  sendResultsToServer(allExperimentData, 'all_loops')
+    // Збираємо всі дані для всіх лупів
+    const allExperimentData = [];
+
+    // Перевіряємо лупи через доступ до psychoJS.experiment._loops
+    const loopNames = ['trials_1', 'trials_2', 'trials_3', 'trials_4', 'trials_5', 'trials_6', 'trials_7', 'trials_8'];
+
+    for (const loopName of loopNames) {
+        const loop = psychoJS.experiment._loops[loopName];
+        if (loop) {
+            const trialData = loop.trialList.map((thisTrial, index) => ({
+                name: thisTrial.name ?? 'невідомо',
+                stimul: thisTrial.stimul ?? 'невідомо',
+                color: thisTrial.color ?? 'невідомо',
+                response: thisTrial.response ?? 'невідомо',
+                trialNumber: index + 1
+            }));
+
+            allExperimentData.push(...trialData); // Додаємо дані цього лупа в загальний масив
+        }
+    }
+
+
+    // Викликаємо sendResultsToServer і передаємо всі дані
+console.log("allExperimentData: ", allExperimentData);
+console.log("loopName: ", 'all_loops');
+sendResultsToServer(allExperimentData, 'all_loops')
     .then(() => console.log("Результати успішно надіслані"))
     .catch((error) => console.error("Помилка при відправці результатів:", error));
-
-  return Scheduler.Event.QUIT;
+    return Scheduler.Event.QUIT;
 }
-
