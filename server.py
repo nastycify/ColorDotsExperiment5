@@ -28,19 +28,19 @@ def serve_resources(filename):
     return send_from_directory('static', filename)
 
 # Прийом даних від респондентів та збереження у .xlsx
-@app.route('/submit_results/<string:loop_name>', methods=['POST'])
-def submit_results(loop_name):
+@app.route('/submit_results', methods=['POST'])
+def submit_results():
     try:
         data = request.get_json()
 
         # Логування отриманих даних
-        app.logger.info(f"Received data for loop {loop_name}: {data}")
+        app.logger.info(f"Received data: {data}")
 
         if not data:
             return jsonify({"error": "No data received"}), 400
 
         # Перевірка структури вхідних даних
-        required_fields = ["name", "stimul", "color", "response", "trialNumber"]
+        required_fields = ["name", "color", "response"]
         for item in data:
             if not all(field in item for field in required_fields):
                 return jsonify({"error": f"Missing required fields in entry: {item}"}), 400
@@ -54,23 +54,20 @@ def submit_results(loop_name):
         else:
             wb = Workbook()
             sheet = wb.active
-            sheet.append(["Name", "Stimul", "Color", "Response", "Trial Number", "Loop Name"])
+            sheet.append(["Name", "Color", "Response"])  # Оновлено заголовки
 
         # Додавання нових даних
         for item in data:
             sheet.append([
-                item.get("name"), 
-                item.get("stimul"), 
-                item.get("color"), 
-                item.get("response"), 
-                item.get("trialNumber"), 
-                loop_name
+                item.get("name"),
+                item.get("color"),
+                item.get("response")
             ])
 
         # Збереження Excel-файлу
         wb.save(file_path)
 
-        app.logger.info(f"Data successfully saved for loop {loop_name}")
+        app.logger.info("Data successfully saved")
         return jsonify({"status": "success"}), 200
 
     except Exception as e:
@@ -82,7 +79,6 @@ def submit_results(loop_name):
 def download_results():
     app.logger.info("Downloading results.xlsx")
     try:
-        # Вказуємо шлях до файлу в tmp
         return send_from_directory(tmp_folder, 'results.xlsx', as_attachment=True)
     except Exception as e:
         app.logger.error(f"Error downloading results: {e}")
@@ -92,5 +88,3 @@ def download_results():
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 8000))
     app.run(host='0.0.0.0', port=port, debug=True)
-
-
