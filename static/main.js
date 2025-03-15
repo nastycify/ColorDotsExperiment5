@@ -1235,7 +1235,7 @@ async function sendResultsToServer(data, loopName) {
     } catch (error) {
         console.error(`Помилка під час з'єднання з сервером (${loopName}):`, error);
     }
-}
+}    
 
 
 
@@ -1270,12 +1270,11 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
 async function trials_1LoopEnd() {
     psychoJS.experiment.removeLoop(trials_1);
 
-    // Збираємо дані правильно з `thisTrial_1` об'єкта
+    // Збираємо лише необхідні дані
     const allTrialData = trials_1.trialList.map((thisTrial_1, index) => ({
         name: thisTrial_1?.name ?? 'невідомо',
-        stimul: thisTrial_1?.stimul ?? 'невідомо',
         color: thisTrial_1?.color ?? 'невідомо',
-        response: thisTrial_1?.response ?? 'невідомо',
+        response: psychoJS.experiment._trialsData?.[index]?.response ?? 'невідомо',  // Беремо відповідь окремо
         trialNumber: index + 1
     }));
 
@@ -1289,7 +1288,8 @@ async function trials_1LoopEnd() {
         currentLoop = psychoJS.experiment;
 
     return Scheduler.Event.NEXT;
-}
+}                                                                                                                                                                                      
+
 
 
 function trials_1LoopEndIteration(scheduler, snapshot) {
@@ -1344,12 +1344,11 @@ function trials_2LoopBegin(trials_2LoopScheduler, snapshot) {
 async function trials_2LoopEnd() {
     psychoJS.experiment.removeLoop(trials_2);
 
-    // Збираємо дані правильно з `thisTrial_2` об'єкта
+    // Збираємо лише необхідні дані
     const allTrialData = trials_2.trialList.map((thisTrial_2, index) => ({
         name: thisTrial_2?.name ?? 'невідомо',
-        stimul: thisTrial_2?.stimul ?? 'невідомо',
         color: thisTrial_2?.color ?? 'невідомо',
-        response: thisTrial_2?.response ?? 'невідомо',
+        response: psychoJS.experiment._trialsData?.[index]?.response ?? 'невідомо',  // Беремо відповідь окремо
         trialNumber: index + 1
     }));
 
@@ -1363,7 +1362,7 @@ async function trials_2LoopEnd() {
         currentLoop = psychoJS.experiment;
 
     return Scheduler.Event.NEXT;
-}
+}                                                                                                                                                                                      
 
 
 
@@ -1421,12 +1420,11 @@ function trials_3LoopBegin(trials_3LoopScheduler, snapshot) {
 async function trials_3LoopEnd() {
     psychoJS.experiment.removeLoop(trials_3);
 
-    // Збираємо дані правильно з `thisTrial_3` об'єкта
+    // Збираємо лише необхідні дані
     const allTrialData = trials_3.trialList.map((thisTrial_3, index) => ({
         name: thisTrial_3?.name ?? 'невідомо',
-        stimul: thisTrial_3?.stimul ?? 'невідомо',
         color: thisTrial_3?.color ?? 'невідомо',
-        response: thisTrial_3?.response ?? 'невідомо',
+        response: psychoJS.experiment._trialsData?.[index]?.response ?? 'невідомо',  // Беремо відповідь окремо
         trialNumber: index + 1
     }));
 
@@ -1440,7 +1438,7 @@ async function trials_3LoopEnd() {
         currentLoop = psychoJS.experiment;
 
     return Scheduler.Event.NEXT;
-}
+}                                                                                                                                                                                      
 
 function trials_3LoopEndIteration(scheduler, snapshot) {
   // ------Prepare for next entry------
@@ -1496,12 +1494,11 @@ function trials_4LoopBegin(trials_4LoopScheduler, snapshot) {
 async function trials_4LoopEnd() {
     psychoJS.experiment.removeLoop(trials_4);
 
-    // Збираємо дані правильно з `thisTrial_4` об'єкта
+    // Збираємо лише необхідні дані
     const allTrialData = trials_4.trialList.map((thisTrial_4, index) => ({
         name: thisTrial_4?.name ?? 'невідомо',
-        stimul: thisTrial_4?.stimul ?? 'невідомо',
         color: thisTrial_4?.color ?? 'невідомо',
-        response: thisTrial_4?.response ?? 'невідомо',
+        response: psychoJS.experiment._trialsData?.[index]?.response ?? 'невідомо',  // Беремо відповідь окремо
         trialNumber: index + 1
     }));
 
@@ -1515,7 +1512,7 @@ async function trials_4LoopEnd() {
         currentLoop = psychoJS.experiment;
 
     return Scheduler.Event.NEXT;
-}
+}                                                                                                                                                                                      
 
 
 function trials_4LoopEndIteration(scheduler, snapshot) {
@@ -1572,12 +1569,11 @@ function trials_5LoopBegin(trials_5LoopScheduler, snapshot) {
 async function trials_5LoopEnd() {
     psychoJS.experiment.removeLoop(trials_5);
 
-    // Збираємо дані правильно з `thisTrial_5` об'єкта
+    // Збираємо лише необхідні дані
     const allTrialData = trials_5.trialList.map((thisTrial_5, index) => ({
         name: thisTrial_5?.name ?? 'невідомо',
-        stimul: thisTrial_5?.stimul ?? 'невідомо',
         color: thisTrial_5?.color ?? 'невідомо',
-        response: thisTrial_5?.response ?? 'невідомо',
+        response: psychoJS.experiment._trialsData?.[index]?.response ?? 'невідомо',  // Беремо відповідь окремо
         trialNumber: index + 1
     }));
 
@@ -1591,7 +1587,8 @@ async function trials_5LoopEnd() {
         currentLoop = psychoJS.experiment;
 
     return Scheduler.Event.NEXT;
-}
+}                                                                                                                                                                                      
+
 
 
 
@@ -1649,12 +1646,11 @@ function trials_6LoopBegin(trials_6LoopScheduler, snapshot) {
 async function trials_6LoopEnd() {
     psychoJS.experiment.removeLoop(trials_6);
 
-    // Збираємо дані правильно з `thisTrial_6` об'єкта
+    // Збираємо лише необхідні дані
     const allTrialData = trials_6.trialList.map((thisTrial_6, index) => ({
         name: thisTrial_6?.name ?? 'невідомо',
-        stimul: thisTrial_6?.stimul ?? 'невідомо',
         color: thisTrial_6?.color ?? 'невідомо',
-        response: thisTrial_6?.response ?? 'невідомо',
+        response: psychoJS.experiment._trialsData?.[index]?.response ?? 'невідомо',  // Беремо відповідь окремо
         trialNumber: index + 1
     }));
 
@@ -1668,7 +1664,7 @@ async function trials_6LoopEnd() {
         currentLoop = psychoJS.experiment;
 
     return Scheduler.Event.NEXT;
-}
+}                                                                                                                                                                                      
 
 
 function trials_6LoopEndIteration(scheduler, snapshot) {
@@ -1725,12 +1721,11 @@ function trials_7LoopBegin(trials_7LoopScheduler, snapshot) {
 async function trials_7LoopEnd() {
     psychoJS.experiment.removeLoop(trials_7);
 
-    // Збираємо дані правильно з `thisTrial_7` об'єкта
-    const allTrialData = trials_7.trialList.map((thisTrial7, index) => ({
+    // Збираємо лише необхідні дані
+    const allTrialData = trials_7.trialList.map((thisTrial_7, index) => ({
         name: thisTrial_7?.name ?? 'невідомо',
-        stimul: thisTrial_7?.stimul ?? 'невідомо',
         color: thisTrial_7?.color ?? 'невідомо',
-        response: thisTrial_7?.response ?? 'невідомо',
+        response: psychoJS.experiment._trialsData?.[index]?.response ?? 'невідомо',  // Беремо відповідь окремо
         trialNumber: index + 1
     }));
 
@@ -1744,7 +1739,8 @@ async function trials_7LoopEnd() {
         currentLoop = psychoJS.experiment;
 
     return Scheduler.Event.NEXT;
-}
+}                                                                                                                                                                                      
+
 
 
 
@@ -1802,12 +1798,11 @@ function trials_8LoopBegin(trials_8LoopScheduler, snapshot) {
 async function trials_8LoopEnd() {
     psychoJS.experiment.removeLoop(trials_8);
 
-    // Збираємо дані правильно з `thisTrial_8` об'єкта
+    // Збираємо лише необхідні дані
     const allTrialData = trials_8.trialList.map((thisTrial_8, index) => ({
         name: thisTrial_8?.name ?? 'невідомо',
-        stimul: thisTrial_8?.stimul ?? 'невідомо',
         color: thisTrial_8?.color ?? 'невідомо',
-        response: thisTrial_8?.response ?? 'невідомо',
+        response: psychoJS.experiment._trialsData?.[index]?.response ?? 'невідомо',  // Беремо відповідь окремо
         trialNumber: index + 1
     }));
 
@@ -1821,7 +1816,7 @@ async function trials_8LoopEnd() {
         currentLoop = psychoJS.experiment;
 
     return Scheduler.Event.NEXT;
-}
+}                                                                                                                                                                                      
 
 function trials_8LoopEndIteration(scheduler, snapshot) {
   // ------Prepare for next entry------
@@ -3111,7 +3106,6 @@ function importConditions(currentLoop) {
     };
 }
 
-
 async function quitPsychoJS(message, isCompleted) {
     if (psychoJS.experiment.isEntryEmpty()) {
         psychoJS.experiment.nextEntry();
@@ -3127,9 +3121,8 @@ async function quitPsychoJS(message, isCompleted) {
         if (loop) {
             const trialData = loop.trialList.map((thisTrial, index) => ({
                 name: thisTrial?.name ?? 'невідомо',
-                stimul: thisTrial?.stimul ?? 'невідомо',
                 color: thisTrial?.color ?? 'невідомо',
-                response: thisTrial?.response ?? 'невідомо',
+                response: psychoJS.experiment._trialsData?.[index]?.response ?? 'невідомо',  // Беремо відповідь окремо
                 trialNumber: index + 1
             }));
             allExperimentData.push(...trialData);
@@ -3153,5 +3146,4 @@ async function quitPsychoJS(message, isCompleted) {
 
     await sendTrialData();
 }
-
 
