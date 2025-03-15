@@ -1289,7 +1289,7 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
 
       recordResponse(snapshot.index, stimName, stimColor)
         .then(response => {
-          console.log(Response for trial ${snapshot.index + 1}: ${response});
+          console.log(`Response for trial ${snapshot.index + 1}: ${response}`);
           // Після отримання відповіді можна зберегти її в масив або обробити додатково
           psychoJS.experiment._trialsData[snapshot.index].response = response;
         })
