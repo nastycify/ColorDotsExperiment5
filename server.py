@@ -31,7 +31,7 @@ def serve_resources(filename):
 @app.route('/submit_results', methods=['POST'])
 def submit_results():
     try:
-        data = request.get_json()
+        data = request.get_json()  # Отримання JSON даних
 
         # Логування отриманих даних
         app.logger.info(f"Received data: {data}")
@@ -43,6 +43,7 @@ def submit_results():
         required_fields = ["name", "color", "response"]
         for item in data:
             if not all(field in item for field in required_fields):
+                app.logger.error(f"Missing required fields in entry: {item}")  # Логування відсутніх полів
                 return jsonify({"error": f"Missing required fields in entry: {item}"}), 400
 
         # Створення або оновлення файлу з результатами
@@ -88,3 +89,4 @@ def download_results():
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 8000))
     app.run(host='0.0.0.0', port=port, debug=True)
+
