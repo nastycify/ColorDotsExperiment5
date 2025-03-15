@@ -1270,7 +1270,7 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
       nReps: 1, method: TrialHandler.Method.RANDOM,
       extraInfo: expInfo, originPath: undefined,
       trialList: 'Stimul_1.xlsx',
-      seed: undefined, name: 'trials_1'
+      seed: null, name: 'trials_1'
     });
     psychoJS.experiment.addLoop(trials_1); // add the loop to the experiment
     currentLoop = trials_1;  // we're now the current loop
@@ -1365,7 +1365,7 @@ function trials_2LoopBegin(trials_2LoopScheduler, snapshot) {
       nReps: 1, method: TrialHandler.Method.RANDOM,
       extraInfo: expInfo, originPath: undefined,
       trialList: 'Stimul_2.xlsx',
-      seed: undefined, name: 'trials_2'
+      seed: null, name: 'trials_2'
     });
     psychoJS.experiment.addLoop(trials_2); // add the loop to the experiment
     currentLoop = trials_2;  // we're now the current loop
@@ -1460,7 +1460,7 @@ function trials_3LoopBegin(trials_3LoopScheduler, snapshot) {
       nReps: 1, method: TrialHandler.Method.RANDOM,
       extraInfo: expInfo, originPath: undefined,
       trialList: 'Stimul_3.xlsx',
-      seed: undefined, name: 'trials_3'
+      seed: null, name: 'trials_3'
     });
     psychoJS.experiment.addLoop(trials_3); // add the loop to the experiment
     currentLoop = trials_3;  // we're now the current loop
@@ -1555,7 +1555,7 @@ function trials_4LoopBegin(trials_4LoopScheduler, snapshot) {
       nReps: 1, method: TrialHandler.Method.RANDOM,
       extraInfo: expInfo, originPath: undefined,
       trialList: 'Stimul_4.xlsx',
-      seed: undefined, name: 'trials_4'
+      seed: null, name: 'trials_4'
     });
     psychoJS.experiment.addLoop(trials_4); // add the loop to the experiment
     currentLoop = trials_4;  // we're now the current loop
@@ -1649,7 +1649,7 @@ function trials_5LoopBegin(trials_5LoopScheduler, snapshot) {
       nReps: 1, method: TrialHandler.Method.RANDOM,
       extraInfo: expInfo, originPath: undefined,
       trialList: 'Stimul_5.xlsx',
-      seed: undefined, name: 'trials_5'
+      seed: null, name: 'trials_5'
     });
     psychoJS.experiment.addLoop(trials_5); // add the loop to the experiment
     currentLoop = trials_5;  // we're now the current loop
@@ -1744,7 +1744,7 @@ function trials_6LoopBegin(trials_6LoopScheduler, snapshot) {
       nReps: 1, method: TrialHandler.Method.RANDOM,
       extraInfo: expInfo, originPath: undefined,
       trialList: 'Stimul_6.xlsx',
-      seed: undefined, name: 'trials_6'
+      seed: null, name: 'trials_6'
     });
     psychoJS.experiment.addLoop(trials_6); // add the loop to the experiment
     currentLoop = trials_6;  // we're now the current loop
@@ -1838,7 +1838,7 @@ function trials_7LoopBegin(trials_7LoopScheduler, snapshot) {
       nReps: 1, method: TrialHandler.Method.RANDOM,
       extraInfo: expInfo, originPath: undefined,
       trialList: 'Stimul_7.xlsx',
-      seed: undefined, name: 'trials_7'
+      seed: null, name: 'trials_7'
     });
     psychoJS.experiment.addLoop(trials_7); // add the loop to the experiment
     currentLoop = trials_7;  // we're now the current loop
@@ -1933,7 +1933,7 @@ function trials_8LoopBegin(trials_8LoopScheduler, snapshot) {
       nReps: 1, method: TrialHandler.Method.RANDOM,
       extraInfo: expInfo, originPath: undefined,
       trialList: 'Stimul_8.xlsx',
-      seed: undefined, name: 'trials_8'
+      seed: null, name: 'trials_8'
     });
     psychoJS.experiment.addLoop(trials_8); // add the loop to the experiment
     currentLoop = trials_8;  // we're now the current loop
