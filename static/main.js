@@ -1228,14 +1228,14 @@ async function sendResultsToServer(data, loopName) {
 
         if (!response.ok) {
             const errorText = await response.text();
-            console.error(`Помилка при надсиланні даних (${loopName}): ${errorText}`);
+            console.error(`Error sending data (${loopName}): ${errorText}`);
         } else {
-            console.log(`Дані успішно надіслані для лупу ${loopName}`);
+            console.log(`Data successfully sent for loop ${loopName}`);
         }
     } catch (error) {
-        console.error(`Помилка під час з'єднання з сервером (${loopName}):`, error);
+        console.error(`Error connecting to server (${loopName}):`, error);
     }
-}    
+}
 
 
 
@@ -1270,17 +1270,18 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
 async function trials_1LoopEnd() {
     psychoJS.experiment.removeLoop(trials_1);
 
-    // Збираємо лише необхідні дані
+    // Collecting necessary data for the current trial
     const allTrialData = trials_1.trialList.map((thisTrial_1, index) => ({
-        name: thisTrial_1?.name ?? 'невідомо',
-        color: thisTrial_1?.color ?? 'невідомо',
-        response: psychoJS.experiment._trialsData?.[index]?.response ?? 'невідомо',  // Беремо відповідь окремо
+        name: thisTrial_1?.name ?? 'unknown',
+        color: thisTrial_1?.color ?? 'unknown',
+        response: psychoJS.experiment._trialsData?.[index]?.response ?? 'unknown',  // Get the response separately
         trialNumber: index + 1
     }));
 
+    // Sending results for this trial
     await sendResultsToServer(allTrialData, 'trials_1')
-        .then(() => console.log('Дані успішно надіслані.'))
-        .catch((error) => console.error('Помилка під час надсилання даних:', error));
+        .then(() => console.log('Data successfully sent for trials_1.'))
+        .catch((error) => console.error('Error sending data for trials_1:', error));
 
     if (psychoJS.experiment._unfinishedLoops.length > 0)
         currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
@@ -1288,7 +1289,8 @@ async function trials_1LoopEnd() {
         currentLoop = psychoJS.experiment;
 
     return Scheduler.Event.NEXT;
-}                                                                                                                                                                                      
+}
+                                                                                                                                                                
 
 
 
@@ -1344,17 +1346,18 @@ function trials_2LoopBegin(trials_2LoopScheduler, snapshot) {
 async function trials_2LoopEnd() {
     psychoJS.experiment.removeLoop(trials_2);
 
-    // Збираємо лише необхідні дані
+    // Collecting necessary data for the current trial
     const allTrialData = trials_2.trialList.map((thisTrial_2, index) => ({
-        name: thisTrial_2?.name ?? 'невідомо',
-        color: thisTrial_2?.color ?? 'невідомо',
-        response: psychoJS.experiment._trialsData?.[index]?.response ?? 'невідомо',  // Беремо відповідь окремо
+        name: thisTrial_2?.name ?? 'unknown',
+        color: thisTrial_2?.color ?? 'unknown',
+        response: psychoJS.experiment._trialsData?.[index]?.response ?? 'unknown',  // Get the response separately
         trialNumber: index + 1
     }));
 
+    // Sending results for this trial
     await sendResultsToServer(allTrialData, 'trials_2')
-        .then(() => console.log('Дані успішно надіслані.'))
-        .catch((error) => console.error('Помилка під час надсилання даних:', error));
+        .then(() => console.log('Data successfully sent for trials_2.'))
+        .catch((error) => console.error('Error sending data for trials_2:', error));
 
     if (psychoJS.experiment._unfinishedLoops.length > 0)
         currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
@@ -1362,7 +1365,8 @@ async function trials_2LoopEnd() {
         currentLoop = psychoJS.experiment;
 
     return Scheduler.Event.NEXT;
-}                                                                                                                                                                                      
+}
+                                                                                                                                                                       
 
 
 
@@ -1420,17 +1424,18 @@ function trials_3LoopBegin(trials_3LoopScheduler, snapshot) {
 async function trials_3LoopEnd() {
     psychoJS.experiment.removeLoop(trials_3);
 
-    // Збираємо лише необхідні дані
+    // Collecting necessary data for the current trial
     const allTrialData = trials_3.trialList.map((thisTrial_3, index) => ({
-        name: thisTrial_3?.name ?? 'невідомо',
-        color: thisTrial_3?.color ?? 'невідомо',
-        response: psychoJS.experiment._trialsData?.[index]?.response ?? 'невідомо',  // Беремо відповідь окремо
+        name: thisTrial_3?.name ?? 'unknown',
+        color: thisTrial_3?.color ?? 'unknown',
+        response: psychoJS.experiment._trialsData?.[index]?.response ?? 'unknown',  // Get the response separately
         trialNumber: index + 1
     }));
 
+    // Sending results for this trial
     await sendResultsToServer(allTrialData, 'trials_3')
-        .then(() => console.log('Дані успішно надіслані.'))
-        .catch((error) => console.error('Помилка під час надсилання даних:', error));
+        .then(() => console.log('Data successfully sent for trials_3.'))
+        .catch((error) => console.error('Error sending data for trials_3:', error));
 
     if (psychoJS.experiment._unfinishedLoops.length > 0)
         currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
@@ -1438,7 +1443,8 @@ async function trials_3LoopEnd() {
         currentLoop = psychoJS.experiment;
 
     return Scheduler.Event.NEXT;
-}                                                                                                                                                                                      
+}
+                                                                                                                              
 
 function trials_3LoopEndIteration(scheduler, snapshot) {
   // ------Prepare for next entry------
@@ -1494,17 +1500,18 @@ function trials_4LoopBegin(trials_4LoopScheduler, snapshot) {
 async function trials_4LoopEnd() {
     psychoJS.experiment.removeLoop(trials_4);
 
-    // Збираємо лише необхідні дані
+    // Collecting necessary data for the current trial
     const allTrialData = trials_4.trialList.map((thisTrial_4, index) => ({
-        name: thisTrial_4?.name ?? 'невідомо',
-        color: thisTrial_4?.color ?? 'невідомо',
-        response: psychoJS.experiment._trialsData?.[index]?.response ?? 'невідомо',  // Беремо відповідь окремо
+        name: thisTrial_4?.name ?? 'unknown',
+        color: thisTrial_4?.color ?? 'unknown',
+        response: psychoJS.experiment._trialsData?.[index]?.response ?? 'unknown',  // Get the response separately
         trialNumber: index + 1
     }));
 
+    // Sending results for this trial
     await sendResultsToServer(allTrialData, 'trials_4')
-        .then(() => console.log('Дані успішно надіслані.'))
-        .catch((error) => console.error('Помилка під час надсилання даних:', error));
+        .then(() => console.log('Data successfully sent for trials_4.'))
+        .catch((error) => console.error('Error sending data for trials_4:', error));
 
     if (psychoJS.experiment._unfinishedLoops.length > 0)
         currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
@@ -1512,7 +1519,8 @@ async function trials_4LoopEnd() {
         currentLoop = psychoJS.experiment;
 
     return Scheduler.Event.NEXT;
-}                                                                                                                                                                                      
+}
+                                                                                                                            
 
 
 function trials_4LoopEndIteration(scheduler, snapshot) {
@@ -1569,17 +1577,18 @@ function trials_5LoopBegin(trials_5LoopScheduler, snapshot) {
 async function trials_5LoopEnd() {
     psychoJS.experiment.removeLoop(trials_5);
 
-    // Збираємо лише необхідні дані
+    // Collecting necessary data for the current trial
     const allTrialData = trials_5.trialList.map((thisTrial_5, index) => ({
-        name: thisTrial_5?.name ?? 'невідомо',
-        color: thisTrial_5?.color ?? 'невідомо',
-        response: psychoJS.experiment._trialsData?.[index]?.response ?? 'невідомо',  // Беремо відповідь окремо
+        name: thisTrial_5?.name ?? 'unknown',
+        color: thisTrial_5?.color ?? 'unknown',
+        response: psychoJS.experiment._trialsData?.[index]?.response ?? 'unknown',  // Get the response separately
         trialNumber: index + 1
     }));
 
+    // Sending results for this trial
     await sendResultsToServer(allTrialData, 'trials_5')
-        .then(() => console.log('Дані успішно надіслані.'))
-        .catch((error) => console.error('Помилка під час надсилання даних:', error));
+        .then(() => console.log('Data successfully sent for trials_5.'))
+        .catch((error) => console.error('Error sending data for trials_5:', error));
 
     if (psychoJS.experiment._unfinishedLoops.length > 0)
         currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
@@ -1587,7 +1596,8 @@ async function trials_5LoopEnd() {
         currentLoop = psychoJS.experiment;
 
     return Scheduler.Event.NEXT;
-}                                                                                                                                                                                      
+}
+                                                                                                       
 
 
 
@@ -1646,17 +1656,18 @@ function trials_6LoopBegin(trials_6LoopScheduler, snapshot) {
 async function trials_6LoopEnd() {
     psychoJS.experiment.removeLoop(trials_6);
 
-    // Збираємо лише необхідні дані
+    // Collecting necessary data for the current trial
     const allTrialData = trials_6.trialList.map((thisTrial_6, index) => ({
-        name: thisTrial_6?.name ?? 'невідомо',
-        color: thisTrial_6?.color ?? 'невідомо',
-        response: psychoJS.experiment._trialsData?.[index]?.response ?? 'невідомо',  // Беремо відповідь окремо
+        name: thisTrial_6?.name ?? 'unknown',
+        color: thisTrial_6?.color ?? 'unknown',
+        response: psychoJS.experiment._trialsData?.[index]?.response ?? 'unknown',  // Get the response separately
         trialNumber: index + 1
     }));
 
+    // Sending results for this trial
     await sendResultsToServer(allTrialData, 'trials_6')
-        .then(() => console.log('Дані успішно надіслані.'))
-        .catch((error) => console.error('Помилка під час надсилання даних:', error));
+        .then(() => console.log('Data successfully sent for trials_6.'))
+        .catch((error) => console.error('Error sending data for trials_6:', error));
 
     if (psychoJS.experiment._unfinishedLoops.length > 0)
         currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
@@ -1664,7 +1675,8 @@ async function trials_6LoopEnd() {
         currentLoop = psychoJS.experiment;
 
     return Scheduler.Event.NEXT;
-}                                                                                                                                                                                      
+}
+                                                                                                                             
 
 
 function trials_6LoopEndIteration(scheduler, snapshot) {
@@ -1721,17 +1733,18 @@ function trials_7LoopBegin(trials_7LoopScheduler, snapshot) {
 async function trials_7LoopEnd() {
     psychoJS.experiment.removeLoop(trials_7);
 
-    // Збираємо лише необхідні дані
+    // Collecting necessary data for the current trial
     const allTrialData = trials_7.trialList.map((thisTrial_7, index) => ({
-        name: thisTrial_7?.name ?? 'невідомо',
-        color: thisTrial_7?.color ?? 'невідомо',
-        response: psychoJS.experiment._trialsData?.[index]?.response ?? 'невідомо',  // Беремо відповідь окремо
+        name: thisTrial_7?.name ?? 'unknown',
+        color: thisTrial_7?.color ?? 'unknown',
+        response: psychoJS.experiment._trialsData?.[index]?.response ?? 'unknown',  // Get the response separately
         trialNumber: index + 1
     }));
 
+    // Sending results for this trial
     await sendResultsToServer(allTrialData, 'trials_7')
-        .then(() => console.log('Дані успішно надіслані.'))
-        .catch((error) => console.error('Помилка під час надсилання даних:', error));
+        .then(() => console.log('Data successfully sent for trials_7.'))
+        .catch((error) => console.error('Error sending data for trials_7:', error));
 
     if (psychoJS.experiment._unfinishedLoops.length > 0)
         currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
@@ -1739,7 +1752,8 @@ async function trials_7LoopEnd() {
         currentLoop = psychoJS.experiment;
 
     return Scheduler.Event.NEXT;
-}                                                                                                                                                                                      
+}
+                                                                                                           
 
 
 
@@ -1798,17 +1812,18 @@ function trials_8LoopBegin(trials_8LoopScheduler, snapshot) {
 async function trials_8LoopEnd() {
     psychoJS.experiment.removeLoop(trials_8);
 
-    // Збираємо лише необхідні дані
+    // Collecting necessary data for the current trial
     const allTrialData = trials_8.trialList.map((thisTrial_8, index) => ({
-        name: thisTrial_8?.name ?? 'невідомо',
-        color: thisTrial_8?.color ?? 'невідомо',
-        response: psychoJS.experiment._trialsData?.[index]?.response ?? 'невідомо',  // Беремо відповідь окремо
+        name: thisTrial_8?.name ?? 'unknown',
+        color: thisTrial_8?.color ?? 'unknown',
+        response: psychoJS.experiment._trialsData?.[index]?.response ?? 'unknown',  // Get the response separately
         trialNumber: index + 1
     }));
 
+    // Sending results for this trial
     await sendResultsToServer(allTrialData, 'trials_8')
-        .then(() => console.log('Дані успішно надіслані.'))
-        .catch((error) => console.error('Помилка під час надсилання даних:', error));
+        .then(() => console.log('Data successfully sent for trials_8.'))
+        .catch((error) => console.error('Error sending data for trials_8:', error));
 
     if (psychoJS.experiment._unfinishedLoops.length > 0)
         currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
@@ -1816,7 +1831,8 @@ async function trials_8LoopEnd() {
         currentLoop = psychoJS.experiment;
 
     return Scheduler.Event.NEXT;
-}                                                                                                                                                                                      
+}
+                                                                                                         
 
 function trials_8LoopEndIteration(scheduler, snapshot) {
   // ------Prepare for next entry------
@@ -3116,28 +3132,30 @@ async function quitPsychoJS(message, isCompleted) {
     const allExperimentData = [];
     const loopNames = ['trials_1', 'trials_2', 'trials_3', 'trials_4', 'trials_5', 'trials_6', 'trials_7', 'trials_8'];
 
+    // Collecting all trial data
     for (const loopName of loopNames) {
         const loop = psychoJS.experiment._loops[loopName];
         if (loop) {
             const trialData = loop.trialList.map((thisTrial, index) => ({
-                name: thisTrial?.name ?? 'невідомо',
-                color: thisTrial?.color ?? 'невідомо',
-                response: psychoJS.experiment._trialsData?.[index]?.response ?? 'невідомо',  // Беремо відповідь окремо
+                name: thisTrial?.name ?? 'unknown',
+                color: thisTrial?.color ?? 'unknown',
+                response: psychoJS.experiment._trialsData?.[index]?.response ?? 'unknown',  // Get the response separately
                 trialNumber: index + 1
             }));
             allExperimentData.push(...trialData);
         }
     }
 
+    // Send results for each trial
     async function sendTrialData() {
         for (const loopName of loopNames) {
             const trialData = allExperimentData.filter(data => data.trialNumber === parseInt(loopName.split('_')[1]));
             try {
-                console.log(`allExperimentData for ${loopName}:`, trialData);
-                await sendResultsToServer(trialData, loopName);
-                console.log(`Результати успішно надіслані для ${loopName}.`);
+                console.log(`Sending allExperimentData for ${loopName}:`, trialData);
+                await sendResultsToServer(trialData, loopName);  // Sending data for each loop (trial)
+                console.log(`Results successfully sent for ${loopName}.`);
             } catch (error) {
-                console.error(`Помилка при відправці результатів для ${loopName}:`, error);
+                console.error(`Error sending results for ${loopName}:`, error);
             }
         }
 
@@ -3146,4 +3164,3 @@ async function quitPsychoJS(message, isCompleted) {
 
     await sendTrialData();
 }
-
