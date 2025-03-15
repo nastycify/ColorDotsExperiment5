@@ -1279,7 +1279,7 @@ async function trials_1LoopEnd() {
     }));
 
     // Асинхронне надсилання даних без очікування
-sendDataToServer(allTrialData, 'trials_1')
+sendResultsToServer(allTrialData, 'trials_1')
     .then(() => console.log('Дані успішно надіслані.'))
     .catch((error) => console.error('Помилка під час надсилання даних:', error));
 
@@ -1356,7 +1356,7 @@ async function trials_2LoopEnd() {
     }));
 
     // Асинхронне надсилання даних без очікування
-    sendDataToServer(allTrialData, 'trials_2')
+    sendResultsToServer(allTrialData, 'trials_2')
         .then(() => console.log('Дані успішно надіслані.'))
         .catch((error) => console.error('Помилка під час надсилання даних:', error));
 
@@ -1435,7 +1435,7 @@ async function trials_3LoopEnd() {
     }));
 
     // Асинхронне надсилання даних без очікування
-    sendDataToServer(allTrialData, 'trials_3')
+    sendResultsToServer(allTrialData, 'trials_3')
         .then(() => console.log('Дані успішно надіслані.'))
         .catch((error) => console.error('Помилка під час надсилання даних:', error));
 
@@ -1513,7 +1513,7 @@ async function trials_4LoopEnd() {
     }));
 
     // Асинхронне надсилання даних без очікування
-    sendDataToServer(allTrialData, 'trials_4')
+    sendResultsToServer(allTrialData, 'trials_4')
         .then(() => console.log('Дані успішно надіслані.'))
         .catch((error) => console.error('Помилка під час надсилання даних:', error));
 
@@ -1592,7 +1592,7 @@ async function trials_5LoopEnd() {
     }));
 
     // Асинхронне надсилання даних без очікування
-    sendDataToServer(allTrialData, 'trials_5')
+    sendResultsToServer(allTrialData, 'trials_5')
         .then(() => console.log('Дані успішно надіслані.'))
         .catch((error) => console.error('Помилка під час надсилання даних:', error));
 
@@ -1671,7 +1671,7 @@ async function trials_6LoopEnd() {
     }));
 
     // Асинхронне надсилання даних без очікування
-    sendDataToServer(allTrialData, 'trials_6')
+    sendResultsToServer(allTrialData, 'trials_6')
         .then(() => console.log('Дані успішно надіслані.'))
         .catch((error) => console.error('Помилка під час надсилання даних:', error));
 
@@ -1749,7 +1749,7 @@ async function trials_7LoopEnd() {
     }));
 
     // Асинхронне надсилання даних без очікування
-    sendDataToServer(allTrialData, 'trials_7')
+    sendResultsToServer(allTrialData, 'trials_7')
         .then(() => console.log('Дані успішно надіслані.'))
         .catch((error) => console.error('Помилка під час надсилання даних:', error));
 
@@ -1828,7 +1828,7 @@ async function trials_8LoopEnd() {
     }));
 
     // Асинхронне надсилання даних без очікування
-    sendDataToServer(allTrialData, 'trials_8')
+    sendResultsToServer(allTrialData, 'trials_8')
         .then(() => console.log('Дані успішно надіслані.'))
         .catch((error) => console.error('Помилка під час надсилання даних:', error));
 
