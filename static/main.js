@@ -1217,22 +1217,23 @@ function instructionRoutineEnd(snapshot) {
 }
 
 
-async function sendDataToServer(data) {
-  try {
-    const response = await fetch('https://color-dots-production.up.railway.app/submit_results', {  // без trialNumber
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    });
+async function sendDataToServer(data, trialNumber) {
+    try {
+        const response = await fetch(`https://color-dots-production.up.railway.app/submit_results/${trialNumber}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
 
-    if (!response.ok) {
-      console.error('Помилка при надсиланні даних:', response.statusText);
-    } else {
-      console.log('Дані успішно надіслані');
+        if (!response.ok) {
+            const errorText = await response.text();  // Отримання тексту помилки
+            console.error(`Помилка при надсиланні даних: ${errorText}`);
+        } else {
+            console.log(`Дані успішно надіслані для тріалу ${trialNumber}`);
+        }
+    } catch (error) {
+        console.error('Помилка під час з\'єднання з сервером:', error);
     }
-  } catch (error) {
-    console.error('Помилка під час з\'єднання з сервером:', error);
-  }
 }
 
 
