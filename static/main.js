@@ -1222,51 +1222,52 @@ function recordResponse(trialIndex, name, color) {
   return new Promise(resolve => {
     console.log(`Waiting for response for trial ${trialIndex + 1}`);  // Логування для початку збору відповіді
 
-    let key_resp_allKeys = [];  // Ініціалізація змінної для зберігання натиснутих клавіш
+    // Очікуємо на натискання клавіші
+    let key_resp_allKeys = [];  // Ініціалізація масиву для зберігання натиснутих клавіш
 
     // Використовуємо PsychoJS для зберігання натиснутих клавіш
     let theseKeys = key_resp.getKeys({keyList: ['s', 'l'], waitRelease: false});
     key_resp_allKeys = key_resp_allKeys.concat(theseKeys);  // Додаємо натиснуті клавіші до масиву
 
+    // Якщо були натиснуті клавіші, зберігаємо яку саме клавішу натиснуто
     if (key_resp_allKeys.length > 0) {
-      // Записуємо відповідь
-      const response = key_resp_allKeys[0].name === 's' ? 'blue' : 'purple';  // Визначаємо відповідь за клавішею
+      const keyPressed = key_resp_allKeys[0].name;  // Зберігаємо натиснуту клавішу
       trialResponses[trialIndex] = {
         name: name,
         color: color,
-        response: response,
+        response: keyPressed,  // Замість кольору записуємо натиснуту клавішу
         trialNumber: trialIndex + 1
       };
 
       console.log(`Trial ${trialIndex + 1} response recorded:`, trialResponses[trialIndex]);
 
-      resolve(response);  // Повідомляємо, що відповідь записана
+      // Повідомляємо, що відповідь записана
+      resolve(keyPressed);  
     }
   });
 }
 
-
-
-
+// Виправлений виклик функції для збереження даних
 async function sendResultsToServer(data, loopName) {
-    try {
-        console.log('Sending data for loop:', loopName, data);  // Перевірка виведення даних
-        const response = await fetch(`https://color-dots-production.up.railway.app/submit_results`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data),
-        });
+  try {
+    console.log('Sending data for loop:', loopName, data);  // Перевірка виведення даних
+    const response = await fetch(`https://color-dots-production.up.railway.app/submit_results`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+    });
 
-        if (!response.ok) {
-            const errorText = await response.text();
-            console.error(`Error sending data (${loopName}): ${errorText}`);
-        } else {
-            console.log(`Data successfully sent for loop ${loopName}`);
-        }
-    } catch (error) {
-        console.error(`Error connecting to server (${loopName}):`, error);
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error(`Error sending data (${loopName}): ${errorText}`);
+    } else {
+      console.log(`Data successfully sent for loop ${loopName}`);
     }
+  } catch (error) {
+    console.error(`Error connecting to server (${loopName}):`, error);
+  }
 }
+
 
 
 
