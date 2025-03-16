@@ -1271,24 +1271,25 @@ async function sendResultsToServer(data, loopName) {
       }
     };
 
-    console.log('Sending data for loop:', loopName, dataToSend);  // Перевірка виведення даних
+  console.log('Sending data for loop:', loopName, dataToSend);  // Перевірка виведення даних
 
-    const response = await fetch(https://color-dots-production.up.railway.app/submit_results, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(dataToSend),  // Надсилаємо оновлені дані
-    });
+try {
+  const response = await fetch('https://color-dots-production.up.railway.app/submit_results', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(dataToSend),  // Надсилаємо оновлені дані
+  });
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error(Error sending data (${loopName}): ${errorText});
-    } else {
-      console.log(Data successfully sent for loop ${loopName});
-    }
-  } catch (error) {
-    console.error(Error connecting to server (${loopName}):, error);
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.error(`Error sending data (${loopName}): ${errorText}`);
+  } else {
+    console.log(`Data successfully sent for loop ${loopName}`);
   }
+} catch (error) {
+  console.error(`Error connecting to server (${loopName}):`, error);
 }
+
 
 
 
