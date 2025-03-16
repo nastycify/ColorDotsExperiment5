@@ -1220,19 +1220,24 @@ let trialResponses = [];  // Масив для зберігання відпов
 
 function recordResponse(trialIndex, name, color) {
   return new Promise(resolve => {
-    console.log(`Waiting for response for trial ${trialIndex + 1}`);  // Логування для початку збору відповіді
-    document.addEventListener('keydown', function(event) {
-      if (event.key === 'S' || event.key === 'L') {
-        const response = event.key === 'S' ? 'blue' : 'purple';  // Визначаємо колір
-        trialResponses[trialIndex] = {
-          name: name,
-          color: color,
-          response: response
-        };  // Зберігаємо всю інформацію про тріал
-        console.log(`Trial ${trialIndex + 1} response recorded:`, trialResponses[trialIndex]);  // Логування для перевірки
-        resolve(response);  // Повідомляємо, що відповідь записана
-      }
-    });
+    let theseKeys = key_resp.getKeys({keyList: ['s', 'l'], waitRelease: false});
+    _key_resp_allKeys = _key_resp_allKeys.concat(theseKeys);
+    if (_key_resp_allKeys.length > 0) {
+      key_resp.keys = _key_resp_allKeys.map((key) => key.name);  // зберігаємо всі натиснуті клавіші
+      key_resp.rt = _key_resp_allKeys.map((key) => key.rt);
+      key_resp.duration = _key_resp_allKeys.map((key) => key.duration);
+      
+      // Визначаємо, яку відповідь дав учасник
+      const response = key_resp.keys[0] === 's' ? 'blue' : 'purple';  // Перевіряємо, яка клавіша була натиснута
+      trialResponses[trialIndex] = {
+        name: name,
+        color: color,
+        response: response
+      };
+      
+      console.log(`Trial ${trialIndex + 1} response recorded:`, trialResponses[trialIndex]);
+      resolve(response);  // Повідомляємо, що відповідь записана
+    }
   });
 }
 
