@@ -1223,27 +1223,22 @@ function recordResponse(trialIndex, name, color) {
     console.log(`Waiting for response for trial ${trialIndex + 1}`);  // Логування для початку збору відповіді
 
     // Очікуємо на натискання клавіші
-    let key_resp_allKeys = [];  // Ініціалізація масиву для зберігання натиснутих клавіш
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'S' || event.key === 'L') {  // Якщо натиснута клавіша S або L
+        const keyPressed = event.key;  // Зберігаємо натиснуту клавішу
+        trialResponses[trialIndex] = {
+          name: name,
+          color: color,
+          response: keyPressed,  // Замість кольору записуємо натиснуту клавішу
+          trialNumber: trialIndex + 1
+        };
 
-    // Використовуємо PsychoJS для зберігання натиснутих клавіш
-    let theseKeys = key_resp.getKeys({keyList: ['s', 'l'], waitRelease: false});
-    key_resp_allKeys = key_resp_allKeys.concat(theseKeys);  // Додаємо натиснуті клавіші до масиву
+        console.log(`Trial ${trialIndex + 1} response recorded:`, trialResponses[trialIndex]);
 
-    // Якщо були натиснуті клавіші, зберігаємо яку саме клавішу натиснуто
-    if (key_resp_allKeys.length > 0) {
-      const keyPressed = key_resp_allKeys[0].name;  // Зберігаємо натиснуту клавішу
-      trialResponses[trialIndex] = {
-        name: name,
-        color: color,
-        response: keyPressed,  // Замість кольору записуємо натиснуту клавішу
-        trialNumber: trialIndex + 1
-      };
-
-      console.log(`Trial ${trialIndex + 1} response recorded:`, trialResponses[trialIndex]);
-
-      // Повідомляємо, що відповідь записана
-      resolve(keyPressed);  
-    }
+        // Повідомляємо, що відповідь записана
+        resolve(keyPressed);
+      }
+    });
   });
 }
 
