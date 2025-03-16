@@ -1224,6 +1224,8 @@ function recordResponse(trialIndex, name, color) {
 
     // Очікуємо на натискання клавіші
     document.addEventListener('keydown', function(event) {
+      console.log(`Key pressed: ${event.key}`); // Логування натиснутої клавіші
+
       if (event.key === 'S' || event.key === 'L') {  // Якщо натиснута клавіша S або L
         const keyPressed = event.key;  // Зберігаємо натиснуту клавішу
         trialResponses[trialIndex] = {
@@ -1262,6 +1264,7 @@ async function sendResultsToServer(data, loopName) {
     console.error(`Error connecting to server (${loopName}):`, error);
   }
 }
+
 
 
 
