@@ -3281,11 +3281,10 @@ function ExitRoutineEnd(snapshot) {
 
 function importConditions(currentLoop) {
   return async function () {
-    psychoJS.importAttributes(currentLoop.getCurrentTrial());
+    await psychoJS.importAttributes(currentLoop.getCurrentTrial());  // Додано await, якщо це асинхронна функція
     return Scheduler.Event.NEXT;
-    };
+  };
 }
-
 async function quitPsychoJS(message, isCompleted) {
     if (psychoJS.experiment.isEntryEmpty()) {
         psychoJS.experiment.nextEntry();
