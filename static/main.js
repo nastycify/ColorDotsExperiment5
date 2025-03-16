@@ -3310,7 +3310,6 @@ async function quitPsychoJS(message, isCompleted) {
         }
     }
 
-// Send results for each trial
 async function sendTrialData() {
     for (const loopName of loopNames) {
         const trialData = allExperimentData.filter(data => data.trialNumber === parseInt(loopName.split('_')[1]));
@@ -3327,4 +3326,3 @@ async function sendTrialData() {
 }
 
 await sendTrialData();  // Виклик функції sendTrialData
-}
