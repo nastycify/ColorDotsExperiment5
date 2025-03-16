@@ -3326,5 +3326,3 @@ async function quitPsychoJS(message, isCompleted) {
 
     await sendTrialData();  // Виклик функції sendTrialData
 }  // Закриваюча дужка для quitPsychoJS
-
-
