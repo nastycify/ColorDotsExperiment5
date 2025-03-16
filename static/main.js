@@ -1269,7 +1269,7 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
       psychoJS: psychoJS,
       nReps: 1, method: TrialHandler.Method.RANDOM,
       extraInfo: expInfo, originPath: undefined,
-      trialList: '/static/Stimul_1.xlsx',
+      trialList: 'static/Stimul_1.xlsx',
       seed: undefined, name: 'trials_1'
     });
     psychoJS.experiment.addLoop(trials_1); // add the loop to the experiment
@@ -1357,7 +1357,7 @@ function trials_2LoopBegin(trials_2LoopScheduler, snapshot) {
       psychoJS: psychoJS,
       nReps: 1, method: TrialHandler.Method.RANDOM,
       extraInfo: expInfo, originPath: undefined,
-      trialList: '/static/Stimul_2.xlsx',
+      trialList: 'static/Stimul_2.xlsx',
       seed: undefined, name: 'trials_2'
     });
     psychoJS.experiment.addLoop(trials_2); // add the loop to the experiment
@@ -1445,7 +1445,7 @@ function trials_3LoopBegin(trials_3LoopScheduler, snapshot) {
       psychoJS: psychoJS,
       nReps: 1, method: TrialHandler.Method.RANDOM,
       extraInfo: expInfo, originPath: undefined,
-      trialList: '/static/Stimul_3.xlsx',
+      trialList: 'static/Stimul_3.xlsx',
       seed: undefined, name: 'trials_3'
     });
     psychoJS.experiment.addLoop(trials_3); // add the loop to the experiment
@@ -1532,7 +1532,7 @@ function trials_4LoopBegin(trials_4LoopScheduler, snapshot) {
       psychoJS: psychoJS,
       nReps: 1, method: TrialHandler.Method.RANDOM,
       extraInfo: expInfo, originPath: undefined,
-      trialList: '/static/Stimul_4.xlsx',
+      trialList: 'static/Stimul_4.xlsx',
       seed: undefined, name: 'trials_4'
     });
     psychoJS.experiment.addLoop(trials_4); // add the loop to the experiment
@@ -1619,7 +1619,7 @@ function trials_5LoopBegin(trials_5LoopScheduler, snapshot) {
       psychoJS: psychoJS,
       nReps: 1, method: TrialHandler.Method.RANDOM,
       extraInfo: expInfo, originPath: undefined,
-      trialList: '/static/Stimul_5.xlsx',
+      trialList: 'static/Stimul_5.xlsx',
       seed: undefined, name: 'trials_5'
     });
     psychoJS.experiment.addLoop(trials_5); // add the loop to the experiment
@@ -1706,7 +1706,7 @@ function trials_6LoopBegin(trials_6LoopScheduler, snapshot) {
       psychoJS: psychoJS,
       nReps: 1, method: TrialHandler.Method.RANDOM,
       extraInfo: expInfo, originPath: undefined,
-      trialList: '/static/Stimul_6.xlsx',
+      trialList: 'static/Stimul_6.xlsx',
       seed: undefined, name: 'trials_6'
     });
     psychoJS.experiment.addLoop(trials_6); // add the loop to the experiment
@@ -1793,7 +1793,7 @@ function trials_7LoopBegin(trials_7LoopScheduler, snapshot) {
       psychoJS: psychoJS,
       nReps: 1, method: TrialHandler.Method.RANDOM,
       extraInfo: expInfo, originPath: undefined,
-      trialList: '/static/Stimul_7.xlsx',
+      trialList: 'static/Stimul_7.xlsx',
       seed: undefined, name: 'trials_7'
     });
     psychoJS.experiment.addLoop(trials_7); // add the loop to the experiment
@@ -1880,7 +1880,7 @@ function trials_8LoopBegin(trials_8LoopScheduler, snapshot) {
       psychoJS: psychoJS,
       nReps: 1, method: TrialHandler.Method.RANDOM,
       extraInfo: expInfo, originPath: undefined,
-      trialList: '/static/Stimul_8.xlsx',
+      trialList: 'static/Stimul_8.xlsx',
       seed: undefined, name: 'trials_8'
     });
     psychoJS.experiment.addLoop(trials_8); // add the loop to the experiment
