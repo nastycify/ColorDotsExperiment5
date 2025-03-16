@@ -1229,8 +1229,7 @@ let trialResponses = [];  // Масив для зберігання відпов
 
 function recordResponse(trialIndex, name, color) {
   return new Promise(resolve => {
-  console.log(`Waiting for response for trial ${trialIndex + 1}`);
-  
+    console.log(`Waiting for response for trial ${trialIndex + 1}`);
 
     // Створюємо обробник події
     const keydownHandler = function(event) {
@@ -1271,26 +1270,29 @@ async function sendResultsToServer(data, loopName) {
       }
     };
 
-  console.log('Sending data for loop:', loopName, dataToSend);  // Перевірка виведення даних
+    console.log('Sending data for loop:', loopName, dataToSend);  // Перевірка виведення даних
 
-try {
-  const response = await fetch('https://color-dots-production.up.railway.app/submit_results', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(dataToSend),  // Надсилаємо оновлені дані
-  });
+    try {
+      const response = await fetch('https://color-dots-production.up.railway.app/submit_results', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dataToSend),  // Надсилаємо оновлені дані
+      });
 
-  if (!response.ok) {
-    const errorText = await response.text();
-    console.error(`Error sending data (${loopName}): ${errorText}`);
-  } else {
-    console.log(`Data successfully sent for loop ${loopName}`);
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error(`Error sending data (${loopName}): ${errorText}`);
+      } else {
+        console.log(`Data successfully sent for loop ${loopName}`);
+      }
+    } catch (error) {
+      console.error(`Error connecting to server (${loopName}):`, error);
+    }
+
+  } catch (error) {
+    console.error('Error in sendResultsToServer function:', error);
   }
-} catch (error) {
-  console.error(`Error connecting to server (${loopName}):`, error);
-}
-
-
+}  // Закриваюча дужка для sendResultsToServer
 
 
 
