@@ -12,13 +12,19 @@ const { round } = util;
 
 
 // store info about the experiment session:
+// store info about the experiment session:
 let expName = 'experiment';  // Назва експерименту
 let expInfo = {
-    'participant': `${util.pad(Number.parseFloat(util.randint(0, 999999)).toFixed(0), 6)}`, // Унікальний ID учасника
-    'session': '001',
-    'gender': '',  // Поле для зберігання статі учасника
-    'age': ''      // Поле для зберігання імені учасника
+    'participant': `${util.pad(Number.parseFloat(util.randint(0, 999999)).toFixed(0), 6)}`,  // Унікальний ID учасника
+    'session': '001',  // Номер сесії
+    'gender': '',  // Стать учасника (буде запитано)
+    'age': ''       // Вік учасника (буде запитано)
 };
+
+// Отримуємо дані від учасника перед початком експерименту:
+expInfo.age = prompt("Please enter your age:");  // Вік учасника
+expInfo.gender = prompt("Please enter your gender (male/female):");  // Стать учасника
+
 
 
 // Start code blocks for 'Before Experiment'
@@ -1277,6 +1283,7 @@ async function sendResultsToServer(data, loopName) {
     console.error(`Error connecting to server (${loopName}):`, error);
   }
 }
+
 
 
 
