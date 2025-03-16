@@ -1229,26 +1229,31 @@ let trialResponses = [];  // Масив для зберігання відпов
 
 function recordResponse(trialIndex, name, color) {
   return new Promise(resolve => {
-    console.log(`Waiting for response for trial ${trialIndex + 1}`);  // Логування для початку збору відповіді
+    console.log(`Waiting for response for trial ${trialIndex + 1}`);  
 
-    // Очікуємо на натискання клавіші
-    document.addEventListener('keydown', function(event) {
-      console.log(`Key pressed: ${event.key}`); // Логування натиснутої клавіші
+    // Створюємо обробник події
+    const keydownHandler = function(event) {
+      console.log(`Key pressed: ${event.key}`); 
 
-      // Замість перевірки на 'S' або 'L', зберігаємо будь-яку натиснуту клавішу
-      const keyPressed = event.key;  // Зберігаємо натиснуту клавішу
+      const keyPressed = event.key;  
       trialResponses[trialIndex] = {
         name: name,
         color: color,
-        response: keyPressed,  // Замість кольору записуємо натиснуту клавішу
+        response: keyPressed,  
         trialNumber: trialIndex + 1
       };
 
       console.log(`Trial ${trialIndex + 1} response recorded:`, trialResponses[trialIndex]);
 
+      // Видаляємо обробник одразу після реєстрації натискання
+      document.removeEventListener('keydown', keydownHandler);
+
       // Повідомляємо, що відповідь записана
       resolve(keyPressed);
-    });
+    };
+
+    // Додаємо обробник події з параметром `{ once: true }` для уникнення дублювання
+    document.addEventListener('keydown', keydownHandler, { once: true });
   });
 }
 
