@@ -1220,6 +1220,7 @@ let trialResponses = [];  // Масив для зберігання відпов
 
 function recordResponse(trialIndex, name, color) {
   return new Promise(resolve => {
+    console.log(`Waiting for response for trial ${trialIndex + 1}`);  // Логування для початку збору відповіді
     document.addEventListener('keydown', function(event) {
       if (event.key === 'S' || event.key === 'L') {
         const response = event.key === 'S' ? 'blue' : 'purple';  // Визначаємо колір
@@ -1228,12 +1229,13 @@ function recordResponse(trialIndex, name, color) {
           color: color,
           response: response
         };  // Зберігаємо всю інформацію про тріал
-        console.log(`Trial ${trialIndex + 1} response:`, trialResponses[trialIndex]);  // Логування для перевірки
+        console.log(`Trial ${trialIndex + 1} response recorded:`, trialResponses[trialIndex]);  // Логування для перевірки
         resolve(response);  // Повідомляємо, що відповідь записана
       }
     });
   });
 }
+
 
 
 async function sendResultsToServer(data, loopName) {
