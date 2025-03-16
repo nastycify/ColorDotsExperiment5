@@ -1222,26 +1222,24 @@ function recordResponse(trialIndex, name, color) {
   return new Promise(resolve => {
     console.log(`Waiting for response for trial ${trialIndex + 1}`);  // Логування для початку збору відповіді
 
-    // Створюємо змінну для зберігання всіх натиснутих клавіш цього тріалу
     let key_resp_allKeys = [];  // Ініціалізація змінної для зберігання натиснутих клавіш
 
+    // Використовуємо PsychoJS для зберігання натиснутих клавіш
     let theseKeys = key_resp.getKeys({keyList: ['s', 'l'], waitRelease: false});
     key_resp_allKeys = key_resp_allKeys.concat(theseKeys);  // Додаємо натиснуті клавіші до масиву
 
     if (key_resp_allKeys.length > 0) {
-      key_resp.keys = key_resp_allKeys.map((key) => key.name);  // Зберігаємо всі натиснуті клавіші
-      key_resp.rt = key_resp_allKeys.map((key) => key.rt);
-      key_resp.duration = key_resp_allKeys.map((key) => key.duration);
-
-      // Визначаємо, яку відповідь дав учасник
-      const response = key_resp.keys[0] === 's' ? 'blue' : 'purple';  // Перевіряємо, яка клавіша була натиснута
+      // Записуємо відповідь
+      const response = key_resp_allKeys[0].name === 's' ? 'blue' : 'purple';  // Визначаємо відповідь за клавішею
       trialResponses[trialIndex] = {
         name: name,
         color: color,
-        response: response
+        response: response,
+        trialNumber: trialIndex + 1
       };
 
       console.log(`Trial ${trialIndex + 1} response recorded:`, trialResponses[trialIndex]);
+
       resolve(response);  // Повідомляємо, що відповідь записана
     }
   });
