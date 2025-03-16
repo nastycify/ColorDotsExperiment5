@@ -1229,7 +1229,8 @@ let trialResponses = [];  // Масив для зберігання відпов
 
 function recordResponse(trialIndex, name, color) {
   return new Promise(resolve => {
-    console.log(Waiting for response for trial ${trialIndex + 1});  
+  console.log(`Waiting for response for trial ${trialIndex + 1}`);
+  
 
     // Створюємо обробник події
     const keydownHandler = function(event) {
