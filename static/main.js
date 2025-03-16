@@ -3290,3 +3290,4 @@ async function sendTrialData() {
 }
 
 await sendTrialData();  // Виклик функції sendTrialData
+}
