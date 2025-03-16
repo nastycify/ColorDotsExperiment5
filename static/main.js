@@ -1234,7 +1234,7 @@ function recordResponse(trialIndex, name, color) {
 
     // Створюємо обробник події
     const keydownHandler = function(event) {
-      console.log(Key pressed: ${event.key}); 
+      console.log(`Key pressed: ${event.key}`); 
 
       const keyPressed = event.key;  
       trialResponses[trialIndex] = {
