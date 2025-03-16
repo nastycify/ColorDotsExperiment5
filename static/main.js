@@ -17,7 +17,7 @@ let expInfo = {
     'participant': `${util.pad(Number.parseFloat(util.randint(0, 999999)).toFixed(0), 6)}`, // Унікальний ID учасника
     'session': '001',
     'gender': '',  // Поле для зберігання статі учасника
-    'name': ''      // Поле для зберігання імені учасника
+    'age': ''      // Поле для зберігання імені учасника
 };
 
 
