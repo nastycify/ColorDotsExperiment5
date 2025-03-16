@@ -1287,8 +1287,8 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
 
             // Логування для перевірки вмісту each trial
             console.log(`Trial ${snapshot.index + 1}:`, thisTrial_1);
-            const stimName = thisTrial_1?.name ?? 'unknown';
-            const stimColor = thisTrial_1?.color ?? 'unknown';
+            const stimName = thisTrial_1?.Name ?? 'unknown';
+            const stimColor = thisTrial_1?.Color ?? 'unknown';
             console.log(`Trial data: Name - ${stimName}, Color - ${stimColor}`);
 
             // Фіксація відповіді користувача під час тріалу
@@ -1313,8 +1313,8 @@ async function trials_1LoopEnd() {
 
     // Збір даних по всіх тріалах
     const allTrialData = trials_1.trialList.map((thisTrial_1, index) => ({
-        name: thisTrial_1?.name ?? 'unknown',
-        color: thisTrial_1?.color ?? 'unknown',
+        name: thisTrial_1?.Name ?? 'unknown',
+        color: thisTrial_1?.Color ?? 'unknown',
         response: psychoJS.experiment._trialsData?.[index]?.response ?? 'unknown',
         trialNumber: index + 1
     }));
@@ -1377,8 +1377,8 @@ function trials_2LoopBegin(trials_2LoopScheduler, snapshot) {
 
             // Логування для перевірки вмісту each trial
             console.log(`Trial ${snapshot.index + 1}:`, thisTrial_2);
-            const stimName = thisTrial_2?.name ?? 'unknown';
-            const stimColor = thisTrial_2?.color ?? 'unknown';
+            const stimName = thisTrial_2?.Name ?? 'unknown';
+            const stimColor = thisTrial_2?.Color ?? 'unknown';
             console.log(`Trial data: Name - ${stimName}, Color - ${stimColor}`);
 
             // Фіксація відповіді користувача під час тріалу
@@ -1403,8 +1403,8 @@ async function trials_2LoopEnd() {
 
     // Збір даних по всіх тріалах
     const allTrialData = trials_2.trialList.map((thisTrial_2, index) => ({
-        name: thisTrial_2?.name ?? 'unknown',
-        color: thisTrial_2?.color ?? 'unknown',
+        name: thisTrial_2?.Name ?? 'unknown',
+        color: thisTrial_2?.Color ?? 'unknown',
         response: psychoJS.experiment._trialsData?.[index]?.response ?? 'unknown',
         trialNumber: index + 1
     }));
@@ -1468,8 +1468,8 @@ function trials_3LoopBegin(trials_3LoopScheduler, snapshot) {
 
             // Логування для перевірки вмісту each trial
             console.log(`Trial ${snapshot.index + 1}:`, thisTrial_3);
-            const stimName = thisTrial_3?.name ?? 'unknown';
-            const stimColor = thisTrial_3?.color ?? 'unknown';
+            const stimName = thisTrial_3?.Name ?? 'unknown';
+            const stimColor = thisTrial_3?.Color ?? 'unknown';
             console.log(`Trial data: Name - ${stimName}, Color - ${stimColor}`);
 
             // Фіксація відповіді користувача під час тріалу
@@ -1494,8 +1494,8 @@ async function trials_3LoopEnd() {
 
     // Збір даних по всіх тріалах
     const allTrialData = trials_3.trialList.map((thisTrial_3, index) => ({
-        name: thisTrial_3?.name ?? 'unknown',
-        color: thisTrial_3?.color ?? 'unknown',
+        name: thisTrial_3?.Name ?? 'unknown',
+        color: thisTrial_3?.Color ?? 'unknown',
         response: psychoJS.experiment._trialsData?.[index]?.response ?? 'unknown',
         trialNumber: index + 1
     }));
@@ -1558,8 +1558,8 @@ function trials_4LoopBegin(trials_4LoopScheduler, snapshot) {
 
             // Логування для перевірки вмісту each trial
             console.log(`Trial ${snapshot.index + 1}:`, thisTrial_4);
-            const stimName = thisTrial_4?.name ?? 'unknown';
-            const stimColor = thisTrial_4?.color ?? 'unknown';
+            const stimName = thisTrial_4?.Name ?? 'unknown';
+            const stimColor = thisTrial_4?.Color ?? 'unknown';
             console.log(`Trial data: Name - ${stimName}, Color - ${stimColor}`);
 
             // Фіксація відповіді користувача під час тріалу
@@ -1584,8 +1584,8 @@ async function trials_4LoopEnd() {
 
     // Збір даних по всіх тріалах
     const allTrialData = trials_4.trialList.map((thisTrial_4, index) => ({
-        name: thisTrial_4?.name ?? 'unknown',
-        color: thisTrial_4?.color ?? 'unknown',
+        name: thisTrial_4?.Name ?? 'unknown',
+        color: thisTrial_4?.Color ?? 'unknown',
         response: psychoJS.experiment._trialsData?.[index]?.response ?? 'unknown',
         trialNumber: index + 1
     }));
@@ -1647,8 +1647,8 @@ function trials_5LoopBegin(trials_5LoopScheduler, snapshot) {
 
             // Логування для перевірки вмісту each trial
             console.log(`Trial ${snapshot.index + 1}:`, thisTrial_5);
-            const stimName = thisTrial_5?.name ?? 'unknown';
-            const stimColor = thisTrial_5?.color ?? 'unknown';
+            const stimName = thisTrial_5?.Name ?? 'unknown';
+            const stimColor = thisTrial_5?.Color ?? 'unknown';
             console.log(`Trial data: Name - ${stimName}, Color - ${stimColor}`);
 
             // Фіксація відповіді користувача під час тріалу
@@ -1673,8 +1673,8 @@ async function trials_5LoopEnd() {
 
     // Збір даних по всіх тріалах
     const allTrialData = trials_5.trialList.map((thisTrial_5, index) => ({
-        name: thisTrial_5?.name ?? 'unknown',
-        color: thisTrial_5?.color ?? 'unknown',
+        name: thisTrial_5?.Name ?? 'unknown',
+        color: thisTrial_5?.Color ?? 'unknown',
         response: psychoJS.experiment._trialsData?.[index]?.response ?? 'unknown',
         trialNumber: index + 1
     }));
@@ -1737,8 +1737,8 @@ function trials_6LoopBegin(trials_6LoopScheduler, snapshot) {
 
             // Логування для перевірки вмісту each trial
             console.log(`Trial ${snapshot.index + 1}:`, thisTrial_6);
-            const stimName = thisTrial_6?.name ?? 'unknown';
-            const stimColor = thisTrial_6?.color ?? 'unknown';
+            const stimName = thisTrial_6?.Name ?? 'unknown';
+            const stimColor = thisTrial_6?.Color ?? 'unknown';
             console.log(`Trial data: Name - ${stimName}, Color - ${stimColor}`);
 
             // Фіксація відповіді користувача під час тріалу
@@ -1763,8 +1763,8 @@ async function trials_6LoopEnd() {
 
     // Збір даних по всіх тріалах
     const allTrialData = trials_6.trialList.map((thisTrial_6, index) => ({
-        name: thisTrial_6?.name ?? 'unknown',
-        color: thisTrial_6?.color ?? 'unknown',
+        name: thisTrial_6?.Name ?? 'unknown',
+        color: thisTrial_6?.Color ?? 'unknown',
         response: psychoJS.experiment._trialsData?.[index]?.response ?? 'unknown',
         trialNumber: index + 1
     }));
@@ -1827,8 +1827,8 @@ function trials_7LoopBegin(trials_7LoopScheduler, snapshot) {
 
             // Логування для перевірки вмісту each trial
             console.log(`Trial ${snapshot.index + 1}:`, thisTrial_7);
-            const stimName = thisTrial_7?.name ?? 'unknown';
-            const stimColor = thisTrial_7?.color ?? 'unknown';
+            const stimName = thisTrial_7?.Name ?? 'unknown';
+            const stimColor = thisTrial_7?.Color ?? 'unknown';
             console.log(`Trial data: Name - ${stimName}, Color - ${stimColor}`);
 
             // Фіксація відповіді користувача під час тріалу
@@ -1853,8 +1853,8 @@ async function trials_7LoopEnd() {
 
     // Збір даних по всіх тріалах
     const allTrialData = trials_7.trialList.map((thisTrial_7, index) => ({
-        name: thisTrial_7?.name ?? 'unknown',
-        color: thisTrial_7?.color ?? 'unknown',
+        name: thisTrial_7?.Name ?? 'unknown',
+        color: thisTrial_7?.Color ?? 'unknown',
         response: psychoJS.experiment._trialsData?.[index]?.response ?? 'unknown',
         trialNumber: index + 1
     }));
@@ -1918,8 +1918,8 @@ function trials_8LoopBegin(trials_8LoopScheduler, snapshot) {
 
             // Логування для перевірки вмісту each trial
             console.log(`Trial ${snapshot.index + 1}:`, thisTrial_8);
-            const stimName = thisTrial_8?.name ?? 'unknown';
-            const stimColor = thisTrial_8?.color ?? 'unknown';
+            const stimName = thisTrial_8?.Name ?? 'unknown';
+            const stimColor = thisTrial_8?.Color ?? 'unknown';
             console.log(`Trial data: Name - ${stimName}, Color - ${stimColor}`);
 
             // Фіксація відповіді користувача під час тріалу
@@ -1944,8 +1944,8 @@ async function trials_8LoopEnd() {
 
     // Збір даних по всіх тріалах
     const allTrialData = trials_8.trialList.map((thisTrial_8, index) => ({
-        name: thisTrial_8?.name ?? 'unknown',
-        color: thisTrial_8?.color ?? 'unknown',
+        name: thisTrial_8?.Name ?? 'unknown',
+        color: thisTrial_8?.Color ?? 'unknown',
         response: psychoJS.experiment._trialsData?.[index]?.response ?? 'unknown',
         trialNumber: index + 1
     }));
