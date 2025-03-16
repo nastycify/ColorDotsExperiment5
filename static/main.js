@@ -1229,9 +1229,15 @@ let trialResponses = [];  // Масив для зберігання відпов
 
 function recordResponse(trialIndex, name, color) {
   return new Promise(resolve => {
+    // Перевірка на коректність trialIndex
+    if (typeof trialIndex !== 'number' || isNaN(trialIndex)) {
+      console.error(`Invalid trialIndex received: ${trialIndex}`);
+      resolve(null);
+      return;
+    }
+
     console.log(`Waiting for response for trial ${trialIndex + 1}`);  
 
-    // Створюємо обробник події
     const keydownHandler = function(event) {
       console.log(`Key pressed: ${event.key}`); 
 
@@ -1245,14 +1251,11 @@ function recordResponse(trialIndex, name, color) {
 
       console.log(`Trial ${trialIndex + 1} response recorded:`, trialResponses[trialIndex]);
 
-      // Видаляємо обробник одразу після реєстрації натискання
       document.removeEventListener('keydown', keydownHandler);
 
-      // Повідомляємо, що відповідь записана
       resolve(keyPressed);
     };
 
-    // Додаємо обробник події з параметром `{ once: true }` для уникнення дублювання
     document.addEventListener('keydown', keydownHandler, { once: true });
   });
 }
@@ -1260,22 +1263,26 @@ function recordResponse(trialIndex, name, color) {
 // Виправлений виклик функції для збереження даних
 async function sendResultsToServer(data, loopName) {
   try {
-    // Додаємо додаткову інформацію про учасника до даних
+    if (!data || Object.keys(data).length === 0) {
+      console.error(`No valid data to send for loop ${loopName}`);
+      return;
+    }
+
     const dataToSend = {
-      ...data,  // Результати експерименту
+      ...data,
       participantInfo: {
-        age: expInfo.age,  // Вік учасника
-        gender: expInfo.gender,  // Стать учасника
-        participantId: expInfo.participant  // Унікальний ID учасника
+        age: expInfo.age || 'Unknown',
+        gender: expInfo.gender || 'Unknown',
+        participantId: expInfo.participant || 'Unknown'
       }
     };
 
-    console.log('Sending data for loop:', loopName, dataToSend);  // Перевірка виведення даних
+    console.log('Sending data for loop:', loopName, dataToSend);
 
     const response = await fetch(`https://color-dots-production.up.railway.app/submit_results`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(dataToSend),  // Надсилаємо оновлені дані
+      body: JSON.stringify(dataToSend),
     });
 
     if (!response.ok) {
@@ -1288,7 +1295,6 @@ async function sendResultsToServer(data, loopName) {
     console.error(`Error connecting to server (${loopName}):`, error);
   }
 }
-
 
 
 
