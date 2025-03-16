@@ -1253,7 +1253,7 @@ async function sendResultsToServer(data, loopName) {
     const dataToSend = {
       ...data,  // Результати експерименту
       participantInfo: {
-        name: expInfo.name,  // Ім'я учасника
+        age: expInfo.age,  // Вік учасника
         gender: expInfo.gender,  // Стать учасника
         participantId: expInfo.participant  // Унікальний ID учасника
       }
