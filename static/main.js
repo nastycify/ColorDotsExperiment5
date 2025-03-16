@@ -1244,7 +1244,7 @@ function recordResponse(trialIndex, name, color) {
         trialNumber: trialIndex + 1
       };
 
-      console.log(`Trial ${trialIndex + 1}` response recorded:, trialResponses[trialIndex]);
+      console.log(`Trial ${trialIndex + 1} response recorded:`, trialResponses[trialIndex]);
 
       // Видаляємо обробник одразу після реєстрації натискання
       document.removeEventListener('keydown', keydownHandler);
