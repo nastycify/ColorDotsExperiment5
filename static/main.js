@@ -1285,7 +1285,10 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
       trials_1LoopScheduler.add(trialRoutineEnd(snapshot));
       trials_1LoopScheduler.add(trials_1LoopEndIteration(trials_1LoopScheduler, snapshot));
 
-      // Витягування та логування даних для діагностики
+     for (const thisTrial_1 of trials_1) {
+    // Додаткове логування для перевірки, що міститься в thisTrial_1
+    console.log(`Trial ${snapshot.index + 1}:`, thisTrial_1);
+    // Витягування та логування даних для діагностики
       const stimName = thisTrial_1?.name ?? 'unknown';
       const stimColor = thisTrial_1?.color ?? 'unknown';
       console.log(`Trial data: Name - ${stimName}, Color - ${stimColor}`);
@@ -1375,6 +1378,9 @@ function trials_2LoopBegin(trials_2LoopScheduler, snapshot) {
       trials_2LoopScheduler.add(trialRoutineEnd(snapshot));
       trials_2LoopScheduler.add(trials_2LoopEndIteration(trials_2LoopScheduler, snapshot));
 
+    for (const thisTrial_2 of trials_2) {
+    // Додаткове логування для перевірки, що міститься в thisTrial_2
+    console.log(`Trial ${snapshot.index + 1}:`, thisTrial_2);
       // Витягування та логування даних для діагностики
       const stimName = thisTrial_2?.name ?? 'unknown';
       const stimColor = thisTrial_2?.color ?? 'unknown';
@@ -1465,6 +1471,9 @@ function trials_3LoopBegin(trials_3LoopScheduler, snapshot) {
       trials_3LoopScheduler.add(trialRoutineEnd(snapshot));
       trials_3LoopScheduler.add(trials_3LoopEndIteration(trials_3LoopScheduler, snapshot));
 
+        for (const thisTrial_3 of trials_3) {
+    // Додаткове логування для перевірки, що міститься в thisTrial_3
+    console.log(`Trial ${snapshot.index + 1}:`, thisTrial_3);
       // Витягування та логування даних для діагностики
       const stimName = thisTrial_3?.name ?? 'unknown';
       const stimColor = thisTrial_3?.color ?? 'unknown';
@@ -1555,6 +1564,9 @@ function trials_4LoopBegin(trials_4LoopScheduler, snapshot) {
       trials_4LoopScheduler.add(trialRoutineEnd(snapshot));
       trials_4LoopScheduler.add(trials_4LoopEndIteration(trials_4LoopScheduler, snapshot));
 
+        for (const thisTrial_4 of trials_4) {
+    // Додаткове логування для перевірки, що міститься в thisTrial_4
+    console.log(`Trial ${snapshot.index + 1}:`, thisTrial_4);
       // Витягування та логування даних для діагностики
       const stimName = thisTrial_4?.name ?? 'unknown';
       const stimColor = thisTrial_4?.color ?? 'unknown';
@@ -1644,6 +1656,9 @@ function trials_5LoopBegin(trials_5LoopScheduler, snapshot) {
       trials_5LoopScheduler.add(trialRoutineEnd(snapshot));
       trials_5LoopScheduler.add(trials_5LoopEndIteration(trials_5LoopScheduler, snapshot));
 
+        for (const thisTrial_5 of trials_5) {
+    // Додаткове логування для перевірки, що міститься в thisTrial_5
+    console.log(`Trial ${snapshot.index + 1}:`, thisTrial_5);
       // Витягування та логування даних для діагностики
       const stimName = thisTrial_5?.name ?? 'unknown';
       const stimColor = thisTrial_5?.color ?? 'unknown';
@@ -1734,6 +1749,9 @@ function trials_6LoopBegin(trials_6LoopScheduler, snapshot) {
       trials_6LoopScheduler.add(trialRoutineEnd(snapshot));
       trials_6LoopScheduler.add(trials_6LoopEndIteration(trials_6LoopScheduler, snapshot));
 
+        for (const thisTrial_6 of trials_6) {
+    // Додаткове логування для перевірки, що міститься в thisTrial_6
+    console.log(`Trial ${snapshot.index + 1}:`, thisTrial_6);
       // Витягування та логування даних для діагностики
       const stimName = thisTrial_6?.name ?? 'unknown';
       const stimColor = thisTrial_63?.color ?? 'unknown';
@@ -1824,6 +1842,9 @@ function trials_7LoopBegin(trials_7LoopScheduler, snapshot) {
       trials_7LoopScheduler.add(trialRoutineEnd(snapshot));
       trials_7LoopScheduler.add(trials_7LoopEndIteration(trials_7LoopScheduler, snapshot));
 
+        for (const thisTrial_7 of trials_7) {
+    // Додаткове логування для перевірки, що міститься в thisTrial_7
+    console.log(`Trial ${snapshot.index + 1}:`, thisTrial_7);
       // Витягування та логування даних для діагностики
       const stimName = thisTrial_7?.name ?? 'unknown';
       const stimColor = thisTrial_7?.color ?? 'unknown';
@@ -1914,6 +1935,9 @@ function trials_8LoopBegin(trials_8LoopScheduler, snapshot) {
       trials_8LoopScheduler.add(trialRoutineEnd(snapshot));
       trials_8LoopScheduler.add(trials_8LoopEndIteration(trials_8LoopScheduler, snapshot));
 
+        for (const thisTrial_8 of trials_8) {
+    // Додаткове логування для перевірки, що міститься в thisTrial_8
+    console.log(`Trial ${snapshot.index + 1}:`, thisTrial_8);
       // Витягування та логування даних для діагностики
       const stimName = thisTrial_8?.name ?? 'unknown';
       const stimColor = thisTrial_8?.color ?? 'unknown';
