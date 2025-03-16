@@ -3310,19 +3310,21 @@ async function quitPsychoJS(message, isCompleted) {
         }
     }
 
-async function sendTrialData() {
-    for (const loopName of loopNames) {
-        const trialData = allExperimentData.filter(data => data.trialNumber === parseInt(loopName.split('_')[1]));
-        try {
-            console.log(`Sending allExperimentData for ${loopName}:`, trialData);
-            await sendResultsToServer(trialData, loopName);  // Sending data for each loop (trial)
-            console.log(`Results successfully sent for ${loopName}.`);
-        } catch (error) {
-            console.error(`Error sending results for ${loopName}:`, error);
+    async function sendTrialData() {
+        for (const loopName of loopNames) {
+            const trialData = allExperimentData.filter(data => data.trialNumber === parseInt(loopName.split('_')[1]));
+            try {
+                console.log(`Sending allExperimentData for ${loopName}:`, trialData);
+                await sendResultsToServer(trialData, loopName);  // Sending data for each loop (trial)
+                console.log(`Results successfully sent for ${loopName}.`);
+            } catch (error) {
+                console.error(`Error sending results for ${loopName}:`, error);
+            }
         }
+
+        return Scheduler.Event.QUIT;
     }
 
-    return Scheduler.Event.QUIT;
-}
+    await sendTrialData();  // Виклик функції sendTrialData
+} // Закриття функції quitPsychoJS
 
-await sendTrialData();  // Виклик функції sendTrialData
