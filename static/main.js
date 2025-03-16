@@ -12,11 +12,14 @@ const { round } = util;
 
 
 // store info about the experiment session:
-let expName = 'смиролор';  // from the Builder filename that created this script
+let expName = 'experiment';  // Назва експерименту
 let expInfo = {
-    'participant': `${util.pad(Number.parseFloat(util.randint(0, 999999)).toFixed(0), 6)}`,
+    'participant': `${util.pad(Number.parseFloat(util.randint(0, 999999)).toFixed(0), 6)}`, // Унікальний ID учасника
     'session': '001',
+    'gender': '',  // Поле для зберігання статі учасника
+    'name': ''      // Поле для зберігання імені учасника
 };
+
 
 // Start code blocks for 'Before Experiment'
 // init psychoJS:
@@ -1246,11 +1249,22 @@ function recordResponse(trialIndex, name, color) {
 // Виправлений виклик функції для збереження даних
 async function sendResultsToServer(data, loopName) {
   try {
-    console.log('Sending data for loop:', loopName, data);  // Перевірка виведення даних
+    // Додаємо додаткову інформацію про учасника до даних
+    const dataToSend = {
+      ...data,  // Результати експерименту
+      participantInfo: {
+        name: expInfo.name,  // Ім'я учасника
+        gender: expInfo.gender,  // Стать учасника
+        participantId: expInfo.participant  // Унікальний ID учасника
+      }
+    };
+
+    console.log('Sending data for loop:', loopName, dataToSend);  // Перевірка виведення даних
+
     const response = await fetch(`https://color-dots-production.up.railway.app/submit_results`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(dataToSend),  // Надсилаємо оновлені дані
     });
 
     if (!response.ok) {
@@ -1263,8 +1277,6 @@ async function sendResultsToServer(data, loopName) {
     console.error(`Error connecting to server (${loopName}):`, error);
   }
 }
-
-
 
 
 
