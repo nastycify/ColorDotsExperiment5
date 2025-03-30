@@ -1287,8 +1287,6 @@ async function sendResultsToServer(data, loopName) {
 
 
 
-
-
 var trials_1;
 
 function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
@@ -1348,9 +1346,6 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
                         feedbackColor: feedbackColor  // Зберігаємо колір фідбеку
                     };
 
-                    // Очищення екрану (необов'язково, якщо хочемо залишити попередній стимул)
-                    psychoJS.window.clear();
-
                     // Відображення фідбеку
                     const feedbackText = new visual.TextStim({
                         win: psychoJS.window,
@@ -1361,10 +1356,10 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
                     feedbackText.draw();
                     psychoJS.window.flip(); // Оновлюємо екран для відображення фідбеку
 
-                    // Пауза після фідбеку, щоб учасник міг побачити результат
-                    core.wait(1.0);  // Пауза 1 секунда для перегляду фідбеку
+                    // Пауза після фідбеку (1,5 секунди)
+                    core.wait(1.5);  // Пауза 1.5 сек для перегляду фідбеку
 
-                    // Очистити екран після паузи
+                    // Очистити екран після паузи перед новим стимулом
                     psychoJS.window.clear();
                     psychoJS.window.flip();  // Оновити екран після очищення
                 })
@@ -1417,6 +1412,7 @@ function trials_1LoopEndIteration(scheduler, snapshot) {
         return Scheduler.Event.NEXT;
     };
 }
+
 
 var trials_2;
 
