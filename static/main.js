@@ -1287,31 +1287,11 @@ async function sendResultsToServer(data, loopName) {
 
 
 
-// Додаємо функцію для відображення фідбеку на 1,5 секунди, а потім очищення екрану
-async function showFeedback(feedback, feedbackColor) {
-    const feedbackText = new visual.TextStim({
-        win: psychoJS.window,
-        text: feedback,
-        color: feedbackColor,  // Використовуємо змінну для кольору
-        height: 0.1
-    });
+let trials_1;
 
-    feedbackText.draw();  // Виводимо фідбек на екран
-    psychoJS.window.flip(); // Оновлюємо екран для відображення фідбеку
-
-    // Пауза після фідбеку (1,5 секунди)
-    await core.wait(1.5);  // Пауза 1.5 сек для перегляду фідбеку
-
-    // Очищення екрану після паузи перед новим стимулом
-    psychoJS.window.clear();  // Очищаємо екран
-    psychoJS.window.flip();   // Оновлюємо екран, щоб почати новий стимул
-}
-
-// Оновлений код в основному циклі
 function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
     return async function() {
-        TrialHandler.fromSnapshot(snapshot); // Оновлення внутрішніх змінних петлі
-
+        // Ініціалізація Trials_1
         trials_1 = new TrialHandler({
             psychoJS: psychoJS,
             nReps: 1, method: TrialHandler.Method.RANDOM,
@@ -1319,8 +1299,8 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
             trialList: 'Stimul_1.xlsx', // Перевірте правильність шляху до файлу
             seed: undefined, name: 'trials_1'
         });
-        psychoJS.experiment.addLoop(trials_1); // Додаємо петлю до експерименту
-        currentLoop = trials_1;  // Встановлюємо поточну петлю
+        psychoJS.experiment.addLoop(trials_1);
+        currentLoop = trials_1; // Встановлюємо поточну петлю
 
         for (const thisTrial_1 of trials_1) {
             snapshot = trials_1.getSnapshot();
@@ -1328,56 +1308,48 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
             trials_1LoopScheduler.add(trialRoutineBegin(snapshot));
             trials_1LoopScheduler.add(trialRoutineEachFrame());
             trials_1LoopScheduler.add(trialRoutineEnd(snapshot));
-            trials_1LoopScheduler.add(trials_1LoopEndIteration(trials_1LoopScheduler, snapshot));
+            trials_1LoopScheduler.add(trials_1LoopEndIteration(trials_1LoopScheduler, snapshot)); // Викликаємо функцію тут
 
-            // Логування для перевірки вмісту кожного тріалу
             console.log(`Trial ${snapshot.index + 1}:`, thisTrial_1);
             const stimName = thisTrial_1?.Name ?? 'unknown';
             const stimColor = thisTrial_1?.Color ?? 'unknown';
             console.log(`Trial data: Name - ${stimName}, Color - ${stimColor}`);
 
-            // Фіксація відповіді користувача під час тріалу
             recordResponse(snapshot.index, stimName, stimColor)
                 .then(response => {
                     console.log(`Response for trial ${snapshot.index + 1}: ${response}`);
 
-                    // Порівняння відповіді з правильною
-                    const correctAnswer = stimColor;  // Припускаємо, що правильна відповідь - це колір
+                    const correctAnswer = stimColor;
                     let feedback = '';
-                    let feedbackColor = '';  // Змінна для кольору фідбеку
+                    let feedbackColor = '';
 
                     if (response === correctAnswer) {
                         feedback = "Правильно!";
-                        feedbackColor = 'green';  // Зелений колір для правильної відповіді
+                        feedbackColor = 'green';
                     } else {
                         feedback = "Неправильно!";
-                        feedbackColor = 'red';  // Червоний колір для неправильної відповіді
+                        feedbackColor = 'red';
                     }
 
-                    // Фіксування результату
                     psychoJS.experiment._trialsData[snapshot.index] = {
                         name: stimName,
                         color: stimColor,
                         response: response,
-                        feedback: feedback,  // Додаємо фідбек до даних
-                        feedbackColor: feedbackColor  // Зберігаємо колір фідбеку
+                        feedback: feedback,
+                        feedbackColor: feedbackColor
                     };
 
-                    // Виводимо фідбек та чекаємо
-                    showFeedback(feedback, feedbackColor)
-                        .then(() => {
-                            // Після паузи для фідбеку запускаємо новий стимул
-                            // Відображення нового стимулу на екрані
-                            const stimulus = new visual.TextStim({
-                                win: psychoJS.window,
-                                text: stimName,
-                                color: stimColor,  // Визначаємо колір стимулу
-                                height: 0.1
-                            });
-
-                            stimulus.draw();
-                            psychoJS.window.flip();  // Оновлюємо екран з новим стимулом
-                        });
+                    const feedbackText = new visual.TextStim({
+                        win: psychoJS.window,
+                        text: feedback,
+                        color: feedbackColor,
+                        height: 0.1
+                    });
+                    feedbackText.draw();
+                    psychoJS.window.flip();
+                    core.wait(1.5);
+                    psychoJS.window.clear();
+                    psychoJS.window.flip();
                 })
                 .catch(error => console.error('Error recording response:', error));
         }
@@ -1385,6 +1357,47 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
         return Scheduler.Event.NEXT;
     }
 }
+
+async function trials_1LoopEnd() {
+    psychoJS.experiment.removeLoop(trials_1);
+
+    const allTrialData = trials_1.trialList.map((thisTrial_1, index) => ({
+        name: thisTrial_1?.Name ?? 'unknown',
+        color: thisTrial_1?.Color ?? 'unknown',
+        response: psychoJS.experiment._trialsData?.[index]?.response ?? 'unknown',
+        trialNumber: index + 1,
+        feedback: psychoJS.experiment._trialsData?.[index]?.feedback ?? 'unknown',
+        feedbackColor: psychoJS.experiment._trialsData?.[index]?.feedbackColor ?? 'unknown'
+    }));
+
+    await sendResultsToServer(allTrialData, 'trials_1')
+        .then(() => console.log('Data successfully sent for trials_1.'))
+        .catch((error) => console.error('Error sending data for trials_1:', error));
+
+    if (psychoJS.experiment._unfinishedLoops.length > 0)
+        currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
+    else
+        currentLoop = psychoJS.experiment;
+
+    return Scheduler.Event.NEXT;
+}
+
+function trials_1LoopEndIteration(scheduler, snapshot) {
+    return async function () {
+        if (typeof snapshot !== 'undefined') {
+            if (snapshot.finished) {
+                if (psychoJS.experiment.isEntryEmpty()) {
+                    psychoJS.experiment.nextEntry(snapshot);
+                }
+                scheduler.stop();
+            } else {
+                psychoJS.experiment.nextEntry(snapshot);
+            }
+        }
+        return Scheduler.Event.NEXT;
+    };
+}
+
 
 
 var trials_2;
