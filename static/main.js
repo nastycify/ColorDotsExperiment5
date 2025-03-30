@@ -1348,6 +1348,9 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
                         feedbackColor: feedbackColor  // Зберігаємо колір фідбеку
                     };
 
+                    // Очищаємо екран перед показом фідбеку
+                    psychoJS.window.clear();
+
                     // Відображення фідбеку
                     const feedbackText = new visual.TextStim({
                         win: psychoJS.window,
@@ -1361,6 +1364,9 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
                     // Пауза після фідбеку, щоб учасник міг побачити результат
                     core.wait(1.0);  // Пауза 1 секунда для перегляду фідбеку
 
+                    // Очистити екран після паузи
+                    psychoJS.window.clear();
+                    psychoJS.window.flip();  // Оновити екран після очищення
                 })
                 .catch(error => console.error('Error recording response:', error));
         }
@@ -1411,7 +1417,6 @@ function trials_1LoopEndIteration(scheduler, snapshot) {
         return Scheduler.Event.NEXT;
     };
 }
-
 
 var trials_2;
 
