@@ -1287,7 +1287,7 @@ async function sendResultsToServer(data, loopName) {
 
 
 
-let trials_1;
+var trials_1;
 
 function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
     return async function() {
@@ -1313,17 +1313,18 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
             console.log(`Trial ${snapshot.index + 1}:`, thisTrial_1);
             const stimName = thisTrial_1?.Name ?? 'unknown';
             const stimColor = thisTrial_1?.Color ?? 'unknown';
-            console.log(`Trial data: Name - ${stimName}, Color - ${stimColor}`);
+            const correctAnswer = thisTrial_1?.Correct_answer ?? 'unknown'; // Отримуємо правильну відповідь
+            console.log(`Trial data: Name - ${stimName}, Color - ${stimColor}, Correct answer - ${correctAnswer}`);
 
             recordResponse(snapshot.index, stimName, stimColor)
                 .then(response => {
                     console.log(`Response for trial ${snapshot.index + 1}: ${response}`);
 
-                    const correctAnswer = stimColor;
                     let feedback = '';
                     let feedbackColor = '';
 
-                    if (response === correctAnswer) {
+                    // Перевіряємо відповідь
+                    if (response.toLowerCase() === correctAnswer.toLowerCase()) {
                         feedback = "Правильно!";
                         feedbackColor = 'green';
                     } else {
@@ -1339,17 +1340,19 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
                         feedbackColor: feedbackColor
                     };
 
+                    // Створення та малювання фідбеку
                     const feedbackText = new visual.TextStim({
                         win: psychoJS.window,
                         text: feedback,
                         color: feedbackColor,
                         height: 0.1
                     });
+
                     feedbackText.draw();
-                    psychoJS.window.flip();
-                    core.wait(1.5);
-                    psychoJS.window.clear();
-                    psychoJS.window.flip();
+                    psychoJS.window.flip();  // Оновлення екрану після малювання фідбеку
+                    core.wait(1.5);  // Затримка на 1.5 секунди
+                    psychoJS.window.clear();  // Очищення екрану після затримки
+                    psychoJS.window.flip();  // Оновлення екрану після очищення
                 })
                 .catch(error => console.error('Error recording response:', error));
         }
