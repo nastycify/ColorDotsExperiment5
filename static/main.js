@@ -1348,7 +1348,7 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
                         feedbackColor: feedbackColor  // Зберігаємо колір фідбеку
                     };
 
-                    // Очищаємо екран перед показом фідбеку
+                    // Очищення екрану (необов'язково, якщо хочемо залишити попередній стимул)
                     psychoJS.window.clear();
 
                     // Відображення фідбеку
@@ -1359,7 +1359,7 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
                         height: 0.1
                     });
                     feedbackText.draw();
-                    psychoJS.window.flip();
+                    psychoJS.window.flip(); // Оновлюємо екран для відображення фідбеку
 
                     // Пауза після фідбеку, щоб учасник міг побачити результат
                     core.wait(1.0);  // Пауза 1 секунда для перегляду фідбеку
