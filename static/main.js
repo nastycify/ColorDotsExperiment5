@@ -1313,7 +1313,7 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
             trials_1LoopScheduler.add(trialRoutineEnd(snapshot));
             trials_1LoopScheduler.add(trials_1LoopEndIteration(trials_1LoopScheduler, snapshot));
 
-            // Логування для перевірки вмісту each trial
+            // Логування для перевірки вмісту кожного тріалу
             console.log(`Trial ${snapshot.index + 1}:`, thisTrial_1);
             const stimName = thisTrial_1?.Name ?? 'unknown';
             const stimColor = thisTrial_1?.Color ?? 'unknown';
@@ -1359,9 +1359,9 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
                     // Пауза після фідбеку (1,5 секунди)
                     core.wait(1.5);  // Пауза 1.5 сек для перегляду фідбеку
 
-                    // Очистити екран після паузи перед новим стимулом
-                    psychoJS.window.clear();
-                    psychoJS.window.flip();  // Оновити екран після очищення
+                    // Очищення екрану після паузи перед новим стимулом
+                    psychoJS.window.clear();  // Очищаємо екран
+                    psychoJS.window.flip();   // Оновлюємо екран, щоб почати новий стимул
                 })
                 .catch(error => console.error('Error recording response:', error));
         }
