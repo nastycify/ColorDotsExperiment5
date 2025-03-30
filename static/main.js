@@ -1295,7 +1295,7 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
     return async function() {
         TrialHandler.fromSnapshot(snapshot); // Оновлення внутрішніх змінних петлі
 
-        // Налаштування обробника для рандомізації умов тощо
+        // Налаштування обробника для рандомізації умов
         trials_1 = new TrialHandler({
             psychoJS: psychoJS,
             nReps: 1, method: TrialHandler.Method.RANDOM,
@@ -1306,7 +1306,7 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
         psychoJS.experiment.addLoop(trials_1); // Додаємо петлю до експерименту
         currentLoop = trials_1;  // Встановлюємо поточну петлю
 
-        // Додаємо всі тріали з trialList:
+        // Додаємо всі тріали з trialList
         for (const thisTrial_1 of trials_1) {
             snapshot = trials_1.getSnapshot();
             trials_1LoopScheduler.add(importConditions(snapshot));
@@ -1325,11 +1325,42 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
             recordResponse(snapshot.index, stimName, stimColor)
                 .then(response => {
                     console.log(`Response for trial ${snapshot.index + 1}: ${response}`);
+
+                    // Порівняння відповіді з правильною
+                    const correctAnswer = stimColor;  // Припускаємо, що правильна відповідь - це колір
+                    let feedback = '';
+                    let feedbackColor = '';  // Змінна для кольору фідбеку
+
+                    if (response === correctAnswer) {
+                        feedback = "Правильно!";
+                        feedbackColor = 'green';  // Зелений колір для правильної відповіді
+                    } else {
+                        feedback = "Неправильно!";
+                        feedbackColor = 'red';  // Червоний колір для неправильної відповіді
+                    }
+
+                    // Фіксування результату
                     psychoJS.experiment._trialsData[snapshot.index] = {
                         name: stimName,
                         color: stimColor,
-                        response: response
+                        response: response,
+                        feedback: feedback,  // Додаємо фідбек до даних
+                        feedbackColor: feedbackColor  // Зберігаємо колір фідбеку
                     };
+
+                    // Відображення фідбеку
+                    const feedbackText = new visual.TextStim({
+                        win: psychoJS.window,
+                        text: feedback,
+                        color: feedbackColor,  // Використовуємо змінну для кольору
+                        height: 0.1
+                    });
+                    feedbackText.draw();
+                    psychoJS.window.flip();
+
+                    // Пауза після фідбеку, щоб учасник міг побачити результат
+                    core.wait(1.0);  // Пауза 1 секунда для перегляду фідбеку
+
                 })
                 .catch(error => console.error('Error recording response:', error));
         }
@@ -1346,7 +1377,9 @@ async function trials_1LoopEnd() {
         name: thisTrial_1?.Name ?? 'unknown',
         color: thisTrial_1?.Color ?? 'unknown',
         response: psychoJS.experiment._trialsData?.[index]?.response ?? 'unknown',
-        trialNumber: index + 1
+        trialNumber: index + 1,
+        feedback: psychoJS.experiment._trialsData?.[index]?.feedback ?? 'unknown',
+        feedbackColor: psychoJS.experiment._trialsData?.[index]?.feedbackColor ?? 'unknown'  // Додаємо фідбек і його колір
     }));
 
     // Надсилання результатів на сервер
@@ -1378,6 +1411,7 @@ function trials_1LoopEndIteration(scheduler, snapshot) {
         return Scheduler.Event.NEXT;
     };
 }
+
 
 var trials_2;
 
