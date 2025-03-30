@@ -1334,7 +1334,63 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
                     }
 
                     psychoJS.experiment._tr_
+            // Фіксація відповіді користувача під час тріалу
+            recordResponse(snapshot.index, stimName, stimColor)
+                .then(response => {
+                    console.log(`Response for trial ${snapshot.index + 1}: ${response}`);
+                    psychoJS.experiment._trialsData[snapshot.index] = {
+                        name: stimName,
+                        color: stimColor,
+                        response: response
+                    };
+                })
+                .catch(error => console.error('Error recording response:', error));
+        }
 
+        return Scheduler.Event.NEXT;
+    }
+}
+
+async function trials_1LoopEnd() {
+    psychoJS.experiment.removeLoop(trials_1);
+
+    // Збір даних по всіх тріалах
+    const allTrialData = trials_1.trialList.map((thisTrial_1, index) => ({
+        name: thisTrial_1?.Name ?? 'unknown',
+        color: thisTrial_1?.Color ?? 'unknown',
+        response: psychoJS.experiment._trialsData?.[index]?.response ?? 'unknown',
+        trialNumber: index + 1
+    }));
+
+    // Надсилання результатів на сервер
+    await sendResultsToServer(allTrialData, 'trials_1')
+        .then(() => console.log('Data successfully sent for trials_1.'))
+        .catch((error) => console.error('Error sending data for trials_1:', error));
+
+    if (psychoJS.experiment._unfinishedLoops.length > 0)
+        currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
+    else
+        currentLoop = psychoJS.experiment;
+
+    return Scheduler.Event.NEXT;
+}
+
+function trials_1LoopEndIteration(scheduler, snapshot) {
+    // Підготовка до наступної ітерації
+    return async function () {
+        if (typeof snapshot !== 'undefined') {
+            if (snapshot.finished) {
+                if (psychoJS.experiment.isEntryEmpty()) {
+                    psychoJS.experiment.nextEntry(snapshot);
+                }
+                scheduler.stop();
+            } else {
+                psychoJS.experiment.nextEntry(snapshot);
+            }
+        }
+        return Scheduler.Event.NEXT;
+    };
+}
 
 
 var trials_2;
