@@ -1285,8 +1285,6 @@ async function sendResultsToServer(data, loopName) {
   }
 }
 
-
-
 var trials_1;
 
 function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
@@ -1337,8 +1335,11 @@ function trialRoutineEachFrame_1(snapshot) {
 
             // Показуємо фідбек
             showFeedback(feedbackText, feedbackColor);
+
+            // Затримка перед переходом до наступного стимулу
             await sleep(1000); // Затримка перед приховуванням фідбеку
-            hideFeedback();
+
+            hideFeedback();  // Сховати фідбек
 
             continueRoutine = false; // Завершуємо цикл після відповіді
         }
@@ -1410,9 +1411,6 @@ function trials_1LoopEndIteration(snapshot) {
         return Scheduler.Event.NEXT;
     };
 }
-
-
-
 
 
 
