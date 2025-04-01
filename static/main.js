@@ -1293,7 +1293,7 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
     return async function() {
         TrialHandler.fromSnapshot(snapshot); // Оновлення внутрішніх змінних петлі
 
-        // Налаштування обробника для рандомізації умов тощо
+        // Налаштування обробника для рандомізації умов
         trials_1 = new TrialHandler({
             psychoJS: psychoJS,
             nReps: 1, method: TrialHandler.Method.RANDOM,
@@ -1309,7 +1309,7 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
             snapshot = trials_1.getSnapshot();
             trials_1LoopScheduler.add(importConditions(snapshot));
             trials_1LoopScheduler.add(trialRoutineBegin(snapshot));
-            trials_1LoopScheduler.add(trialRoutineEachFrame(snapshot));
+            trials_1LoopScheduler.add(trialRoutineEachFrame_1(snapshot)); // Оновлений виклик
             trials_1LoopScheduler.add(trialRoutineEnd(snapshot));
             trials_1LoopScheduler.add(trials_1LoopEndIteration(trials_1LoopScheduler, snapshot));
         }
@@ -1318,7 +1318,8 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
     }
 }
 
-function trialRoutineEachFrame(snapshot) {
+// Функція для першого лупу (унікальне ім'я)
+function trialRoutineEachFrame_1(snapshot) {
     return async function() {
         let continueRoutine = true;
 
@@ -1342,6 +1343,7 @@ function trialRoutineEachFrame(snapshot) {
     }
 }
 
+// Функція для відображення зворотного зв’язку
 function showFeedback(text, color) {
     let feedbackComponent = document.getElementById("feedback");
     feedbackComponent.innerText = text;
@@ -1349,15 +1351,18 @@ function showFeedback(text, color) {
     feedbackComponent.style.display = "block";
 }
 
+// Функція для приховування зворотного зв’язку
 function hideFeedback() {
     let feedbackComponent = document.getElementById("feedback");
     feedbackComponent.style.display = "none";
 }
 
+// Функція для паузи (імітація очікування)
 async function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+// Завершення лупу
 async function trials_1LoopEnd() {
     psychoJS.experiment.removeLoop(trials_1);
 
@@ -1372,32 +1377,7 @@ async function trials_1LoopEnd() {
     // Надсилання результатів на сервер
     await sendResultsToServer(allTrialData, 'trials_1')
         .then(() => console.log('Data successfully sent for trials_1.'))
-        .catch((error) => console.error('Error sending data for trials_1:', error));
-
-    if (psychoJS.experiment._unfinishedLoops.length > 0)
-        currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
-    else
-        currentLoop = psychoJS.experiment;
-
-    return Scheduler.Event.NEXT;
-}
-
-function trials_1LoopEndIteration(scheduler, snapshot) {
-    // Підготовка до наступної ітерації
-    return async function () {
-        if (typeof snapshot !== 'undefined') {
-            if (snapshot.finished) {
-                if (psychoJS.experiment.isEntryEmpty()) {
-                    psychoJS.experiment.nextEntry(snapshot);
-                }
-                scheduler.stop();
-            } else {
-                psychoJS.experiment.nextEntry(snapshot);
-            }
-        }
-        return Scheduler.Event.NEXT;
-    };
-}
+        .catch((error) => console.error('Error
 
 
 
