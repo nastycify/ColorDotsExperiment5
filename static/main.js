@@ -1311,7 +1311,7 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
             trials_1LoopScheduler.add(trialRoutineBegin(snapshot));
             trials_1LoopScheduler.add(trialRoutineEachFrame(snapshot)); // Оновлений виклик
             trials_1LoopScheduler.add(trialRoutineEnd(snapshot));
-            trials_1LoopScheduler.add(trials_1LoopEndIteration(trials_1LoopScheduler, snapshot));
+            trials_1LoopScheduler.add(trials_1LoopEndIteration(snapshot)); // Викликаємо функцію завершення ітерації
         }
 
         return Scheduler.Event.NEXT;
@@ -1390,6 +1390,23 @@ async function trials_1LoopEnd() {
     return Scheduler.Event.NEXT;
 }
 
+// Функція для завершення кожної ітерації лупу
+function trials_1LoopEndIteration(snapshot) {
+    return async function() {
+        if (typeof snapshot !== 'undefined') {
+            if (snapshot.finished) {
+                if (psychoJS.experiment.isEntryEmpty()) {
+                    psychoJS.experiment.nextEntry(snapshot);
+                }
+                // Зупиняємо поточний цикл після завершення ітерації
+                psychoJS.experiment.nextEntry(snapshot);
+            } else {
+                psychoJS.experiment.nextEntry(snapshot);
+            }
+        }
+        return Scheduler.Event.NEXT;
+    };
+}
 
 
 
