@@ -1319,10 +1319,11 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
 }
 
 // Функція для першого лупу (унікальне ім'я)
-function trialRoutineEachFrame_1(snapshot) {
+function trialRoutineEachFrame(snapshot) {
     return async function() {
         let continueRoutine = true;
 
+        // Перевірка на наявність правильного значення в snapshot
         if (!snapshot || !snapshot['correct_answer']) {
             console.error("Missing data in snapshot", snapshot);
             return Scheduler.Event.NEXT;
@@ -1331,12 +1332,17 @@ function trialRoutineEachFrame_1(snapshot) {
         let correctAnswer = snapshot['correct_answer'];
         let response = psychoJS.eventManager.getKeys({keyList: ['l', 's']});
 
+        // Якщо є відповідь, перевіряємо її та відображаємо фідбек
         if (response.length > 0) {
             let feedbackText = (response[0] === correctAnswer) ? "Правильно!" : "Неправильно";
             let feedbackColor = (response[0] === correctAnswer) ? "green" : "red";
             showFeedback(feedbackText, feedbackColor);
-            await sleep(1000);
-            hideFeedback();
+
+            // Затримка 1 секунда перед приховуванням фідбеку
+            setTimeout(() => {
+                hideFeedback();
+            }, 1000);
+
             continueRoutine = false;
         }
         return continueRoutine ? Scheduler.Event.FLIP_REPEAT : Scheduler.Event.NEXT;
@@ -1346,15 +1352,23 @@ function trialRoutineEachFrame_1(snapshot) {
 // Функція для відображення зворотного зв’язку
 function showFeedback(text, color) {
     let feedbackComponent = document.getElementById("feedback");
-    feedbackComponent.innerText = text;
-    feedbackComponent.style.color = color;
-    feedbackComponent.style.display = "block";
+    if (feedbackComponent) {
+        feedbackComponent.innerText = text;
+        feedbackComponent.style.color = color;
+        feedbackComponent.style.display = "block";
+    } else {
+        console.error("Feedback component not found");
+    }
 }
 
 // Функція для приховування зворотного зв’язку
 function hideFeedback() {
     let feedbackComponent = document.getElementById("feedback");
-    feedbackComponent.style.display = "none";
+    if (feedbackComponent) {
+        feedbackComponent.style.display = "none";
+    } else {
+        console.error("Feedback component not found");
+    }
 }
 
 // Функція для паузи (імітація очікування)
