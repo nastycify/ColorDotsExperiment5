@@ -2081,7 +2081,7 @@ function trialRoutineBegin(snapshot) {
 
 
 var frameRemains;
-function trialRoutineEachFrameGeneral() {
+function trialRoutineEachFrame() {
   return async function () {
     //--- Loop for each frame of Routine 'trial' ---
     // get current time
