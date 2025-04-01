@@ -1291,23 +1291,25 @@ var trials_1;
 
 function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
     return async function() {
-        TrialHandler.fromSnapshot(snapshot); // Оновлення внутрішніх змінних петлі
-
-        // Налаштування обробника для рандомізації умов
+        // Оновлення внутрішніх змінних петлі
         trials_1 = new TrialHandler({
             psychoJS: psychoJS,
-            nReps: 1, method: TrialHandler.Method.RANDOM,
-            extraInfo: expInfo, originPath: undefined,
+            nReps: 1, 
+            method: TrialHandler.Method.RANDOM,
+            extraInfo: expInfo, 
+            originPath: undefined,
             trialList: 'Stimul_1.xlsx', // Перевірте правильність шляху до файлу
-            seed: undefined, name: 'trials_1'
+            seed: undefined, 
+            name: 'trials_1'
         });
+
         psychoJS.experiment.addLoop(trials_1); // Додаємо петлю до експерименту
         currentLoop = trials_1;  // Встановлюємо поточну петлю
 
         // Додаємо всі тріали з trialList:
         for (const thisTrial_1 of trials_1) {
             snapshot = trials_1.getSnapshot();
-            trials_1LoopScheduler.add(importConditions(snapshot));
+            trials_1LoopScheduler.add(importConditions(snapshot)); // Переконатися, що ця функція працює
             trials_1LoopScheduler.add(trialRoutineBegin(snapshot));
             trials_1LoopScheduler.add(trialRoutineEachFrame_1(snapshot)); // Викликаємо функцію для першого лупу
             trials_1LoopScheduler.add(trialRoutineEnd(snapshot));
