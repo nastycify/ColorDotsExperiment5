@@ -1309,7 +1309,7 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
             snapshot = trials_1.getSnapshot();
             trials_1LoopScheduler.add(importConditions(snapshot));
             trials_1LoopScheduler.add(trialRoutineBegin(snapshot));
-            trials_1LoopScheduler.add(trialRoutineEachFrame(snapshot)); // Оновлений виклик
+            trials_1LoopScheduler.add(trialRoutineEachFrame_1(snapshot)); // Викликаємо функцію для першого лупу
             trials_1LoopScheduler.add(trialRoutineEnd(snapshot));
             trials_1LoopScheduler.add(trials_1LoopEndIteration(snapshot)); // Викликаємо функцію завершення ітерації
         }
@@ -1319,7 +1319,7 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
 }
 
 // Функція для першого лупу (унікальне ім'я)
-function trialRoutineEachFrame(snapshot) {
+function trialRoutineEachFrame_1(snapshot) {
     return async function() {
         let continueRoutine = true;
 
@@ -1328,7 +1328,7 @@ function trialRoutineEachFrame(snapshot) {
             return Scheduler.Event.NEXT;
         }
 
-        let correctAnswer = snapshot['Correct_answer'];  // Перевірка правильного відповіді з файлу
+        let correctAnswer = snapshot['Correct_answer'];  // Перевірка правильної відповіді з файлу
         let response = psychoJS.eventManager.getKeys({keyList: ['l', 's']});  // Отримуємо натискання клавіші
 
         if (response.length > 0) {
@@ -2079,7 +2079,7 @@ function trialRoutineBegin(snapshot) {
 
 
 var frameRemains;
-function trialRoutineEachFrame() {
+function trialRoutineEachFrameGeneral() {
   return async function () {
     //--- Loop for each frame of Routine 'trial' ---
     // get current time
