@@ -1287,39 +1287,11 @@ async function sendResultsToServer(data, loopName) {
 
 
 
-var trials_1;
-
-function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
-    return async function() {
-        TrialHandler.fromSnapshot(snapshot); // Оновлення внутрішніх змінних петлі
-
-        // Налаштування обробника для рандомізації умов
-        trials_1 = new TrialHandler({
-            psychoJS: psychoJS,
-            nReps: 1, method: TrialHandler.Method.RANDOM,
-            extraInfo: expInfo, originPath: undefined,
-            trialList: 'Stimul_1.xlsx', // Перевірте правильність шляху до файлу
-            seed: undefined, name: 'trials_1'
-        });
-        psychoJS.experiment.addLoop(trials_1); // Додаємо петлю до експерименту
-        currentLoop = trials_1;  // Встановлюємо поточну петлю
-
-        // Додаємо всі тріали з trialList:
-        for (const thisTrial_1 of trials_1) {
-            snapshot = trials_1.getSnapshot();
-            trials_1LoopScheduler.add(importConditions(snapshot));
-            trials_1LoopScheduler.add(trialRoutineBegin(snapshot));
-            trials_1LoopScheduler.add(trialRoutineEachFrame(snapshot)); // Оновлений виклик
-            trials_1LoopScheduler.add(trialRoutineEnd(snapshot));
-            trials_1LoopScheduler.add(trials_1LoopEndIteration(snapshot)); // Викликаємо функцію завершення ітерації
-        }
-
-        return Scheduler.Event.NEXT;
-    }
-}
+// Змінна для збереження стану фідбеку
+let feedbackShown = false;
 
 // Функція для першого лупу (унікальне ім'я)
-function trialRoutineEachFrame(snapshot) {
+function trialRoutineEachFrame_1(snapshot) {
     return async function() {
         let continueRoutine = true;
 
@@ -1332,8 +1304,10 @@ function trialRoutineEachFrame(snapshot) {
         let correctAnswer = snapshot['correct_answer'];
         let response = psychoJS.eventManager.getKeys({keyList: ['l', 's']});
 
-        // Якщо є відповідь, перевіряємо її та відображаємо фідбек
-        if (response.length > 0) {
+        // Перевірка чи була дана відповідь та чи вже не показували фідбек
+        if (response.length > 0 && !feedbackShown) {
+            feedbackShown = true;  // Встановлюємо, що фідбек показано
+
             let feedbackText = (response[0] === correctAnswer) ? "Правильно!" : "Неправильно";
             let feedbackColor = (response[0] === correctAnswer) ? "green" : "red";
             showFeedback(feedbackText, feedbackColor);
@@ -1343,10 +1317,11 @@ function trialRoutineEachFrame(snapshot) {
                 hideFeedback();
             }, 1000);
 
-            continueRoutine = false;
+            continueRoutine = false; // Завершуємо тріал після відповіді
         }
+
         return continueRoutine ? Scheduler.Event.FLIP_REPEAT : Scheduler.Event.NEXT;
-    }
+    };
 }
 
 // Функція для відображення зворотного зв’язку
@@ -1376,7 +1351,37 @@ async function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-// Завершення лупу
+// Функція початку лупу
+function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
+    return async function() {
+        TrialHandler.fromSnapshot(snapshot); // Оновлення внутрішніх змінних петлі
+
+        // Налаштування обробника для рандомізації умов
+        trials_1 = new TrialHandler({
+            psychoJS: psychoJS,
+            nReps: 1, method: TrialHandler.Method.RANDOM,
+            extraInfo: expInfo, originPath: undefined,
+            trialList: 'Stimul_1.xlsx', // Перевірте правильність шляху до файлу
+            seed: undefined, name: 'trials_1'
+        });
+        psychoJS.experiment.addLoop(trials_1); // Додаємо петлю до експерименту
+        currentLoop = trials_1;  // Встановлюємо поточну петлю
+
+        // Додаємо всі тріали з trialList:
+        for (const thisTrial_1 of trials_1) {
+            snapshot = trials_1.getSnapshot();
+            trials_1LoopScheduler.add(importConditions(snapshot));
+            trials_1LoopScheduler.add(trialRoutineBegin(snapshot));
+            trials_1LoopScheduler.add(trialRoutineEachFrame_1(snapshot)); // Викликаємо оновлену функцію
+            trials_1LoopScheduler.add(trialRoutineEnd(snapshot));
+            trials_1LoopScheduler.add(trials_1LoopEndIteration(snapshot)); // Викликаємо функцію завершення ітерації
+        }
+
+        return Scheduler.Event.NEXT;
+    }
+}
+
+// Функція для завершення лупу
 async function trials_1LoopEnd() {
     psychoJS.experiment.removeLoop(trials_1);
 
@@ -1421,6 +1426,7 @@ function trials_1LoopEndIteration(snapshot) {
         return Scheduler.Event.NEXT;
     };
 }
+
 
 
 
@@ -2090,7 +2096,7 @@ function trialRoutineBegin(snapshot) {
 
 
 var frameRemains;
-function trialRoutineEachFrameGeneral() {
+function trialRoutineEachFrame() {
   return async function () {
     //--- Loop for each frame of Routine 'trial' ---
     // get current time
