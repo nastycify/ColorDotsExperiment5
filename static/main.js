@@ -1319,28 +1319,32 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
 }
 
 // Функція для першого лупу (унікальне ім'я)
-function trialRoutineEachFrame_1(snapshot) {
+function trialRoutineEachFrame(snapshot) {
     return async function() {
         let continueRoutine = true;
 
-        if (!snapshot || !snapshot['correct_answer']) {
+        if (!snapshot || !snapshot['Correct_answer']) {
             console.error("Missing data in snapshot", snapshot);
             return Scheduler.Event.NEXT;
         }
 
-        let correctAnswer = snapshot['correct_answer'];
-        let response = psychoJS.eventManager.getKeys({keyList: ['l', 's']});
+        let correctAnswer = snapshot['Correct_answer'];  // Перевірка правильного відповіді з файлу
+        let response = psychoJS.eventManager.getKeys({keyList: ['l', 's']});  // Отримуємо натискання клавіші
 
         if (response.length > 0) {
+            // Порівнюємо відповідь користувача з правильною відповіддю
             let feedbackText = (response[0] === correctAnswer) ? "Правильно!" : "Неправильно";
             let feedbackColor = (response[0] === correctAnswer) ? "green" : "red";
+
+            // Виводимо фідбек
             showFeedback(feedbackText, feedbackColor);
-            await sleep(1000);
-            hideFeedback();
-            continueRoutine = false;
+            await sleep(1000);  // Чекаємо 1 секунду для фідбеку
+            hideFeedback();  // Ховаємо фідбек
+
+            continueRoutine = false;  // Завершуємо поточний тріал
         }
         return continueRoutine ? Scheduler.Event.FLIP_REPEAT : Scheduler.Event.NEXT;
-    }
+    };
 }
 
 // Функція для відображення зворотного зв’язку
@@ -1407,6 +1411,7 @@ function trials_1LoopEndIteration(snapshot) {
         return Scheduler.Event.NEXT;
     };
 }
+
 
 
 
