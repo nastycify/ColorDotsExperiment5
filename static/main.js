@@ -1290,6 +1290,9 @@ async function sendResultsToServer(data, loopName) {
 // Змінна для збереження стану фідбеку
 let feedbackShown = false;
 
+// Оголошення змінної trials_1
+var trials_1;
+
 // Функція для першого лупу (унікальне ім'я)
 function trialRoutineEachFrame_1(snapshot) {
     return async function() {
@@ -1356,7 +1359,7 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
     return async function() {
         TrialHandler.fromSnapshot(snapshot); // Оновлення внутрішніх змінних петлі
 
-        // Налаштування обробника для рандомізації умов
+        // Оголошення змінної trials_1 перед її використанням
         trials_1 = new TrialHandler({
             psychoJS: psychoJS,
             nReps: 1, method: TrialHandler.Method.RANDOM,
@@ -1364,6 +1367,7 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
             trialList: 'Stimul_1.xlsx', // Перевірте правильність шляху до файлу
             seed: undefined, name: 'trials_1'
         });
+
         psychoJS.experiment.addLoop(trials_1); // Додаємо петлю до експерименту
         currentLoop = trials_1;  // Встановлюємо поточну петлю
 
@@ -1378,7 +1382,7 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
         }
 
         return Scheduler.Event.NEXT;
-    }
+    };
 }
 
 // Функція для завершення лупу
