@@ -1288,7 +1288,7 @@ async function sendResultsToServer(data, loopName) {
 
 
 var trials_1;
-var feedbackText; // Додаємо змінну для текстового компонента фідбеку
+var feedbackText;
 
 function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
     return async function() {
@@ -1303,7 +1303,6 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
         psychoJS.experiment.addLoop(trials_1);
         currentLoop = trials_1;
 
-        // Ініціалізація текстового компонента для фідбеку
         feedbackText = new visual.TextStim({
             win: psychoJS.window,
             name: 'feedbackText',
@@ -1328,38 +1327,43 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
             const stimColor = thisTrial_1?.Color ?? 'unknown';
             console.log(`Trial data: Name - ${stimName}, Color - ${stimColor}`);
 
-            recordResponse(snapshot.index, stimName, stimColor)
-                .then(response => {
-                    console.log(`Response for trial ${snapshot.index + 1}: ${response}`);
-                    psychoJS.experiment._trialsData[snapshot.index] = {
-                        name: stimName,
-                        color: stimColor,
-                        response: response
-                    };
+            await new Promise((resolve) => { // Обгортаємо у Promise
+                recordResponse(snapshot.index, stimName, stimColor)
+                    .then(response => {
+                        console.log(`Response for trial ${snapshot.index + 1}: ${response}`);
+                        psychoJS.experiment._trialsData[snapshot.index] = {
+                            name: stimName,
+                            color: stimColor,
+                            response: response
+                        };
 
-                    // Перевірка відповіді та відображення фідбеку
-                    const correctAnswer = thisTrial_1?.correct_answer ?? 'unknown';
-                    if (response === correctAnswer) {
-                        feedbackText.setColor(new util.Color('green'));
-                        feedbackText.setText('Правильно!');
-                    } else {
-                        feedbackText.setColor(new util.Color('red'));
-                        feedbackText.setText('Неправильно!');
-                    }
-                    feedbackText.setAutoDraw(true); // Показуємо фідбек
+                        const correctAnswer = thisTrial_1?.correct_answer ?? 'unknown';
+                        if (response === correctAnswer) {
+                            feedbackText.setColor(new util.Color('green'));
+                            feedbackText.setText('Правильно!');
+                        } else {
+                            feedbackText.setColor(new util.Color('red'));
+                            feedbackText.setText('Неправильно!');
+                        }
+                        feedbackText.setAutoDraw(true);
 
-                    // Затримка на 1 секунду перед наступним тріалом
-                    setTimeout(() => {
-                        feedbackText.setAutoDraw(false); // Приховуємо фідбек
-                        trials_1LoopScheduler.next(); // Перехід до наступного тріалу
-                    }, 1000); // 1000 мілісекунд = 1 секунда
-                })
-                .catch(error => console.error('Error recording response:', error));
+                        setTimeout(() => {
+                            feedbackText.setAutoDraw(false);
+                            resolve(); // Вирішуємо Promise після затримки
+                        }, 1000);
+                    })
+                    .catch(error => {
+                        console.error('Error recording response:', error);
+                        resolve(); // Вирішуємо Promise навіть при помилці, щоб не застрягти цикл
+                    });
+            });
         }
 
         return Scheduler.Event.NEXT;
     }
 }
+
+// Решта функцій (trials_2LoopEnd, trials_2LoopEndIteration) залишаються без змін
 async function trials_1LoopEnd() {
     psychoJS.experiment.removeLoop(trials_1);
 
