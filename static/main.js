@@ -1309,7 +1309,7 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
             snapshot = trials_1.getSnapshot();
             trials_1LoopScheduler.add(importConditions(snapshot));
             trials_1LoopScheduler.add(trialRoutineBegin(snapshot));
-            trials_1LoopScheduler.add(trialRoutineEachFrame_1(snapshot)); // Оновлений виклик
+            trials_1LoopScheduler.add(trialRoutineEachFrame(snapshot)); // Оновлений виклик
             trials_1LoopScheduler.add(trialRoutineEnd(snapshot));
             trials_1LoopScheduler.add(trials_1LoopEndIteration(trials_1LoopScheduler, snapshot));
         }
