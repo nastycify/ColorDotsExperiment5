@@ -1291,25 +1291,24 @@ var trials_1;
 
 function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
     return async function() {
-        TrialHandler.fromSnapshot(snapshot); 
+        TrialHandler.fromSnapshot(snapshot);
 
         trials_1 = new TrialHandler({
             psychoJS: psychoJS,
             nReps: 1, method: TrialHandler.Method.RANDOM,
             extraInfo: expInfo, originPath: undefined,
-            trialList: 'Stimul_1.xlsx', 
+            trialList: 'Stimul_1.xlsx',
             seed: undefined, name: 'trials_1'
         });
         psychoJS.experiment.addLoop(trials_1);
-        currentLoop = trials_1;  
+        currentLoop = trials_1;
 
         for (const thisTrial_1 of trials_1) {
             snapshot = trials_1.getSnapshot();
             trials_1LoopScheduler.add(importConditions(snapshot));
             trials_1LoopScheduler.add(trialRoutineBegin(snapshot));
-            trials_1LoopScheduler.add(trialRoutineEachFrame());
+            trials_1LoopScheduler.add(trialRoutineEachFrame(snapshot));
             trials_1LoopScheduler.add(trialRoutineEnd(snapshot));
-            trials_1LoopScheduler.add(showFeedback(snapshot)); 
             trials_1LoopScheduler.add(trials_1LoopEndIteration(trials_1LoopScheduler, snapshot));
         }
 
@@ -1317,69 +1316,52 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
     }
 }
 
-function showFeedback(snapshot) {
-    return async function () {
-        let feedbackText = '';
-        let feedbackColor = 'white';
-        
-        const correctAnswer = snapshot.get('correct_answer');
-        const userResponse = psychoJS.experiment._trialsData?.[snapshot.index]?.response ?? '';
-        
-        if (userResponse === correctAnswer) {
-            feedbackText = 'Правильно!';
-            feedbackColor = 'green';
-        } else {
-            feedbackText = 'Неправильно';
-            feedbackColor = 'red';
+function trialRoutineEachFrame(snapshot) {
+    return async function() {
+        let continueRoutine = true;
+
+        if (!snapshot || !snapshot.get("correct_answer")) {
+            console.error("Missing data in snapshot", snapshot);
+            return Scheduler.Event.NEXT;
         }
-        
-        feedbackComponent.setText(feedbackText);
-        feedbackComponent.setColor(feedbackColor);
-        feedbackComponent.setAutoDraw(true);
-        await psychoJS.clock.wait(1000); 
-        feedbackComponent.setAutoDraw(false);
 
-        return Scheduler.Event.NEXT;
-    };
-}
+        let correctAnswer = snapshot.get("correct_answer");
+        let response = psychoJS.eventManager.getKeys({keyList: ['l', 's']});
 
-async function trials_1LoopEnd() {
-    psychoJS.experiment.removeLoop(trials_1);
-
-    const allTrialData = trials_1.trialList.map((thisTrial_1, index) => ({
-        name: thisTrial_1?.Name ?? 'unknown',
-        color: thisTrial_1?.Color ?? 'unknown',
-        response: psychoJS.experiment._trialsData?.[index]?.response ?? 'unknown',
-        trialNumber: index + 1
-    }));
-
-    await sendResultsToServer(allTrialData, 'trials_1')
-        .then(() => console.log('Data successfully sent for trials_1.'))
-        .catch((error) => console.error('Error sending data for trials_1:', error));
-
-    if (psychoJS.experiment._unfinishedLoops.length > 0)
-        currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
-    else
-        currentLoop = psychoJS.experiment;
-
-    return Scheduler.Event.NEXT;
-}
-
-function trials_1LoopEndIteration(scheduler, snapshot) {
-    return async function () {
-        if (typeof snapshot !== 'undefined') {
-            if (snapshot.finished) {
-                if (psychoJS.experiment.isEntryEmpty()) {
-                    psychoJS.experiment.nextEntry(snapshot);
-                }
-                scheduler.stop();
-            } else {
-                psychoJS.experiment.nextEntry(snapshot);
-            }
+        if (response.length > 0) {
+            let isCorrect = response[0] === correctAnswer;
+            let feedbackText = isCorrect ? "Правильно!" : "Неправильно";
+            let feedbackColor = isCorrect ? "green" : "red";
+            showFeedback(feedbackText, feedbackColor);
+            
+            psychoJS.experiment.addData("response", response[0]);
+            psychoJS.experiment.addData("correct", isCorrect);
+            psychoJS.experiment.nextEntry();
+            
+            await sleep(1000);
+            hideFeedback();
+            continueRoutine = false;
         }
-        return Scheduler.Event.NEXT;
-    };
+        return continueRoutine ? Scheduler.Event.FLIP_REPEAT : Scheduler.Event.NEXT;
+    }
 }
+
+function showFeedback(text, color) {
+    let feedbackComponent = document.getElementById("feedback");
+    feedbackComponent.innerText = text;
+    feedbackComponent.style.color = color;
+    feedbackComponent.style.display = "block";
+}
+
+function hideFeedback() {
+    let feedbackComponent = document.getElementById("feedback");
+    feedbackComponent.style.display = "none";
+}
+
+async function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 
 
 var trials_2;
