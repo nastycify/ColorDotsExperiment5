@@ -1291,27 +1291,25 @@ var trials_1;
 
 function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
     return async function() {
-        // Оновлення внутрішніх змінних петлі
+        TrialHandler.fromSnapshot(snapshot); // Оновлення внутрішніх змінних петлі
+
+        // Налаштування обробника для рандомізації умов
         trials_1 = new TrialHandler({
             psychoJS: psychoJS,
-            nReps: 1, 
-            method: TrialHandler.Method.RANDOM,
-            extraInfo: expInfo, 
-            originPath: undefined,
+            nReps: 1, method: TrialHandler.Method.RANDOM,
+            extraInfo: expInfo, originPath: undefined,
             trialList: 'Stimul_1.xlsx', // Перевірте правильність шляху до файлу
-            seed: undefined, 
-            name: 'trials_1'
+            seed: undefined, name: 'trials_1'
         });
-
         psychoJS.experiment.addLoop(trials_1); // Додаємо петлю до експерименту
         currentLoop = trials_1;  // Встановлюємо поточну петлю
 
         // Додаємо всі тріали з trialList:
         for (const thisTrial_1 of trials_1) {
             snapshot = trials_1.getSnapshot();
-            trials_1LoopScheduler.add(importConditions(snapshot)); // Переконатися, що ця функція працює
+            trials_1LoopScheduler.add(importConditions(snapshot));
             trials_1LoopScheduler.add(trialRoutineBegin(snapshot));
-            trials_1LoopScheduler.add(trialRoutineEachFrame_1(snapshot)); // Викликаємо функцію для першого лупу
+            trials_1LoopScheduler.add(trialRoutineEachFrame(snapshot)); // Оновлений виклик
             trials_1LoopScheduler.add(trialRoutineEnd(snapshot));
             trials_1LoopScheduler.add(trials_1LoopEndIteration(snapshot)); // Викликаємо функцію завершення ітерації
         }
@@ -1325,28 +1323,24 @@ function trialRoutineEachFrame_1(snapshot) {
     return async function() {
         let continueRoutine = true;
 
-        if (!snapshot || !snapshot['Correct_answer']) {
+        if (!snapshot || !snapshot['correct_answer']) {
             console.error("Missing data in snapshot", snapshot);
             return Scheduler.Event.NEXT;
         }
 
-        let correctAnswer = snapshot['Correct_answer'];  // Перевірка правильної відповіді з файлу
-        let response = psychoJS.eventManager.getKeys({keyList: ['l', 's']});  // Отримуємо натискання клавіші
+        let correctAnswer = snapshot['correct_answer'];
+        let response = psychoJS.eventManager.getKeys({keyList: ['l', 's']});
 
         if (response.length > 0) {
-            // Порівнюємо відповідь користувача з правильною відповіддю
             let feedbackText = (response[0] === correctAnswer) ? "Правильно!" : "Неправильно";
             let feedbackColor = (response[0] === correctAnswer) ? "green" : "red";
-
-            // Виводимо фідбек
             showFeedback(feedbackText, feedbackColor);
-            await sleep(1000);  // Чекаємо 1 секунду для фідбеку
-            hideFeedback();  // Ховаємо фідбек
-
-            continueRoutine = false;  // Завершуємо поточний тріал
+            await sleep(1000);
+            hideFeedback();
+            continueRoutine = false;
         }
         return continueRoutine ? Scheduler.Event.FLIP_REPEAT : Scheduler.Event.NEXT;
-    };
+    }
 }
 
 // Функція для відображення зворотного зв’язку
@@ -1413,6 +1407,7 @@ function trials_1LoopEndIteration(snapshot) {
         return Scheduler.Event.NEXT;
     };
 }
+
 
 
 
