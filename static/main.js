@@ -1288,11 +1288,11 @@ async function sendResultsToServer(data, loopName) {
 
 
 var trials_1;
+var feedbackText; // Додаємо змінну для текстового компонента фідбеку
 
 function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
     return async function() {
         TrialHandler.fromSnapshot(snapshot);
-
         trials_1 = new TrialHandler({
             psychoJS: psychoJS,
             nReps: 1, method: TrialHandler.Method.RANDOM,
@@ -1303,63 +1303,102 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
         psychoJS.experiment.addLoop(trials_1);
         currentLoop = trials_1;
 
+        // Ініціалізація текстового компонента для фідбеку
+        feedbackText = new visual.TextStim({
+            win: psychoJS.window,
+            name: 'feedbackText',
+            text: '',
+            font: 'Arial',
+            units: undefined,
+            pos: [0, 0], height: 0.1, wrapWidth: undefined, ori: 0,
+            color: new util.Color('white'), opacity: 1,
+            depth: -6.0
+        });
+
         for (const thisTrial_1 of trials_1) {
             snapshot = trials_1.getSnapshot();
             trials_1LoopScheduler.add(importConditions(snapshot));
             trials_1LoopScheduler.add(trialRoutineBegin(snapshot));
-            trials_1LoopScheduler.add(trialRoutineEachFrame(snapshot));
+            trials_1LoopScheduler.add(trialRoutineEachFrame());
             trials_1LoopScheduler.add(trialRoutineEnd(snapshot));
             trials_1LoopScheduler.add(trials_1LoopEndIteration(trials_1LoopScheduler, snapshot));
+
+            console.log(`Trial ${snapshot.index + 1}:`, thisTrial_1);
+            const stimName = thisTrial_1?.Name ?? 'unknown';
+            const stimColor = thisTrial_1?.Color ?? 'unknown';
+            console.log(`Trial data: Name - ${stimName}, Color - ${stimColor}`);
+
+            recordResponse(snapshot.index, stimName, stimColor)
+                .then(response => {
+                    console.log(`Response for trial ${snapshot.index + 1}: ${response}`);
+                    psychoJS.experiment._trialsData[snapshot.index] = {
+                        name: stimName,
+                        color: stimColor,
+                        response: response
+                    };
+
+                    // Перевірка відповіді та відображення фідбеку
+                    const correctAnswer = thisTrial_1?.correct_answer ?? 'unknown';
+                    if (response === correctAnswer) {
+                        feedbackText.setColor(new util.Color('green'));
+                        feedbackText.setText('Правильно!');
+                    } else {
+                        feedbackText.setColor(new util.Color('red'));
+                        feedbackText.setText('Неправильно!');
+                    }
+                    feedbackText.setAutoDraw(true); // Показуємо фідбек
+
+                    // Затримка на 1 секунду перед наступним тріалом
+                    setTimeout(() => {
+                        feedbackText.setAutoDraw(false); // Приховуємо фідбек
+                        trials_1LoopScheduler.next(); // Перехід до наступного тріалу
+                    }, 1000); // 1000 мілісекунд = 1 секунда
+                })
+                .catch(error => console.error('Error recording response:', error));
         }
 
         return Scheduler.Event.NEXT;
     }
 }
+async function trials_1LoopEnd() {
+    psychoJS.experiment.removeLoop(trials_1);
 
-function trialRoutineEachFrame(snapshot) {
-    return async function() {
-        let continueRoutine = true;
+    // Збір даних по всіх тріалах
+    const allTrialData = trials_1.trialList.map((thisTrial_1, index) => ({
+        name: thisTrial_1?.Name ?? 'unknown',
+        color: thisTrial_1?.Color ?? 'unknown',
+        response: psychoJS.experiment._trialsData?.[index]?.response ?? 'unknown',
+        trialNumber: index + 1
+    }));
 
-        if (!snapshot || !snapshot.get("correct_answer")) {
-            console.error("Missing data in snapshot", snapshot);
-            return Scheduler.Event.NEXT;
+    // Надсилання результатів на сервер
+    await sendResultsToServer(allTrialData, 'trials_1')
+        .then(() => console.log('Data successfully sent for trials_1.'))
+        .catch((error) => console.error('Error sending data for trials_1:', error));
+
+    if (psychoJS.experiment._unfinishedLoops.length > 0)
+        currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
+    else
+        currentLoop = psychoJS.experiment;
+
+    return Scheduler.Event.NEXT;
+}
+
+function trials_1LoopEndIteration(scheduler, snapshot) {
+    // Підготовка до наступної ітерації
+    return async function () {
+        if (typeof snapshot !== 'undefined') {
+            if (snapshot.finished) {
+                if (psychoJS.experiment.isEntryEmpty()) {
+                    psychoJS.experiment.nextEntry(snapshot);
+                }
+                scheduler.stop();
+            } else {
+                psychoJS.experiment.nextEntry(snapshot);
+            }
         }
-
-        let correctAnswer = snapshot.get("correct_answer");
-        let response = psychoJS.eventManager.getKeys({keyList: ['l', 's']});
-
-        if (response.length > 0) {
-            let isCorrect = response[0] === correctAnswer;
-            let feedbackText = isCorrect ? "Правильно!" : "Неправильно";
-            let feedbackColor = isCorrect ? "green" : "red";
-            showFeedback(feedbackText, feedbackColor);
-            
-            psychoJS.experiment.addData("response", response[0]);
-            psychoJS.experiment.addData("correct", isCorrect);
-            psychoJS.experiment.nextEntry();
-            
-            await sleep(1000);
-            hideFeedback();
-            continueRoutine = false;
-        }
-        return continueRoutine ? Scheduler.Event.FLIP_REPEAT : Scheduler.Event.NEXT;
-    }
-}
-
-function showFeedback(text, color) {
-    let feedbackComponent = document.getElementById("feedback");
-    feedbackComponent.innerText = text;
-    feedbackComponent.style.color = color;
-    feedbackComponent.style.display = "block";
-}
-
-function hideFeedback() {
-    let feedbackComponent = document.getElementById("feedback");
-    feedbackComponent.style.display = "none";
-}
-
-async function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+        return Scheduler.Event.NEXT;
+    };
 }
 
 
