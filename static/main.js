@@ -2090,7 +2090,7 @@ function trialRoutineBegin(snapshot) {
 
 
 var frameRemains;
-function trialRoutineEachFrame() {
+function trialRoutineEachFrameGeneral() {
   return async function () {
     //--- Loop for each frame of Routine 'trial' ---
     // get current time
