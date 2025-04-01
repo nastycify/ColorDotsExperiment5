@@ -1374,10 +1374,22 @@ async function trials_1LoopEnd() {
         trialNumber: index + 1
     }));
 
-    // Надсилання результатів на сервер
-    await sendResultsToServer(allTrialData, 'trials_1')
-        .then(() => console.log('Data successfully sent for trials_1.'))
-        .catch((error) => console.error('Error
+    try {
+        await sendResultsToServer(allTrialData, 'trials_1');
+        console.log('Data successfully sent for trials_1.');
+    } catch (error) {
+        console.error('Error sending data for trials_1:', error);
+    }
+
+    if (psychoJS.experiment._unfinishedLoops.length > 0) {
+        currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
+    } else {
+        currentLoop = psychoJS.experiment;
+    }
+
+    return Scheduler.Event.NEXT;
+}
+
 
 
 
