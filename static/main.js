@@ -1288,102 +1288,91 @@ async function sendResultsToServer(data, loopName) {
 
 
 var trials_1;
-var feedbackText;
 
 function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
     return async function() {
-        TrialHandler.fromSnapshot(snapshot);
+        TrialHandler.fromSnapshot(snapshot); // Оновлення внутрішніх змінних петлі
+
+        // Налаштування обробника для рандомізації умов тощо
         trials_1 = new TrialHandler({
             psychoJS: psychoJS,
             nReps: 1, method: TrialHandler.Method.RANDOM,
             extraInfo: expInfo, originPath: undefined,
-            trialList: 'Stimul_1.xlsx', // Ensure correct path
+            trialList: 'Stimul_1.xlsx', // Перевірте правильність шляху до файлу
             seed: undefined, name: 'trials_1'
         });
-        psychoJS.experiment.addLoop(trials_1);
-        currentLoop = trials_1;
+        psychoJS.experiment.addLoop(trials_1); // Додаємо петлю до експерименту
+        currentLoop = trials_1;  // Встановлюємо поточну петлю
 
-        feedbackText = new visual.TextStim({
-            win: psychoJS.window,
-            name: 'feedbackText',
-            text: '',
-            font: 'Arial',
-            units: undefined,
-            pos: [0, 0], height: 0.1, wrapWidth: undefined, ori: 0,
-            color: new util.Color('white'), opacity: 1,
-            depth: -6.0
-        });
-
+        // Додаємо всі тріали з trialList:
         for (const thisTrial_1 of trials_1) {
             snapshot = trials_1.getSnapshot();
             trials_1LoopScheduler.add(importConditions(snapshot));
             trials_1LoopScheduler.add(trialRoutineBegin(snapshot));
-            trials_1LoopScheduler.add(trialRoutineEachFrame());
+            trials_1LoopScheduler.add(trialRoutineEachFrame(snapshot));
             trials_1LoopScheduler.add(trialRoutineEnd(snapshot));
             trials_1LoopScheduler.add(trials_1LoopEndIteration(trials_1LoopScheduler, snapshot));
-
-            console.log(`Trial ${snapshot.index + 1}:`, thisTrial_1);
-            const stimName = thisTrial_1?.Name ?? 'unknown';
-            const stimColor = thisTrial_1?.Color ?? 'unknown';
-            console.log(`Trial data: Name - ${stimName}, Color - ${stimColor}`);
-
-            try {
-                const response = await recordResponse(snapshot.index, stimName, stimColor);
-                console.log(`Response for trial ${snapshot.index + 1}: ${response}`);
-                psychoJS.experiment._trialsData[snapshot.index] = {
-                    name: stimName,
-                    color: stimColor,
-                    response: response
-                };
-
-                const correctAnswer = thisTrial_1?.correct_answer ?? 'unknown';
-                if (response === correctAnswer) {
-                    feedbackText.setColor(new util.Color('green'));
-                    feedbackText.setText('Правильно!');
-                } else {
-                    feedbackText.setColor(new util.Color('red'));
-                    feedbackText.setText('Неправильно!');
-                }
-                feedbackText.setAutoDraw(true);
-
-                await new Promise(resolve => setTimeout(resolve, 1000)); // Use Promise for delay
-                feedbackText.setAutoDraw(false);
-
-            } catch (error) {
-                console.error('Error during trial:', error);
-                // Handle error appropriately (e.g., break the loop, log the error, etc.)
-                // For example, to continue:
-                continue;
-            }
         }
 
         return Scheduler.Event.NEXT;
     }
 }
 
+function trialRoutineEachFrame(snapshot) {
+    return async function() {
+        let continueRoutine = true;
+
+        if (!snapshot || !snapshot['correct_answer']) {
+            console.error("Missing data in snapshot", snapshot);
+            return Scheduler.Event.NEXT;
+        }
+
+        let correctAnswer = snapshot['correct_answer'];
+        let response = psychoJS.eventManager.getKeys({keyList: ['l', 's']});
+
+        if (response.length > 0) {
+            let feedbackText = (response[0] === correctAnswer) ? "Правильно!" : "Неправильно";
+            let feedbackColor = (response[0] === correctAnswer) ? "green" : "red";
+            showFeedback(feedbackText, feedbackColor);
+            await sleep(1000);
+            hideFeedback();
+            continueRoutine = false;
+        }
+        return continueRoutine ? Scheduler.Event.FLIP_REPEAT : Scheduler.Event.NEXT;
+    }
+}
+
+function showFeedback(text, color) {
+    let feedbackComponent = document.getElementById("feedback");
+    feedbackComponent.innerText = text;
+    feedbackComponent.style.color = color;
+    feedbackComponent.style.display = "block";
+}
+
+function hideFeedback() {
+    let feedbackComponent = document.getElementById("feedback");
+    feedbackComponent.style.display = "none";
+}
+
+async function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 async function trials_1LoopEnd() {
     psychoJS.experiment.removeLoop(trials_1);
 
     // Збір даних по всіх тріалах
-    const allTrialData = trials_1.trialList.map((thisTrial_1, index) => {
-        console.log('Trial data:', thisTrial_1);
-        console.log('Response data:', psychoJS.experiment._trialsData?.[index]);
-        return {
-            name: thisTrial_1?.Name ?? 'unknown',
-            color: thisTrial_1?.Color ?? 'unknown',
-            response: psychoJS.experiment._trialsData?.[index]?.response ?? 'unknown',
-            trialNumber: index + 1
-        };
-    });
+    const allTrialData = trials_1.trialList.map((thisTrial_1, index) => ({
+        name: thisTrial_1?.Name ?? 'unknown',
+        color: thisTrial_1?.Color ?? 'unknown',
+        response: psychoJS.experiment._trialsData?.[index]?.response ?? 'unknown',
+        trialNumber: index + 1
+    }));
 
     // Надсилання результатів на сервер
-    try {
-        await sendResultsToServer(allTrialData, 'trials_1');
-        console.log('Data successfully sent for trials_1.');
-    } catch (error) {
-        console.error('Error sending data for trials_1:', error);
-        // Handle error appropriately
-    }
+    await sendResultsToServer(allTrialData, 'trials_1')
+        .then(() => console.log('Data successfully sent for trials_1.'))
+        .catch((error) => console.error('Error sending data for trials_1:', error));
 
     if (psychoJS.experiment._unfinishedLoops.length > 0)
         currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
@@ -1410,39 +1399,6 @@ function trials_1LoopEndIteration(scheduler, snapshot) {
     };
 }
 
-// --- Helper Functions (Example) ---
-
-async function recordResponse(trialIndex, stimName, stimColor) {
-    return new Promise((resolve, reject) => {
-        // Simulate response recording (replace with actual logic)
-        setTimeout(() => {
-            const response = Math.random() < 0.5 ? 'l' : 's'; // Simulate 'l' or 's'
-            console.log(`Simulated response: ${response}`);
-            resolve(response);
-        }, 500); // Simulate delay
-    });
-}
-
-async function sendResultsToServer(data, loopName) {
-    return new Promise((resolve, reject) => {
-        // Simulate sending data (replace with actual server call)
-        setTimeout(() => {
-            console.log(`Simulated sending data for ${loopName}:`, data);
-            resolve(); // Simulate success
-            // reject(new Error('Simulated server error')); // Simulate error if needed
-        }, 1000);
-    });
-}
-
-function instructionRoutineEnd() {
-    console.log('instructionRoutineEnd() викликана');
-    console.log('Натиснута клавіша: ', key);
-    if (key === 'space') {
-        console.log('Натиснуто клавішу space');
-        // ... (rest of your instruction routine end code)
-        continueRoutine = false; // Assuming continueRoutine controls the routine
-    }
-}
 
 
 var trials_2;
