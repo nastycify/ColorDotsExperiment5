@@ -1297,7 +1297,7 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
             psychoJS: psychoJS,
             nReps: 1, method: TrialHandler.Method.RANDOM,
             extraInfo: expInfo, originPath: undefined,
-            trialList: 'Stimul_1.xlsx',
+            trialList: 'Stimul_1.xlsx', // Ensure correct path
             seed: undefined, name: 'trials_1'
         });
         psychoJS.experiment.addLoop(trials_1);
@@ -1327,58 +1327,63 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
             const stimColor = thisTrial_1?.Color ?? 'unknown';
             console.log(`Trial data: Name - ${stimName}, Color - ${stimColor}`);
 
-            await new Promise((resolve) => { // Обгортаємо у Promise
-                recordResponse(snapshot.index, stimName, stimColor)
-                    .then(response => {
-                        console.log(`Response for trial ${snapshot.index + 1}: ${response}`);
-                        psychoJS.experiment._trialsData[snapshot.index] = {
-                            name: stimName,
-                            color: stimColor,
-                            response: response
-                        };
+            try {
+                const response = await recordResponse(snapshot.index, stimName, stimColor);
+                console.log(`Response for trial ${snapshot.index + 1}: ${response}`);
+                psychoJS.experiment._trialsData[snapshot.index] = {
+                    name: stimName,
+                    color: stimColor,
+                    response: response
+                };
 
-                        const correctAnswer = thisTrial_1?.correct_answer ?? 'unknown';
-                        if (response === correctAnswer) {
-                            feedbackText.setColor(new util.Color('green'));
-                            feedbackText.setText('Правильно!');
-                        } else {
-                            feedbackText.setColor(new util.Color('red'));
-                            feedbackText.setText('Неправильно!');
-                        }
-                        feedbackText.setAutoDraw(true);
+                const correctAnswer = thisTrial_1?.correct_answer ?? 'unknown';
+                if (response === correctAnswer) {
+                    feedbackText.setColor(new util.Color('green'));
+                    feedbackText.setText('Правильно!');
+                } else {
+                    feedbackText.setColor(new util.Color('red'));
+                    feedbackText.setText('Неправильно!');
+                }
+                feedbackText.setAutoDraw(true);
 
-                        setTimeout(() => {
-                            feedbackText.setAutoDraw(false);
-                            resolve(); // Вирішуємо Promise після затримки
-                        }, 1000);
-                    })
-                    .catch(error => {
-                        console.error('Error recording response:', error);
-                        resolve(); // Вирішуємо Promise навіть при помилці, щоб не застрягти цикл
-                    });
-            });
+                await new Promise(resolve => setTimeout(resolve, 1000)); // Use Promise for delay
+                feedbackText.setAutoDraw(false);
+
+            } catch (error) {
+                console.error('Error during trial:', error);
+                // Handle error appropriately (e.g., break the loop, log the error, etc.)
+                // For example, to continue:
+                continue;
+            }
         }
 
         return Scheduler.Event.NEXT;
     }
 }
 
-// Решта функцій (trials_2LoopEnd, trials_2LoopEndIteration) залишаються без змін
 async function trials_1LoopEnd() {
     psychoJS.experiment.removeLoop(trials_1);
 
     // Збір даних по всіх тріалах
-    const allTrialData = trials_1.trialList.map((thisTrial_1, index) => ({
-        name: thisTrial_1?.Name ?? 'unknown',
-        color: thisTrial_1?.Color ?? 'unknown',
-        response: psychoJS.experiment._trialsData?.[index]?.response ?? 'unknown',
-        trialNumber: index + 1
-    }));
+    const allTrialData = trials_1.trialList.map((thisTrial_1, index) => {
+        console.log('Trial data:', thisTrial_1);
+        console.log('Response data:', psychoJS.experiment._trialsData?.[index]);
+        return {
+            name: thisTrial_1?.Name ?? 'unknown',
+            color: thisTrial_1?.Color ?? 'unknown',
+            response: psychoJS.experiment._trialsData?.[index]?.response ?? 'unknown',
+            trialNumber: index + 1
+        };
+    });
 
     // Надсилання результатів на сервер
-    await sendResultsToServer(allTrialData, 'trials_1')
-        .then(() => console.log('Data successfully sent for trials_1.'))
-        .catch((error) => console.error('Error sending data for trials_1:', error));
+    try {
+        await sendResultsToServer(allTrialData, 'trials_1');
+        console.log('Data successfully sent for trials_1.');
+    } catch (error) {
+        console.error('Error sending data for trials_1:', error);
+        // Handle error appropriately
+    }
 
     if (psychoJS.experiment._unfinishedLoops.length > 0)
         currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
@@ -1405,6 +1410,39 @@ function trials_1LoopEndIteration(scheduler, snapshot) {
     };
 }
 
+// --- Helper Functions (Example) ---
+
+async function recordResponse(trialIndex, stimName, stimColor) {
+    return new Promise((resolve, reject) => {
+        // Simulate response recording (replace with actual logic)
+        setTimeout(() => {
+            const response = Math.random() < 0.5 ? 'l' : 's'; // Simulate 'l' or 's'
+            console.log(`Simulated response: ${response}`);
+            resolve(response);
+        }, 500); // Simulate delay
+    });
+}
+
+async function sendResultsToServer(data, loopName) {
+    return new Promise((resolve, reject) => {
+        // Simulate sending data (replace with actual server call)
+        setTimeout(() => {
+            console.log(`Simulated sending data for ${loopName}:`, data);
+            resolve(); // Simulate success
+            // reject(new Error('Simulated server error')); // Simulate error if needed
+        }, 1000);
+    });
+}
+
+function instructionRoutineEnd() {
+    console.log('instructionRoutineEnd() викликана');
+    console.log('Натиснута клавіша: ', key);
+    if (key === 'space') {
+        console.log('Натиснуто клавішу space');
+        // ... (rest of your instruction routine end code)
+        continueRoutine = false; // Assuming continueRoutine controls the routine
+    }
+}
 
 
 var trials_2;
