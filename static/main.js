@@ -1111,21 +1111,67 @@ var _stop_instruction_allKeys;
 var instructionComponents;
 var trialResponses = [];  // Масив для зберігання відповідей користувача
 
-// Функція для показу фідбеку
-function showFeedback(isCorrect) {
-  const feedbackElement = document.getElementById("feedback");
+// Створюємо текстовий об'єкт для фідбеку
+var feedbackText = new visual.TextStim({
+    win: psychoJS.window,
+    text: '',
+    font: 'Arial',
+    pos: [0, 0], height: 0.1, wrapWidth: undefined,
+    color: new util.Color('white'), // Початковий колір
+    opacity: 1,
+    depth: 0.0
+});
 
-  // Встановлюємо текст фідбеку в залежності від правильності відповіді
-  feedbackElement.textContent = isCorrect ? "Правильна відповідь!" : "Неправильна відповідь, спробуйте ще раз!";
-  
-  // Додаємо клас для показу фідбеку
-  feedbackElement.classList.add("feedback-visible");
+// Функція для перевірки відповіді та відображення фідбеку
+function checkResponse(userResponse, correctAnswer, trialIndex) {
+    let feedbackMessage, feedbackColor;
 
-  // Приховуємо фідбек через 2 секунди
-  setTimeout(() => {
-    feedbackElement.classList.remove("feedback-visible");
-  }, 2000);
+    if (userResponse === correctAnswer) {
+        feedbackMessage = 'Правильно!';
+        feedbackColor = 'green';
+    } else {
+        feedbackMessage = 'Неправильно!';
+        feedbackColor = 'red';
+    }
+
+    console.log(`Trial ${trialIndex + 1}: User - ${userResponse}, Correct - ${correctAnswer}, Feedback - ${feedbackMessage}`);
+
+    // Відображаємо фідбек
+    displayFeedback(feedbackMessage, feedbackColor);
 }
+
+// Функція для відображення фідбеку на екрані
+function displayFeedback(feedbackMessage, feedbackColor) {
+    feedbackText.setText(feedbackMessage);
+    feedbackText.setColor(new util.Color(feedbackColor));
+    
+    feedbackText.draw();
+    psychoJS.window.flip(); // Оновлюємо екран
+
+    // Фідбек буде відображатися 1 секунду, потім зникає
+    setTimeout(() => {
+        feedbackText.setText('');
+        psychoJS.window.flip();
+    }, 1000);
+}
+
+// Функція для обробки відповіді
+function recordResponse(trialIndex, trialData) {
+    return new Promise((resolve, reject) => {
+        psychoJS.eventManager.addResponse({
+            keys: ['l', 's'], // Дозволені клавіші
+            callback: function (response) {
+                const userAnswer = response.key;
+                const correctAnswer = trialData?.Correct_answer ?? 'unknown'; // Отримуємо правильну відповідь
+
+                checkResponse(userAnswer, correctAnswer, trialIndex); // Перевіряємо відповідь і даємо фідбек
+                
+                resolve(userAnswer); // Повертаємо відповідь користувача
+            }
+        });
+    });
+}
+
 
 // Функція для початку рутин
 function instructionRoutineBegin(snapshot) {
@@ -1245,20 +1291,6 @@ async function recordResponse(trialIndex, name, color, Correct_answer) {
       };
 
       console.log(`Trial ${trialIndex + 1} response recorded:`, trialResponses[trialIndex]);
-
-      // Перевірка на правильність відповіді
-      const isCorrect = keyPressed === Correct_answer;  // Використовуємо Correct_answer
-      showFeedback(isCorrect);  // Викликаємо функцію для фідбеку
-
-      // Повідомляємо, що відповідь записана
-      resolve(keyPressed);
-
-      // Відключаємо слухача подій після запису відповіді
-      document.removeEventListener('keydown', handleKeyPress);
-    }
-
-    // Додаємо слухача подій
-    document.addEventListener('keydown', handleKeyPress);
   });
 }
 
@@ -1305,7 +1337,7 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
             psychoJS: psychoJS,
             nReps: 1, method: TrialHandler.Method.RANDOM,
             extraInfo: expInfo, originPath: undefined,
-            trialList: 'Stimul_1.xlsx', // Перевірте правильність шляху до файлу
+            trialList: 'Stimul_1.xlsx', // Файл з даними
             seed: undefined, name: 'trials_1'
         });
         psychoJS.experiment.addLoop(trials_1); // Додаємо петлю до експерименту
@@ -1320,68 +1352,77 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
             trials_1LoopScheduler.add(trialRoutineEnd(snapshot));
             trials_1LoopScheduler.add(trials_1LoopEndIteration(trials_1LoopScheduler, snapshot));
 
-            // Логування для перевірки вмісту кожного тріалу
+            // Логування для перевірки вмісту тріалу
             console.log(`Trial ${snapshot.index + 1}:`, thisTrial_1);
             const stimName = thisTrial_1?.Name ?? 'unknown';
             const stimColor = thisTrial_1?.Color ?? 'unknown';
             console.log(`Trial data: Name - ${stimName}, Color - ${stimColor}`);
 
-            // Фіксація відповіді користувача під час тріалу
-            recordResponse(snapshot.index, stimName, stimColor, thisTrial_1.Correct_answer) // Додаємо правильну відповідь для перевірки
-                .then(response => {
-                    console.log(`Response for trial ${snapshot.index + 1}: ${response}`);
+            // Фіксація відповіді користувача + перевірка правильності
+            recordResponse(snapshot.index, thisTrial_1)
+                .then(userResponse => {
+                    console.log(`Response for trial ${snapshot.index + 1}: ${userResponse}`);
+
+                    // Отримуємо правильну відповідь із файлу Excel
+                    const correctAnswer = thisTrial_1?.Correct_answer ?? 'unknown';
+
+                    // Викликаємо функцію для перевірки відповіді та фідбеку
+                    checkResponse(userResponse, correctAnswer, snapshot.index);
+
+                    // Зберігаємо відповідь
                     psychoJS.experiment._trialsData[snapshot.index] = {
                         name: stimName,
                         color: stimColor,
-                        response: response
+                        response: userResponse
                     };
                 })
                 .catch(error => console.error('Error recording response:', error));
         }
 
         return Scheduler.Event.NEXT;
-    }
+    };
 }
 
 async function trials_1LoopEnd() {
-    if (trials_1) {
-        psychoJS.experiment.removeLoop(trials_1);
+    psychoJS.experiment.removeLoop(trials_1);
 
-        // Збір даних по всіх тріалах
-        const allTrialData = trials_1.trialList.map((thisTrial_1, index) => ({
-            name: thisTrial_1?.Name ?? 'unknown',
-            color: thisTrial_1?.Color ?? 'unknown',
-            response: psychoJS.experiment._trialsData?.[index]?.response ?? 'unknown',
-            trialNumber: index + 1
-        }));
+    // Збір даних по всіх тріалах
+    const allTrialData = trials_1.trialList.map((thisTrial_1, index) => ({
+        name: thisTrial_1?.Name ?? 'unknown',
+        color: thisTrial_1?.Color ?? 'unknown',
+        response: psychoJS.experiment._trialsData?.[index]?.response ?? 'unknown',
+        trialNumber: index + 1
+    }));
 
-        // Надсилання результатів на сервер
-        await sendResultsToServer(allTrialData, 'trials_1')
-            .then(() => console.log('Data successfully sent for trials_1.'))
-            .catch((error) => console.error('Error sending data for trials_1:', error));
+    // Надсилання результатів на сервер
+    await sendResultsToServer(allTrialData, 'trials_1')
+        .then(() => console.log('Data successfully sent for trials_1.'))
+        .catch((error) => console.error('Error sending data for trials_1:', error));
 
-        if (psychoJS.experiment._unfinishedLoops.length > 0)
-            currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
-        else
-            currentLoop = psychoJS.experiment;
-    }
+    if (psychoJS.experiment._unfinishedLoops.length > 0)
+        currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
+    else
+        currentLoop = psychoJS.experiment;
 
     return Scheduler.Event.NEXT;
 }
 
 function trials_1LoopEndIteration(scheduler, snapshot) {
     return async function () {
-        if (snapshot && snapshot.finished) {
-            if (psychoJS.experiment.isEntryEmpty()) {
+        if (typeof snapshot !== 'undefined') {
+            if (snapshot.finished) {
+                if (psychoJS.experiment.isEntryEmpty()) {
+                    psychoJS.experiment.nextEntry(snapshot);
+                }
+                scheduler.stop();
+            } else {
                 psychoJS.experiment.nextEntry(snapshot);
             }
-            scheduler.stop(); // Завершення циклу
-        } else {
-            psychoJS.experiment.nextEntry(snapshot); // Перехід до наступного тріалу
         }
         return Scheduler.Event.NEXT;
     };
 }
+
 
 
 
