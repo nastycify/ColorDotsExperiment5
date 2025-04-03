@@ -28,6 +28,15 @@
         visibility: visible;
         transition: opacity 0.5s ease;
       }
+
+      /* Стилі для різних типів фідбеку */
+      .feedback-correct {
+        color: green; /* Зелений для правильної відповіді */
+      }
+
+      .feedback-incorrect {
+        color: red; /* Червоний для неправильної відповіді */
+      }
     </style>
   </head>
   <body>
@@ -50,9 +59,17 @@
 
     <script>
       // Функція для відображення фідбеку на 1 секунду
-      function showFeedback(message) {
+      function showFeedback(isCorrect) {
         const feedbackElement = document.getElementById('feedback');
-        feedbackElement.textContent = message;  // Встановлюємо повідомлення
+        if (isCorrect) {
+          feedbackElement.textContent = 'Правильна відповідь!';
+          feedbackElement.classList.add('feedback-correct');
+          feedbackElement.classList.remove('feedback-incorrect');
+        } else {
+          feedbackElement.textContent = 'Неправильна відповідь, спробуйте ще раз!';
+          feedbackElement.classList.add('feedback-incorrect');
+          feedbackElement.classList.remove('feedback-correct');
+        }
         feedbackElement.classList.add('feedback-visible');  // Додаємо клас для показу
 
         // Через 1 секунду ховаємо фідбек
@@ -62,22 +79,25 @@
       }
 
       // Приклад використання: коли респондент дає відповідь
-      function recordResponse(index, stimName, stimColor) {
+      function recordResponse(index, stimName, stimColor, correctAnswer) {
         // Замініть цю частину на реальний код, що фіксує відповідь респондента
         return new Promise((resolve) => {
           setTimeout(() => {
-            resolve('Correct');  // Тестова відповідь (замість цього може бути реальний процес фіксації)
+            // Імітація відповіді
+            const response = stimColor === correctAnswer ? 'Correct' : 'Incorrect';
+            resolve(response);  // Тестова відповідь
           }, 500);  // Час затримки для імітації відповіді
         });
       }
 
       // Приклад виклику функції showFeedback після фіксації відповіді
-      recordResponse(0, 'StimulusName', 'Blue')
+      recordResponse(0, 'StimulusName', 'Blue', 'Blue')
         .then(response => {
           console.log(`Response recorded: ${response}`);
           
           // Показуємо фідбек після відповіді
-          showFeedback('Correct!');  // Замініть на динамічне повідомлення
+          const isCorrect = response === 'Correct';
+          showFeedback(isCorrect);  // Замініть на динамічне повідомлення
         })
         .catch(error => console.error('Error recording response:', error));
     </script>
