@@ -1291,7 +1291,7 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
     return async function() {
         TrialHandler.fromSnapshot(snapshot); // Оновлення внутрішніх змінних петлі
 
-        // Налаштування обробника для рандомізації умов
+        // Налаштування обробника для рандомізації умов тощо
         trials_1 = new TrialHandler({
             psychoJS: psychoJS,
             nReps: 1, method: TrialHandler.Method.RANDOM,
@@ -1307,70 +1307,33 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
             snapshot = trials_1.getSnapshot();
             trials_1LoopScheduler.add(importConditions(snapshot));
             trials_1LoopScheduler.add(trialRoutineBegin(snapshot));
-            trials_1LoopScheduler.add(trialRoutineEachFrame(snapshot)); // Оновлений виклик
+            trials_1LoopScheduler.add(trialRoutineEachFrame());
             trials_1LoopScheduler.add(trialRoutineEnd(snapshot));
-            trials_1LoopScheduler.add(trials_1LoopEndIteration(snapshot)); // Викликаємо функцію завершення ітерації
+            trials_1LoopScheduler.add(trials_1LoopEndIteration(trials_1LoopScheduler, snapshot));
+
+            // Логування для перевірки вмісту each trial
+            console.log(`Trial ${snapshot.index + 1}:`, thisTrial_1);
+            const stimName = thisTrial_1?.Name ?? 'unknown';
+            const stimColor = thisTrial_1?.Color ?? 'unknown';
+            console.log(`Trial data: Name - ${stimName}, Color - ${stimColor}`);
+
+            // Фіксація відповіді користувача під час тріалу
+            recordResponse(snapshot.index, stimName, stimColor)
+                .then(response => {
+                    console.log(`Response for trial ${snapshot.index + 1}: ${response}`);
+                    psychoJS.experiment._trialsData[snapshot.index] = {
+                        name: stimName,
+                        color: stimColor,
+                        response: response
+                    };
+                })
+                .catch(error => console.error('Error recording response:', error));
         }
 
         return Scheduler.Event.NEXT;
     }
-} // <-- Ось тут потрібно закрити функцію!
-
-// Функція для першого лупу (унікальне ім'я)
-function trialRoutineEachFrame_1(snapshot) {
-    return async function() {
-        let continueRoutine = true;
-
-        if (!snapshot || !snapshot['correct_answer']) {
-            console.error("Missing data in snapshot", snapshot);
-            return Scheduler.Event.NEXT;
-        }
-
-        let correctAnswer = snapshot['correct_answer'];
-        let response = psychoJS.eventManager.getKeys({keyList: ['l', 's']});
-
-        if (response.length > 0) {
-            let feedbackText = (response[0] === correctAnswer) ? "Правильно!" : "Неправильно";
-            let feedbackColor = (response[0] === correctAnswer) ? "green" : "red";
-
-            // Оновлюємо HTML-фідбек
-            let feedbackComponent = document.getElementById("feedback");
-            feedbackComponent.innerText = feedbackText;
-            feedbackComponent.style.color = feedbackColor;
-            feedbackComponent.style.display = "block"; // Показуємо фідбек
-
-            // Зупинка виконання на 1 секунду перед наступним стимулом
-            await sleep(1000);
-
-            feedbackComponent.style.display = "none"; // Прибираємо фідбек
-
-            continueRoutine = false; // Завершуємо рутину після відповіді
-        }
-
-        return continueRoutine ? Scheduler.Event.FLIP_REPEAT : Scheduler.Event.NEXT;
-    };
 }
 
-// Функція для відображення зворотного зв’язку
-function showFeedback(text, color) {
-    let feedbackComponent = document.getElementById("feedback");
-    feedbackComponent.innerText = text;
-    feedbackComponent.style.color = color;
-    feedbackComponent.style.display = "block"; // Відображення компоненту фідбеку
-}
-
-// Функція для приховування зворотного зв’язку
-function hideFeedback() {
-    let feedbackComponent = document.getElementById("feedback");
-    feedbackComponent.style.display = "none"; // Сховання компоненту фідбеку
-}
-
-// Функція для паузи (імітація очікування)
-async function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-// Завершення лупу
 async function trials_1LoopEnd() {
     psychoJS.experiment.removeLoop(trials_1);
 
@@ -1382,32 +1345,28 @@ async function trials_1LoopEnd() {
         trialNumber: index + 1
     }));
 
-    try {
-        await sendResultsToServer(allTrialData, 'trials_1');
-        console.log('Data successfully sent for trials_1.');
-    } catch (error) {
-        console.error('Error sending data for trials_1:', error);
-    }
+    // Надсилання результатів на сервер
+    await sendResultsToServer(allTrialData, 'trials_1')
+        .then(() => console.log('Data successfully sent for trials_1.'))
+        .catch((error) => console.error('Error sending data for trials_1:', error));
 
-    if (psychoJS.experiment._unfinishedLoops.length > 0) {
+    if (psychoJS.experiment._unfinishedLoops.length > 0)
         currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
-    } else {
+    else
         currentLoop = psychoJS.experiment;
-    }
 
     return Scheduler.Event.NEXT;
 }
 
-// Функція для завершення кожної ітерації лупу
-function trials_1LoopEndIteration(snapshot) {
-    return async function() {
+function trials_1LoopEndIteration(scheduler, snapshot) {
+    // Підготовка до наступної ітерації
+    return async function () {
         if (typeof snapshot !== 'undefined') {
             if (snapshot.finished) {
                 if (psychoJS.experiment.isEntryEmpty()) {
                     psychoJS.experiment.nextEntry(snapshot);
                 }
-                // Зупиняємо поточний цикл після завершення ітерації
-                psychoJS.experiment.nextEntry(snapshot);
+                scheduler.stop();
             } else {
                 psychoJS.experiment.nextEntry(snapshot);
             }
@@ -1415,7 +1374,6 @@ function trials_1LoopEndIteration(snapshot) {
         return Scheduler.Event.NEXT;
     };
 }
-
 
 
 
