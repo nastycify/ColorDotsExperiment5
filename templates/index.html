@@ -8,12 +8,33 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-ui-dist@1.12.1/jquery-ui.min.css">
     <!-- PsychoJS CSS -->
     <link rel="stylesheet" href="/static/lib/psychojs-2023.2.3.css">
+
+    <style>
+      /* Стиль для фідбеку */
+      #feedback {
+        font-size: 24px;
+        text-align: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.5s ease, visibility 0s linear 0.5s; /* Плавне зникнення */
+      }
+
+      .feedback-visible {
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 0.5s ease;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
 
     <!-- Блок для фідбеку -->
-    <div id="feedback" style="display:none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 24px; text-align: center;"></div>
+    <div id="feedback"></div>
 
     <!-- external libraries -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
@@ -26,6 +47,39 @@
     <!-- legacy browsers -->
     <script src="/static/lib/psychojs-2023.2.3.iife.js" nomodule></script>
     <script src="/static/main-legacy-browsers.js" nomodule></script>
+
+    <script>
+      // Функція для відображення фідбеку на 1 секунду
+      function showFeedback(message) {
+        const feedbackElement = document.getElementById('feedback');
+        feedbackElement.textContent = message;  // Встановлюємо повідомлення
+        feedbackElement.classList.add('feedback-visible');  // Додаємо клас для показу
+
+        // Через 1 секунду ховаємо фідбек
+        setTimeout(() => {
+          feedbackElement.classList.remove('feedback-visible');  // Прибираємо клас для сховання
+        }, 1000);  // 1000 мс = 1 секунда
+      }
+
+      // Приклад використання: коли респондент дає відповідь
+      function recordResponse(index, stimName, stimColor) {
+        // Замініть цю частину на реальний код, що фіксує відповідь респондента
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve('Correct');  // Тестова відповідь (замість цього може бути реальний процес фіксації)
+          }, 500);  // Час затримки для імітації відповіді
+        });
+      }
+
+      // Приклад виклику функції showFeedback після фіксації відповіді
+      recordResponse(0, 'StimulusName', 'Blue')
+        .then(response => {
+          console.log(`Response recorded: ${response}`);
+          
+          // Показуємо фідбек після відповіді
+          showFeedback('Correct!');  // Замініть на динамічне повідомлення
+        })
+        .catch(error => console.error('Error recording response:', error));
+    </script>
   </body>
 </html>
-
