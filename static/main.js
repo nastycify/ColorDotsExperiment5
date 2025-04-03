@@ -1227,7 +1227,7 @@ function instructionRoutineEnd(snapshot) {
 }
 
 // Функція для запису відповіді
-async function recordResponse(trialIndex, name, color, correctAnswer) {
+async function recordResponse(trialIndex, name, color, Correct_answer) {
   return new Promise(resolve => {
     console.log(`Waiting for response for trial ${trialIndex + 1}`);  // Логування для початку збору відповіді
 
@@ -1238,8 +1238,8 @@ async function recordResponse(trialIndex, name, color, correctAnswer) {
       // Замість перевірки на 'S' або 'L', зберігаємо будь-яку натиснуту клавішу
       const keyPressed = event.key;  // Зберігаємо натиснуту клавішу
       trialResponses[trialIndex] = {
-        name: name,
-        color: color,
+        name: Name,
+        color: Color,
         response: keyPressed,  // Замість кольору записуємо натиснуту клавішу
         trialNumber: trialIndex + 1
       };
@@ -1247,7 +1247,7 @@ async function recordResponse(trialIndex, name, color, correctAnswer) {
       console.log(`Trial ${trialIndex + 1} response recorded:`, trialResponses[trialIndex]);
 
       // Перевірка на правильність відповіді
-      const isCorrect = keyPressed === correctAnswer;
+      const isCorrect = keyPressed === Correct_answer;
       showFeedback(isCorrect);  // Викликаємо функцію для фідбеку
 
       // Повідомляємо, що відповідь записана
@@ -1293,10 +1293,10 @@ async function sendResultsToServer(data, loopName) {
 var trials_1;
 
 function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
-    return function() {
+    return async function() {
         TrialHandler.fromSnapshot(snapshot); // Оновлення внутрішніх змінних петлі
 
-        // Налаштування обробника для рандомізації умов
+        // Налаштування обробника для рандомізації умов тощо
         trials_1 = new TrialHandler({
             psychoJS: psychoJS,
             nReps: 1, method: TrialHandler.Method.RANDOM,
@@ -1316,15 +1316,14 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
             trials_1LoopScheduler.add(trialRoutineEnd(snapshot));
             trials_1LoopScheduler.add(trials_1LoopEndIteration(trials_1LoopScheduler, snapshot));
 
-            // Логування для перевірки вмісту кожного тріалу
+            // Логування для перевірки вмісту each trial
             console.log(`Trial ${snapshot.index + 1}:`, thisTrial_1);
             const stimName = thisTrial_1?.Name ?? 'unknown';
             const stimColor = thisTrial_1?.Color ?? 'unknown';
-            const correctAnswer = thisTrial_1?.Correct_answer ?? 'unknown'; // Заміна на Correct_answer
-            console.log(`Trial data: Name - ${stimName}, Color - ${stimColor}, Correct Answer - ${correctAnswer}`);
+            console.log(`Trial data: Name - ${stimName}, Color - ${stimColor}`);
 
             // Фіксація відповіді користувача під час тріалу
-            recordResponse(snapshot.index, stimName, stimColor, correctAnswer)
+            recordResponse(snapshot.index, stimName, stimColor, thisTrial_1.Correct_answer) // Додаємо правильну відповідь для перевірки
                 .then(response => {
                     console.log(`Response for trial ${snapshot.index + 1}: ${response}`);
                     psychoJS.experiment._trialsData[snapshot.index] = {
@@ -1332,10 +1331,6 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
                         color: stimColor,
                         response: response
                     };
-
-                    // Показати фідбек після кожної відповіді
-                    const isCorrect = (response === correctAnswer);  // Перевірка на правильність відповіді
-                    showFeedback(isCorrect ? "Правильна відповідь!" : "Неправильна відповідь, спробуйте ще раз!");
                 })
                 .catch(error => console.error('Error recording response:', error));
         }
@@ -1345,10 +1340,10 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
 }
 
 async function trials_1LoopEnd() {
-    psychoJS.experiment.removeLoop(trials_1);
+    psychoJS.experiment.removeLoop(trials_2);
 
     // Збір даних по всіх тріалах
-    const allTrialData = trials_1.trialList.map((thisTrial_1, index) => ({
+    const allTrialData = trials_2.trialList.map((thisTrial_1, index) => ({
         name: thisTrial_1?.Name ?? 'unknown',
         color: thisTrial_1?.Color ?? 'unknown',
         response: psychoJS.experiment._trialsData?.[index]?.response ?? 'unknown',
@@ -1370,53 +1365,20 @@ async function trials_1LoopEnd() {
 
 function trials_1LoopEndIteration(scheduler, snapshot) {
     // Підготовка до наступної ітерації
-    return function () {
-        if (snapshot.finished) {
-            if (psychoJS.experiment.isEntryEmpty()) {
+    return async function () {
+        if (typeof snapshot !== 'undefined') {
+            if (snapshot.finished) {
+                if (psychoJS.experiment.isEntryEmpty()) {
+                    psychoJS.experiment.nextEntry(snapshot);
+                }
+                scheduler.stop();
+            } else {
                 psychoJS.experiment.nextEntry(snapshot);
             }
-            scheduler.stop();
-        } else {
-            psychoJS.experiment.nextEntry(snapshot);
         }
         return Scheduler.Event.NEXT;
     };
 }
-
-// Функція для фіксації відповіді
-function recordResponse(trialIndex, stimName, stimColor, correctAnswer) {
-    return new Promise((resolve, reject) => {
-        const responseHandler = function(event) {
-            const response = event.key;
-
-            // Записуємо правильну або неправильну відповідь
-            resolve(response); // Завжди записуємо відповідь, незалежно від правильності
-
-            // Відключаємо обробник після першої відповіді
-            document.removeEventListener('keydown', responseHandler);
-        };
-
-        document.addEventListener('keydown', responseHandler);
-    });
-}
-
-// Функція для відображення фідбеку
-function showFeedback(message) {
-    const feedbackElement = document.getElementById("feedback");
-
-    // Встановлюємо текст фідбеку
-    feedbackElement.textContent = message;
-
-    // Додаємо клас для показу фідбеку
-    feedbackElement.classList.add("feedback-visible");
-
-    // Через 2 секунди приховуємо фідбек
-    setTimeout(() => {
-        feedbackElement.classList.remove("feedback-visible");
-    }, 2000);
-}
-
-
 
 
 
