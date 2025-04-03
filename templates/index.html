@@ -79,19 +79,19 @@
       }
 
       // Приклад використання: коли респондент дає відповідь
-      function recordResponse(index, stimName, stimColor, correctAnswer) {
+      function recordResponse(index, stimName, stimColor, Correct_answer) {
         // Замініть цю частину на реальний код, що фіксує відповідь респондента
         return new Promise((resolve) => {
           setTimeout(() => {
             // Імітація відповіді
-            const response = stimColor === correctAnswer ? 'Correct' : 'Incorrect';
+            const response = stimColor === Correct_answer ? 'Correct' : 'Incorrect';
             resolve(response);  // Тестова відповідь
           }, 500);  // Час затримки для імітації відповіді
         });
       }
 
       // Приклад виклику функції showFeedback після фіксації відповіді
-      recordResponse(0, 'StimulusName', 'Blue', 'Blue')
+      recordResponse(0, 'StimulusName', 'Blue', 's')
         .then(response => {
           console.log(`Response recorded: ${response}`);
           
