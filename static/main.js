@@ -1300,7 +1300,7 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
     return async function() {
         TrialHandler.fromSnapshot(snapshot); // Оновлення внутрішніх змінних петлі
 
-        // Налаштування обробника для рандомізації умов тощо
+        // Налаштування обробника для рандомізації умов
         trials_1 = new TrialHandler({
             psychoJS: psychoJS,
             nReps: 1, method: TrialHandler.Method.RANDOM,
@@ -1320,7 +1320,7 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
             trials_1LoopScheduler.add(trialRoutineEnd(snapshot));
             trials_1LoopScheduler.add(trials_1LoopEndIteration(trials_1LoopScheduler, snapshot));
 
-            // Логування для перевірки вмісту each trial
+            // Логування для перевірки вмісту кожного тріалу
             console.log(`Trial ${snapshot.index + 1}:`, thisTrial_1);
             const stimName = thisTrial_1?.Name ?? 'unknown';
             const stimColor = thisTrial_1?.Color ?? 'unknown';
@@ -1344,45 +1344,45 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
 }
 
 async function trials_1LoopEnd() {
-    psychoJS.experiment.removeLoop(trials_2);
+    if (trials_1) {
+        psychoJS.experiment.removeLoop(trials_1);
 
-    // Збір даних по всіх тріалах
-    const allTrialData = trials_2.trialList.map((thisTrial_1, index) => ({
-        name: thisTrial_1?.Name ?? 'unknown',
-        color: thisTrial_1?.Color ?? 'unknown',
-        response: psychoJS.experiment._trialsData?.[index]?.response ?? 'unknown',
-        trialNumber: index + 1
-    }));
+        // Збір даних по всіх тріалах
+        const allTrialData = trials_1.trialList.map((thisTrial_1, index) => ({
+            name: thisTrial_1?.Name ?? 'unknown',
+            color: thisTrial_1?.Color ?? 'unknown',
+            response: psychoJS.experiment._trialsData?.[index]?.response ?? 'unknown',
+            trialNumber: index + 1
+        }));
 
-    // Надсилання результатів на сервер
-    await sendResultsToServer(allTrialData, 'trials_1')
-        .then(() => console.log('Data successfully sent for trials_1.'))
-        .catch((error) => console.error('Error sending data for trials_1:', error));
+        // Надсилання результатів на сервер
+        await sendResultsToServer(allTrialData, 'trials_1')
+            .then(() => console.log('Data successfully sent for trials_1.'))
+            .catch((error) => console.error('Error sending data for trials_1:', error));
 
-    if (psychoJS.experiment._unfinishedLoops.length > 0)
-        currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
-    else
-        currentLoop = psychoJS.experiment;
+        if (psychoJS.experiment._unfinishedLoops.length > 0)
+            currentLoop = psychoJS.experiment._unfinishedLoops.at(-1);
+        else
+            currentLoop = psychoJS.experiment;
+    }
 
     return Scheduler.Event.NEXT;
 }
 
 function trials_1LoopEndIteration(scheduler, snapshot) {
-    // Підготовка до наступної ітерації
     return async function () {
-        if (typeof snapshot !== 'undefined') {
-            if (snapshot.finished) {
-                if (psychoJS.experiment.isEntryEmpty()) {
-                    psychoJS.experiment.nextEntry(snapshot);
-                }
-                scheduler.stop();
-            } else {
+        if (snapshot && snapshot.finished) {
+            if (psychoJS.experiment.isEntryEmpty()) {
                 psychoJS.experiment.nextEntry(snapshot);
             }
+            scheduler.stop(); // Завершення циклу
+        } else {
+            psychoJS.experiment.nextEntry(snapshot); // Перехід до наступного тріалу
         }
         return Scheduler.Event.NEXT;
     };
 }
+
 
 
 
