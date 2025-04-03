@@ -31,10 +31,11 @@
 
     <!-- Додано: JavaScript для відправки результатів на сервер та отримання фідбеку -->
     <script>
-      // Цей код буде виконуватись після того, як респондент відповідає на запитання
-
       // Функція для надсилання результатів на сервер
       function submitResponse(data) {
+        // Логування даних, які відправляються
+        console.log('Дані для відправки на сервер:', data);
+        
         fetch('https://color-dots-production.up.railway.app/submit_results', {  // Замінили на URL вашого серверу на Railway
           method: 'POST',
           headers: {
@@ -42,10 +43,22 @@
           },
           body: JSON.stringify(data)  // Надсилаємо дані на сервер
         })
-        .then(response => response.json())
+        .then(response => {
+          // Перевірка статусу відповіді від сервера
+          if (!response.ok) {
+            throw new Error('Мережевий запит не вдалося виконати. Статус: ' + response.status);
+          }
+          return response.json(); // Перетворюємо відповідь в JSON
+        })
         .then(data => {
-          // Отримуємо фідбек від сервера
-          showFeedback(data.feedback);
+          // Логування відповіді сервера
+          console.log('Отримана відповідь від сервера:', data);
+          
+          if (data && data.feedback) {
+            showFeedback(data.feedback);
+          } else {
+            console.error('Не отримано фідбеку від сервера');
+          }
         })
         .catch(error => {
           console.error('Помилка при запиті:', error);
@@ -77,3 +90,4 @@
     </script>
   </body>
 </html>
+
