@@ -1311,14 +1311,15 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
             trials_1LoopScheduler.add(trialRoutineEnd(snapshot));
             trials_1LoopScheduler.add(trials_1LoopEndIteration(trials_1LoopScheduler, snapshot));
 
-            // Логування для перевірки вмісту each trial
+            // Логування для перевірки вмісту кожного тріалу
             console.log(`Trial ${snapshot.index + 1}:`, thisTrial_1);
             const stimName = thisTrial_1?.Name ?? 'unknown';
             const stimColor = thisTrial_1?.Color ?? 'unknown';
-            console.log(`Trial data: Name - ${stimName}, Color - ${stimColor}`);
+            const correctAnswer = thisTrial_1?.Correct_answer ?? 'unknown'; // Заміна на Correct_answer
+            console.log(`Trial data: Name - ${stimName}, Color - ${stimColor}, Correct Answer - ${correctAnswer}`);
 
             // Фіксація відповіді користувача під час тріалу
-            recordResponse(snapshot.index, stimName, stimColor)
+            recordResponse(snapshot.index, stimName, stimColor, correctAnswer)
                 .then(response => {
                     console.log(`Response for trial ${snapshot.index + 1}: ${response}`);
                     psychoJS.experiment._trialsData[snapshot.index] = {
@@ -1328,7 +1329,7 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
                     };
 
                     // Показати фідбек після кожної відповіді
-                    const isCorrect = (response === stimName);  // Перевірка на правильність відповіді (приклад)
+                    const isCorrect = (response === correctAnswer);  // Перевірка на правильність відповіді
                     showFeedback(isCorrect ? "Правильна відповідь!" : "Неправильна відповідь, спробуйте ще раз!");
                 })
                 .catch(error => console.error('Error recording response:', error));
@@ -1379,6 +1380,23 @@ function trials_1LoopEndIteration(scheduler, snapshot) {
     };
 }
 
+// Функція для фіксації відповіді
+async function recordResponse(trialIndex, stimName, stimColor, correctAnswer) {
+    return new Promise((resolve, reject) => {
+        const responseHandler = function(event) {
+            const response = event.key;
+            if (response === correctAnswer) {
+                resolve(response); // Якщо правильна відповідь
+            } else {
+                resolve(response); // Якщо неправильна відповідь
+            }
+            // Відключення обробника після першої відповіді
+            document.removeEventListener('keydown', responseHandler);
+        };
+        document.addEventListener('keydown', responseHandler);
+    });
+}
+
 // Функція для відображення фідбеку
 function showFeedback(message) {
     const feedbackElement = document.getElementById("feedback");
@@ -1394,6 +1412,7 @@ function showFeedback(message) {
         feedbackElement.classList.remove("feedback-visible");
     }, 2000);
 }
+
 
 
 var trials_2;
