@@ -1238,8 +1238,8 @@ async function recordResponse(trialIndex, name, color, Correct_answer) {
       // Замість перевірки на 'S' або 'L', зберігаємо будь-яку натиснуту клавішу
       const keyPressed = event.key;  // Зберігаємо натиснуту клавішу
       trialResponses[trialIndex] = {
-        name: name,
-        color: color,
+        name: Name,
+        color: Color,
         response: keyPressed,  // Замість кольору записуємо натиснуту клавішу
         trialNumber: trialIndex + 1
       };
