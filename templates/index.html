@@ -35,7 +35,7 @@
 
       // Функція для надсилання результатів на сервер
       function submitResponse(data) {
-        fetch('http://localhost:8000/submit_results', {
+        fetch('https://color-dots-production.up.railway.app/submit_results', {  // Замінили на URL вашого серверу на Railway
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -77,4 +77,3 @@
     </script>
   </body>
 </html>
-
