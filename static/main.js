@@ -1248,9 +1248,13 @@ function recordResponse(trialIndex, name, color) {
 
       // Повідомляємо, що відповідь записана
       resolve(keyPressed);
+
+      // Відключаємо слухача подій після запису відповіді
+      document.removeEventListener('keydown', arguments.callee);
     });
   });
 }
+
 
 
 // Виправлений виклик функції для збереження даних
@@ -1288,10 +1292,10 @@ async function sendResultsToServer(data, loopName) {
 var trials_1;
 
 function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
-    return async function() {
+    return function() {
         TrialHandler.fromSnapshot(snapshot); // Оновлення внутрішніх змінних петлі
 
-        // Налаштування обробника для рандомізації умов тощо
+        // Налаштування обробника для рандомізації умов
         trials_1 = new TrialHandler({
             psychoJS: psychoJS,
             nReps: 1, method: TrialHandler.Method.RANDOM,
@@ -1365,34 +1369,32 @@ async function trials_1LoopEnd() {
 
 function trials_1LoopEndIteration(scheduler, snapshot) {
     // Підготовка до наступної ітерації
-    return async function () {
-        if (typeof snapshot !== 'undefined') {
-            if (snapshot.finished) {
-                if (psychoJS.experiment.isEntryEmpty()) {
-                    psychoJS.experiment.nextEntry(snapshot);
-                }
-                scheduler.stop();
-            } else {
+    return function () {
+        if (snapshot.finished) {
+            if (psychoJS.experiment.isEntryEmpty()) {
                 psychoJS.experiment.nextEntry(snapshot);
             }
+            scheduler.stop();
+        } else {
+            psychoJS.experiment.nextEntry(snapshot);
         }
         return Scheduler.Event.NEXT;
     };
 }
 
 // Функція для фіксації відповіді
-async function recordResponse(trialIndex, stimName, stimColor, correctAnswer) {
+function recordResponse(trialIndex, stimName, stimColor, correctAnswer) {
     return new Promise((resolve, reject) => {
         const responseHandler = function(event) {
             const response = event.key;
-            if (response === correctAnswer) {
-                resolve(response); // Якщо правильна відповідь
-            } else {
-                resolve(response); // Якщо неправильна відповідь
-            }
-            // Відключення обробника після першої відповіді
+
+            // Записуємо правильну або неправильну відповідь
+            resolve(response); // Завжди записуємо відповідь, незалежно від правильності
+
+            // Відключаємо обробник після першої відповіді
             document.removeEventListener('keydown', responseHandler);
         };
+
         document.addEventListener('keydown', responseHandler);
     });
 }
@@ -1412,6 +1414,7 @@ function showFeedback(message) {
         feedbackElement.classList.remove("feedback-visible");
     }, 2000);
 }
+
 
 
 
