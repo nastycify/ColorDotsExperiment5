@@ -46,6 +46,23 @@ def submit_results():
                 app.logger.error(f"Missing required fields in entry: {item}")  # Логування відсутніх полів
                 return jsonify({"error": f"Missing required fields in entry: {item}"}), 400
 
+        # Логіка для визначення фідбеку
+        feedbacks = []
+        for item in data:
+            # Приклад фідбеку (замініть на вашу логіку перевірки)
+            if item['response'] == 'correct':  # Це умовний приклад
+                feedback = 'Правильна відповідь!'
+            else:
+                feedback = 'Неправильна відповідь!'
+            
+            # Додаємо фідбек до кожного елементу
+            feedbacks.append({
+                "name": item['name'],
+                "color": item['color'],
+                "response": item['response'],
+                "feedback": feedback
+            })
+
         # Створення або оновлення файлу з результатами
         file_path = os.path.join(tmp_folder, 'results.xlsx')  # Шлях до файлу в tmp
 
@@ -55,21 +72,22 @@ def submit_results():
         else:
             wb = Workbook()
             sheet = wb.active
-            sheet.append(["Name", "Color", "Response"])  # Оновлено заголовки
+            sheet.append(["Name", "Color", "Response", "Feedback"])  # Додано стовпець для фідбеку
 
-        # Додавання нових даних
-        for item in data:
+        # Додавання нових даних з фідбеком
+        for item in feedbacks:
             sheet.append([
                 item.get("name"),
                 item.get("color"),
-                item.get("response")
+                item.get("response"),
+                item.get("feedback")  # Додаємо фідбек
             ])
 
         # Збереження Excel-файлу
         wb.save(file_path)
 
-        app.logger.info("Data successfully saved")
-        return jsonify({"status": "success"}), 200
+        app.logger.info("Data successfully saved with feedback")
+        return jsonify({"status": "success", "feedbacks": feedbacks}), 200
 
     except Exception as e:
         app.logger.error(f"Error saving data to Excel: {e}")
@@ -89,4 +107,5 @@ def download_results():
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 8000))
     app.run(host='0.0.0.0', port=port, debug=True)
+
 
