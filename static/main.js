@@ -866,32 +866,27 @@ async function experimentInit() {
 
 // Додаємо визначення функції instructionRoutineBegin, щоб вона була доступна
 function instructionRoutineBegin(snapshot) {
-    return async function () {
-        TrialHandler.fromSnapshot(snapshot); // ensure that .thisN vals are up to date
+    // Підготовка до початку Routine 'instruction'
+    t = 0;
+    instructionClock.reset(); // reset clock
+    frameN = -1;
+    continueRoutine = true;
+    psychoJS.experiment.addData('instruction.started', globalClock.getTime());
 
-        // --- Підготовка до початку Routine 'instruction' ---
-        t = 0;
-        instructionClock.reset(); // reset clock
-        frameN = -1;
-        continueRoutine = true;
-        psychoJS.experiment.addData('instruction.started', globalClock.getTime());
+    stop_instruction.keys = undefined;
+    stop_instruction.rt = undefined;
+    _stop_instruction_allKeys = [];
 
-        stop_instruction.keys = undefined;
-        stop_instruction.rt = undefined;
-        _stop_instruction_allKeys = [];
+    instructionComponents = [];
+    instructionComponents.push(instruction_text);
+    instructionComponents.push(stop_instruction);
 
-        instructionComponents = [];
-        instructionComponents.push(instruction_text);
-        instructionComponents.push(stop_instruction);
-
-        for (const thisComponent of instructionComponents)
-            if ('status' in thisComponent)
-                thisComponent.status = PsychoJS.Status.NOT_STARTED;
-
-        return Scheduler.Event.NEXT;
+    for (const thisComponent of instructionComponents) {
+        if ('status' in thisComponent) {
+            thisComponent.status = PsychoJS.Status.NOT_STARTED;
+        }
     }
 }
-
   
   // Initialize components for Routine "trial"
   trialClock = new util.Clock();
