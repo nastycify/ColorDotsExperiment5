@@ -1,23 +1,18 @@
 <!doctype html>
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <title>main [PsychoPy]</title>
-
     <!-- styles -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-ui-dist@1.12.1/jquery-ui.min.css">
     <!-- PsychoJS CSS -->
     <link rel="stylesheet" href="/static/lib/psychojs-2023.2.3.css">
-
-    <!-- Завантаження бібліотеки для роботи з Excel -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.1/xlsx.full.min.js"></script>
   </head>
   <body>
-    <!-- Основний контейнер експерименту -->
     <div id="root"></div>
 
-    <!-- Блок для фідбеку (спочатку прихований) -->
+    <!-- Блок для фідбеку -->
     <div id="feedback" style="display:none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 24px; text-align: center;"></div>
 
     <!-- external libraries -->
@@ -31,125 +26,6 @@
     <!-- legacy browsers -->
     <script src="/static/lib/psychojs-2023.2.3.iife.js" nomodule></script>
     <script src="/static/main-legacy-browsers.js" nomodule></script>
-
-    <!-- Додано: JavaScript для завантаження стимулів з Excel та відправки результатів на сервер -->
-    <script>
-      let stimuli = [];  // Масив для зберігання стимулів
-
-      // Завантаження стимулів з Excel
-      function loadStimuli() {
-        const sheetNames = [
-          'Stimul_1.xlsx',
-          'Stimul_2.xlsx',
-          'Stimul_3.xlsx',
-          'Stimul_4.xlsx',
-          'Stimul_5.xlsx',
-          'Stimul_6.xlsx',
-          'Stimul_7.xlsx',
-          'Stimul_8.xlsx'
-        ];
-
-        const promises = sheetNames.map(fileName => {
-          return loadExcelFile(`/results/${fileName}`);  // Шлях до папки results
-        });
-
-        // Коли всі файли будуть завантажені, ініціалізуємо експеримент
-        Promise.all(promises)
-          .then(() => {
-            console.log('Стимули завантажено:', stimuli);
-            startExperiment();
-          })
-          .catch(error => console.error('Помилка при завантаженні даних:', error));
-      }
-
-      // Функція для завантаження даних з Excel файлу
-      function loadExcelFile(filePath) {
-        return fetch(filePath)
-          .then(response => response.arrayBuffer())  // Завантажуємо файл як ArrayBuffer
-          .then(data => {
-            const workbook = XLSX.read(data, { type: 'array' });  // Парсимо Excel файл
-            const sheet = workbook.Sheets[workbook.SheetNames[0]];  // Беремо перший аркуш
-            const jsonData = XLSX.utils.sheet_to_json(sheet);  // Перетворюємо в JSON
-
-            // Додаємо дані в масив стимулів
-            stimuli.push(...jsonData);
-          })
-          .catch(error => console.error('Помилка при завантаженні Excel файлу:', error));
-      }
-
-      // Функція для початку експерименту
-      function startExperiment() {
-        if (stimuli.length === 0) {
-          console.error('Не вдалося завантажити стимулів!');
-          return;
-        }
-
-        // Приклад: Викликаємо submitResponse після відповіді респондента
-        // Наприклад, для першого стимулу відповідь 'l'
-        submitResponse(0, 'l');
-      }
-
-      // Функція для відправки результатів на сервер
-      function submitResponse(stimulusIndex, response) {
-        if (stimuli.length === 0) {
-          console.error('Стимули не завантажено!');
-          return;
-        }
-
-        // Отримуємо дані для поточного стимулу
-        const stimulus = stimuli[stimulusIndex];
-
-        // Перевірка правильності відповіді
-        const isCorrect = (response === stimulus.Correct_answer);
-
-        // Підготовка даних для відправки на сервер
-        const responseData = {
-          name: stimulus.Name,
-          color: stimulus.Color,
-          response: response,
-          correct_answer: stimulus.Correct_answer,
-          is_correct: isCorrect
-        };
-
-        // Відправка даних на сервер
-        fetch('https://color-dots-production.up.railway.app/submit_results', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(responseData)  // Надсилаємо дані на сервер
-        })
-        .then(response => response.json())
-        .then(data => {
-          console.log('Отримана відповідь від сервера:', data);
-          
-          if (data && data.feedback) {
-            showFeedback(data.feedback);
-          } else {
-            console.error('Не отримано фідбеку від сервера');
-          }
-        })
-        .catch(error => {
-          console.error('Помилка при запиті:', error);
-        });
-      }
-
-      // Функція для відображення фідбеку
-      function showFeedback(feedbackText) {
-        const feedbackElement = document.getElementById('feedback');
-        feedbackElement.textContent = feedbackText;
-        feedbackElement.style.display = 'block';  // Показуємо фідбек
-
-        // Приховуємо фідбек через кілька секунд
-        setTimeout(() => {
-          feedbackElement.style.display = 'none';
-        }, 2000);  // 2000 мс = 2 секунди
-      }
-
-      // Завантажуємо стимулів при завантаженні сторінки
-      window.onload = loadStimuli;
-    </script>
   </body>
 </html>
-
 
