@@ -842,22 +842,56 @@ var ExitClock;
 var text_3;
 var globalClock;
 var routineTimer;
+
 async function experimentInit() {
-  // Initialize components for Routine "instruction"
-  instructionClock = new util.Clock();
-  instruction_text = new visual.TextStim({
-    win: psychoJS.window,
-    name: 'instruction_text',
-    text: "У цьому експерименті Вам буде протягом короткого часу представлене коло певного кольору. Після демонстрації фігури на екрані з'явиться знак питання. \nНатисніть'S', якщо вважаєте,що коло було ближче до СИНЬОГО кольору.\nНатисніть 'L', якщо вважаєте,що коло було ближче до ФІОЛЕТОВОГО кольору.\nБудь ласка намагайтесь відповідати швидко і чітко.\nНатисніть будь яку клавішу,щоб розпочати",
-    font: 'Open Sans',
-    units: undefined, 
-    pos: [0, 0], height: 0.05,  wrapWidth: undefined, ori: 0.0,
-    languageStyle: 'LTR',
-    color: new util.Color([0, 0, 0]),  opacity: undefined,
-    depth: 0.0 
-  });
-  
-  stop_instruction = new core.Keyboard({psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true});
+    // Initialize components for Routine "instruction"
+    instructionClock = new util.Clock();
+    instruction_text = new visual.TextStim({
+        win: psychoJS.window,
+        name: 'instruction_text',
+        text: "У цьому експерименті Вам буде протягом короткого часу представлене коло певного кольору. Після демонстрації фігури на екрані з'явиться знак питання. \nНатисніть 'S', якщо вважаєте, що коло було ближче до СИНЬОГО кольору.\nНатисніть 'L', якщо вважаєте, що коло було ближче до ФІОЛЕТОВОГО кольору.\nБудь ласка, намагайтесь відповідати швидко і чітко.\nНатисніть будь-яку клавішу, щоб розпочати",
+        font: 'Open Sans',
+        units: undefined,
+        pos: [0, 0], height: 0.05, wrapWidth: undefined, ori: 0.0,
+        languageStyle: 'LTR',
+        color: new util.Color([0, 0, 0]), opacity: undefined,
+        depth: 0.0
+    });
+
+    stop_instruction = new core.Keyboard({ psychoJS: psychoJS, clock: new util.Clock(), waitForStart: true });
+
+    globalClock = new util.Clock();
+    routineTimer = new util.CountdownTimer();
+}
+
+// Додаємо визначення функції instructionRoutineBegin, щоб вона була доступна
+function instructionRoutineBegin(snapshot) {
+    return async function () {
+        TrialHandler.fromSnapshot(snapshot); // ensure that .thisN vals are up to date
+
+        // --- Підготовка до початку Routine 'instruction' ---
+        t = 0;
+        instructionClock.reset(); // reset clock
+        frameN = -1;
+        continueRoutine = true;
+        psychoJS.experiment.addData('instruction.started', globalClock.getTime());
+
+        stop_instruction.keys = undefined;
+        stop_instruction.rt = undefined;
+        _stop_instruction_allKeys = [];
+
+        instructionComponents = [];
+        instructionComponents.push(instruction_text);
+        instructionComponents.push(stop_instruction);
+
+        for (const thisComponent of instructionComponents)
+            if ('status' in thisComponent)
+                thisComponent.status = PsychoJS.Status.NOT_STARTED;
+
+        return Scheduler.Event.NEXT;
+    }
+}
+
   
   // Initialize components for Routine "trial"
   trialClock = new util.Clock();
