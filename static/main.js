@@ -1332,18 +1332,16 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
     return async function() {
         TrialHandler.fromSnapshot(snapshot); // Оновлення внутрішніх змінних петлі
 
-        // Налаштування обробника для рандомізації умов
         trials_1 = new TrialHandler({
             psychoJS: psychoJS,
             nReps: 1, method: TrialHandler.Method.RANDOM,
             extraInfo: expInfo, originPath: undefined,
-            trialList: 'Stimul_1.xlsx', // Файл з даними
+            trialList: 'Stimul_1.xlsx',
             seed: undefined, name: 'trials_1'
         });
-        psychoJS.experiment.addLoop(trials_1); // Додаємо петлю до експерименту
-        currentLoop = trials_1;  // Встановлюємо поточну петлю
+        psychoJS.experiment.addLoop(trials_1);
+        currentLoop = trials_1;
 
-        // Додаємо всі тріали з trialList:
         for (const thisTrial_1 of trials_1) {
             snapshot = trials_1.getSnapshot();
             trials_1LoopScheduler.add(importConditions(snapshot));
@@ -1352,31 +1350,32 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
             trials_1LoopScheduler.add(trialRoutineEnd(snapshot));
             trials_1LoopScheduler.add(trials_1LoopEndIteration(trials_1LoopScheduler, snapshot));
 
-            // Логування для перевірки вмісту тріалу
+            // Логування стимулів
             console.log(`Trial ${snapshot.index + 1}:`, thisTrial_1);
             const stimName = thisTrial_1?.Name ?? 'unknown';
             const stimColor = thisTrial_1?.Color ?? 'unknown';
             console.log(`Trial data: Name - ${stimName}, Color - ${stimColor}`);
 
-            // Фіксація відповіді користувача + перевірка правильності
-            recordResponse(snapshot.index, thisTrial_1)
-                .then(userResponse => {
-                    console.log(`Response for trial ${snapshot.index + 1}: ${userResponse}`);
+            // Перевіряємо, чи функція recordResponse вже існує, щоб не перевизначати
+            if (typeof recordResponse !== "undefined") {
+                recordResponse(snapshot.index, thisTrial_1)
+                    .then(userResponse => {
+                        console.log(`Response for trial ${snapshot.index + 1}: ${userResponse}`);
 
-                    // Отримуємо правильну відповідь із файлу Excel
-                    const correctAnswer = thisTrial_1?.Correct_answer ?? 'unknown';
+                        // Отримуємо правильну відповідь
+                        const correctAnswer = thisTrial_1?.Correct_answer ?? 'unknown';
 
-                    // Викликаємо функцію для перевірки відповіді та фідбеку
-                    checkResponse(userResponse, correctAnswer, snapshot.index);
+                        // Перевіряємо відповідь
+                        checkResponse(userResponse.trim().toLowerCase(), correctAnswer.trim().toLowerCase(), snapshot.index);
 
-                    // Зберігаємо відповідь
-                    psychoJS.experiment._trialsData[snapshot.index] = {
-                        name: stimName,
-                        color: stimColor,
-                        response: userResponse
-                    };
-                })
-                .catch(error => console.error('Error recording response:', error));
+                        psychoJS.experiment._trialsData[snapshot.index] = {
+                            name: stimName,
+                            color: stimColor,
+                            response: userResponse
+                        };
+                    })
+                    .catch(error => console.error('Error recording response:', error));
+            }
         }
 
         return Scheduler.Event.NEXT;
@@ -1386,7 +1385,6 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
 async function trials_1LoopEnd() {
     psychoJS.experiment.removeLoop(trials_1);
 
-    // Збір даних по всіх тріалах
     const allTrialData = trials_1.trialList.map((thisTrial_1, index) => ({
         name: thisTrial_1?.Name ?? 'unknown',
         color: thisTrial_1?.Color ?? 'unknown',
@@ -1394,7 +1392,6 @@ async function trials_1LoopEnd() {
         trialNumber: index + 1
     }));
 
-    // Надсилання результатів на сервер
     await sendResultsToServer(allTrialData, 'trials_1')
         .then(() => console.log('Data successfully sent for trials_1.'))
         .catch((error) => console.error('Error sending data for trials_1:', error));
@@ -1422,7 +1419,6 @@ function trials_1LoopEndIteration(scheduler, snapshot) {
         return Scheduler.Event.NEXT;
     };
 }
-
 
 
 
