@@ -1102,7 +1102,9 @@ async function experimentInit() {
   return Scheduler.Event.NEXT;
 }
 
-
+var psychoJS = new PsychoJS({
+    debug: true
+});
 var t;
 var frameN;
 var continueRoutine;
