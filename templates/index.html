@@ -1,18 +1,20 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <title>main [PsychoPy]</title>
+
     <!-- styles -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-ui-dist@1.12.1/jquery-ui.min.css">
     <!-- PsychoJS CSS -->
     <link rel="stylesheet" href="/static/lib/psychojs-2023.2.3.css">
   </head>
   <body>
+    <!-- Основний контейнер експерименту -->
     <div id="root"></div>
 
-    <!-- Блок для фідбеку -->
+    <!-- Блок для фідбеку (спочатку прихований) -->
     <div id="feedback" style="display:none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 24px; text-align: center;"></div>
 
     <!-- external libraries -->
@@ -26,5 +28,53 @@
     <!-- legacy browsers -->
     <script src="/static/lib/psychojs-2023.2.3.iife.js" nomodule></script>
     <script src="/static/main-legacy-browsers.js" nomodule></script>
+
+    <!-- Додано: JavaScript для відправки результатів на сервер та отримання фідбеку -->
+    <script>
+      // Цей код буде виконуватись після того, як респондент відповідає на запитання
+
+      // Функція для надсилання результатів на сервер
+      function submitResponse(data) {
+        fetch('http://localhost:8000/submit_results', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)  // Надсилаємо дані на сервер
+        })
+        .then(response => response.json())
+        .then(data => {
+          // Отримуємо фідбек від сервера
+          showFeedback(data.feedback);
+        })
+        .catch(error => {
+          console.error('Помилка при запиті:', error);
+        });
+      }
+
+      // Функція для відображення фідбеку
+      function showFeedback(feedbackText) {
+        const feedbackElement = document.getElementById('feedback');
+        feedbackElement.textContent = feedbackText;
+        feedbackElement.style.display = 'block';  // Показуємо фідбек
+
+        // Приховуємо фідбек через кілька секунд
+        setTimeout(() => {
+          feedbackElement.style.display = 'none';
+        }, 2000);  // 2000 мс = 2 секунди
+      }
+
+      // Приклад: Викликаємо submitResponse після відповіді респондента
+      // Цей код має бути вставлений у вашу логіку обробки відповідей
+      const exampleResponseData = {
+        name: 'Participant1',
+        color: 'Blue',
+        response: 'Yes'
+      };
+
+      // Тут викликаємо submitResponse після кожної відповіді
+      submitResponse(exampleResponseData);
+    </script>
   </body>
 </html>
+
