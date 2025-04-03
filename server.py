@@ -87,6 +87,8 @@ def submit_results():
         wb.save(file_path)
 
         app.logger.info("Data successfully saved with feedback")
+
+        # Повертаємо фідбек для кожної відповіді
         return jsonify({"status": "success", "feedbacks": feedbacks}), 200
 
     except Exception as e:
@@ -107,5 +109,4 @@ def download_results():
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 8000))
     app.run(host='0.0.0.0', port=port, debug=True)
-
 
