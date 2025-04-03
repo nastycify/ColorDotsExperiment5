@@ -1326,6 +1326,10 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
                         color: stimColor,
                         response: response
                     };
+
+                    // Показати фідбек після кожної відповіді
+                    const isCorrect = (response === stimName);  // Перевірка на правильність відповіді (приклад)
+                    showFeedback(isCorrect ? "Правильна відповідь!" : "Неправильна відповідь, спробуйте ще раз!");
                 })
                 .catch(error => console.error('Error recording response:', error));
         }
@@ -1375,6 +1379,21 @@ function trials_1LoopEndIteration(scheduler, snapshot) {
     };
 }
 
+// Функція для відображення фідбеку
+function showFeedback(message) {
+    const feedbackElement = document.getElementById("feedback");
+
+    // Встановлюємо текст фідбеку
+    feedbackElement.textContent = message;
+
+    // Додаємо клас для показу фідбеку
+    feedbackElement.classList.add("feedback-visible");
+
+    // Через 2 секунди приховуємо фідбек
+    setTimeout(() => {
+        feedbackElement.classList.remove("feedback-visible");
+    }, 2000);
+}
 
 
 var trials_2;
