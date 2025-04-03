@@ -1103,7 +1103,7 @@ async function experimentInit() {
 }
 
 
-// Глобальні змінні
+// --- Глобальні змінні ---
 var t;
 var frameN;
 var continueRoutine;
@@ -1155,176 +1155,71 @@ function displayFeedback(feedbackMessage, feedbackColor) {
     }, 1000);
 }
 
-// Функція для обробки відповіді
-function recordResponse(trialIndex, trialData) {
-    return new Promise((resolve, reject) => {
-        psychoJS.eventManager.addResponse({
-            keys: ['l', 's'], // Дозволені клавіші
-            callback: function (response) {
-                const userAnswer = response.key;
-                const correctAnswer = trialData?.Correct_answer ?? 'unknown'; // Отримуємо правильну відповідь
+// --- Функція для запису відповіді ---
+async function recordResponse(trialIndex, Name, Color, Correct_answer) {
+    return new Promise(resolve => {
+        console.log(`Очікується відповідь на trial ${trialIndex + 1}`);  // Логування початку збору відповіді
 
-                checkResponse(userAnswer, correctAnswer, trialIndex); // Перевіряємо відповідь і даємо фідбек
-                
-                resolve(userAnswer); // Повертаємо відповідь користувача
-            }
-        });
+        function handleKeyPress(event) {
+            console.log(`Натиснута клавіша: ${event.key}`); // Логування натискання
+
+            const keyPressed = event.key;  // Зберігаємо натиснуту клавішу
+            
+            // Збереження відповіді у масив
+            trialResponses[trialIndex] = {
+                name: Name,  // Використовуємо правильні змінні
+                color: Color,
+                response: keyPressed,
+                trialNumber: trialIndex + 1
+            };
+
+            console.log(`Trial ${trialIndex + 1} записано:`, trialResponses[trialIndex]);
+
+            // Прибираємо слухач подій після отримання відповіді
+            document.removeEventListener("keydown", handleKeyPress);
+
+            // Визначаємо правильність відповіді та викликаємо функцію фідбеку
+            checkResponse(keyPressed, Correct_answer, trialIndex);
+
+            resolve(keyPressed);  // Повертаємо відповідь користувача
+        }
+
+        // Додаємо слухач подій для клавіш
+        document.addEventListener("keydown", handleKeyPress);
     });
 }
 
-
-// Функція для початку рутин
-function instructionRoutineBegin(snapshot) {
-  return async function () {
-    TrialHandler.fromSnapshot(snapshot); // ensure that .thisN vals are up to date
-    
-    // --- Підготовка до початку Routine 'instruction' ---
-    t = 0;
-    instructionClock.reset(); // clock
-    frameN = -1;
-    continueRoutine = true; // until we're told otherwise
-    psychoJS.experiment.addData('instruction.started', globalClock.getTime());
-    stop_instruction.keys = undefined;
-    stop_instruction.rt = undefined;
-    _stop_instruction_allKeys = [];
-    
-    instructionComponents = [];
-    instructionComponents.push(instruction_text);
-    instructionComponents.push(stop_instruction);
-    
-    for (const thisComponent of instructionComponents)
-      if ('status' in thisComponent)
-        thisComponent.status = PsychoJS.Status.NOT_STARTED;
-
-    return Scheduler.Event.NEXT;
-  }
-}
-
-// Оновлення рутин кожного кадру
-function instructionRoutineEachFrame() {
-  return async function () {
-    t = instructionClock.getTime();
-    frameN = frameN + 1;
-
-    // Оновлення компонента instruction_text
-    if (t >= 0.0 && instruction_text.status === PsychoJS.Status.NOT_STARTED) {
-      instruction_text.tStart = t;
-      instruction_text.frameNStart = frameN;
-      instruction_text.setAutoDraw(true);
-    }
-
-    // Оновлення компонента stop_instruction
-    if (t >= 1 && stop_instruction.status === PsychoJS.Status.NOT_STARTED) {
-      psychoJS.window.callOnFlip(function() { stop_instruction.clock.reset(); });
-      psychoJS.window.callOnFlip(function() { stop_instruction.start(); });
-      psychoJS.window.callOnFlip(function() { stop_instruction.clearEvents(); });
-    }
-    
-    if (stop_instruction.status === PsychoJS.Status.STARTED) {
-      let theseKeys = stop_instruction.getKeys({keyList: [], waitRelease: false});
-      _stop_instruction_allKeys = _stop_instruction_allKeys.concat(theseKeys);
-      if (_stop_instruction_allKeys.length > 0) {
-        stop_instruction.keys = _stop_instruction_allKeys[_stop_instruction_allKeys.length - 1].name;
-        stop_instruction.rt = _stop_instruction_allKeys[_stop_instruction_allKeys.length - 1].rt;
-        stop_instruction.duration = _stop_instruction_allKeys[_stop_instruction_allKeys.length - 1].duration;
-        continueRoutine = false;
-      }
-    }
-
-    if (psychoJS.experiment.experimentEnded || psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
-      return quitPsychoJS('The [Escape] key was pressed. Goodbye!', false);
-    }
-
-    if (!continueRoutine) {
-      return Scheduler.Event.NEXT;
-    }
-    
-    continueRoutine = false;
-    for (const thisComponent of instructionComponents)
-      if ('status' in thisComponent && thisComponent.status !== PsychoJS.Status.FINISHED) {
-        continueRoutine = true;
-        break;
-      }
-
-    if (continueRoutine) {
-      return Scheduler.Event.FLIP_REPEAT;
-    } else {
-      return Scheduler.Event.NEXT;
-    }
-  };
-}
-
-// Завершення рутин
-function instructionRoutineEnd(snapshot) {
-  return async function () {
-    for (const thisComponent of instructionComponents) {
-      if (typeof thisComponent.setAutoDraw === 'function') {
-        thisComponent.setAutoDraw(false);
-      }
-    }
-    psychoJS.experiment.addData('instruction.stopped', globalClock.getTime());
-    stop_instruction.stop();
-    routineTimer.reset();
-    if (currentLoop === psychoJS.experiment) {
-      psychoJS.experiment.nextEntry(snapshot);
-    }
-    return Scheduler.Event.NEXT;
-  }
-}
-
-// Функція для запису відповіді
-async function recordResponse(trialIndex, name, color, Correct_answer) {
-  return new Promise(resolve => {
-    console.log(`Waiting for response for trial ${trialIndex + 1}`);  // Логування для початку збору відповіді
-
-    // Іменована функція для обробки події
-    function handleKeyPress(event) {
-      console.log(`Key pressed: ${event.key}`); // Логування натиснутої клавіші
-
-      // Замість перевірки на 'S' або 'L', зберігаємо будь-яку натиснуту клавішу
-      const keyPressed = event.key;  // Зберігаємо натиснуту клавішу
-      trialResponses[trialIndex] = {
-        name: Name,
-        color: Color,
-        response: keyPressed,  // Замість кольору записуємо натиснуту клавішу
-        trialNumber: trialIndex + 1
-      };
-
-      console.log(`Trial ${trialIndex + 1} response recorded:`, trialResponses[trialIndex]);
-  });
-}
-
-
-// Виправлений виклик функції для збереження даних
+// --- Функція для відправлення результатів на сервер ---
 async function sendResultsToServer(data, loopName) {
-  try {
-    const dataToSend = {
-      ...data,
-      participantInfo: {
-        age: expInfo.age,
-        gender: expInfo.gender,
-        participantId: expInfo.participant
-      }
-    };
+    try {
+        const dataToSend = {
+            ...data,
+            participantInfo: {
+                age: expInfo.age,
+                gender: expInfo.gender,
+                participantId: expInfo.participant
+            }
+        };
 
-    console.log('Sending data for loop:', loopName, dataToSend);
+        console.log('Надсилаємо дані для циклу:', loopName, dataToSend);
 
-    const response = await fetch(`https://color-dots-production.up.railway.app/submit_results`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(dataToSend),
-    });
+        const response = await fetch(`https://color-dots-production.up.railway.app/submit_results`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(dataToSend),
+        });
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error(`Error sending data (${loopName}): ${errorText}`);
-    } else {
-      console.log(`Data successfully sent for loop ${loopName}`);
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error(`Помилка відправлення даних (${loopName}): ${errorText}`);
+        } else {
+            console.log(`Дані успішно надіслані для циклу ${loopName}`);
+        }
+    } catch (error) {
+        console.error(`Помилка з'єднання з сервером (${loopName}):`, error);
     }
-  } catch (error) {
-    console.error(`Error connecting to server (${loopName}):`, error);
-  }
 }
+
 
 var trials_1;
 
