@@ -1231,15 +1231,15 @@ async function recordResponse(trialIndex, name, color, Correct_answer) {
   return new Promise(resolve => {
     console.log(`Waiting for response for trial ${trialIndex + 1}`);  // Логування для початку збору відповіді
 
-    // Очікуємо на натискання клавіші
-    document.addEventListener('keydown', function(event) {
+    // Іменована функція для обробки події
+    function handleKeyPress(event) {
       console.log(`Key pressed: ${event.key}`); // Логування натиснутої клавіші
 
       // Замість перевірки на 'S' або 'L', зберігаємо будь-яку натиснуту клавішу
       const keyPressed = event.key;  // Зберігаємо натиснуту клавішу
       trialResponses[trialIndex] = {
-        name: Name,
-        color: Color,
+        name: name,
+        color: color,
         response: keyPressed,  // Замість кольору записуємо натиснуту клавішу
         trialNumber: trialIndex + 1
       };
@@ -1247,17 +1247,21 @@ async function recordResponse(trialIndex, name, color, Correct_answer) {
       console.log(`Trial ${trialIndex + 1} response recorded:`, trialResponses[trialIndex]);
 
       // Перевірка на правильність відповіді
-      const isCorrect = keyPressed === Correct_answer;
+      const isCorrect = keyPressed === Correct_answer;  // Використовуємо Correct_answer
       showFeedback(isCorrect);  // Викликаємо функцію для фідбеку
 
       // Повідомляємо, що відповідь записана
       resolve(keyPressed);
 
       // Відключаємо слухача подій після запису відповіді
-      document.removeEventListener('keydown', arguments.callee);
-    });
+      document.removeEventListener('keydown', handleKeyPress);
+    }
+
+    // Додаємо слухача подій
+    document.addEventListener('keydown', handleKeyPress);
   });
 }
+
 
 // Виправлений виклик функції для збереження даних
 async function sendResultsToServer(data, loopName) {
