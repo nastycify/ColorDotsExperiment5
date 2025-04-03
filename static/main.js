@@ -1333,18 +1333,22 @@ function trialRoutineEachFrame_1(snapshot) {
             let feedbackText = (response[0] === correctAnswer) ? "Правильно!" : "Неправильно";
             let feedbackColor = (response[0] === correctAnswer) ? "green" : "red";
 
-            // Показуємо фідбек після натискання клавіші
-            showFeedback(feedbackText, feedbackColor);
+            // Оновлюємо HTML-фідбек
+            let feedbackComponent = document.getElementById("feedback");
+            feedbackComponent.innerText = feedbackText;
+            feedbackComponent.style.color = feedbackColor;
+            feedbackComponent.style.display = "block"; // Показуємо фідбек
 
-            // Затримка перед переходом до наступного стимулу
-            await sleep(1000); // Затримка 1 секунда перед приховуванням фідбеку
+            // Зупинка виконання на 1 секунду перед наступним стимулом
+            await sleep(1000);
 
-            hideFeedback();  // Сховати фідбек
+            feedbackComponent.style.display = "none"; // Прибираємо фідбек
 
-            continueRoutine = false; // Завершуємо цикл після відповіді
+            continueRoutine = false; // Завершуємо рутину після відповіді
         }
+
         return continueRoutine ? Scheduler.Event.FLIP_REPEAT : Scheduler.Event.NEXT;
-    }
+    };
 }
 
 // Функція для відображення зворотного зв’язку
