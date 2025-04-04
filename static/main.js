@@ -1110,6 +1110,9 @@ var _stop_instruction_allKeys;
 var instructionComponents;
 var trialResponses = [];  // Масив для зберігання відповідей користувача
 
+// Оголошуємо глобальну змінну для правильних відповідей
+var correctAnswer = '';
+
 function instructionRoutineBegin(snapshot) {
   return async function () {
     TrialHandler.fromSnapshot(snapshot);
@@ -1194,13 +1197,17 @@ function instructionRoutineEnd(snapshot) {
   };
 }
 
-// Функція запису відповіді
+// Оновлена функція для запису відповіді та обробки натискання клавіші
 async function recordResponse(trialIndex, Name, Color, Correct_answer) {
     return new Promise(resolve => {
+        // Призначаємо правильну відповідь для перевірки
+        correctAnswer = Correct_answer.trim().toLowerCase();
+
         function handleKeyPress(event) {
             const keyPressed = event.key.trim().toLowerCase();
             document.removeEventListener("keydown", handleKeyPress);
 
+            // Зберігаємо відповідь
             trialResponses[trialIndex] = {
                 name: Name,
                 color: Color,
@@ -1208,13 +1215,25 @@ async function recordResponse(trialIndex, Name, Color, Correct_answer) {
                 trialNumber: trialIndex + 1
             };
 
-            checkResponse(keyPressed, Correct_answer.trim().toLowerCase(), trialIndex);
+            // Викликаємо перевірку відповіді
+            checkResponse(keyPressed, correctAnswer, trialIndex);
             resolve(keyPressed);
         }
+
         document.addEventListener("keydown", handleKeyPress);
     });
 }
 
+// Функція для перевірки відповіді
+function checkResponse(userResponse, correctAnswer, trialIndex) {
+    if (userResponse === correctAnswer) {
+        psychoJS.experiment.addData(`trial_${trialIndex + 1}_correct`, true);
+    } else {
+        psychoJS.experiment.addData(`trial_${trialIndex + 1}_correct`, false);
+    }
+}
+
+// Функція для відправки результатів на сервер
 async function sendResultsToServer(data, loopName) {
     try {
         const dataToSend = {
@@ -1237,6 +1256,7 @@ async function sendResultsToServer(data, loopName) {
         console.error(`Помилка з'єднання (${loopName}):`, error);
     }
 }
+
 
 var trials_1;
 function trials_1LoopEndIteration(trials_1LoopScheduler, snapshot) {
