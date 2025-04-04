@@ -1171,17 +1171,32 @@ function instructionRoutineEachFrame() {
         continueRoutine = false;
       }
     }
-    // Перевірка натискання клавіші Escape для завершення експерименту
-    if (psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
+// check for quit (typically the Esc key)
+    if (psychoJS.experiment.experimentEnded || psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
       return quitPsychoJS('The [Escape] key was pressed. Goodbye!', false);
     }
-
-    // Продовження рутин
-    continueRoutine = instructionComponents.some(comp => 'status' in comp && comp.status !== PsychoJS.Status.FINISHED);
-
-    return continueRoutine ? Scheduler.Event.FLIP_REPEAT : Scheduler.Event.NEXT;
+    
+    // check if the Routine should terminate
+    if (!continueRoutine) {  // a component has requested a forced-end of Routine
+      return Scheduler.Event.NEXT;
+    }
+    
+    continueRoutine = false;  // reverts to True if at least one component still running
+    for (const thisComponent of instructionComponents)
+      if ('status' in thisComponent && thisComponent.status !== PsychoJS.Status.FINISHED) {
+        continueRoutine = true;
+        break;
+      }
+    
+    // refresh the screen if continuing
+    if (continueRoutine) {
+      return Scheduler.Event.FLIP_REPEAT;
+    } else {
+      return Scheduler.Event.NEXT;
+    }
   };
 }
+
 
 function instructionRoutineEnd(snapshot) {
   return async function () {
