@@ -1128,9 +1128,6 @@ function instructionRoutineBegin(snapshot) {
   globalClock = new util.Clock();  // to track the time since experiment started
   routineTimer = new util.CountdownTimer();  // to track time remaining of each (non-slip) routine
 
-}
-
-
 // --- Глобальні змінні ---
 var t;
 var frameN;
