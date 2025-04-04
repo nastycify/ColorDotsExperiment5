@@ -1161,6 +1161,7 @@ function instructionRoutineEachFrame() {
       if (_stop_instruction_allKeys.length > 0) {
         stop_instruction.keys = _stop_instruction_allKeys[_stop_instruction_allKeys.length - 1].name;
         stop_instruction.rt = _stop_instruction_allKeys[_stop_instruction_allKeys.length - 1].rt;
+        // Зміна стану для продовження чи завершення
         continueRoutine = false;
       }
     }
@@ -1169,15 +1170,19 @@ function instructionRoutineEachFrame() {
       return quitPsychoJS('The [Escape] key was pressed. Goodbye!', false);
     }
 
+    // Потрібно встановити умови для зникнення інструкції при натисканні клавіші
     if (!continueRoutine) {
+      instruction_text.setAutoDraw(false); // Зробити інструкцію невидимою після натискання клавіші
       return Scheduler.Event.NEXT;
     }
 
+    // Продовжуємо рендеринг інструкцій
     continueRoutine = instructionComponents.some(comp => 'status' in comp && comp.status !== PsychoJS.Status.FINISHED);
 
     return continueRoutine ? Scheduler.Event.FLIP_REPEAT : Scheduler.Event.NEXT;
   };
 }
+
 
 function instructionRoutineEnd(snapshot) {
   return async function () {
