@@ -1109,9 +1109,7 @@ var continueRoutine;
 var _stop_instruction_allKeys;
 var instructionComponents;
 var trialResponses = [];  // Масив для зберігання відповідей користувача
-
-// Оголошуємо глобальну змінну для правильних відповідей
-var correctAnswer = '';
+var correctAnswer = '';  // Глобальна змінна для правильних відповідей
 
 function instructionRoutineBegin(snapshot) {
   return async function () {
@@ -1141,51 +1139,37 @@ function instructionRoutineEachFrame() {
   return async function () {
     t = instructionClock.getTime();
     frameN += 1;
-    
+
+    // Показуємо інструкцію, якщо вона ще не почалась
     if (t >= 0.0 && instruction_text.status === PsychoJS.Status.NOT_STARTED) {
       instruction_text.tStart = t;
       instruction_text.frameNStart = frameN;
       instruction_text.setAutoDraw(true);
     }
-    
-    if (t >= 1 && stop_instruction.status === PsychoJS.Status.NOT_STARTED) {
-      stop_instruction.tStart = t;
-      stop_instruction.frameNStart = frameN;
-      psychoJS.window.callOnFlip(() => stop_instruction.start());
-      psychoJS.window.callOnFlip(() => stop_instruction.clearEvents());
+
+    // Очікуємо натискання клавіші для закриття інструкції
+    let theseKeys = psychoJS.eventManager.getKeys({keyList: [], waitRelease: false});
+    if (theseKeys.length > 0) {
+      // Як тільки натиснута клавіша, закриваємо інструкцію
+      instruction_text.setAutoDraw(false);  // Зробити інструкцію невидимою
+      continueRoutine = false;  // Завершуємо рутину
     }
 
-    if (stop_instruction.status === PsychoJS.Status.STARTED) {
-      let theseKeys = stop_instruction.getKeys({keyList: [], waitRelease: false});
-      _stop_instruction_allKeys = _stop_instruction_allKeys.concat(theseKeys);
-      if (_stop_instruction_allKeys.length > 0) {
-        stop_instruction.keys = _stop_instruction_allKeys[_stop_instruction_allKeys.length - 1].name;
-        stop_instruction.rt = _stop_instruction_allKeys[_stop_instruction_allKeys.length - 1].rt;
-        // Зміна стану для продовження чи завершення
-        continueRoutine = false;
-      }
-    }
-
+    // Перевірка натискання клавіші Escape для завершення експерименту
     if (psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
       return quitPsychoJS('The [Escape] key was pressed. Goodbye!', false);
     }
 
-    // Потрібно встановити умови для зникнення інструкції при натисканні клавіші
-    if (!continueRoutine) {
-      instruction_text.setAutoDraw(false); // Зробити інструкцію невидимою після натискання клавіші
-      return Scheduler.Event.NEXT;
-    }
-
-    // Продовжуємо рендеринг інструкцій
+    // Продовження рутин
     continueRoutine = instructionComponents.some(comp => 'status' in comp && comp.status !== PsychoJS.Status.FINISHED);
 
     return continueRoutine ? Scheduler.Event.FLIP_REPEAT : Scheduler.Event.NEXT;
   };
 }
 
-
 function instructionRoutineEnd(snapshot) {
   return async function () {
+    // Очищаємо всі компоненти після завершення інструкцій
     instructionComponents.forEach(comp => {
       if (typeof comp.setAutoDraw === 'function') {
         comp.setAutoDraw(false);
@@ -1261,7 +1245,6 @@ async function sendResultsToServer(data, loopName) {
         console.error(`Помилка з'єднання (${loopName}):`, error);
     }
 }
-
 
 var trials_1;
 function trials_1LoopEndIteration(trials_1LoopScheduler, snapshot) {
