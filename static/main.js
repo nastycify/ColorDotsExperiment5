@@ -1124,8 +1124,11 @@ function instructionRoutineBegin(snapshot) {
     stop_instruction.rt = undefined;
     _stop_instruction_allKeys = [];
 
-    instructionComponents = [instruction_text, stop_instruction];
-
+     // keep track of which components have finished
+    instructionComponents = [];
+    instructionComponents.push(instruction_text);
+    instructionComponents.push(stop_instruction);
+      
     for (const thisComponent of instructionComponents) {
       if ('status' in thisComponent) {
         thisComponent.status = PsychoJS.Status.NOT_STARTED;
@@ -1146,15 +1149,28 @@ function instructionRoutineEachFrame() {
       instruction_text.frameNStart = frameN;
       instruction_text.setAutoDraw(true);
     }
-
-    // Очікуємо натискання клавіші для закриття інструкції
-    let theseKeys = psychoJS.eventManager.getKeys({keyList: [], waitRelease: false});
-    if (theseKeys.length > 0) {
-      // Як тільки натиснута клавіша, закриваємо інструкцію
-      instruction_text.setAutoDraw(false);  // Зробити інструкцію невидимою
-      continueRoutine = false;  // Завершуємо рутину
+// *stop_instruction* updates
+    if (t >= 1 && stop_instruction.status === PsychoJS.Status.NOT_STARTED) {
+      // keep track of start time/frame for later
+      stop_instruction.tStart = t;  // (not accounting for frame time here)
+      stop_instruction.frameNStart = frameN;  // exact frame index
+      
+      // keyboard checking is just starting
+      psychoJS.window.callOnFlip(function() { stop_instruction.clock.reset(); });  // t=0 on next screen flip
+      psychoJS.window.callOnFlip(function() { stop_instruction.start(); }); // start on screen flip
+      psychoJS.window.callOnFlip(function() { stop_instruction.clearEvents(); });
     }
-
+    if (stop_instruction.status === PsychoJS.Status.STARTED) {
+      let theseKeys = stop_instruction.getKeys({keyList: [], waitRelease: false});
+      _stop_instruction_allKeys = _stop_instruction_allKeys.concat(theseKeys);
+      if (_stop_instruction_allKeys.length > 0) {
+        stop_instruction.keys = _stop_instruction_allKeys[_stop_instruction_allKeys.length - 1].name;  // just the last key pressed
+        stop_instruction.rt = _stop_instruction_allKeys[_stop_instruction_allKeys.length - 1].rt;
+        stop_instruction.duration = _stop_instruction_allKeys[_stop_instruction_allKeys.length - 1].duration;
+        // a response ends the routine
+        continueRoutine = false;
+      }
+    }
     // Перевірка натискання клавіші Escape для завершення експерименту
     if (psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
       return quitPsychoJS('The [Escape] key was pressed. Goodbye!', false);
