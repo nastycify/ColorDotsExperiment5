@@ -1127,8 +1127,7 @@ function instructionRoutineBegin(snapshot) {
   // Create some handy timers
   globalClock = new util.Clock();  // to track the time since experiment started
   routineTimer = new util.CountdownTimer();  // to track time remaining of each (non-slip) routine
-  
-  return Scheduler.Event.NEXT;
+
 }
 
 
