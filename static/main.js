@@ -1239,6 +1239,14 @@ async function sendResultsToServer(data, loopName) {
 }
 
 var trials_1;
+function trials_1LoopEndIteration(trials_1LoopScheduler, snapshot) {
+    return async function() {
+        if (typeof snapshot !== 'undefined') {
+            psychoJS.experiment.nextEntry(snapshot);
+        }
+        return Scheduler.Event.NEXT;
+    };
+}
 
 function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
     return async function() {
@@ -1266,11 +1274,11 @@ function trials_1LoopBegin(trials_1LoopScheduler, snapshot) {
             const stimColor = thisTrial_1?.Color ?? 'unknown';
             const correctAnswer = thisTrial_1?.Correct_answer ?? 'unknown';
 
-            recordResponse(snapshot.index, stimName, stimColor, correctAnswer)
-                .then(userResponse => {
-                    psychoJS.experiment.addData(`trial_${snapshot.index + 1}_response`, userResponse);
-                })
-                .catch(error => console.error('Error recording response:', error));
+await recordResponse(snapshot.index, stimName, stimColor, correctAnswer)
+    .then(userResponse => {
+        psychoJS.experiment.addData(`trial_${snapshot.index + 1}_response`, userResponse);
+    })
+    .catch(error => console.error('Error recording response:', error));
         }
 
         return Scheduler.Event.NEXT;
