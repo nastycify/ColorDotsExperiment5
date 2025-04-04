@@ -1153,7 +1153,7 @@ function instructionRoutineEachFrame() {
     }
 
     if (stop_instruction.status === PsychoJS.Status.STARTED) {
-      let theseKeys = stop_instruction.getKeys({keyList: null, waitRelease: false});
+      let theseKeys = stop_instruction.getKeys({keyList: [], waitRelease: false});
       _stop_instruction_allKeys = _stop_instruction_allKeys.concat(theseKeys);
       if (_stop_instruction_allKeys.length > 0) {
         stop_instruction.keys = _stop_instruction_allKeys[_stop_instruction_allKeys.length - 1].name;
