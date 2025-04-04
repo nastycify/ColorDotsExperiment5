@@ -1113,43 +1113,50 @@ var correctAnswer = '';  // Глобальна змінна для правил�
 
 function instructionRoutineBegin(snapshot) {
   return async function () {
-    TrialHandler.fromSnapshot(snapshot);
+    TrialHandler.fromSnapshot(snapshot); // ensure that .thisN vals are up to date
     
+    //--- Prepare to start Routine 'instruction' ---
     t = 0;
-    instructionClock.reset();
+    instructionClock.reset(); // clock
     frameN = -1;
-    continueRoutine = true;
+    continueRoutine = true; // until we're told otherwise
+    // update component parameters for each repeat
     psychoJS.experiment.addData('instruction.started', globalClock.getTime());
     stop_instruction.keys = undefined;
     stop_instruction.rt = undefined;
     _stop_instruction_allKeys = [];
-
-     // keep track of which components have finished
+    // keep track of which components have finished
     instructionComponents = [];
     instructionComponents.push(instruction_text);
     instructionComponents.push(stop_instruction);
-      
-    for (const thisComponent of instructionComponents) {
-      if ('status' in thisComponent) {
+    
+    for (const thisComponent of instructionComponents)
+      if ('status' in thisComponent)
         thisComponent.status = PsychoJS.Status.NOT_STARTED;
-      }
-    }
     return Scheduler.Event.NEXT;
-  };
+  }
 }
+
 
 function instructionRoutineEachFrame() {
   return async function () {
+    //--- Loop for each frame of Routine 'instruction' ---
+    // get current time
     t = instructionClock.getTime();
-    frameN += 1;
-
-    // Показуємо інструкцію, якщо вона ще не почалась
+    frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
+    // update/draw components on each frame
+    
+    // *instruction_text* updates
     if (t >= 0.0 && instruction_text.status === PsychoJS.Status.NOT_STARTED) {
-      instruction_text.tStart = t;
-      instruction_text.frameNStart = frameN;
+      // keep track of start time/frame for later
+      instruction_text.tStart = t;  // (not accounting for frame time here)
+      instruction_text.frameNStart = frameN;  // exact frame index
+      
       instruction_text.setAutoDraw(true);
     }
-// *stop_instruction* updates
+    
+    
+    // *stop_instruction* updates
     if (t >= 1 && stop_instruction.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
       stop_instruction.tStart = t;  // (not accounting for frame time here)
@@ -1160,6 +1167,7 @@ function instructionRoutineEachFrame() {
       psychoJS.window.callOnFlip(function() { stop_instruction.start(); }); // start on screen flip
       psychoJS.window.callOnFlip(function() { stop_instruction.clearEvents(); });
     }
+    
     if (stop_instruction.status === PsychoJS.Status.STARTED) {
       let theseKeys = stop_instruction.getKeys({keyList: [], waitRelease: false});
       _stop_instruction_allKeys = _stop_instruction_allKeys.concat(theseKeys);
@@ -1171,7 +1179,8 @@ function instructionRoutineEachFrame() {
         continueRoutine = false;
       }
     }
-// check for quit (typically the Esc key)
+    
+    // check for quit (typically the Esc key)
     if (psychoJS.experiment.experimentEnded || psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
       return quitPsychoJS('The [Escape] key was pressed. Goodbye!', false);
     }
@@ -1200,23 +1209,24 @@ function instructionRoutineEachFrame() {
 
 function instructionRoutineEnd(snapshot) {
   return async function () {
-    // Очищаємо всі компоненти після завершення інструкцій
-    instructionComponents.forEach(comp => {
-      if (typeof comp.setAutoDraw === 'function') {
-        comp.setAutoDraw(false);
+    //--- Ending Routine 'instruction' ---
+    for (const thisComponent of instructionComponents) {
+      if (typeof thisComponent.setAutoDraw === 'function') {
+        thisComponent.setAutoDraw(false);
       }
-    });
+    }
     psychoJS.experiment.addData('instruction.stopped', globalClock.getTime());
     stop_instruction.stop();
+    // the Routine "instruction" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
-
+    
+    // Routines running outside a loop should always advance the datafile row
     if (currentLoop === psychoJS.experiment) {
       psychoJS.experiment.nextEntry(snapshot);
     }
     return Scheduler.Event.NEXT;
-  };
+  }
 }
-
 // Оновлена функція для запису відповіді та обробки натискання клавіші
 async function recordResponse(trialIndex, Name, Color, Correct_answer) {
     return new Promise(resolve => {
