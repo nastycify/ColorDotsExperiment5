@@ -2156,7 +2156,7 @@ function trialRoutineEachFrame() {
     
     
     // *key_resp* updates
-    if (t >= 0.45 && key_resp.status === PsychoJS.Status.NOT_STARTED) {
+    if (t >= 0.35 && key_resp.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
       key_resp.tStart = t;  // (not accounting for frame time here)
       key_resp.frameNStart = frameN;  // exact frame index
