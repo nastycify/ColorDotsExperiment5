@@ -2289,13 +2289,17 @@ function FeadbackRoutineBegin(snapshot) {
     }
     _pj = {};
     _pj_snippets(_pj);
-    if (_pj.in_es6(Correct_answer, key_resp.keys)) {
-        feedback = "\u041f\u0440\u0430\u0432\u0438\u043b\u044c\u043d\u043e!";
-        feedback_color = "green";
-    } else {
-        feedback = "\u041d\u0435\u043f\u0440\u0430\u0432\u0438\u043b\u044c\u043d\u043e!";
-        feedback_color = "red";
-    }
+if (_pj.in_es6(Correct_answer, key_resp.keys)) {
+    feedback = "\u041f\u0440\u0430\u0432\u0438\u043b\u044c\u043d\u043e!";
+    feedback_color = "green";
+} else {
+    feedback = "\u041d\u0435\u043f\u0440\u0430\u0432\u0438\u043b\u044c\u043d\u043e!";
+    feedback_color = "red";
+}
+
+feedback_text.setText(feedback);  // Встановлюємо текст фідбеку
+feedback_text.setColor(feedback_color);  // Задаємо колір тексту
+
     
     feedback_text.setText(feedback);
     // keep track of which components have finished
