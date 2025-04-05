@@ -1111,7 +1111,7 @@ async function experimentInit() {
   text_3 = new visual.TextStim({
     win: psychoJS.window,
     name: 'text_3',
-    text: 'Дуже дякуємо за те, що прийняли участь у нашому експерименті! Ващ приділений час має велике значення для результатів дослідження!',
+    text: 'Дуже дякуємо за те, що прийняли участь у нашому експерименті! Ваiш приділений час має велике значення для результатів дослідження!',
     font: 'Open Sans',
     units: undefined, 
     pos: [0, 0], height: 0.07,  wrapWidth: undefined, ori: 0.0,
@@ -2146,7 +2146,7 @@ function trialRoutineEachFrame() {
     }
     
     // *text_2* updates
-    if (t >= 0.6 && text_2.status === PsychoJS.Status.NOT_STARTED) {
+    if (t >= 0.55 && text_2.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
       text_2.tStart = t;  // (not accounting for frame time here)
       text_2.frameNStart = frameN;  // exact frame index
@@ -2156,7 +2156,7 @@ function trialRoutineEachFrame() {
     
     
     // *key_resp* updates
-    if (t >= 0.5 && key_resp.status === PsychoJS.Status.NOT_STARTED) {
+    if (t >= 0.45 && key_resp.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
       key_resp.tStart = t;  // (not accounting for frame time here)
       key_resp.frameNStart = frameN;  // exact frame index
