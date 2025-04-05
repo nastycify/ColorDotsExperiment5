@@ -1604,7 +1604,7 @@ function trials_3LoopEndIteration(scheduler, snapshot) {
   };
 }
 
-var trials_4LoopBegin;
+var trials_4;
 function trials_4LoopBegin(trials_4LoopScheduler, snapshot) {
   return async function() {
     TrialHandler.fromSnapshot(snapshot); // update internal variables (.thisN etc) of the loop
